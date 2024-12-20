@@ -62,3 +62,47 @@ Content-Type: application/json
     ]
   }
 }
+
+//get Pregled osoba - operatera
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getPregledOperatera",
+  "sid": "ltnp1704nqg0ropu020tik3bn4",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZIV",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get ovl osobe - mj troska
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getOvlOsobeMjTr",
+  "sid": "ltnp1704nqg0ropu020tik3bn4",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZIV",
+        "direction": "ASC"
+      }
+    ]
+  }
+}

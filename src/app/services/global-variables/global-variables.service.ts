@@ -281,6 +281,81 @@ export class GlobalVariablesService {
     this.SYSDColumn,
   ];
 
+
+  public IDColumn: ColumnRef = {
+    displayedName: 'ID',
+    name: 'ID'
+  };
+  public NAZIVColumn: ColumnRef = {
+    displayedName: 'NAZIV',
+    name: 'NAZIV'
+  };
+  public USERNAMEColumn: ColumnRef = {
+    displayedName: 'USERNAME',
+    name: 'USERNAME'
+  };
+  public PASSWORDColumn: ColumnRef = {
+    displayedName: 'PASSWORD',
+    name: 'PASSWORD'
+  };
+  public NAPOMENAColumn: ColumnRef = {
+    displayedName: 'NAPOMENA',
+    name: 'NAPOMENA'
+  };
+  public IDULOGEColumn: ColumnRef = {
+    displayedName: 'IDULOGE',
+    name: 'IDULOGE'
+  };
+  public ULOGAColumn: ColumnRef = {
+    displayedName: 'ULOGA',
+    name: 'ULOGA'
+  };
+
+  public OperateriDisplayedColumns: ColumnRef[] = [
+    this.IDColumn,
+    this.NAZIVColumn,
+    this.USERNAMEColumn,
+    this.NAPOMENAColumn,
+    this.IDULOGEColumn,
+    this.ULOGAColumn
+  ];
+
+  public OperateriColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.IDColumn,
+    this.NAZIVColumn,
+    this.USERNAMEColumn,
+    this.PASSWORDColumn,
+    this.NAPOMENAColumn,
+    this.IDULOGEColumn,
+    this.ULOGAColumn
+  ];
+
+  public SIFMJTRColumn: ColumnRef = {
+    displayedName: 'SIFMJTR',
+    name: 'SIFMJTR'
+  };
+  public NAZMJTRColumn: ColumnRef = {
+    displayedName: 'NAZMJTR',
+    name: 'NAZMJTR'
+  };
+
+  public OvlastenaOsobaMjTrDisplayedColumns: ColumnRef[] = [
+    this.IDColumn,
+    this.NAZIVColumn,
+    this.USERNAMEColumn,
+    this.SIFMJTRColumn,
+    this.NAZMJTRColumn,
+  ];
+
+  public OvlastenaOsobaMjTrColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.IDColumn,
+    this.NAZIVColumn,
+    this.USERNAMEColumn,
+    this.SIFMJTRColumn,
+    this.NAZMJTRColumn,
+  ];
   // END: columns list
 
   public sidebarItems: SidebarItem[] = [
@@ -348,6 +423,34 @@ export class GlobalVariablesService {
           open: false
         }
       ],
+    },
+    {
+      namePrefix: '2',
+      name: 'Administracija',
+      icon: null,
+      highlighted: false,
+      rightsState: 1,
+      open: true,
+      children: [
+        {
+          namePrefix: '2.1',
+          name: 'OvlasteneOsobe',
+          icon: 'people_alt',
+          url: '/operateri',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '2.2',
+          name: 'OvlasteneOsobeMjTr',
+          icon: 'approval',
+          url: '/ovlastene-osobe-mj-tr',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+      ],
     }
   ];
 
@@ -376,6 +479,16 @@ export class GlobalVariablesService {
       componentName: 'OrganizationalUnit',
       componentDatabaseName: 'hOJ_pl',
       url: '/oj'
+    },
+    {
+      componentName: 'OvlasteneOsobe',
+      componentDatabaseName: 'bilokojadozvola',
+      url: '/operateri'
+    },
+    {
+      componentName: 'OvlasteneOsobeMjTr',
+      componentDatabaseName: 'bilokojadozvola',
+      url: '/ovlastene-osobe-mj-tr'
     }
 
   ];
@@ -426,6 +539,27 @@ export class GlobalVariablesService {
           url: '/oj',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }
+      ],
+      url: ''
+    },
+    {
+      name: 'Administracija',
+      icon: 'gpp_good',
+      rowHeight: 2,
+      rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+      items: [
+        {
+          name: 'OvlasteneOsobe',
+          icon: 'people_alt',
+          url: '/operateri',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'OvlasteneOsobeMjTr',
+          icon: 'approval',
+          url: '/ovlastene-osobe-mj-tr',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
       ],
       url: ''
     },

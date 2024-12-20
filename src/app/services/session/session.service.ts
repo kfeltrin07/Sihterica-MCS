@@ -113,17 +113,20 @@ export class SessionService {
         }
       }
     ).subscribe((response: any) => {
-      if (response.debugData.metadata.OPIS != 'SQL:OK' && response.debugData.metadata.OPIS != 'O.K.') {
-        this.openSnackBar(response.debugData.metadata.OPIS, this.t.translate('Okay'));
+      if (response.debugData?.metadata?.OPIS != 'SQL:OK' && response.debugData?.metadata?.OPIS != 'O.K.') {
+        this.openSnackBar(response.debugDat?.metadata?.OPIS, this.t.translate('Okay'));
       }
-      this.sessionInfo(this.loggedInUser.sessionID);
+      //this.sessionInfo(this.loggedInUser.sessionID);
       this.loggedInUser = {
         ID: 0,
-        displayedUsername: '',
-        username: '',
-        password: '',
-        sessionID: '',
-        roleID: 0
+        displayedUsername: "",
+        username: "",
+        password: "",
+        sessionID: "",
+        roleID: 0,
+        owner: "",
+        ownerID: 0,
+        IDVlasnika: 0,
       };
       this.cookies.deleteCookie('logged-in-user-session-id');
       this.loggingOutDialogRef.close();

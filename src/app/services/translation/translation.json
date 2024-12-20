@@ -7147,7 +7147,7 @@
         {
             "ref": "Zaposleni",
             "en": "Employees",
-            "hr": "zaposleni",
+            "hr": "Zaposleni",
             "transferred": false
         },
         {
@@ -7160,6 +7160,18 @@
             "ref": "NAZ_VP",
             "en": "Job type name",
             "hr": "Naziv vrste posla",
+            "transferred": false
+        },
+        {
+            "ref": "OvlasteneOsobe",
+            "en": "Authorized persons",
+            "hr": "Ovlaštene osobe",
+            "transferred": false
+        },
+        {
+            "ref": "OvlasteneOsobeMjTr",
+            "en": "Authorized persons Pla. Expe.",
+            "hr": "Ovlaštene osobe Mj. Tr.",
             "transferred": false
         }
     ]

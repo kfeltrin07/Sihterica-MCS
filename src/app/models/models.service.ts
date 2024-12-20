@@ -358,6 +358,27 @@ export interface OrganizacijskeJedinice {
   SYSD: string
 }
 
+export interface Operateri {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  ID: string;
+  NAZIV: string;
+  USERNAME: string;
+  PASSWORD: string;
+  NAPOMENA: string;
+  IDULOGE: string;
+  ULOGA: string;
+}
+
+export interface OvlastenaOsobaMjTr {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  ID: string;
+  NAZIV: string;
+  USERNAME: string;
+  SIFMJTR: string;
+  NAZMJTR: string;
+}
 
 // START: app API
 export interface ColumnRef {
