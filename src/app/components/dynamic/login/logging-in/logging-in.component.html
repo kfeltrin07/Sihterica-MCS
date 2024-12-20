@@ -1,0 +1,12 @@
+<mat-dialog-content>
+    <div class="logging-in-container">
+      <mat-icon class="center-text">person</mat-icon>
+      <h2>{{ globalVar.loggingInMessage | translate }}</h2>
+      <mat-progress-bar mode="indeterminate" *ngIf="!(globalVar.loggingInMessage == 'LoginFailed')"></mat-progress-bar>
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end" *ngIf="globalVar.loggingInMessage == 'LoginFailed'">
+    <button mat-raised-button color="primary" mat-dialog-close>{{ 'Okay' | translate }}</button>
+  </mat-dialog-actions>
+  

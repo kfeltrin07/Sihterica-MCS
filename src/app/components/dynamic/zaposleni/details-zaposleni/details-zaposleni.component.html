@@ -1,0 +1,25 @@
+<div class="detail-div">
+
+    <mat-list class="min-width detail-list">
+
+        <mat-list-item cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container">
+            <span 
+                class="float-left">
+                <b>{{ 'Details' | translate }}</b>
+            </span>
+        </mat-list-item>
+
+        <ng-container *ngFor="let item of datasource | keyvalue">
+            <mat-list-item *ngIf="filterColumn(item.key.toString())">
+                <span class="detail-key">{{item.key|translate}}</span>
+                <span class="detail-value" matTooltip="{{item.value}}" matTooltipShowDelay="1000"><b
+                        [class.gray-text]="!item!.value">{{ item.value ? item.value : '[' +
+                        ('UnregisteredData' | translate) + ']' }}</b></span>
+            </mat-list-item>
+
+            <mat-divider *ngIf="filterColumn(item.key.toString())"></mat-divider>
+        </ng-container>
+
+    </mat-list>
+
+</div>

@@ -1,1 +1,11 @@
-<p>main-content works!</p>
+<mat-card class="content-card" [ngClass]="{
+    'content-card-login-size': session.loggedInUser.sessionID == '',
+    'content-card-logged-in-size': session.loggedInUser.sessionID != ''
+  }">
+  
+    <mat-card-content>
+      <router-outlet></router-outlet>
+    </mat-card-content>
+  
+  </mat-card>
+  

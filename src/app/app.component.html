@@ -1,4 +1,3 @@
-<app-toolbar *ngIf="translationLoaded"></app-toolbar>
+<app-toolbar *ngIf="translationLoaded && session.loggedInUser.sessionID != ''"></app-toolbar>
 <app-sidenav *ngIf="translationLoaded"></app-sidenav>
 <app-loading></app-loading>
-<router-outlet></router-outlet>

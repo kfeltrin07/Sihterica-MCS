@@ -1,0 +1,56 @@
+<div class="selection-screen">
+    @for(item of globalVar.dashboardItems;track item){
+      @if(item.rightsState!=0){
+        <div class="selection-div" [style.grid-row]="'span ' +item.rowHeight">
+          <mat-card class="selection_card" class="selection-screen-card card">
+            <mat-icon class="icon">{{item.icon}}</mat-icon>
+            <h1 style="z-index: 100;">{{item.name|translate}}</h1>
+          
+            <table style="background: none;z-index: 100;">
+              @for(link of item.items;track link){
+                @if(link.rightsState!=0|| !globalVar.useDynamicMenus){
+                
+                  <tr (click)="router.navigate([link.url])">
+                    <td class="hover-div">
+                      <mat-icon >{{link.icon}}</mat-icon>
+                    </td>
+                    <td>
+                      <label for="">{{link.name|translate}}</label>
+                    
+                    </td>
+                    <td>
+                      <mat-icon class="arrow">chevron_right</mat-icon>
+                    </td>
+                  
+                  </tr>
+                }
+              
+              }
+            </table>
+            <div class="shine"></div>
+            <div class="background">
+              <div class="tiles">
+                <div class="tile tile-1"></div>
+                <div class="tile tile-2"></div>
+                <div class="tile tile-3"></div>
+                <div class="tile tile-4"></div>
+              
+                <div class="tile tile-5"></div>
+                <div class="tile tile-6"></div>
+                <div class="tile tile-7"></div>
+                <div class="tile tile-8"></div>
+              
+                <div class="tile tile-9"></div>
+                <div class="tile tile-10"></div>
+              </div>
+            
+              <div class="line line-1"></div>
+              <div class="line line-2"></div>
+              <div class="line line-3"></div>
+            </div>
+          </mat-card>
+        
+        </div>
+      }
+    }
+  </div>

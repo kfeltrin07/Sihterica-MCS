@@ -1,1 +1,84 @@
-<p>sidenav works!</p>
+<mat-sidenav-container class="sidenav" [ngClass]="{
+    'sidenav-login': session.loggedInUser.sessionID == '',
+    'sidenav-logged-in': session.loggedInUser.sessionID != ''
+  }">
+  
+    <mat-sidenav #snav [mode]="this.globalVar.VrstaUredaja?'over':'side'" [opened]="this.globalVar.VrstaUredaja?false:true" class="sidenav-sidenav" *ngIf="session.loggedInUser.sessionID != ''">
+  
+      <div class="display-flex sidenav-headers">
+        <div matRipple class="sidenav-right-header" (click)="expandAll();">
+          <mat-icon>arrow_drop_down</mat-icon>
+          <span>{{ 'ExpandAll' | translate }}</span>
+        </div>
+        <div matRipple class="sidenav-left-header" (click)="collapseAll();">
+          <mat-icon>arrow_right</mat-icon>
+          <span>{{ 'CollapseAll' | translate }}</span>
+        </div>
+      </div>
+  
+      <div *ngFor="let sidebarItem of sidebarItemsState">
+  
+        <div matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
+    
+          <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarItem.highlighted">{{ sidebarItem.icon ? sidebarItem.icon : (sidebarItem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right') }}</mat-icon>
+          <span *ngIf="!(sidebarItem.children && sidebarItem.open)" [class.highlight-with-weight]="sidebarItem.highlighted">
+            {{ (sidebarItem.namePrefix ? sidebarItem.namePrefix! : '') | translate }}
+            {{ sidebarItem.name | translate }}
+          </span>
+          <b *ngIf="sidebarItem.children && sidebarItem.open" [class.highlight-with-weight]="sidebarItem.highlighted">
+            {{ (sidebarItem.namePrefix ? sidebarItem.namePrefix! : '') | translate }}
+            {{ sidebarItem.name | translate }}
+          </b>
+    
+        </div>
+  
+        <div *ngIf="sidebarItem.open">
+  
+          <div *ngFor="let sidebarSubitem of sidebarItem.children">
+            
+            <div *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem" [class.highlighted-background]="sidebarSubitem.highlighted && !sidebarSubitem.children" (click)="toggleSidebarItemOpen(sidebarSubitem); goToRoute(sidebarSubitem);">
+        
+              <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarSubitem.highlighted">{{ sidebarSubitem.children ? (sidebarSubitem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right') : sidebarSubitem.icon }}</mat-icon>
+              <span *ngIf="!(sidebarSubitem.children && sidebarSubitem.open)" [class.highlight-with-weight]="sidebarSubitem.highlighted">
+                {{ (sidebarSubitem.namePrefix ? sidebarSubitem.namePrefix! : '') | translate }}
+                {{ sidebarSubitem.name | translate }}
+              </span>
+              <b *ngIf="sidebarSubitem.children && sidebarSubitem.open" [class.highlight-with-weight]="sidebarSubitem.highlighted">
+                {{ (sidebarSubitem.namePrefix ? sidebarSubitem.namePrefix! : '') | translate }}
+                {{ sidebarSubitem.name | translate }}
+              </b>
+        
+            </div>
+  
+            <div *ngIf="sidebarSubitem.open">
+      
+              <div *ngFor="let sidebarSubsubitem of sidebarSubitem.children">
+                <div *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem" [class.highlighted-background]="sidebarSubsubitem.highlighted" (click)="goToRoute(sidebarSubsubitem);">
+            
+                  <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarSubsubitem.highlighted">{{ sidebarSubsubitem.icon ? sidebarSubsubitem.icon : 'chevron_right' }}</mat-icon>
+                  <span *ngIf="!(sidebarSubsubitem.children && sidebarSubsubitem.open)" [class.highlight-with-weight]="sidebarSubsubitem.highlighted">
+                    {{ (sidebarSubsubitem.namePrefix ? sidebarSubsubitem.namePrefix! : '') | translate }}
+                    {{ sidebarSubsubitem.name | translate }}
+                  </span>
+                  <b *ngIf="sidebarSubsubitem.children && sidebarSubsubitem.open" [class.highlight-with-weight]="sidebarSubsubitem.highlighted">
+                    {{ (sidebarSubsubitem.namePrefix ? sidebarSubsubitem.namePrefix! : '') | translate }}
+                    {{ sidebarSubsubitem.name | translate }}
+                  </b>
+            
+                </div>
+              </div>
+              
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <app-main-content></app-main-content>
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+  

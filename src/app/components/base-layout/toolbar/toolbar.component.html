@@ -1,1 +1,68 @@
-<p>toolbar works!</p>
+<mat-toolbar color="primary">
+
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="mainMenu" matTooltip="{{ 'Menu' | translate }}">
+      <mat-icon>menu</mat-icon>
+    </button>
+  
+    <button mat-icon-button class="example-icon" (click)="sidenavService.toggle()">
+      <mat-icon>view_sidebar</mat-icon>
+    </button>
+  
+    <button mat-flat-button class="example-icon" style="margin-right: 20px;" (click)="router.navigateByUrl('selection-screen')">
+      {{'SelectionScreen'|translate}}
+      <mat-icon>view_list</mat-icon>
+    </button>
+  
+    <span>{{(session.loggedInUser.owner ? session.loggedInUser.owner:'Nepoznat Vlasnik') +' @ ' + ( 'Šihterica' | translate) }}</span>
+    
+    <span *ngIf="showKonekcije" style="margin-left: 20px;">{{"  Konekcija: "+globalVar.APIHost+globalVar.APIFile}}</span>
+  
+    <span class="toolbar-spacer"></span>
+  
+    <span>{{ session.loggedInUser.username }}</span>
+  
+    <button mat-icon-button class="example-icon favorite-icon" matTooltip="{{ 'Logout' | translate }}" (click)="openLogoutPrompt();">
+      <mat-icon>logout</mat-icon>
+    </button>
+  
+  </mat-toolbar>
+  
+  <mat-menu #mainMenu="matMenu">
+  
+    <button mat-menu-item>
+      {{ 'AboutTheProduct' | translate }}
+      <mat-icon>info</mat-icon>
+    </button>
+  
+    <button mat-menu-item *ngIf="session.loggedInUser.sessionID != ''" [matMenuTriggerFor]="submenuLanguage">
+      {{ 'Language' | translate }}
+      <mat-icon>language</mat-icon>
+    </button>
+  
+    <button mat-menu-item *ngIf="session.loggedInUser.sessionID != ''" (click)="openLogoutPrompt();">
+      {{ 'Logout' | translate }}
+      <mat-icon>logout</mat-icon>
+    </button>
+  
+  </mat-menu>
+  
+  <mat-menu #submenuLanguage="matMenu">
+  
+    <button mat-menu-item (click)="globalFn.changeLanguage('hr');">
+      <mat-icon color="primary">{{ globalVar.selectedLanguage == 'hr' ? 'done' : '' }}</mat-icon>
+      <mat-icon>
+        <img src="assets/icons/png/language-hr.png" alt="" height="20">
+      </mat-icon>
+      {{ 'Croatian' | translate }}
+    </button>
+  
+    <button mat-menu-item (click)="globalFn.changeLanguage('en');">
+      <mat-icon color="primary">{{ globalVar.selectedLanguage == 'en' ? 'done' : '' }}</mat-icon>
+      <mat-icon>
+        <img src="assets/icons/png/language-en.png" alt="" height="20">
+      </mat-icon>
+      {{ 'English' | translate }}
+    </button>
+  
+  </mat-menu>
+  

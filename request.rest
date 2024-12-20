@@ -1,0 +1,64 @@
+//get zaposleni
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getZaposleni",
+  "sid": "fveti40ivupcu7a5mvo2lfcpv1",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "MBR",
+        "direction": "DESC"
+      }
+    ]
+  }
+}
+
+//get vrste posla
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getVrstePosla",
+  "sid": "fveti40ivupcu7a5mvo2lfcpv1",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZ_VP",
+        "direction": "DESC"
+      }
+    ]
+  }
+}
+//get OJ
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getOJ",
+  "sid": "h0ep3660rtliv0e489m36v4fi0",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIF_OJ",
+        "direction": "DESC"
+      }
+    ]
+  }
+}
