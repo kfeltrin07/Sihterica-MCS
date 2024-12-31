@@ -21,6 +21,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { CreateOvlasteneOsobeMjTrComponent } from './create-ovlastene-osobe-mj-tr/create-ovlastene-osobe-mj-tr.component';
+import { EditOvlasteneOsobeMjTrComponent } from './edit-ovlastene-osobe-mj-tr/edit-ovlastene-osobe-mj-tr.component';
+import { DeleteOvlasteneOsobeMjTrComponent } from './delete-ovlastene-osobe-mj-tr/delete-ovlastene-osobe-mj-tr.component';
 
 @Component({
   selector: 'app-ovlastene-osobe-mj-tr',
@@ -58,6 +61,9 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     USERNAME: "",
     SIFMJTR: "",
     NAZMJTR: "",
+    OD:"",
+    DO:"",
+    SATI:"",
   };
 
 
@@ -123,17 +129,39 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     }
   }
 
+  public openCreateDialog(): void {
 
+    const dialogRef = this.dialog.open(CreateOvlasteneOsobeMjTrComponent, {
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
 
   public openDetailsDialog(item: any): void {
     const dialogRef = this.dialog.open(DetailsOvlasteneOsobeMjTrComponent, {
       data: item,
-
-
     });
     dialogRef.afterClosed().subscribe((result) => { });
   }
 
+  public openEditDialog(item: any): void {
+    const dialogRef = this.dialog.open(EditOvlasteneOsobeMjTrComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
+
+  public openDeleteDialog(item: any): void {
+    const dialogRef = this.dialog.open(DeleteOvlasteneOsobeMjTrComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
 
   public refresh(): void {
     this.loading = true;
@@ -155,4 +183,6 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     }
     this.displayedColumns.push('options');
   }
+
+
 }

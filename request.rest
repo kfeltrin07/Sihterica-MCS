@@ -93,7 +93,7 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getOvlOsobeMjTr",
-  "sid": "ltnp1704nqg0ropu020tik3bn4",
+  "sid": "imb2vmpdnjd1nviijkkefr4kj7",
   "data" : {
     "pDioNaziva" : "",
     "limit": 10,
@@ -101,6 +101,50 @@ Content-Type: application/json
     "sort": [
       {
         "property": "NAZIV",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get EVIDENCIJA RADNOG VREMENA ZAGLAVLJA
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaZag",
+  "sid": "4l7u0827q307kipsk2klng9mc0",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIF_STUPCA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get Opis Vrste HELP ZA
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getOpisVrste",
+  "sid": "4l7u0827q307kipsk2klng9mc0",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIFRA",
         "direction": "ASC"
       }
     ]

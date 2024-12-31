@@ -9,6 +9,7 @@ import { VrstePoslaComponent } from './components/dynamic/vrste-posla/vrste-posl
 import { OrganizacijskeJediniceComponent } from './components/dynamic/organizacijske-jedinice/organizacijske-jedinice.component';
 import { PregledOperateraComponent } from './components/dynamic/pregled-operatera/pregled-operatera.component';
 import { OvlasteneOsobeMjTrComponent } from './components/dynamic/ovlastene-osobe-mj-tr/ovlastene-osobe-mj-tr.component';
+import { EvidencijaRadnogVremenaZaglavljeComponent } from './components/dynamic/evidencija-radnog-vremena-zaglavlje/evidencija-radnog-vremena-zaglavlje.component';
 
 const routes: Routes = [
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'oj', component: OrganizacijskeJediniceComponent, canActivate: [authGuard()] },
   { path: 'operateri', component: PregledOperateraComponent, canActivate: [authGuard()] },
   { path: 'ovlastene-osobe-mj-tr', component: OvlasteneOsobeMjTrComponent, canActivate: [authGuard()] },
+  { path: 'evidencija-rad-vrem-zag', component: EvidencijaRadnogVremenaZaglavljeComponent, canActivate: [authGuard()] },
 
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },

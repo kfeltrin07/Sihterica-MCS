@@ -21,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { OrganizacijskeJedinicePdfComponent } from './organizacijske-jedinice-pdf/organizacijske-jedinice-pdf.component';
 
 @Component({
   selector: 'app-organizacijske-jedinice',
@@ -166,5 +167,14 @@ export class OrganizacijskeJediniceComponent {
       this.displayedColumns.push(this.globalVar.OrganizacijskeJediniceDisplayedColumns[i].name);
     }
     this.displayedColumns.push('options');
+  }
+
+  public openPDFDialog(item: any): void {
+    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
   }
 }

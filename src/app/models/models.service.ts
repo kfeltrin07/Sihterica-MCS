@@ -378,6 +378,161 @@ export interface OvlastenaOsobaMjTr {
   USERNAME: string;
   SIFMJTR: string;
   NAZMJTR: string;
+  OD:string;
+  DO:string;
+  SATI:string;
+}
+
+export interface EvidencijaRadVreZag{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  RID: string;
+  SIF_STUPCA: string;
+  RBROJ: string;
+  KNAZIV: string;
+  OPIS: string;
+  VRSTA_SLOGA: string;
+  OPISVRSTE: string;
+}
+
+export interface OpisVrste{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_VLAS: string;
+  SIFRA: string;
+  OPIS: string;
+}
+
+export enum TodoState {
+  Urgent,
+  InProgress,
+  Next,
+  ForLater
+}
+
+export interface ReadPostRequestMain {
+  action: string;
+  method: string;
+  sid?: string;
+  data: ReadPostRequestBody;
+}
+
+export interface ReadPostRequestBody {
+  limit?: number;
+  pActive?: number;
+  pAdminId?: number;
+  pAdresa?: string;
+  pComment?: string;
+  pComputerId?: number;
+  pComputerListId?: string;
+  pComputerModelId?: number;
+  pComputerTypesId?: number;
+  pComputerOS?: number;
+  pComputerOSVersion?: number;
+  pComputerOSArchitecture?: number;
+  pComputerOSKernelVersions?: number;
+  pContact?: string;
+  pCreationDate?: string;
+  pModifiedDate?: string;
+  pDateCreation?: string;
+  pDateMod?: string;
+  pDescription?: string;
+  pDioAdresa?: string;
+  pDioAdresaNOT?: string;
+  pDioAktivan?: string;
+  pDioAktivanNOT?: string;
+  pDioArhitektura?: string;
+  pDioArhitekturaNOT?: string;
+  pDioDatumInstalacije?: string;
+  pDioDatumInstalacijeNOT?: string;
+  pDioEmail?: string;
+  pDioEmailNOT?: string;
+  pDioIDa?: string;
+  pDioIDaNOT?: string;
+  pDioKategorije?: string;
+  pDioKategorijeNOT?: string;
+  pDioKomentar?: string;
+  pDioKomentarNOT?: string;
+  pDioKontakta?: string;
+  pDioKontaktaNOT?: string;
+  pDioModela?: string;
+  pDioModelaNOT?: string;
+  pDioNazivRacunala?: string;
+  pDioNazivRacunalaNOT?: string;
+  pDioNaziva?: string;
+  pDioNazivaNOT?: string;
+  pDioNazivaProcesora?: string;
+  pDioNazivaProcesoraNOT?: string;
+  pDioNazivaProizvodjaca?: string;
+  pDioNazivaProizvodjacaNOT?: string;
+  pDioOperacijskogSustava?: string;
+  pDioOperacijskogSustavaNOT?: string;
+  pDioPassword?: string;
+  pDioPasswordNOT?: string;
+  pDioSerijskog?: string;
+  pDioSerijskogNOT?: string;
+  pDioUloge?: string;
+  pDioUlogeNOT?: string;
+  pDioUsername?: string;
+  pDioUsernameNOT?: string;
+  pDioVerzije?: string;
+  pDioVerzijeNOT?: string;
+  pDioVerzijeSoftvera?: string;
+  pDioVerzijeSoftveraNOT?: string;
+  pDioVrste?: string;
+  pDioVrsteNOT?: string;
+  pDioZupanije?: string;
+  pDioZupanijeNOT?: string;
+  pDueDate?: string;
+  pEmail?: string;
+  pManufacturersID?: number;
+  pName?: string;
+  pNapomena?: string;
+  pSerial?: string;
+  pID?: number;
+  pNedozvoljen?: any;
+  pID_Korisnika?: string;
+  pItemID?: number;
+  pItemId?: number;
+  pItemType?: string;
+  pPassword?: string;
+  pPoruka?: string;
+  pReceiverId?: number;
+  pSenderId?: number;
+  pState?: TodoState;
+  pTitle?: string;
+  pUlogaID?: number;
+  pUlogaId?: number;
+  pUserID?: number;
+  pZupanijaID?: number;
+  pZupanijaId?: number;
+  pSelectedZupanijaID?: number;
+  pSelectedIspostavaID?: number;
+  pSoftwareCategoriesId?: number;
+  pSqlParams?: string;
+  pUloga?: number;
+  pUsername?: string;
+  pPrioriter?: string;
+  pKorisnik?: string;
+  pIDObavijesti?: string;
+  pIDKorisnika?: string;
+  pZaglavlje1?: string;
+  pZaglavlje2?: string;
+  pZaglavlje3?: string;
+  pZaglavlje4?: string;
+  pComputerID?: number;
+  pStatusID?:number;
+  pStatusAktivnostiID?:number;
+  pIDNew?:string;
+  pUsernameNew?:string;
+  pUkupno?: boolean;
+  page?: number;
+  sort?: ReadPostRequestPropertyAndDirection[];
+}
+
+export interface ReadPostRequestPropertyAndDirection {
+  property: string;
+  direction: string;
 }
 
 // START: app API

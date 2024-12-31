@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatLabel, MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
+import { ZaposleniPdfComponent } from './zaposleni-pdf/zaposleni-pdf.component';
 
 @Component({
   selector: 'app-zaposleni',
@@ -50,7 +51,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class ZaposleniComponent implements OnInit{
   public displayedColumns: string[] = ['MBR', 'PREZIME_IME','NAZ_ZAN','SIF_OJ','NAZ_OJ', 'options'];
-  
+
     public zaposleni: Zaposleni[] = [];
     public Zaposleni: Zaposleni = {
       UKUPANBROJSLOGOVA: 0,
@@ -159,6 +160,15 @@ export class ZaposleniComponent implements OnInit{
   public openDeleteDialog(item: any): void {
     const dialogRef = this.dialog.open(DeleteZaposleniComponent, {
       data: item.SIFLOKACIJE
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
+
+  public openPDFDialog(item:any):void{
+    const dialogRef = this.dialog.open(ZaposleniPdfComponent, {
+      data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => this.refresh(), 1000);

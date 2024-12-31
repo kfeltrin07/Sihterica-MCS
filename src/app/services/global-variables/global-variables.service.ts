@@ -28,7 +28,8 @@ export class GlobalVariablesService {
   public RequestVarijable: any;
   public TrenutniIzvjestaj: any;
 
-
+  public headerTitle: string = '';
+  public headerImage: string = '';
   // END: development helpers
 
   // START: logging in messages
@@ -339,6 +340,18 @@ export class GlobalVariablesService {
     displayedName: 'NAZMJTR',
     name: 'NAZMJTR'
   };
+  public ODColumn: ColumnRef = {
+    displayedName: 'OD',
+    name: 'OD'
+  };
+  public DOColumn: ColumnRef = {
+    displayedName: 'DO',
+    name: 'DO'
+  };
+  public SATIColumn: ColumnRef = {
+    displayedName: 'SATI',
+    name: 'SATI'
+  };
 
   public OvlastenaOsobaMjTrDisplayedColumns: ColumnRef[] = [
     this.IDColumn,
@@ -346,6 +359,7 @@ export class GlobalVariablesService {
     this.USERNAMEColumn,
     this.SIFMJTRColumn,
     this.NAZMJTRColumn,
+    this.SATIColumn
   ];
 
   public OvlastenaOsobaMjTrColumnsList: ColumnRef[] = [
@@ -355,7 +369,82 @@ export class GlobalVariablesService {
     this.USERNAMEColumn,
     this.SIFMJTRColumn,
     this.NAZMJTRColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.SATIColumn
   ];
+
+
+  public RIDColumn: ColumnRef = {
+    displayedName: 'RID',
+    name: 'RID'
+  };
+  public SIF_STUPCAColumn: ColumnRef = {
+    displayedName: 'SIF_STUPCA',
+    name: 'SIF_STUPCA'
+  };
+  public RBROJColumn: ColumnRef = {
+    displayedName: 'RBROJ',
+    name: 'RBROJ'
+  };
+  public KNAZIVColumn: ColumnRef = {
+    displayedName: 'KNAZIV',
+    name: 'KNAZIV'
+  };
+  public OPISColumn: ColumnRef = {
+    displayedName: 'OPIS',
+    name: 'OPIS'
+  };
+  public VRSTA_SLOGAColumn: ColumnRef = {
+    displayedName: 'VRSTA_SLOGA',
+    name: 'VRSTA_SLOGA'
+  };
+  public OPISVRSTEColumn: ColumnRef = {
+    displayedName: 'OPISVRSTE',
+    name: 'OPISVRSTE'
+  };
+  public EvidencijaRadVreZagDisplayedColumns: ColumnRef[] = [
+    this.KNAZIVColumn,
+    this.OPISColumn,
+    this.SIF_STUPCAColumn,
+    this.RBROJColumn,
+    this.OPISVRSTEColumn
+  ];
+
+  public EvidencijaRadVreZagColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.RIDColumn,
+    this.KNAZIVColumn,
+    this.OPISColumn,
+    this.SIF_STUPCAColumn,
+    this.RBROJColumn,
+    this.OPISVRSTEColumn,
+    this.VRSTA_SLOGAColumn
+  ];
+
+  public SIFRAColumn: ColumnRef = {
+    displayedName: 'SIFRA',
+    name: 'SIFRA'
+  };
+
+  public SIF_VLASColumn: ColumnRef = {
+    displayedName: 'SIF_VLAS',
+    name: 'SIF_VLAS'
+  };
+
+  public OpisVrsteDisplayedColumns: ColumnRef[] = [
+    this.SIFRAColumn,
+    this.OPISColumn,
+  ];
+
+  public OpisVrsteColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIFRAColumn,
+    this.OPISColumn,
+    this.SIF_VLASColumn
+  ];
+
+  
   // END: columns list
 
   public sidebarItems: SidebarItem[] = [
@@ -450,6 +539,15 @@ export class GlobalVariablesService {
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
         },
+        {
+          namePrefix: '2.3',
+          name: 'EvidencijaRadVremZag',
+          icon: 'work_history',
+          url: '/evidencija-rad-vrem-zag',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        }
       ],
     }
   ];
@@ -560,6 +658,12 @@ export class GlobalVariablesService {
           url: '/ovlastene-osobe-mj-tr',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         },
+        {
+          name: 'EvidencijaRadVremZag',
+          icon: 'work_history',
+          url: '/evidencija-rad-vrem-zag',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        }
       ],
       url: ''
     },

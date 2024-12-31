@@ -7173,6 +7173,84 @@
             "en": "Authorized persons Pla. Expe.",
             "hr": "Ovlaštene osobe Mj. Tr.",
             "transferred": false
+        },
+        {
+          "ref": "ColumnsShown",
+          "en": "Columns shown",
+          "hr": "Prikazani stupci",
+          "transferred": true
+        },
+        {
+          "ref": "All",
+          "en": "All",
+          "hr": "Sve",
+          "transferred": true
+        },
+        {
+          "ref": "OnlyDisplayed",
+          "en": "Only displayed",
+          "hr": "Samo prikazani",
+          "transferred": true
+        },
+        {
+          "ref": "Ordinal",
+          "en": "#",
+          "hr": "R. br.",
+          "transferred": true
+        },
+        {
+          "ref": "OvlasteneOsobeMjTrCreation",
+          "en": "Creating authorized persons by sale location",
+          "hr": "Ovlaštene osobe Mj. Tr. kreiranje",
+          "transferred": true
+        },
+        {
+          "ref": "OD",
+          "en": "From",
+          "hr": "Od",
+          "transferred": true
+        },
+        {
+          "ref": "DO",
+          "en": "To",
+          "hr": "Do",
+          "transferred": true
+        },
+        {
+          "ref": "SATI",
+          "en": "Hours",
+          "hr": "Sati",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadVremZag",
+          "en": "Work time record header",
+          "hr": "Evidencija Rad. Vrem. Zag.",
+          "transferred": true
+        },
+        {
+          "ref": "KNAZIV",
+          "en": "Acronym",
+          "hr": "Kratica naziv",
+          "transferred": true
+        },
+        {
+          "ref": "SIF_STUPCA",
+          "en": "Row code",
+          "hr": "Šifra stupca",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadnogVremenaZaglavlje",
+          "en": "Work time recording header",
+          "hr": "Evidencija radnog vremena zaglavlje",
+          "transferred": true
+        },
+        {
+          "ref": "OpisVrste",
+          "en": "Type description",
+          "hr": "Opis vrste",
+          "transferred": true
         }
     ]
 }

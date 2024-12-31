@@ -20,6 +20,8 @@ import { SessionService } from 'src/app/services/session/session.service';
     MatTooltipModule,
     MatButtonModule,
 
+    CdkDrag,
+    CdkDragHandle,
     TranslationPipe,
     CommonModule,
     CdkDrag,

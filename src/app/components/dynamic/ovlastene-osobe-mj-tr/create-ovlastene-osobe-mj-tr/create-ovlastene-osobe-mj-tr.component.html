@@ -1,0 +1,130 @@
+<div 
+cdkDrag
+cdkDragRootElement=".cdk-overlay-pane" 
+cdkDragHandle 
+cdkDragBoundary=".cdk-overlay-container"
+class="colored-header text-align-center">
+	{{ 'Creating' | translate }}
+    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+
+</div>
+
+<mat-dialog-content class="small-margin-and-center-title">
+
+	<h2 mat-dialog-title class="text-align-center">
+		<mat-icon class="dialog-title-icon">person</mat-icon>
+		<mat-icon class="dialog-title-icon">add</mat-icon>
+		<span class="dialog-title">{{ 'OvlasteneOsobeMjTrCreation' | translate }}</span>
+  	</h2>
+
+	<div class="form-container">
+		<table>
+			<tr>
+				<td>
+					<label for="ID" class="minimum-margin-top">{{ 'ID' | translate }}:</label>
+				</td>
+                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickZaposleni();" (contextmenu)="removeZaposleni($event)"
+                        matTooltip="{{ (!OvlastenaOsobaMjTr.ID ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="varNames.PREZIME_IME">
+                        {{ varNames!.PREZIME_IME ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (mouseleave)="resetZaposleni();"
+                        (click)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);">
+                        <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.ID" maxlength="22"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (ngModelChange)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);"
+                            (focus)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);"
+                            (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
+                            (keyup.escape)="resetZaposleni();">
+                        <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredZaposleni-dropdown-' + i"
+                                *ngFor="let zaposleni of offeredZaposleni; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == ZaposleniDropdownIndex"
+                                (mousedown)="selectZaposleni(zaposleni);">
+                                <span>
+                                    <b>{{ zaposleni.MBR }}</b> ({{ zaposleni.PREZIME_IME }})
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.PREZIME_IME }}"
+                        matTooltipShowDelay="1000">{{
+                        varNames!.PREZIME_IME }}</span>
+                </td>
+			</tr>
+			<tr>
+				<td>
+					<label for="NAZJM" class="minimum-margin-top">{{ 'NAZJM' | translate }}:</label>
+				</td>
+                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
+                        matTooltip="{{ (!OvlastenaOsobaMjTr.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="varNames.NAZ_OJ">
+                        {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (mouseleave)="resetOrganizationalUnits();"
+                        (click)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);">
+                        <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.SIFMJTR" maxlength="22"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (ngModelChange)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
+                            (focus)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
+                            (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
+                            (keyup.escape)="resetOrganizationalUnits();">
+                        <div id="offeredOrganizacijskeJedinice-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
+                                *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == OrganizacijskeJediniceDropdownIndex"
+                                (mousedown)="selectOrganizationalUnits(organizationalUnits);">
+                                <span>
+                                    <b>{{ organizationalUnits.SIF_OJ }}</b> ({{ organizationalUnits.NAZ_OJ }})
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
+                        matTooltipShowDelay="1000">{{
+                        varNames!.NAZ_OJ }}</span>
+                </td>
+			</tr>
+			<tr>
+				<td>
+					<label for="OD" class="minimum-margin-top">{{ 'OD' | translate }}:</label>
+				</td>
+				<td>
+					<input id="OD" type="time" class="minimum-margin width-276-px" [(ngModel)]="OvlastenaOsobaMjTr!.OD" placeholder="{{ 'OD' | translate }}">
+				</td>
+			</tr>
+            <tr>
+				<td>
+					<label for="DO" class="minimum-margin-top">{{ 'DO' | translate }}:</label>
+				</td>
+				<td>
+					<input id="DO" type="time" class="minimum-margin width-276-px" [(ngModel)]="OvlastenaOsobaMjTr!.DO" placeholder="{{ 'DO' | translate }}">
+				</td>
+			</tr>
+            <tr>
+				<td>
+					<label for="SATI" class="minimum-margin-top">{{ 'SATI' | translate }}:</label>
+				</td>
+				<td>
+					<input id="SATI" class="minimum-margin width-276-px" [(ngModel)]="OvlastenaOsobaMjTr!.SATI" placeholder="{{ 'SATI' | translate }}">
+				</td>
+			</tr>
+		</table>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
+	<button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+		[disabled]="validateForm(OvlastenaOsobaMjTr!)">{{ 'Create' | translate }}</button>
+</mat-dialog-actions>
