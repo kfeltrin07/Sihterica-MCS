@@ -7164,14 +7164,14 @@
         },
         {
             "ref": "OvlasteneOsobe",
-            "en": "Authorized persons",
-            "hr": "Ovlaštene osobe",
+            "en": "Authorized Persons",
+            "hr": "Ovlaštene Osobe",
             "transferred": false
         },
         {
             "ref": "OvlasteneOsobeMjTr",
-            "en": "Authorized persons Pla. Expe.",
-            "hr": "Ovlaštene osobe Mj. Tr.",
+            "en": "Authorized Persons Place of Expense",
+            "hr": "Ovlaštene Osobe Mjesta Troška",
             "transferred": false
         },
         {
@@ -7225,7 +7225,7 @@
         {
           "ref": "EvidencijaRadVremZag",
           "en": "Work time record header",
-          "hr": "Evidencija Rad. Vrem. Zag.",
+          "hr": "Evidencija Radnog Vremena Zaglavlje",
           "transferred": true
         },
         {
@@ -7250,6 +7250,186 @@
           "ref": "OpisVrste",
           "en": "Type description",
           "hr": "Opis vrste",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadVreZagCreation",
+          "en": "Work time recording header creation",
+          "hr": "Kreiranje evidencije radnog vremena zaglavlje",
+          "transferred": true
+        },
+        {
+          "ref": "VRSTA_IZRACUNA",
+          "en": "Calculation type",
+          "hr": "Vrsta izračuna",
+          "transferred": true
+        },
+        {
+          "ref": "RBROJ",
+          "en": "Ordinal number",
+          "hr": "Redni broj",
+          "transferred": true
+        },
+        {
+          "ref": "Creating",
+          "en": "Creating",
+          "hr": "Kreiranje",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadVreZagEditing",
+          "en": "Work time recording header editing",
+          "hr": "Uređivanje evidencije radnog vremena zaglavlje",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadVremZagVeze",
+          "en": "Work time record header",
+          "hr": "Evidencija Radnog Vremena Zaglavlja Veze",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadnogVremenaZaglavljeVeze",
+          "en": "Work time recording header connections",
+          "hr": "Evidencija radnog vremena zaglavlje veze",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadnogVremenaRadnika",
+          "en": "Employee Working Time Rec.",
+          "hr": "Evidencija Radnog Vremena Radnika",
+          "transferred": true
+        },
+        {
+          "ref": "SIFRANAZIV",
+          "en": "Code and name",
+          "hr": "Šifra i naziv",
+          "transferred": true
+        },
+        {
+          "ref": "SIF_MT",
+          "en": "Pl. of exp. code",
+          "hr": "Šifra Mj Tr",
+          "transferred": true
+        },
+        {
+          "ref": "NAZIV_MT",
+          "en": "Pl. of exp. name",
+          "hr": "Naziv Mj Tr",
+          "transferred": true
+        },
+        {
+          "ref": "REDAK",
+          "en": "Row",
+          "hr": "Redak",
+          "transferred": true
+        },
+        {
+          "ref": "VRSTA",
+          "en": "Type",
+          "hr": "Vrsta",
+          "transferred": true
+        },
+        {
+          "ref": "POCETAK",
+          "en": "Start",
+          "hr": "Početak",
+          "transferred": true
+        },
+        {
+          "ref": "ZAVRSETAK",
+          "en": "End",
+          "hr": "Završetak",
+          "transferred": true
+        },
+        {
+          "ref": "ZaMjesec",
+          "en": "For month",
+          "hr": "Za mjesec",
+          "transferred": true
+        },
+        {
+          "ref": "Siječanj",
+          "en": "January",
+          "hr": "Siječanj",
+          "transferred": true
+        },
+        {
+          "ref": "Veljača",
+          "en": "February",
+          "hr": "Veljača",
+          "transferred": true
+        },
+        {
+          "ref": "Ožujak",
+          "en": "March",
+          "hr": "Ožujak",
+          "transferred": true
+        },
+        {
+          "ref": "Travanj",
+          "en": "April",
+          "hr": "Travanj",
+          "transferred": true
+        },
+        {
+          "ref": "Svibanj",
+          "en": "May",
+          "hr": "Svibanj",
+          "transferred": true
+        },
+        {
+          "ref": "Lipanj",
+          "en": "June",
+          "hr": "Lipanj",
+          "transferred": true
+        },
+        {
+          "ref": "Srpanj",
+          "en": "July",
+          "hr": "Srpanj",
+          "transferred": true
+        },
+        {
+          "ref": "Kolovoz",
+          "en": "August",
+          "hr": "Kolovoz",
+          "transferred": true
+        },
+        {
+          "ref": "Rujan",
+          "en": "September",
+          "hr": "Rujan",
+          "transferred": true
+        },
+        {
+          "ref": "Listopad",
+          "en": "October",
+          "hr": "Listopad",
+          "transferred": true
+        },
+        {
+          "ref": "Studeni",
+          "en": "November",
+          "hr": "Studeni",
+          "transferred": true
+        },
+        {
+          "ref": "Prosinac",
+          "en": "December",
+          "hr": "Prosinac",
+          "transferred": true
+        },
+        {
+          "ref": "FondSati",
+          "en": "Fond of hours",
+          "hr": "Fond sati",
+          "transferred": true
+        },
+        {
+          "ref": "EvidencijaRadnogVremena",
+          "en": "Work Time Record",
+          "hr": "Evidencija Radnog Vremena",
           "transferred": true
         }
     ]

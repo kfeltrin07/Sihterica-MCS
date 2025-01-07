@@ -10,6 +10,9 @@ import { OrganizacijskeJediniceComponent } from './components/dynamic/organizaci
 import { PregledOperateraComponent } from './components/dynamic/pregled-operatera/pregled-operatera.component';
 import { OvlasteneOsobeMjTrComponent } from './components/dynamic/ovlastene-osobe-mj-tr/ovlastene-osobe-mj-tr.component';
 import { EvidencijaRadnogVremenaZaglavljeComponent } from './components/dynamic/evidencija-radnog-vremena-zaglavlje/evidencija-radnog-vremena-zaglavlje.component';
+import { EvidencijaRadnogVremenaZaglavljeVezeComponent } from './components/dynamic/evidencija-radnog-vremena-zaglavlje-veze/evidencija-radnog-vremena-zaglavlje-veze.component';
+import { EvidencijaRadnogVremenaRadnikaComponent } from './components/dynamic/evidencija-radnog-vremena-radnika/evidencija-radnog-vremena-radnika.component';
+import { EvidencijaRadnogVremenaComponent } from './components/dynamic/evidencija-radnog-vremena/evidencija-radnog-vremena.component';
 
 const routes: Routes = [
 
@@ -19,6 +22,9 @@ const routes: Routes = [
   { path: 'operateri', component: PregledOperateraComponent, canActivate: [authGuard()] },
   { path: 'ovlastene-osobe-mj-tr', component: OvlasteneOsobeMjTrComponent, canActivate: [authGuard()] },
   { path: 'evidencija-rad-vrem-zag', component: EvidencijaRadnogVremenaZaglavljeComponent, canActivate: [authGuard()] },
+  { path: 'evidencija-rad-vrem-zag-veze', component: EvidencijaRadnogVremenaZaglavljeVezeComponent, canActivate: [authGuard()] },
+  { path: 'evidencija-rad-vrem-rad', component: EvidencijaRadnogVremenaRadnikaComponent, canActivate: [authGuard()] },
+  { path: 'evidencija-rad-vrem', component: EvidencijaRadnogVremenaComponent, canActivate: [authGuard()] },
 
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },

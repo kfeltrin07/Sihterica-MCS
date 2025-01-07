@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EvidencijaRadVreZag, Sorting } from 'src/app/models/models.service';
-import { DetailsEvidencijaRadnogVremenaZaglavljeComponent } from './details-evidencija-radnog-vremena-zaglavlje/details-evidencija-radnog-vremena-zaglavlje.component';
+import { EvidencijaRadVreZagVeze, Sorting } from 'src/app/models/models.service';
+import { CreateEvidencijaRadnogVremenaZaglavljeVezeComponent } from './create-evidencija-radnog-vremena-zaglavlje-veze/create-evidencija-radnog-vremena-zaglavlje-veze.component';
+import { EditEvidencijaRadnogVremenaZaglavljeVezeComponent } from './edit-evidencija-radnog-vremena-zaglavlje-veze/edit-evidencija-radnog-vremena-zaglavlje-veze.component';
+import { DeleteEvidencijaRadnogVremenaZaglavljeVezeComponent } from './delete-evidencija-radnog-vremena-zaglavlje-veze/delete-evidencija-radnog-vremena-zaglavlje-veze.component';
+import { DetailsEvidencijaRadnogVremenaZaglavljeVezeComponent } from './details-evidencija-radnog-vremena-zaglavlje-veze/details-evidencija-radnog-vremena-zaglavlje-veze.component';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
@@ -21,12 +24,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
-import { DeleteEvidencijaRadnogVremenaZaglavljeComponent } from './delete-evidencija-radnog-vremena-zaglavlje/delete-evidencija-radnog-vremena-zaglavlje.component';
-import { EditEvidencijaRadnogVremenaZaglavljeComponent } from './edit-evidencija-radnog-vremena-zaglavlje/edit-evidencija-radnog-vremena-zaglavlje.component';
-import { CreateEvidencijaRadnogVremenaZaglavljeComponent } from './create-evidencija-radnog-vremena-zaglavlje/create-evidencija-radnog-vremena-zaglavlje.component';
 
 @Component({
-  selector: 'app-evidencija-radnog-vremena-zaglavlje',
+  selector: 'app-evidencija-radnog-vremena-zaglavlje-veze',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -46,27 +46,29 @@ import { CreateEvidencijaRadnogVremenaZaglavljeComponent } from './create-eviden
     TranslationPipe,
     PaginationComponent
   ],
-  templateUrl: './evidencija-radnog-vremena-zaglavlje.component.html',
-  styleUrl: './evidencija-radnog-vremena-zaglavlje.component.scss'
+  templateUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.html',
+  styleUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
-export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
-  public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA', 'RBROJ', 'options'];
+export class EvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
+  public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA','XFAKTOR','NAZ_VP', 'options'];
 
-  public evidencijaRadVreZag: EvidencijaRadVreZag[] = [];
-  public EvidencijaRadVreZag: EvidencijaRadVreZag = {
+  public evidencijaRadVreZagVeze: EvidencijaRadVreZagVeze[] = [];
+  public EvidencijaRadVreZagVeze: EvidencijaRadVreZagVeze = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
     RID: "",
     SIF_STUPCA: "",
-    RBROJ: "",
+    SIF_VP: "",
     KNAZIV: "",
     OPIS: "",
-    VRSTA_SLOGA: "",
-    OPISVRSTE: "",
+    NAZ_VP: "",
+    SI: "",
+    XFAKTOR: "",
+    SIF_VLAS: "",
   };
 
 
-  public dataSource = this.evidencijaRadVreZag;
+  public dataSource = this.evidencijaRadVreZagVeze;
   public searchParam: string = '';
   public loading: boolean = true;
   public sorting: Sorting = {
@@ -88,15 +90,15 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getEvRadnogVremenaZag();
+    this.getEvRadnogVremenaZagVeze();
   }
 
-  public getEvRadnogVremenaZag(): void {
+  public getEvRadnogVremenaZagVeze(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'getEvRadnogVremenaZag',
+        method: 'getEvRadnogVremenaZagVeze',
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%' + this.searchParam + '%',
@@ -112,8 +114,8 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.evidencijaRadVreZag = response.debugData.data;
-      this.dataSource = this.evidencijaRadVreZag;
+      this.evidencijaRadVreZagVeze = response.debugData.data;
+      this.dataSource = this.evidencijaRadVreZagVeze;
       this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
       this.loading = false;
     });
@@ -130,7 +132,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
 
   public openCreateDialog(): void {
 
-    const dialogRef = this.dialog.open(CreateEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(CreateEvidencijaRadnogVremenaZaglavljeVezeComponent, {
     });
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => this.refresh(), 1000);
@@ -138,7 +140,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   }
 
   public openEditDialog(item: any): void {
-    const dialogRef = this.dialog.open(EditEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(EditEvidencijaRadnogVremenaZaglavljeVezeComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -147,7 +149,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   }
 
   public openDeleteDialog(item: any): void {
-    const dialogRef = this.dialog.open(DeleteEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(DeleteEvidencijaRadnogVremenaZaglavljeVezeComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -156,7 +158,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   }
 
   public openDetailsDialog(item: any): void {
-    const dialogRef = this.dialog.open(DetailsEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(DetailsEvidencijaRadnogVremenaZaglavljeVezeComponent, {
       data: item,
 
 
@@ -167,7 +169,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
 
   public refresh(): void {
     this.loading = true;
-    this.getEvRadnogVremenaZag();
+    this.getEvRadnogVremenaZagVeze();
   }
 
   public sort(event: any): void {
@@ -180,8 +182,8 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
 
   public setVisibleColumnsFromEvent(): void {
     this.displayedColumns = [];
-    for (let i = 0; i < this.globalVar.EvidencijaRadVreZagDisplayedColumns.length; i++) {
-      this.displayedColumns.push(this.globalVar.EvidencijaRadVreZagDisplayedColumns[i].name);
+    for (let i = 0; i < this.globalVar.EvidencijaRadVreZagVezeDisplayedColumns.length; i++) {
+      this.displayedColumns.push(this.globalVar.EvidencijaRadVreZagVezeDisplayedColumns[i].name);
     }
     this.displayedColumns.push('options');
   }

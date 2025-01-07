@@ -1,0 +1,120 @@
+<div 
+cdkDrag
+cdkDragRootElement=".cdk-overlay-pane" 
+cdkDragHandle 
+cdkDragBoundary=".cdk-overlay-container"
+class="colored-header text-align-center">
+	{{ 'Editing' | translate }}
+    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+
+</div>
+
+<mat-dialog-content class="small-margin-and-center-title">
+
+	<h2 mat-dialog-title class="text-align-center">
+		<mat-icon class="dialog-title-icon">person</mat-icon>
+		<mat-icon class="dialog-title-icon">add</mat-icon>
+		<span class="dialog-title">{{ 'EvidencijaRadVreZagVezeEditing' | translate }}</span>
+  	</h2>
+
+	<div class="form-container">
+		<table>
+			<tr>
+				<td>
+					<label for="Code" class="minimum-margin-top">{{ 'Code' | translate }}:</label>
+				</td>
+                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickEvidVezeSifra();" (contextmenu)="removeEvidVezeSifra($event)"
+                        matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_STUPCA ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="EvidencijaRadVreZagVeze.KNAZIV">
+                        {{ EvidencijaRadVreZagVeze!.KNAZIV ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (mouseleave)="resetEvidVezeSifra();"
+                        (click)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
+                        <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_STUPCA" maxlength="22"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (blur)="OfferedEvidVezeSifra()"
+                            (ngModelChange)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
+                            (focus)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
+                            (keyup.enter)="selectEvidVezeSifra(offeredEvidVezeSifra[EvidVezeSifraDropdownIndex]);"
+                            (keyup.escape)="resetEvidVezeSifra();">
+                        <div id="offeredEvidVezeSifra-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredEvidVezeSifra-dropdown-' + i"
+                                *ngFor="let evidVezeSifra of offeredEvidVezeSifra; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == EvidVezeSifraDropdownIndex"
+                                (mousedown)="selectEvidVezeSifra(evidVezeSifra);">
+                                <span>
+                                    <b>{{ evidVezeSifra.SIF_STUPCA }}</b> ({{ evidVezeSifra.KNAZIV }})
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="small-margin-left margin-right" matTooltip="{{ EvidencijaRadVreZagVeze!.KNAZIV }}"
+                        matTooltipShowDelay="1000">{{
+                        EvidencijaRadVreZagVeze!.KNAZIV }}</span>
+                </td>
+			</tr>
+            <tr>
+				<td>
+					<label for="VRSTA_IZRACUNA" class="minimum-margin-top">{{ 'VRSTA_IZRACUNA' | translate }}:</label>
+				</td>
+                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickEvidVezeIzracuna();" (contextmenu)="removeEvidVezeIzracuna($event)"
+                        matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="EvidencijaRadVreZagVeze.NAZ_VP">
+                        {{ EvidencijaRadVreZagVeze!.NAZ_VP ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (mouseleave)="resetEvidVezeIzracuna();"
+                        (click)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
+                        <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_VP" maxlength="22"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (blur)="OfferedEvidVezeIzracuna()"
+                            (ngModelChange)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
+                            (focus)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
+                            (keyup.enter)="selectEvidVezeIzracuna(offeredEvidVezeIzracuna[EvidVezeIzracunaDropdownIndex]);"
+                            (keyup.escape)="resetEvidVezeIzracuna();">
+                        <div id="offeredEvidVezeIzracuna-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredEvidVezeIzracuna-dropdown-' + i"
+                                *ngFor="let opisVrste of offeredEvidVezeIzracuna; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == EvidVezeIzracunaDropdownIndex"
+                                (mousedown)="selectEvidVezeIzracuna(opisVrste);">
+                                <span>
+                                    <b>{{ opisVrste.SIFRA }}</b> ({{ opisVrste.OPIS }})
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="small-margin-left margin-right" matTooltip="{{ EvidencijaRadVreZagVeze!.NAZ_VP }}"
+                        matTooltipShowDelay="1000">{{
+                        EvidencijaRadVreZagVeze!.NAZ_VP }}</span>
+                </td>
+			</tr>
+            <tr>
+				<td>
+					<label for="FaktorMnozenja" class="minimum-margin-top">{{ 'FaktorMnozenja' | translate }}:</label>
+				</td>
+				<td>
+					<select name="" id="" [(ngModel)]="EvidencijaRadVreZagVeze.XFAKTOR">
+                        <option (value)="1">1</option>
+                        <option (value)="0">0</option>
+                        <option (value)="-1">-1</option>
+                    </select>
+				</td>
+			</tr>
+		</table>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
+	<button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+		[disabled]="validateForm(EvidencijaRadVreZagVeze!)">{{ 'Create' | translate }}</button>
+</mat-dialog-actions>

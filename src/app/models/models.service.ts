@@ -327,6 +327,14 @@ export interface Zaposleni {
   IND: string;
 }
 
+export interface EvRadnogVremenaHelpRadnici {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  MBR: string;
+  PREZIME_IME: string;
+  OSOBA: string;
+}
+
 export interface VrstePosla {
   UKUPANBROJSLOGOVA: number;
   RN: number;
@@ -339,22 +347,22 @@ export interface VrstePosla {
 export interface OrganizacijskeJedinice {
   UKUPANBROJSLOGOVA: number;
   RN: number;
-  SIFVLAS: string,
-  SIF_OJ: string,
-  NAZ_OJ: string,
-  REG_BR: string,
-  BOD_PC: string,
-  KOEF_PC: string,
-  VR_BOD: string,
-  VR_KOEF: string,
-  PROS_SAT: string,
-  PROS_KOEF: string,
-  PROS_BOD: string,
-  IND1: string,
-  SIF_NAD: string,
-  BRO_HZZO: string,
-  RSOPC: string,
-  IDK: string,
+  SIFVLAS: string;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+  REG_BR: string;
+  BOD_PC: string;
+  KOEF_PC: string;
+  VR_BOD: string;
+  VR_KOEF: string;
+  PROS_SAT: string;
+  PROS_KOEF: string;
+  PROS_BOD: string;
+  IND1: string;
+  SIF_NAD: string;
+  BRO_HZZO: string;
+  RSOPC: string;
+  IDK: string;
   SYSD: string
 }
 
@@ -401,6 +409,128 @@ export interface OpisVrste{
   SIF_VLAS: string;
   SIFRA: string;
   OPIS: string;
+}
+
+export interface EvidencijaRadVreZagVeze{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  RID: string;
+  SIF_STUPCA: string;
+  SIF_VP: string;
+  KNAZIV: string;
+  OPIS: string;
+  NAZ_VP: string;
+  SI: string;
+  XFAKTOR: string;
+  SIF_VLAS: string;
+}
+
+export interface EvidVezeSifra{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_STUPCA: string;
+  KNAZIV: string;
+}
+
+export interface EvidVezeIzracuna{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_VLAS: string;
+  SIFRA: string;
+  OPIS: string;
+}
+
+export interface EvidencijaRadVreRad{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIFRANAZIV: string;
+  SIF_MT: string;
+  NAZIV_MT: string;
+  REDAK: string;
+  VRSTA: string;
+  POCETAK: string;
+  ZAVRSETAK: string;
+  SATI_1: string;
+  SATI_2: string;
+  SATI_3: string;
+  SATI_4: string;
+  SATI_5: string;
+  SATI_6: string;
+  SATI_7: string;
+  SATI_8: string;
+  SATI_9: string;
+  SATI_10: string;
+  SATI_11: string;
+  SATI_12: string;
+  SATI_13: string;
+  SATI_14: string;
+  SATI_15: string;
+  SATI_16: string;
+  SATI_17: string;
+  SATI_18: string;
+  SATI_19: string;
+  SATI_20: string;
+  SATI_21: string;
+  SATI_22: string;
+  SATI_23: string;
+  SATI_24: string;
+  SATI_25: string;
+  SATI_26: string;
+  SATI_27: string;
+  SATI_28: string;
+  SATI_29: string;
+}
+
+export interface EvidencijaRadVre{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  NAZIV_OJ:string;
+  SIFRANAZIV: string;
+  NAZIVRAD: string;
+  SIF_MT: string;
+  NAZIV_MT: string;
+  REDAK: string;
+  VRSTA: string;
+  POCETAK: string;
+  ZAVRSETAK: string;
+  SATI_1: string;
+  SATI_2: string;
+  SATI_3: string;
+  SATI_4: string;
+  SATI_5: string;
+  SATI_6: string;
+  SATI_7: string;
+  SATI_8: string;
+  SATI_9: string;
+  SATI_10: string;
+  SATI_11: string;
+  SATI_12: string;
+  SATI_13: string;
+  SATI_14: string;
+  SATI_15: string;
+  SATI_16: string;
+  SATI_17: string;
+  SATI_18: string;
+  SATI_19: string;
+  SATI_20: string;
+  SATI_21: string;
+  SATI_22: string;
+  SATI_23: string;
+  SATI_24: string;
+  SATI_25: string;
+  SATI_26: string;
+  SATI_27: string;
+  SATI_28: string;
+  SATI_29: string;
+  BEMPTYROWAFTER: string;
+}
+
+export interface EvidencijaRadVreOj{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_OJ: string;
+  NAZMJTR: string;
+  VRSTA: string;
 }
 
 export enum TodoState {

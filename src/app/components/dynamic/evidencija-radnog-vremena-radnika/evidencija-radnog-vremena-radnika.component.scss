@@ -1,0 +1,38 @@
+.dokumenti-filteri-container {
+    background-color: var(--color-gray-default);
+    padding: 10px;
+}
+
+.dokumenti-filteri-container input:not([type=file]) {
+    border: 0.5px #d6d6d6 solid;
+    border-radius: 5px;
+    box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
+    height: 20px;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+}
+
+.filteri-table{
+    white-space: nowrap;
+    word-wrap: none;
+    word-break: keep-all;
+    
+}
+
+.filter-result{
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    max-width: 700px;
+    min-width: 700px;
+}
+
+select {
+    border: 0.5px #d6d6d6 solid;
+    border-radius: 5px;
+    box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 120px;
+    height: 24px;
+}

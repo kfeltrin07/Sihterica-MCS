@@ -159,7 +159,7 @@ export class SessionService {
       if (response.debugData.sessionInfo.opisAkcije == 'SQL:OK') {
         this.loggedInUser = {
           ID: +response.debugData.data['0'].IDK,
-          username: response.debugData.data['0'].OPERATER,
+          username: response.debugData.data['0'].USERNAME,
           sessionID: response.debugData.data['0'].SID,
           owner: response.debugData.data['0'].IMEVLASNIKA,
           ownerID: +response.debugData.data['0'].IDVLASNIKA
@@ -170,8 +170,8 @@ export class SessionService {
         this.cookies.setCookie('logged-in-user-session-id', this.loggedInUser.sessionID);
         this.cookies.setCookie('logged-in-user-owner', this.loggedInUser.owner!);
         this.cookies.setCookie('logged-in-user-owner-id', this.loggedInUser.ownerID!.toString());
-        /*this.cookies.setCookie('logged-in-user-displayed-username', this.loggedInUser.displayedUsername!);
-        this.cookies.setCookie('logged-in-user-role-id', this.loggedInUser.roleID!.toString());
+        this.cookies.setCookie('logged-in-user-displayed-username', this.loggedInUser.displayedUsername!);
+        /*this.cookies.setCookie('logged-in-user-role-id', this.loggedInUser.roleID!.toString());
         this.cookies.setCookie('logged-in-user-password', this.loggedInUser.password!.toString());*/
         //this.router.navigate(['/dashboard']);
         this.router.navigate(['/selection-screen']);

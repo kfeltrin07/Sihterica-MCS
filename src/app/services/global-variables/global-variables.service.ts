@@ -444,8 +444,356 @@ export class GlobalVariablesService {
     this.SIF_VLASColumn
   ];
 
+
+  public XFAKTORColumn: ColumnRef = {
+    displayedName: 'XFAKTOR',
+    name: 'XFAKTOR'
+  };
+
+  public EvidencijaRadVreZagVezeDisplayedColumns: ColumnRef[] = [
+    this.KNAZIVColumn,
+    this.OPISColumn,
+    this.SIF_STUPCAColumn,
+    this.SIF_VPColumn,
+    this.NAZ_VPColumn
+  ];
+
+  public EvidencijaRadVreZagVezeColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.RIDColumn,
+    this.KNAZIVColumn,
+    this.OPISColumn,
+    this.SIF_STUPCAColumn,
+    this.SIF_VPColumn,
+    this.NAZ_VPColumn,
+    this.XFAKTORColumn,
+    this.SIF_VLASColumn,
+    this.SIColumn
+  ];
+
+  public EvidVezeSifraDisplayedColumns: ColumnRef[] = [
+    this.SIF_STUPCAColumn,
+    this.KNAZIVColumn,
+  ];
+
+  public EvidVezeSifraColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_STUPCAColumn,
+    this.KNAZIVColumn,
+  ];
   
+  public EvidVezeIzracunaDisplayedColumns: ColumnRef[] = [
+    this.SIF_STUPCAColumn,
+    this.KNAZIVColumn,
+  ];
+
+  public EvidVezeIzracunaColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_VLASColumn,
+    this.SIFRAColumn,
+    this.OPISColumn,
+  ];
+
+  
+
+  public SIFRANAZIVColumn: ColumnRef = {
+    displayedName: 'SIFRANAZIV',
+    name: 'SIFRANAZIV'
+  };
+  public SIF_MTColumn: ColumnRef = {
+    displayedName: 'SIF_MT',
+    name: 'SIF_MT'
+  };
+  public NAZIV_MTColumn: ColumnRef = {
+    displayedName: 'NAZIV_MT',
+    name: 'NAZIV_MT'
+  };
+  public REDAKColumn: ColumnRef = {
+    displayedName: 'REDAK',
+    name: 'REDAK'
+  };
+  public VRSTAColumn: ColumnRef = {
+    displayedName: 'VRSTA',
+    name: 'VRSTA'
+  };
+  public POCETAKColumn: ColumnRef = {
+    displayedName: 'POCETAK',
+    name: 'POCETAK'
+  };
+  public ZAVRSETAKColumn: ColumnRef = {
+    displayedName: 'ZAVRSETAK',
+    name: 'ZAVRSETAK'
+  };
+  public SATI_1Column: ColumnRef = {
+    displayedName: 'SATI_1',
+    name: 'SATI_1'
+  };
+  public SATI_2Column: ColumnRef = {
+    displayedName: 'SATI_2',
+    name: 'SATI_2'
+  };
+  public SATI_3Column: ColumnRef = {
+    displayedName: 'SATI_3',
+    name: 'SATI_3'
+  };
+  public SATI_4Column: ColumnRef = {
+    displayedName: 'SATI_4',
+    name: 'SATI_4'
+  };
+  public SATI_5Column: ColumnRef = {
+    displayedName: 'SATI_5',
+    name: 'SATI_5'
+  };
+  public SATI_6Column: ColumnRef = {
+    displayedName: 'SATI_6',
+    name: 'SATI_6'
+  };
+  public SATI_7Column: ColumnRef = {
+    displayedName: 'SATI_7',
+    name: 'SATI_7'
+  };
+  public SATI_8Column: ColumnRef = {
+    displayedName: 'SATI_8',
+    name: 'SATI_8'
+  };
+  public SATI_9Column: ColumnRef = {
+    displayedName: 'SATI_9',
+    name: 'SATI_9'
+  };
+  public SATI_10Column: ColumnRef = {
+    displayedName: 'SATI_10',
+    name: 'SATI_10'
+  };
+  public SATI_11Column: ColumnRef = {
+    displayedName: 'SATI_11',
+    name: 'SATI_11'
+  };
+  public SATI_12Column: ColumnRef = {
+    displayedName: 'SATI_12',
+    name: 'SATI_12'
+  };
+  public SATI_13Column: ColumnRef = {
+    displayedName: 'SATI_13',
+    name: 'SATI_13'
+  };
+  public SATI_14Column: ColumnRef = {
+    displayedName: 'SATI_14',
+    name: 'SATI_14'
+  };
+  public SATI_15Column: ColumnRef = {
+    displayedName: 'SATI_15',
+    name: 'SATI_15'
+  };
+  public SATI_16Column: ColumnRef = {
+    displayedName: 'SATI_16',
+    name: 'SATI_16'
+  };
+  public SATI_17Column: ColumnRef = {
+    displayedName: 'SATI_17',
+    name: 'SATI_17'
+  };
+  public SATI_18Column: ColumnRef = {
+    displayedName: 'SATI_18',
+    name: 'SATI_18'
+  };
+  public SATI_19Column: ColumnRef = {
+    displayedName: 'SATI_19',
+    name: 'SATI_19'
+  };
+  public SATI_20Column: ColumnRef = {
+    displayedName: 'SATI_20',
+    name: 'SATI_20'
+  };
+  public SATI_21Column: ColumnRef = {
+    displayedName: 'SATI_21',
+    name: 'SATI_21'
+  };
+  public SATI_22Column: ColumnRef = {
+    displayedName: 'SATI_22',
+    name: 'SATI_22'
+  };
+  public SATI_23Column: ColumnRef = {
+    displayedName: 'SATI_23',
+    name: 'SATI_23'
+  };
+  public SATI_24Column: ColumnRef = {
+    displayedName: 'SATI_24',
+    name: 'SATI_24'
+  };
+  public SATI_25Column: ColumnRef = {
+    displayedName: 'SATI_25',
+    name: 'SATI_25'
+  };
+  public SATI_26Column: ColumnRef = {
+    displayedName: 'SATI_26',
+    name: 'SATI_26'
+  };
+  public SATI_27Column: ColumnRef = {
+    displayedName: 'SATI_27',
+    name: 'SATI_27'
+  };
+  public SATI_28Column: ColumnRef = {
+    displayedName: 'SATI_28',
+    name: 'SATI_28'
+  };
+  public SATI_29Column: ColumnRef = {
+    displayedName: 'SATI_29',
+    name: 'SATI_29'
+  };
+  
+  public EvidencijaRadVreRadDisplayedColumns: ColumnRef[] = [
+    this.SIFRANAZIVColumn,
+    this.SIF_MTColumn,
+    this.NAZIV_MTColumn,
+    this.REDAKColumn,
+    this.VRSTAColumn,
+    this.POCETAKColumn,
+    this.ZAVRSETAKColumn,
+    this.SATI_1Column,
+    this.SATI_2Column
+  ];
+
+  public EvidencijaRadVreRadColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIFRANAZIVColumn,
+    this.SIF_MTColumn,
+    this.NAZIV_MTColumn,
+    this.REDAKColumn,
+    this.VRSTAColumn,
+    this.POCETAKColumn,
+    this.ZAVRSETAKColumn,
+    this.SATI_1Column,
+    this.SATI_2Column,
+    this.SATI_3Column,
+    this.SATI_4Column,
+    this.SATI_5Column,
+    this.SATI_6Column,
+    this.SATI_7Column,
+    this.SATI_8Column,
+    this.SATI_9Column,
+    this.SATI_10Column,
+    this.SATI_11Column,
+    this.SATI_12Column,
+    this.SATI_13Column,
+    this.SATI_14Column,
+    this.SATI_15Column,
+    this.SATI_16Column,
+    this.SATI_17Column,
+    this.SATI_18Column,
+    this.SATI_19Column,
+    this.SATI_20Column,
+    this.SATI_21Column,
+    this.SATI_22Column,
+    this.SATI_23Column,
+    this.SATI_24Column,
+    this.SATI_25Column,
+    this.SATI_26Column,
+    this.SATI_27Column,
+    this.SATI_28Column,
+    this.SATI_29Column,
+  ]
   // END: columns list
+
+  public OSOBAColumn: ColumnRef = {
+    displayedName: 'OSOBA',
+    name: 'OSOBA'
+  };
+  
+
+  public EvRadnogVremenaHelpRadniciDisplayedColumns: ColumnRef[] = [
+    this.MBRColumn,
+    this.PREZIME_IMEColumn,
+  ];
+
+  public EvRadnogVremenaHelpRadniciColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.MBRColumn,
+    this.PREZIME_IMEColumn,
+    this.OSOBAColumn,
+  ];
+
+
+  public NAZIV_OJColumn: ColumnRef = {
+    displayedName: 'NAZIV_OJ',
+    name: 'NAZIV_OJ'
+  };
+  public NAZIVRADColumn: ColumnRef = {
+    displayedName: 'NAZIVRAD',
+    name: 'NAZIVRAD'
+  };
+  public BEMPTYROWAFTERColumn: ColumnRef = {
+    displayedName: 'BEMPTYROWAFTER',
+    name: 'BEMPTYROWAFTER'
+  };
+
+  public EvidencijaRadVreDisplayedColumns: ColumnRef[] = [
+    this.NAZIV_OJColumn,
+    this.SIFRANAZIVColumn,
+    this.NAZIVRADColumn,
+    this.SIF_MTColumn,
+    this.NAZIV_MTColumn,
+    this.REDAKColumn,
+    this.VRSTAColumn,
+    this.POCETAKColumn,
+    this.ZAVRSETAKColumn,
+    this.SATI_1Column,
+    this.SATI_2Column
+  ];
+
+  public EvidencijaRadVreColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.NAZIV_OJColumn,
+    this.SIFRANAZIVColumn,
+    this.NAZIVRADColumn,
+    this.SIF_MTColumn,
+    this.NAZIV_MTColumn,
+    this.REDAKColumn,
+    this.VRSTAColumn,
+    this.POCETAKColumn,
+    this.ZAVRSETAKColumn,
+    this.SATI_1Column,
+    this.SATI_2Column,
+    this.SATI_3Column,
+    this.SATI_4Column,
+    this.SATI_5Column,
+    this.SATI_6Column,
+    this.SATI_7Column,
+    this.SATI_8Column,
+    this.SATI_9Column,
+    this.SATI_10Column,
+    this.SATI_11Column,
+    this.SATI_12Column,
+    this.SATI_13Column,
+    this.SATI_14Column,
+    this.SATI_15Column,
+    this.SATI_16Column,
+    this.SATI_17Column,
+    this.SATI_18Column,
+    this.SATI_19Column,
+    this.SATI_20Column,
+    this.SATI_21Column,
+    this.SATI_22Column,
+    this.SATI_23Column,
+    this.SATI_24Column,
+    this.SATI_25Column,
+    this.SATI_26Column,
+    this.SATI_27Column,
+    this.SATI_28Column,
+    this.SATI_29Column,
+    this.BEMPTYROWAFTERColumn
+  ];  
+
+  public EvidencijaRadVreOjDisplayedColumns: ColumnRef[] = [
+    this.SIF_OJColumn,
+    this.NAZMJTRColumn,
+  ];
+
+  public EvidencijaRadVreOjColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_OJColumn,
+    this.NAZMJTRColumn,
+    this.VRSTAColumn,
+  ];
 
   public sidebarItems: SidebarItem[] = [
     {
@@ -515,7 +863,7 @@ export class GlobalVariablesService {
     },
     {
       namePrefix: '2',
-      name: 'Administracija',
+      name: 'Liste',
       icon: null,
       highlighted: false,
       rightsState: 1,
@@ -523,6 +871,34 @@ export class GlobalVariablesService {
       children: [
         {
           namePrefix: '2.1',
+          name: 'EvidencijaRadnogVremenaRadnika',
+          icon: 'perm_contact_cal',
+          url: '/evidencija-rad-vrem-rad',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '2.2',
+          name: 'EvidencijaRadnogVremena',
+          icon: 'access_time',
+          url: '/evidencija-rad-vrem',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+      ]
+    },
+    {
+      namePrefix: '3',
+      name: 'Administracija',
+      icon: null,
+      highlighted: false,
+      rightsState: 1,
+      open: true,
+      children: [
+        {
+          namePrefix: '3.1',
           name: 'OvlasteneOsobe',
           icon: 'people_alt',
           url: '/operateri',
@@ -531,7 +907,7 @@ export class GlobalVariablesService {
           open: false
         },
         {
-          namePrefix: '2.2',
+          namePrefix: '3.2',
           name: 'OvlasteneOsobeMjTr',
           icon: 'approval',
           url: '/ovlastene-osobe-mj-tr',
@@ -540,15 +916,25 @@ export class GlobalVariablesService {
           open: false
         },
         {
-          namePrefix: '2.3',
+          namePrefix: '3.3',
           name: 'EvidencijaRadVremZag',
           icon: 'work_history',
           url: '/evidencija-rad-vrem-zag',
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
+        },
+        {
+          namePrefix: '3.4',
+          name: 'EvidencijaRadVremZagVeze',
+          icon: 'connect_without_contact',
+          url: '/evidencija-rad-vrem-zag-veze',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
         }
       ],
+      
     }
   ];
 
@@ -641,6 +1027,27 @@ export class GlobalVariablesService {
       url: ''
     },
     {
+      name: 'Liste',
+      icon: 'list',
+      rowHeight: 2,
+      rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+      items: [
+        {
+          name: 'EvidencijaRadnogVremenaRadnika',
+          icon: 'perm_contact_cal',
+          url: '/evidencija-rad-vrem-rad',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'EvidencijaRadnogVremena',
+          icon: 'access_time',
+          url: '/evidencija-rad-vrem',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+      ],
+      url: ''
+    },
+    {
       name: 'Administracija',
       icon: 'gpp_good',
       rowHeight: 2,
@@ -662,6 +1069,12 @@ export class GlobalVariablesService {
           name: 'EvidencijaRadVremZag',
           icon: 'work_history',
           url: '/evidencija-rad-vrem-zag',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'EvidencijaRadVremZagVeze',
+          icon: 'connect_without_contact',
+          url: '/evidencija-rad-vrem-zag-veze',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }
       ],

@@ -115,7 +115,7 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getEvRadnogVremenaZag",
-  "sid": "4l7u0827q307kipsk2klng9mc0",
+  "sid": "17jaacrjhb1o39vl9lhp2cng45",
   "data" : {
     "pDioNaziva" : "",
     "limit": 10,
@@ -145,6 +145,156 @@ Content-Type: application/json
     "sort": [
       {
         "property": "SIFRA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get EVIDENCIJA RADNOG VREMENA ZAGLAVLJA VEZE
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaZagVeze",
+  "sid": "17jaacrjhb1o39vl9lhp2cng45",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIF_STUPCA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get ŠIFRE kod EVIDENCIJA RADNOG VREMENA ZAGLAVLJA VEZE
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaZagVezeSifra",
+  "sid": "17jaacrjhb1o39vl9lhp2cng45",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIF_STUPCA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+//get VRSTE POSLA kod EVIDENCIJA RADNOG VREMENA ZAGLAVLJA VEZE
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaZagVrIzracuna",
+  "sid": "17jaacrjhb1o39vl9lhp2cng45",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIFRA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get EVIDENCIJA RADNOG VREMENA
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremena",
+  "sid": "17jaacrjhb1o39vl9lhp2cng45",
+  "data" : {
+    "pIdKorisnika" : "4",
+    "pMbr" : 46,
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIFRANAZIV",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+
+//PRIPREMA EVIDENCIJE RADNOG VREMENA SVI RADNICI (perSviRnSviRadnici)
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "pripremaGetEvRadnogVremenaSviRadnici",
+  "sid": "v582fts4oekk809cq17ha1nap4",
+  "data" : {
+    "pIdKorisnika" : "15",
+    "pSifVlas" : "144",
+    "pSifOj" : "%",
+    "pZaMjesec" : "12.2024"
+  }
+}
+
+//get EVIDENCIJA RADNOG VREMENA SVI RADNICI
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaSviRadnici",
+  "sid": "v582fts4oekk809cq17ha1nap4",
+  "data" : {
+    "pIdKorisnika" : 15,
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZIV_MT",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get EVIDENCIJA RADNOG VREMENA SVI RADNICI HELP OJ
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvRadnogVremenaSviRadniciHelpOj",
+  "sid": "v582fts4oekk809cq17ha1nap4",
+  "data" : {
+    "pIdKorisnika" : 15,
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "vrsta",
         "direction": "ASC"
       }
     ]

@@ -437,6 +437,12 @@ label {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    mat-icon{
+        width: 30px;
+    }
+    span{
+        max-width: 115px;
+    }
 }
 
 .form-portion-table-container {

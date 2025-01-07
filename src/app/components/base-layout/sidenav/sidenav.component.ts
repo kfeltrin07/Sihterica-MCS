@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,11 +13,13 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { MainContentComponent } from "../main-content/main-content.component";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-sidenav',
   standalone:true,
   imports: [
+    MatTooltipModule,
     MatSidenavModule,
     MatIconModule,
     FormsModule,
@@ -26,10 +28,11 @@ import { MainContentComponent } from "../main-content/main-content.component";
     MainContentComponent
 ],
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit,AfterViewInit {
+export class SidenavComponent implements OnInit,AfterContentInit {
   @ViewChild('snav') public sidenav!: MatSidenav;
+  @ViewChild('spanelement') public spanelement!: ElementRef;
 
   public sidebarItemsState: SidebarItem[] = [];
 
@@ -51,7 +54,7 @@ export class SidenavComponent implements OnInit,AfterViewInit {
     this.filterSidebarItems();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
