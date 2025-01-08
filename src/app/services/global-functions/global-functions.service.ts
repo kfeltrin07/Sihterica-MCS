@@ -332,4 +332,19 @@ export class GlobalFunctionsService {
     // END: resetting all component rights states
 
   }
+
+  public conditionalZeroPrefix(value: number): string {
+    if (value < 10) {
+      return '0' + value.toString();
+    } else {
+      return value.toString();
+    }
+  }
+  
+  public formatDate(date: string): string {
+    let day: number = +date.substring(8, 10);
+    let month: number = +date.substring(5, 7);
+    let year: number = +date.substring(0, 4);
+    return this.conditionalZeroPrefix(day) + '.' + this.conditionalZeroPrefix(month) + '.' + year.toString();
+  }
 }

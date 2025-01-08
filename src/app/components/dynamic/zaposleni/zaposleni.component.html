@@ -52,8 +52,14 @@
         <div class="options-cell">
           <mat-icon id="detailsButton" class="cursor-pointer minimum-margin-left-and-right"
             (click)="openDetailsDialog(zaposleni);" matTooltip="{{ 'Details' | translate }}">search</mat-icon>
+          <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
+            (click)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});"
+            matTooltip="{{ 'EXCEL' | translate }}">
+            <img src="assets/icons/png/excel.png" alt="" height="20">
+          </mat-icon>
           <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
-            (click)="openPDFDialog({headers: displayedColumns, searchParam: searchParam});" matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
+            (click)="openPDFDialog({headers: displayedColumns, searchParam: searchParam});"
+            matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
         </div>
       </td>
     </ng-container>

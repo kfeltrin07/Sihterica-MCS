@@ -13,6 +13,9 @@ import { EvidencijaRadnogVremenaZaglavljeComponent } from './components/dynamic/
 import { EvidencijaRadnogVremenaZaglavljeVezeComponent } from './components/dynamic/evidencija-radnog-vremena-zaglavlje-veze/evidencija-radnog-vremena-zaglavlje-veze.component';
 import { EvidencijaRadnogVremenaRadnikaComponent } from './components/dynamic/evidencija-radnog-vremena-radnika/evidencija-radnog-vremena-radnika.component';
 import { EvidencijaRadnogVremenaComponent } from './components/dynamic/evidencija-radnog-vremena/evidencija-radnog-vremena.component';
+import { KontrolaFondaSatiComponent } from './components/dynamic/kontrola-fonda-sati/kontrola-fonda-sati.component';
+import { PomocneListeComponent } from './components/dynamic/pomocne-liste/pomocne-liste.component';
+import { ShemeComponent } from './components/dynamic/sheme/sheme.component';
 
 const routes: Routes = [
 
@@ -25,6 +28,9 @@ const routes: Routes = [
   { path: 'evidencija-rad-vrem-zag-veze', component: EvidencijaRadnogVremenaZaglavljeVezeComponent, canActivate: [authGuard()] },
   { path: 'evidencija-rad-vrem-rad', component: EvidencijaRadnogVremenaRadnikaComponent, canActivate: [authGuard()] },
   { path: 'evidencija-rad-vrem', component: EvidencijaRadnogVremenaComponent, canActivate: [authGuard()] },
+  { path: 'fond-sati', component: KontrolaFondaSatiComponent, canActivate: [authGuard()] },
+  { path: 'pomocne-liste', component: PomocneListeComponent, canActivate: [authGuard()] },
+  { path: 'sheme', component: ShemeComponent, canActivate: [authGuard()] },
 
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },

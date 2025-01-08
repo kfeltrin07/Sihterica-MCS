@@ -24,6 +24,8 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
 import { DeleteEvidencijaRadnogVremenaZaglavljeComponent } from './delete-evidencija-radnog-vremena-zaglavlje/delete-evidencija-radnog-vremena-zaglavlje.component';
 import { EditEvidencijaRadnogVremenaZaglavljeComponent } from './edit-evidencija-radnog-vremena-zaglavlje/edit-evidencija-radnog-vremena-zaglavlje.component';
 import { CreateEvidencijaRadnogVremenaZaglavljeComponent } from './create-evidencija-radnog-vremena-zaglavlje/create-evidencija-radnog-vremena-zaglavlje.component';
+import { PdfEvidencijaRadnogVremenaZaglavljeComponent } from './pdf-evidencija-radnog-vremena-zaglavlje/pdf-evidencija-radnog-vremena-zaglavlje.component';
+import { ExcelEvidencijaRadnogVremenaZaglavljeComponent } from './excel-evidencija-radnog-vremena-zaglavlje/excel-evidencija-radnog-vremena-zaglavlje.component';
 
 @Component({
   selector: 'app-evidencija-radnog-vremena-zaglavlje',
@@ -186,13 +188,20 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-  /*
+  
   public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
+    const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaZaglavljeComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
     });
-  }*/
+  }
+
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelEvidencijaRadnogVremenaZaglavljeComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
 }

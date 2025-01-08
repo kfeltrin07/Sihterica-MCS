@@ -38,11 +38,12 @@ export class GlobalVariablesService {
 
   public konekcije: Konekcija[] = [
     { value: 'http://192.168.88.169:8080/', viewValue: 'Šihterica' }, //0
-    { value: 'http://192.168.88.169:8080/', viewValue: 'Linux' }, //0
+    { value: 'http://194.152.214.238/', viewValue: 'Linux' }, //0
     { value: 'http://192.168.88.169:8080/', viewValue: 'Razvoj' }, //1
     { value: 'http://192.168.88.169:8080/', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'http://172.16.91.70:8000/', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //3
-    { value: 'http://192.168.150.10:8000/', viewValue: 'Čistoća' }, //2
+    { value: 'http://192.168.88.169:8080/', viewValue: 'Linux iz MCS' }, //3
+    { value: 'http://172.16.91.70:8000/', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
+    { value: 'http://192.168.150.10:8000/', viewValue: 'Čistoća' }, //5
   ]
 
   public konekcijeAPIFile: Konekcija[] = [
@@ -50,8 +51,9 @@ export class GlobalVariablesService {
     { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux' }, //0
     { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' }, //1
     { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //3
-    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća' }, //3
+    { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' }, //3
+    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
+    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća' }, //5
 
   ]
   public konekcijeAPIReport: Konekcija[] = [
@@ -59,8 +61,9 @@ export class GlobalVariablesService {
     { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux' }, //0
     { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' }, //1
     { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //3
-    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća' }, //3
+    { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' }, //3
+    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
+    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća' }, //5
 
   ]
 
@@ -105,38 +108,38 @@ export class GlobalVariablesService {
   public SIFVLASColumn: ColumnRef = {
     displayedName: 'SIFVLAS',
     name: 'SIFVLAS'
-  }; 
-  
+  };
+
   public MBRColumn: ColumnRef = {
     displayedName: 'MBR',
     name: 'MBR'
-  };  
-  
+  };
+
   public PREZIME_IMEColumn: ColumnRef = {
     displayedName: 'PREZIME_IME',
     name: 'PREZIME_IME'
-  }; 
-  
+  };
+
   public SIF_RMColumn: ColumnRef = {
     displayedName: 'SIF_RM',
     name: 'SIF_RM'
-  };  
-  
+  };
+
   public NAZ_ZANColumn: ColumnRef = {
     displayedName: 'NAZ_ZAN',
     name: 'NAZ_ZAN'
-  };  
-  
+  };
+
   public NAZ_RMColumn: ColumnRef = {
     displayedName: 'NAZ_RM',
     name: 'NAZ_RM'
-  }; 
-  
+  };
+
   public SIF_OJColumn: ColumnRef = {
     displayedName: 'SIF_OJ',
     name: 'SIF_OJ'
-  };  
-  
+  };
+
   public NAZ_OJColumn: ColumnRef = {
     displayedName: 'NAZ_OJ',
     name: 'NAZ_OJ'
@@ -254,7 +257,7 @@ export class GlobalVariablesService {
     displayedName: 'SYSD',
     name: 'SYSD'
   };
-  
+
 
   public OrganizacijskeJediniceDisplayedColumns: ColumnRef[] = [
     this.SIF_OJColumn,
@@ -481,7 +484,7 @@ export class GlobalVariablesService {
     this.SIF_STUPCAColumn,
     this.KNAZIVColumn,
   ];
-  
+
   public EvidVezeIzracunaDisplayedColumns: ColumnRef[] = [
     this.SIF_STUPCAColumn,
     this.KNAZIVColumn,
@@ -494,7 +497,7 @@ export class GlobalVariablesService {
     this.OPISColumn,
   ];
 
-  
+
 
   public SIFRANAZIVColumn: ColumnRef = {
     displayedName: 'SIFRANAZIV',
@@ -640,7 +643,7 @@ export class GlobalVariablesService {
     displayedName: 'SATI_29',
     name: 'SATI_29'
   };
-  
+
   public EvidencijaRadVreRadDisplayedColumns: ColumnRef[] = [
     this.SIFRANAZIVColumn,
     this.SIF_MTColumn,
@@ -698,7 +701,7 @@ export class GlobalVariablesService {
     displayedName: 'OSOBA',
     name: 'OSOBA'
   };
-  
+
 
   public EvRadnogVremenaHelpRadniciDisplayedColumns: ColumnRef[] = [
     this.MBRColumn,
@@ -781,7 +784,7 @@ export class GlobalVariablesService {
     this.SATI_28Column,
     this.SATI_29Column,
     this.BEMPTYROWAFTERColumn
-  ];  
+  ];
 
   public EvidencijaRadVreOjDisplayedColumns: ColumnRef[] = [
     this.SIF_OJColumn,
@@ -793,6 +796,330 @@ export class GlobalVariablesService {
     this.SIF_OJColumn,
     this.NAZMJTRColumn,
     this.VRSTAColumn,
+  ];
+
+  public DATUMColumn: ColumnRef = {
+    displayedName: 'DATUM',
+    name: 'DATUM'
+  };
+
+  public FondSatiDisplayedColumns: ColumnRef[] = [
+    this.MBRColumn,
+    this.OSOBAColumn,
+    this.NAZ_OJColumn,
+    this.SATIColumn,
+    this.DATUMColumn
+  ];
+
+  public FondSatiColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.MBRColumn,
+    this.OSOBAColumn,
+    this.NAZ_OJColumn,
+    this.SATIColumn,
+    this.DATUMColumn
+  ];
+
+  public FondSatiHelpOJDisplayedColumns: ColumnRef[] = [
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
+    this.VRSTAColumn,
+  ];
+
+  public FondSatiHelpOJColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
+    this.VRSTAColumn,
+  ];
+
+  public XDUMMYColumn: ColumnRef = {
+    displayedName: 'XDUMMY',
+    name: 'XDUMMY'
+  };
+
+  public MJESECColumn: ColumnRef = {
+    displayedName: 'MJESEC',
+    name: 'MJESEC'
+  };
+
+  public S1Column: ColumnRef = {
+    displayedName: 'S1',
+    name: 'S1'
+  };
+
+  public S2Column: ColumnRef = {
+    displayedName: 'S2',
+    name: 'S2'
+  };
+
+  public S3Column: ColumnRef = {
+    displayedName: 'S3',
+    name: 'S3'
+  };
+
+  public S4Column: ColumnRef = {
+    displayedName: 'S4',
+    name: 'S4'
+  };
+
+  public S5Column: ColumnRef = {
+    displayedName: 'S5',
+    name: 'S5'
+  };
+
+  public S6Column: ColumnRef = {
+    displayedName: 'S6',
+    name: 'S6'
+  };
+
+  public S7Column: ColumnRef = {
+    displayedName: 'S7',
+    name: 'S7'
+  };
+
+  public S8Column: ColumnRef = {
+    displayedName: 'S8',
+    name: 'S8'
+  };
+
+  public S9Column: ColumnRef = {
+    displayedName: 'S9',
+    name: 'S9'
+  };
+
+  public S10Column: ColumnRef = {
+    displayedName: 'S10',
+    name: 'S10'
+  };
+
+  public S11Column: ColumnRef = {
+    displayedName: 'S11',
+    name: 'S11'
+  };
+
+  public S12Column: ColumnRef = {
+    displayedName: 'S12',
+    name: 'S12'
+  };
+
+  public S13Column: ColumnRef = {
+    displayedName: 'S13',
+    name: 'S13'
+  };
+
+  public S14Column: ColumnRef = {
+    displayedName: 'S14',
+    name: 'S14'
+  };
+
+  public S15Column: ColumnRef = {
+    displayedName: 'S15',
+    name: 'S15'
+  };
+
+  public S16Column: ColumnRef = {
+    displayedName: 'S16',
+    name: 'S16'
+  };
+
+  public S17Column: ColumnRef = {
+    displayedName: 'S17',
+    name: 'S17'
+  };
+  
+  public S18Column: ColumnRef = {
+    displayedName: 'S18',
+    name: 'S18'
+  };
+
+  public S19Column: ColumnRef = {
+    displayedName: 'S19',
+    name: 'S19'
+  };
+
+  public S20Column: ColumnRef = {
+    displayedName: 'S20',
+    name: 'S20'
+  };
+
+  public S21Column: ColumnRef = {
+    displayedName: 'S21',
+    name: 'S21'
+  };
+
+  public S22Column: ColumnRef = {
+    displayedName: 'S22',
+    name: 'S22'
+  };
+
+  public S23Column: ColumnRef = {
+    displayedName: 'S23',
+    name: 'S23'
+  };
+
+  public S24Column: ColumnRef = {
+    displayedName: 'S24',
+    name: 'S24'
+  };
+
+  public S25Column: ColumnRef = {
+    displayedName: 'S25',
+    name: 'S25'
+  };
+
+  public S26Column: ColumnRef = {
+    displayedName: 'S26',
+    name: 'S26'
+  };
+
+  public S27Column: ColumnRef = {
+    displayedName: 'S27',
+    name: 'S27'
+  };
+
+  public S28Column: ColumnRef = {
+    displayedName: 'S28',
+    name: 'S28'
+  };
+
+  public S29Column: ColumnRef = {
+    displayedName: 'S29',
+    name: 'S29'
+  };
+
+  public S30Column: ColumnRef = {
+    displayedName: 'S30',
+    name: 'S30'
+  };
+
+  public S31Column: ColumnRef = {
+    displayedName: 'S31',
+    name: 'S31'
+  };
+
+  public UKUPNOColumn: ColumnRef = {
+    displayedName: 'UKUPNO',
+    name: 'UKUPNO'
+  };
+
+  public UKUPColumn: ColumnRef = {
+    displayedName: 'UKUP',
+    name: 'UKUP'
+  };
+
+  public SatIznColumn: ColumnRef = {
+    displayedName: 'SatIzn',
+    name: 'SatIzn'
+  };
+  
+  public SifraNazivColumn: ColumnRef = {
+    displayedName: 'SifraNaziv',
+    name: 'SifraNaziv'
+  };
+  
+  public NazivVPColumn: ColumnRef = {
+    displayedName: 'NazivVP',
+    name: 'NazivVP'
+  };
+
+  public PomocnaListaDisplayedColumns: ColumnRef[] = [
+    this.MBRColumn,
+    this.NAZIVColumn,
+    this.SIColumn,
+    this.SIF_VPColumn,
+    this.NAZ_VPColumn,
+    this.SIF_MTColumn,
+    this.MJESECColumn,
+    this.S1Column
+  ];
+
+  public PomocnaListaColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.XDUMMYColumn,
+    this.SifraNazivColumn,
+    this.NazivVPColumn,
+    this.MBRColumn,
+    this.NAZIVColumn,
+    this.SIColumn,
+    this.SIF_VPColumn,
+    this.NAZ_VPColumn,
+    this.SIF_MTColumn,
+    this.SIFVLASColumn,
+    this.MJESECColumn,
+    this.S1Column,
+    this.S2Column,
+    this.S3Column,
+    this.S4Column,
+    this.S5Column,
+    this.S6Column,
+    this.S7Column,
+    this.S8Column,
+    this.S9Column,
+    this.S10Column,
+    this.S11Column,
+    this.S12Column,
+    this.S13Column,
+    this.S14Column,
+    this.S15Column,
+    this.S16Column,
+    this.S17Column,
+    this.S18Column,
+    this.S19Column,
+    this.S20Column,
+    this.S21Column,
+    this.S22Column,
+    this.S23Column,
+    this.S24Column,
+    this.S25Column,
+    this.S26Column,
+    this.S27Column,
+    this.S28Column,
+    this.S29Column,
+    this.S30Column,
+    this.S31Column,
+    this.UKUPNOColumn,
+    this.VRSTAColumn,
+    this.UKUPColumn,
+    this.SatIznColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
+    this.NAZMJTRColumn,
+    this.BEMPTYROWAFTERColumn
+  ];
+
+  public SIF_SHEMEColumn: ColumnRef = {
+    displayedName: 'SIF_SHEME',
+    name: 'SIF_SHEME'
+  };
+
+  public PAUZA_ODColumn: ColumnRef = {
+    displayedName: 'PAUZA_OD',
+    name: 'PAUZA_OD'
+  };
+
+  public PAUZA_DOColumn: ColumnRef = {
+    displayedName: 'PAUZA_DO',
+    name: 'PAUZA_DO'
+  };
+
+  public ShemeDisplayedColumns: ColumnRef[] = [
+    this.SIF_SHEMEColumn,
+    this.OPISColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.PAUZA_ODColumn,
+    this.PAUZA_DOColumn,
+  ];
+
+  public ShemeColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_SHEMEColumn,
+    this.OPISColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.PAUZA_ODColumn,
+    this.PAUZA_DOColumn,
   ];
 
   public sidebarItems: SidebarItem[] = [
@@ -887,6 +1214,24 @@ export class GlobalVariablesService {
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
         },
+        {
+          namePrefix: '2.3',
+          name: 'PomocneListe',
+          icon: 'format_list_numbered',
+          url: '/pomocne-liste',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '2.4',
+          name: 'KontrolaFondaSati',
+          icon: 'hourglass_bottom',
+          url: '/fond-sati',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
       ]
     },
     {
@@ -932,9 +1277,18 @@ export class GlobalVariablesService {
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
+        },
+        {
+          namePrefix: '3.5',
+          name: 'Sheme',
+          icon: 'schema',
+          url: '/sheme',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
         }
       ],
-      
+
     }
   ];
 
@@ -1044,6 +1398,18 @@ export class GlobalVariablesService {
           url: '/evidencija-rad-vrem',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         },
+        {
+          name: 'PomocneListe',
+          icon: 'format_list_numbered',
+          url: '/pomocne-liste',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'KontrolaFondaSati',
+          icon: 'hourglass_bottom',
+          url: '/fond-sati',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        }
       ],
       url: ''
     },
@@ -1075,6 +1441,12 @@ export class GlobalVariablesService {
           name: 'EvidencijaRadVremZagVeze',
           icon: 'connect_without_contact',
           url: '/evidencija-rad-vrem-zag-veze',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'Sheme',
+          icon: 'schema',
+          url: '/sheme',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }
       ],

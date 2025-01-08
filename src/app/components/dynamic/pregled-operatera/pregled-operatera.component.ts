@@ -21,6 +21,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { PdfPregledOperateraComponent } from './pdf-pregled-operatera/pdf-pregled-operatera.component';
+import { ExcelPregledOperateraComponent } from './excel-pregled-operatera/excel-pregled-operatera.component';
 
 @Component({
   selector: 'app-pregled-operatera',
@@ -47,7 +49,7 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './pregled-operatera.component.scss'
 })
 export class PregledOperateraComponent implements OnInit {
-public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','NAPOMENA', 'IDULOGE','ULOGA','options'];
+  public displayedColumns: string[] = ['ID', 'NAZIV', 'USERNAME', 'NAPOMENA', 'IDULOGE', 'ULOGA', 'options'];
 
   public operateri: Operateri[] = [];
   public Operateri: Operateri = {
@@ -136,6 +138,21 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','NAPOMENA', 'IDULO
     dialogRef.afterClosed().subscribe((result) => { });
   }
 
+  public openPDFDialog(item: any): void {
+    const dialogRef = this.dialog.open(PdfPregledOperateraComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelPregledOperateraComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
 
   public refresh(): void {
     this.loading = true;

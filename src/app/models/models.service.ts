@@ -533,6 +533,90 @@ export interface EvidencijaRadVreOj{
   VRSTA: string;
 }
 
+export interface FondSati{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  MBR: string;
+  SATI: string;
+  DATUM: string;
+  OSOBA: string;
+  NAZ_OJ: string;
+}
+
+export interface FondSatiHelpOJ{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+  VRSTA: string;
+}
+
+export interface PomocnaLista{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  XDUMMY: string;
+  SifraNaziv: string;
+  NazivVP: string;
+  MBR: string;
+  NAZIV: string;
+  SI: string;
+  SIF_VP: string;
+  NAZ_VP: string;
+  SIF_MT: string;
+  SIFVLAS: string;
+  MJESEC: string;
+  S1: string;
+  S2: string;
+  S3: string;
+  S4: string;
+  S5: string;
+  S6: string;
+  S7: string;
+  S8: string;
+  S9: string;
+  S10: string;
+  S11: string;
+  S12: string;
+  S13: string;
+  S14: string;
+  S15: string;
+  S16: string;
+  S17: string;
+  S18: string;
+  S19: string;
+  S20: string;
+  S21: string;
+  S22: string;
+  S23: string;
+  S24: string;
+  S25: string;
+  S26: string;
+  S27: string;
+  S28: string;
+  S29: string;
+  S30: string;
+  S31: string;
+  UKUPNO: string;
+  VRSTA: string;
+  UKUP: string;
+  SatIzn: string;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+  NAZMJTR: string;
+  BEMPTYROWAFTER: string;
+}
+
+export interface Sheme{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_SHEME: string;
+  OPIS: string;
+  OD: string;
+  DO: string;
+  PAUZA_OD: string;
+  PAUZA_DO: string;
+}
+
 export enum TodoState {
   Urgent,
   InProgress,

@@ -7431,6 +7431,48 @@
           "en": "Work Time Record",
           "hr": "Evidencija Radnog Vremena",
           "transferred": true
+        },
+        {
+          "ref": "NAZIV_OJ",
+          "en": "Organization unit",
+          "hr": "Organizacijska jedinica",
+          "transferred": false
+        },
+        {
+          "ref": "KontrolaFondaSati",
+          "en": "Number of hours control",
+          "hr": "Kontrola fonda sati",
+          "transferred": false
+        },
+        {
+          "ref": "ZaDan",
+          "en": "For day",
+          "hr": "Za dan",
+          "transferred": false
+        },
+        {
+          "ref": "Dnevni",
+          "en": "Daily",
+          "hr": "Dnevni",
+          "transferred": false
+        },
+        {
+          "ref": "Mjesecni",
+          "en": "Monthly",
+          "hr": "Mjesečni",
+          "transferred": false
+        },
+        {
+          "ref": "ZadaniSati",
+          "en": "Default hours",
+          "hr": "Zadani sati",
+          "transferred": false
+        },
+        {
+          "ref": "PomocneListe",
+          "en": "Auxiliary lists",
+          "hr": "Pomoćne liste",
+          "transferred": false
         }
     ]
 }

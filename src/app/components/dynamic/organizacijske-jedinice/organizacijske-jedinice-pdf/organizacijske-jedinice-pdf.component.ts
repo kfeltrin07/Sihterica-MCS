@@ -139,6 +139,7 @@ export class OrganizacijskeJedinicePdfComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.zaposleni = response.debugData.data;
       let columnsList: string[] = [];
+      columnsList.push(this.t.translate('Ordinal'));
 
       if (this.dialogData.headers.includes('SIF_OJ') || this.allColumns) {
         columnsList.push(this.t.translate('SIF_OJ'));

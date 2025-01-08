@@ -48,14 +48,14 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './evidencija-radnog-vremena.component.scss'
 })
 export class EvidencijaRadnogVremenaComponent implements OnInit {
-  public displayedColumns: string[] = ['NAZIVRAD','SIFRANAZIV','NAZIV_OJ', 'SIF_MT', 'NAZIV_MT', 'REDAK', 'VRSTA', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
+  public displayedColumns: string[] = ['REDAK','NAZIVRAD', 'SIFRANAZIV', 'NAZIV_OJ', 'SIF_MT', 'NAZIV_MT',  'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
 
   public filter: any = {
     MBR: "",
     PREZIME_IME: "",
     NAZ_ZAN: "",
     NAZ_RM: "",
-    SIF_OJ: "",
+    SIF_OJ: "%",
     NAZ_OJ: "",
   }
 
@@ -65,7 +65,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   public EvidencijaRadVre: EvidencijaRadVre = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
-    NAZIV_OJ:"",
+    NAZIV_OJ: "",
     SIFRANAZIV: "",
     NAZIVRAD: "",
     SIF_MT: "",
@@ -106,21 +106,23 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
     BEMPTYROWAFTER: "",
   };
 
-    public EvidencijaRadVreOjDropdownIndex: number = -1;
-    public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
-    public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
-      UKUPANBROJSLOGOVA: 0,
-      RN: 0,
-      SIF_OJ: "",
-      NAZMJTR: "",
-      VRSTA: "",
-    };
+  public pripremaGotova: boolean = false;
+
+  public EvidencijaRadVreOjDropdownIndex: number = -1;
+  public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
+    SIF_OJ: "",
+    NAZMJTR: "",
+    VRSTA: "",
+  };
 
   public dataSource = this.evidencijaRadVre;
   public searchParam: string = '';
   public loading: boolean = false;
   public sorting: Sorting = {
-    active: 'NAZIV_MT',
+    active: 'VRSTA',
     direction: 'ASC'
   };
   public isPaginatorShown: boolean = true;
@@ -138,29 +140,35 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.filter.GODINA=(new Date()).getFullYear();
-    this.filter.MJESEC=new Date().getMonth()+1;
+    this.filter.GODINA = (new Date()).getFullYear();
+    this.filter.MJESEC = new Date().getMonth() + 1;
 
   }
 
   public getPripremaEvRadnogVremena(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'pripremaGetEvRadnogVremenaSviRadnici',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pIdKorisnika: this.session.loggedInUser.ID,
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pSifOj: this.filter.SIFOJ,
-          pZaMjesec: this.filter.MJESEC+'.'+this.filter.GODINA,
+    if (!this.pripremaGotova) {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'pripremaGetEvRadnogVremenaSviRadnici',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pIdKorisnika: this.session.loggedInUser.ID,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pSifOj: this.filter.SIFOJ,
+            pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
+          }
         }
-      }
-    ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.pripremaGotova = true;
+        this.getEvRadnogVremena();
+      });
+    }
+    else {
       this.getEvRadnogVremena();
-    });
+    }
   }
 
   public getEvRadnogVremena(): void {
@@ -265,7 +273,6 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
     });
   }*/
 
@@ -284,6 +291,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
       this.filter.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
       this.filter.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
       this.filter.VRSTA = EvidencijaRadVreOj.VRSTA;
+      this.pripremaGotova = false;
     }
   }
 
@@ -292,6 +300,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
     this.filter.SIF_OJ = "";
     this.filter.NAZMJTR = "";
     this.filter.VRSTA = "";
+    this.pripremaGotova = false;
   }
 
   public refreshEvidencijaRadVreOj(searchParam: string, isSelected: boolean): void {
@@ -302,12 +311,12 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
         method: 'getEvRadnogVremenaSviRadniciHelpOj',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pIdKorisnika: searchParam,
+          pIdKorisnika: this.session.loggedInUser.ID,
           limit: 100,
           page: 1,
           sort: [
             {
-              property: "vrsta",
+              property: "SIF_OJ",
               direction: "ASC"
             }
           ]
@@ -331,12 +340,12 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
         method: 'getEvRadnogVremenaSviRadniciHelpOj',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pIdKorisnika: this.filter.SIF_OJ,
+          pIdKorisnika: this.session.loggedInUser.ID,
           limit: 100,
           page: 1,
           sort: [
             {
-              property: "vrsta",
+              property: "SIF_OJ",
               direction: "ASC"
             }
           ]
@@ -350,6 +359,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
         if (item.SIF_OJ == this.filter.SIF_OJ) {
           this.filter.NAZMJTR = item.NAZMJTR;
           this.filter.VRSTA = item.VRSTA;
+          this.pripremaGotova = false;
         }
       }
     });
@@ -359,6 +369,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
     this.filter.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
     this.filter.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
     this.filter.VRSTA = EvidencijaRadVreOj.VRSTA;
+    this.pripremaGotova = false;
     document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.EvidencijaRadVreOjDropdownIndex = -1;
   }

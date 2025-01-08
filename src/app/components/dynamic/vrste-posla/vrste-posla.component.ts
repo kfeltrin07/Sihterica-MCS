@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 import { VrstePoslaPdfComponent } from './vrste-posla-pdf/vrste-posla-pdf.component';
+import { ExcelVrstePoslaComponent } from './excel-vrste-posla/excel-vrste-posla.component';
 
 @Component({
   selector: 'app-vrste-posla',
@@ -156,12 +157,19 @@ export class VrstePoslaComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-   public openPDFDialog(item:any):void{
-      const dialogRef = this.dialog.open(VrstePoslaPdfComponent, {
-        data: item
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
-      });
-    }
+  public openPDFDialog(item: any): void {
+    const dialogRef = this.dialog.open(VrstePoslaPdfComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelVrstePoslaComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
 }

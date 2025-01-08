@@ -24,6 +24,8 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
 import { CreateOvlasteneOsobeMjTrComponent } from './create-ovlastene-osobe-mj-tr/create-ovlastene-osobe-mj-tr.component';
 import { EditOvlasteneOsobeMjTrComponent } from './edit-ovlastene-osobe-mj-tr/edit-ovlastene-osobe-mj-tr.component';
 import { DeleteOvlasteneOsobeMjTrComponent } from './delete-ovlastene-osobe-mj-tr/delete-ovlastene-osobe-mj-tr.component';
+import { PdfOvlasteneOsobeMjTrComponent } from './pdf-ovlastene-osobe-mj-tr/pdf-ovlastene-osobe-mj-tr.component';
+import { ExcelOvlasteneOsobeMjTrComponent } from './excel-ovlastene-osobe-mj-tr/excel-ovlastene-osobe-mj-tr.component';
 
 @Component({
   selector: 'app-ovlastene-osobe-mj-tr',
@@ -160,6 +162,22 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     });
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => this.refresh(), 1000);
+    });
+  }
+
+  public openPDFDialog(item: any): void {
+    const dialogRef = this.dialog.open(PdfOvlasteneOsobeMjTrComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelOvlasteneOsobeMjTrComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
     });
   }
 

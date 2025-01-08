@@ -14,7 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
-import { EvidencijaRadVreRad, Sorting, Zaposleni } from 'src/app/models/models.service';
+import { EvidencijaRadVreRad, Sorting, Zaposleni, EvRadnogVremenaHelpRadnici } from 'src/app/models/models.service';
 import { DetailsEvidencijaRadnogVremenaRadnikaComponent } from './details-evidencija-radnog-vremena-radnika/details-evidencija-radnog-vremena-radnika.component';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +22,7 @@ import { GlobalFunctionsService } from 'src/app/services/global-functions/global
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { PickZaposleniComponent } from '../../pickers/pick-zaposleni/pick-zaposleni.component';
+import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencija-help-radnici/pick-evidencija-help-radnici.component';
 
 @Component({
   selector: 'app-evidencija-radnog-vremena-radnika',
@@ -48,7 +49,7 @@ import { PickZaposleniComponent } from '../../pickers/pick-zaposleni/pick-zaposl
   styleUrl: './evidencija-radnog-vremena-radnika.component.scss'
 })
 export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
-  public displayedColumns: string[] = ['SIFRANAZIV', 'SIF_MT', 'NAZIV_MT', 'REDAK', 'VRSTA', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
+  public displayedColumns: string[] = ['REDAK','SIFRANAZIV', 'SIF_MT', 'NAZIV_MT', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
 
   public filter: any = {
     MBR: "",
@@ -59,6 +60,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     NAZ_OJ: "",
   }
 
+  public pripremaGotova: boolean = false;
 
 
   public evidencijaRadVreRad: EvidencijaRadVreRad[] = [];
@@ -103,27 +105,21 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     SATI_29: "",
   };
 
-    public ZaposleniDropdownIndex: number = -1;
-    public offeredZaposleni: Zaposleni[] = [];
-    public selectedZaposleni: Zaposleni = {
-      UKUPANBROJSLOGOVA: 0,
-      RN: 0,
-      SIFVLAS: "",
-      MBR: "",
-      PREZIME_IME: "",
-      SIF_RM: "",
-      NAZ_ZAN: "",
-      NAZ_RM: "",
-      SIF_OJ: "",
-      NAZ_OJ: "",
-      IND: "",
-    };
+  public ZaposleniDropdownIndex: number = -1;
+  public offeredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public selectedZaposleni: EvRadnogVremenaHelpRadnici = {
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
+    MBR: "",
+    PREZIME_IME: "",
+    OSOBA: "",
+  };
 
   public dataSource = this.evidencijaRadVreRad;
   public searchParam: string = '';
   public loading: boolean = false;
   public sorting: Sorting = {
-    active: 'SIFRANAZIV',
+    active: 'VRSTA',
     direction: 'ASC'
   };
   public isPaginatorShown: boolean = true;
@@ -141,37 +137,43 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.filter.GODINA=(new Date()).getFullYear();
-    this.filter.MJESEC=new Date().getMonth()+1;
+    this.filter.GODINA = (new Date()).getFullYear();
+    this.filter.MJESEC = new Date().getMonth() + 1;
 
   }
 
   public getPripremaEvRadnogVremena(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'pripremaGetEvRadnogVremena',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pIdKorisnika: this.session.loggedInUser.ID,
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pSifRad: this.filter.MBR,
-          pZaMjesec: this.filter.MJESEC+'.'+this.filter.GODINA,
-          limit: this.pageSize,
-          page: (this.pageIndex + 1),
-          sort: [
-            {
-              property: this.sorting.active,
-              direction: this.sorting.direction
-            }
-          ]
+    if (!this.pripremaGotova) {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'pripremaGetEvRadnogVremena',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pIdKorisnika: this.session.loggedInUser.ID,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pSifRad: this.filter.MBR,
+            pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
+            limit: this.pageSize,
+            page: (this.pageIndex + 1),
+            sort: [
+              {
+                property: this.sorting.active,
+                direction: this.sorting.direction
+              }
+            ]
+          }
         }
-      }
-    ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.pripremaGotova = true;
+        this.getEvRadnogVremena();
+      });
+    }
+    else {
       this.getEvRadnogVremena();
-    });
+    }
   }
 
   public getEvRadnogVremena(): void {
@@ -277,29 +279,25 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
     });
   }*/
 
 
   //ZAPOSLENI START
   public pickZaposleni(): void {
-    const dialogRef = this.dialog.open(PickZaposleniComponent, {});
+    const dialogRef = this.dialog.open(PickEvidencijaHelpRadniciComponent, {});
 
-    dialogRef.afterClosed().subscribe((Zaposleni?: Zaposleni) => {
-      this.setZaposleniFromDialog(Zaposleni);
+    dialogRef.afterClosed().subscribe((EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici) => {
+      this.setZaposleniFromDialog(EvRadnogVremenaHelpRadnici);
     });
   }
 
-  public setZaposleniFromDialog(Zaposleni?: Zaposleni): void {
-    if (Zaposleni) {
-      this.filter.MBR = Zaposleni.MBR;
-      this.filter.PREZIME_IME = Zaposleni.PREZIME_IME;
-      this.filter.NAZ_OJ=Zaposleni.NAZ_OJ;
-      this.filter.SIF_OJ=Zaposleni.SIF_OJ;
-      this.filter.NAZ_RM=Zaposleni.NAZ_RM;
-      this.filter.NAZ_ZAN=Zaposleni.NAZ_ZAN;
-      this.filter.OSOBA=Zaposleni
+  public setZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
+    if (EvRadnogVremenaHelpRadnici) {
+      this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
+      this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+      this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+      this.pripremaGotova = false;
     }
   }
 
@@ -307,6 +305,8 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     e.preventDefault();
     this.filter.MBR = "";
     this.filter.PREZIME_IME = "";
+    this.filter.OSOBA = "";
+    this.pripremaGotova = false;
 
   }
 
@@ -365,22 +365,18 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
       for (let item of this.offeredZaposleni) {
         if (item.MBR == this.filter.MBR) {
           this.filter.PREZIME_IME = item.PREZIME_IME;
-          this.filter.NAZ_OJ=item.NAZ_OJ;
-          this.filter.SIF_OJ=item.SIF_OJ;
-          this.filter.NAZ_RM=item.NAZ_RM;
-          this.filter.NAZ_ZAN=item.NAZ_ZAN;
+          this.filter.OSOBA = item.OSOBA;
+          this.pripremaGotova = false;
         }
       }
     });
   }
 
-  public selectZaposleni(Zaposleni: Zaposleni): void {
-    this.filter.MBR = Zaposleni.MBR;
-    this.filter.PREZIME_IME = Zaposleni.PREZIME_IME;
-    this.filter.NAZ_OJ=Zaposleni.NAZ_OJ;
-    this.filter.SIF_OJ=Zaposleni.SIF_OJ;
-    this.filter.NAZ_RM=Zaposleni.NAZ_RM;
-    this.filter.NAZ_ZAN=Zaposleni.NAZ_ZAN;
+  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici): void {
+    this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
+    this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+    this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+    this.pripremaGotova = false;
     document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.ZaposleniDropdownIndex = -1;
   }

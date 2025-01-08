@@ -93,7 +93,7 @@ export class PickEvidencijaHelpRadniciComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: '%' + this.searchParam + '%',
+          pMbr: '%' + this.searchParam + '%',
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [

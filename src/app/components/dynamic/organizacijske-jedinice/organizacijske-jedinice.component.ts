@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 import { OrganizacijskeJedinicePdfComponent } from './organizacijske-jedinice-pdf/organizacijske-jedinice-pdf.component';
+import { ExcelOrganizacijskeJediniceComponent } from './excel-organizacijske-jedinice/excel-organizacijske-jedinice.component';
 
 @Component({
   selector: 'app-organizacijske-jedinice',
@@ -174,7 +175,13 @@ export class OrganizacijskeJediniceComponent {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
     });
   }
+    public openEXCELDialog(item: any): void {
+      const dialogRef = this.dialog.open(ExcelOrganizacijskeJediniceComponent, {
+        data: item
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+      });
+    }
 }

@@ -22,7 +22,7 @@
         <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Evidencija' | translate }}">
     </mat-form-field>
 
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();" [disabled]="filter.MBR==''">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();" [disabled]="filter.SIF_OJ==''">
         <mat-icon>search</mat-icon>
     </button>
     <!--
@@ -32,7 +32,7 @@
     </button>
 -->
     <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left"
-        (click)="refresh();" [disabled]="filter.MBR==''">
+        (click)="refresh();" [disabled]="filter.SIF_OJ==''">
         <mat-icon *ngIf="!loading">refresh</mat-icon>
         <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
     </button>
@@ -43,23 +43,23 @@
     <table class="filteri-table">
         <tr>
             <td>
-                <label for="MBR">{{ 'Zaposleni' | translate }}:</label>
+                <label for="MBR">{{ 'mjesto-troska' | translate }}:</label>
             </td>
             <td>
                 <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickEvidencijaRadVreOj();"
                     (contextmenu)="removeEvidencijaRadVreOj($event)"
-                    matTooltip="{{ (!filter.MBR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                    [class.color-valid]="filter!.PREZIME_IME">
-                    {{ filter!.PREZIME_IME ? 'done' : 'import_contacts'}}
+                    matTooltip="{{ (!filter.SIF_OJ ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                    [class.color-valid]="filter!.NAZMJTR">
+                    {{ filter!.NAZMJTR ? 'done' : 'import_contacts'}}
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mouseleave)="resetEvidencijaRadVreOjIndex();" (click)="refreshEvidencijaRadVreOj(filter!.MBR, false);">
-                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
+                <span (mouseleave)="resetEvidencijaRadVreOjIndex();" (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj()"
-                        (ngModelChange)="refreshEvidencijaRadVreOj(filter!.MBR, false);"
-                        (focus)="refreshEvidencijaRadVreOj(filter!.MBR, false);"
+                        (ngModelChange)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
+                        (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
                         (keyup.escape)="resetEvidencijaRadVreOjIndex();">
                     <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content max-height-300px"
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </span>
-                <span *ngIf="filter.OSOBA!=''" class="small-margin-left margin-right">{{ filter.NAZMJTR }}</span>
+                <span *ngIf="filter.NAZMJTR!=''" class="small-margin-left margin-right">{{ filter.NAZMJTR }}</span>
             </td>
             <td>
                 <label for="">{{"ZaMjesec"|translate}}</label>

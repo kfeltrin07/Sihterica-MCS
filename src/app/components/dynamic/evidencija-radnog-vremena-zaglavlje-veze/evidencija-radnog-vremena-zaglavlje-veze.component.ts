@@ -24,6 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { PdfEvidencijaRadnogVremenaZaglavljeVezeComponent } from './pdf-evidencija-radnog-vremena-zaglavlje-veze/pdf-evidencija-radnog-vremena-zaglavlje-veze.component';
+import { ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent } from './excel-evidencija-radnog-vremena-zaglavlje-veze/excel-evidencija-radnog-vremena-zaglavlje-veze.component';
 
 @Component({
   selector: 'app-evidencija-radnog-vremena-zaglavlje-veze',
@@ -50,7 +52,7 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class EvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
-  public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA','XFAKTOR','NAZ_VP', 'options'];
+  public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA', 'XFAKTOR', 'NAZ_VP', 'options'];
 
   public evidencijaRadVreZagVeze: EvidencijaRadVreZagVeze[] = [];
   public EvidencijaRadVreZagVeze: EvidencijaRadVreZagVeze = {
@@ -166,6 +168,21 @@ export class EvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => { });
   }
 
+  public openPDFDialog(item: any): void {
+    const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaZaglavljeVezeComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
 
   public refresh(): void {
     this.loading = true;
@@ -188,13 +205,4 @@ export class EvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-  /*
-  public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
-      data: item
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
-    });
-  }*/
 }
