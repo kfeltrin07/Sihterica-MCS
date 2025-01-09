@@ -16,6 +16,8 @@ import { EvidencijaRadnogVremenaComponent } from './components/dynamic/evidencij
 import { KontrolaFondaSatiComponent } from './components/dynamic/kontrola-fonda-sati/kontrola-fonda-sati.component';
 import { PomocneListeComponent } from './components/dynamic/pomocne-liste/pomocne-liste.component';
 import { ShemeComponent } from './components/dynamic/sheme/sheme.component';
+import { GrupeComponent } from './components/dynamic/grupe/grupe.component';
+import { GrupniUnosComponent } from './components/dynamic/grupni-unos/grupni-unos.component';
 
 const routes: Routes = [
 
@@ -31,7 +33,8 @@ const routes: Routes = [
   { path: 'fond-sati', component: KontrolaFondaSatiComponent, canActivate: [authGuard()] },
   { path: 'pomocne-liste', component: PomocneListeComponent, canActivate: [authGuard()] },
   { path: 'sheme', component: ShemeComponent, canActivate: [authGuard()] },
-
+  { path: 'grupe', component: GrupeComponent, canActivate: [authGuard()] },
+  { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard()] },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },
   { path: 'login', component: LoginComponent, canActivate: [noLoginGuard()] },

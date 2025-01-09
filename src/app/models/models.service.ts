@@ -617,6 +617,18 @@ export interface Sheme{
   PAUZA_DO: string;
 }
 
+export interface Grupe{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIF_VLAS: string;
+  SIF_SHEME: string; // help sheme
+  NAZ_SHEME: string;
+  ID_RADNIKA: string; // help zaposleici
+  NAZIV_RADNIKA:string;
+  ID_OPERATERA: string; // priojavljeni korisnik
+}
+
+
 export enum TodoState {
   Urgent,
   InProgress,

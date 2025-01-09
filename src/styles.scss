@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 @include mat.core();
 $backgroundColor: #eceff1;
@@ -2330,4 +2331,8 @@ app-konto .mat-column-charts-of-accounts-name {
 
 .hidden {
     display: none;
+}
+
+.cal-header{
+    text-transform: capitalize;
 }

@@ -1122,6 +1122,43 @@ export class GlobalVariablesService {
     this.PAUZA_DOColumn,
   ];
 
+  public ID_RADNIKAColumn: ColumnRef = {
+    displayedName: 'ID_RADNIKA',
+    name: 'ID_RADNIKA'
+  };
+
+  public ID_OPERATERAColumn: ColumnRef = {
+    displayedName: 'ID_OPERATERA',
+    name: 'ID_OPERATERA'
+  };
+
+  public NAZ_SHEMEColumn: ColumnRef = {
+    displayedName: 'NAZ_SHEME',
+    name: 'NAZ_SHEME'
+  };
+
+  public NAZIV_RADNIKAColumn: ColumnRef = {
+    displayedName: 'NAZIV_RADNIKA',
+    name: 'NAZIV_RADNIKA'
+  };
+
+  public GrupeDisplayedColumns: ColumnRef[] = [
+    this.SIF_SHEMEColumn,
+    this.NAZ_SHEMEColumn,
+    this.ID_RADNIKAColumn,
+    this.ID_OPERATERAColumn,
+  ];
+
+  public GrupeColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIF_VLASColumn,
+    this.SIF_SHEMEColumn,
+    this.NAZ_SHEMEColumn,
+    this.ID_RADNIKAColumn,
+    this.NAZIV_RADNIKAColumn,
+    this.ID_OPERATERAColumn,
+  ];
+
   public sidebarItems: SidebarItem[] = [
     {
       namePrefix: '0',
@@ -1286,6 +1323,24 @@ export class GlobalVariablesService {
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
+        },
+        {
+          namePrefix: '3.6',
+          name: 'Grupe',
+          icon: 'groups',
+          url: '/grupe',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '3.7',
+          name: 'GrupniUnos',
+          icon: 'groups',
+          url: '/grupni-unos',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
         }
       ],
 
@@ -1447,6 +1502,18 @@ export class GlobalVariablesService {
           name: 'Sheme',
           icon: 'schema',
           url: '/sheme',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'Grupe',
+          icon: 'groups',
+          url: '/grupe',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'GrupniUnos',
+          icon: 'groups',
+          url: '/grupni-unos',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }
       ],

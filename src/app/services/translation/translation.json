@@ -7473,6 +7473,126 @@
           "en": "Auxiliary lists",
           "hr": "Pomoćne liste",
           "transferred": false
+        },
+        {
+          "ref": "GrupeCreation",
+          "en": "Creating groups",
+          "hr": "Kreiranje grupe",
+          "transferred": false
+        },
+        {
+          "ref": "Shema",
+          "en": "Scheme",
+          "hr": "Shema",
+          "transferred": false
+        },
+        {
+          "ref": "Zaposlenik",
+          "en": "Employee",
+          "hr": "Zaposlenik",
+          "transferred": false
+        },
+        {
+          "ref": "Grupe",
+          "en": "Groups",
+          "hr": "Grupe",
+          "transferred": false
+        },
+        {
+          "ref": "SIF_SHEME",
+          "en": "Scheme code",
+          "hr": "Šifra sheme",
+          "transferred": false
+        },
+        {
+          "ref": "NAZ_SHEME",
+          "en": "Scheme name",
+          "hr": "Naziv sheme",
+          "transferred": false
+        },
+        {
+          "ref": "ID_RADNIKA",
+          "en": "Employee ID",
+          "hr": "ID radnika",
+          "transferred": false
+        },
+        {
+          "ref": "NAZIV_RADNIKA",
+          "en": "Employee",
+          "hr": "Radnik",
+          "transferred": false
+        },
+        {
+          "ref": "ID_OPERATERA",
+          "en": "Operator ID",
+          "hr": "ID operatera",
+          "transferred": false
+        },
+        {
+          "ref": "SIF_VLAS",
+          "en": "Owner code",
+          "hr": "Šifra vlasnika",
+          "transferred": false
+        },
+        {
+          "ref": "PAUZA_OD",
+          "en": "Break from",
+          "hr": "Pauza od",
+          "transferred": false
+        },
+        {
+          "ref": "PAUZA_DO",
+          "en": "Break to",
+          "hr": "Pauza do",
+          "transferred": false
+        },
+        {
+          "ref": "PAUZAOD",
+          "en": "Break from",
+          "hr": "Pauza od",
+          "transferred": false
+        },
+        {
+          "ref": "PAUZADO",
+          "en": "Break to",
+          "hr": "Pauza do",
+          "transferred": false
+        },
+        {
+          "ref": "ShemeCreation",
+          "en": "Creating schemes",
+          "hr": "Kreiranje sheme",
+          "transferred": false
+        },
+        {
+          "ref": "ShemeEditing",
+          "en": "Editing schemes",
+          "hr": "Uređivanje sheme",
+          "transferred": false
+        },
+        {
+          "ref": "Today",
+          "en": "Today",
+          "hr": "Danas",
+          "transferred": false
+        },
+        {
+          "ref": "Month",
+          "en": "Month",
+          "hr": "Mjesec",
+          "transferred": false
+        },
+        {
+          "ref": "Week",
+          "en": "Week",
+          "hr": "Tjedan",
+          "transferred": false
+        },
+        {
+          "ref": "Day",
+          "en": "Day",
+          "hr": "Dan",
+          "transferred": false
         }
     ]
 }

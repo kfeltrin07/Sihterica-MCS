@@ -361,3 +361,25 @@ Content-Type: application/json
     "page": 1
   }
 }
+
+//get SHEME
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getGrupe",
+  "sid": "f2jhka1eedm8br5hce6hpc4ek3",
+  "data" : {
+    "pDioNaziva" : "",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "SIF_SHEME",
+        "direction": "ASC"
+      }
+    ]
+  }
+}

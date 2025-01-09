@@ -1,0 +1,50 @@
+<div class="grupni-unos">
+    <div class="calendar">
+        <app-header-grupni-unos [(view)]="view" [(viewDate)]="viewDate" (viewDateChange)="checkDate()"
+            (viewChange)="view = $event">
+        </app-header-grupni-unos>
+
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+                [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (dayClicked)="changeDay($event.day.date)"
+                (eventTimesChanged)="eventDropped($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+            [hourSegments]="1" [snapDraggedEvents]="false"
+            [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (dayHeaderClicked)="changeDay($event.day.date)"
+                (eventTimesChanged)="eventDropped($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+                [hourSegments]="1" [snapDraggedEvents]="false"
+                [refresh]="refresh" (eventTimesChanged)="eventDropped($event)">
+            </mwl-calendar-day-view>
+        </div>
+    </div>
+    <div class="unos-form">
+        <div class="col-md-3">
+            <div
+              class="sheme-card"
+              mwlDroppable
+              (drop)="externalDrop($event.dropData.event)"
+              dragOverClass="drag-over"
+            >
+              <div class="card-body">
+                <label style="font-size: 14px;" for="">{{'Sheme'|translate}}</label>
+                <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>
+                <ul>
+                  <li
+                    *ngFor="let event of externalEvents"
+                    mwlDraggable
+                    [dropData]="{event: event}"
+                    [touchStartLongPress]="{ delay: 300, delta: 30 }"
+                    dragActiveClass="drag-active"
+                  >
+                    <button mat-flat-button style="margin: 5px 0px;" [style.background-color]="event.color!.primary">
+                      {{ event.title }}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+    </div>
+</div>

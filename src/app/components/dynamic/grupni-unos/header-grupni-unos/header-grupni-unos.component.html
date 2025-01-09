@@ -1,0 +1,65 @@
+<div style="background-color: var(--color-white);" class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <button mat-flat-button color="primary"
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-flat-button color="primary"
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+          {{'Today'|translate}}
+        </button>
+        <button mat-flat-button color="primary"
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+        <mat-icon>chevron_right</mat-icon>
+    </button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <button mat-flat-button color="primary"
+          class="btn btn-primary"
+          (click)="viewChange.emit(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+        <mat-icon>calendar_view_month</mat-icon>
+          {{'Month'|translate}}
+        </button>
+        <button mat-flat-button color="primary"
+          class="btn btn-primary"
+          (click)="viewChange.emit(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+        <mat-icon>calendar_view_week</mat-icon>
+        {{'Week'|translate}}
+        </button>
+        <button mat-flat-button color="primary"
+          class="btn btn-primary"
+          (click)="viewChange.emit(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+        <mat-icon>calendar_view_day</mat-icon>
+        {{'Day'|translate}}
+          
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
