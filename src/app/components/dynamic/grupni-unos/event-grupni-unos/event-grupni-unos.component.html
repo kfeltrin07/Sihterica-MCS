@@ -4,7 +4,7 @@ class="toolbar">
     <span cdkDrag
     cdkDragRootElement=".cdk-overlay-pane" 
     cdkDragHandle 
-    cdkDragBoundary=".cdk-overlay-container">{{ 'Sheme' | translate }}</span>
+    cdkDragBoundary=".cdk-overlay-container">{{ 'Grupe' | translate }}</span>
   
     <span class="toolbar-spacer"></span>
   
@@ -12,14 +12,14 @@ class="toolbar">
   
       <mat-label>{{ 'DisplayedColumns' | translate }}</mat-label>
   
-      <mat-select (selectionChange)="setVisibleColumnsFromEvent();" [(ngModel)]="globalVar.ShemeDisplayedColumns" multiple>
-        <mat-option *ngFor="let column of globalVar.ShemeColumnsList" [value]="column">{{ column.displayedName | translate }}</mat-option>
+      <mat-select (selectionChange)="setVisibleColumnsFromEvent();" [(ngModel)]="globalVar.GrupeDisplayedColumns" multiple>
+        <mat-option *ngFor="let column of globalVar.GrupeColumnsList" [value]="column">{{ column.displayedName | translate }}</mat-option>
       </mat-select>
   
     </mat-form-field>
   
     <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left" matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-      <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Sheme' | translate }}">
+      <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Grupe' | translate }}">
     </mat-form-field>
   
     <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();">
@@ -35,7 +35,7 @@ class="toolbar">
   
 <div class="tablediv"> <table matSort (matSortChange)="sort($event);" mat-table [dataSource]="dataSource" >
   
-    @for(item of Sheme |keyvalue;track item){
+    @for(item of Grupe |keyvalue;track item){
 
         <ng-container [matColumnDef]="item.key">
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
@@ -46,7 +46,7 @@ class="toolbar">
         }
   
     <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row class="highlighted-on-hover" style="height: 20px;" *matRowDef="let row; columns: displayedColumns;" (click)="pickSheme(row);"></tr>
+    <tr mat-row class="highlighted-on-hover" style="height: 20px;" *matRowDef="let row; columns: displayedColumns;" (click)="pickGrupe(row);"></tr>
   
   </table>
   

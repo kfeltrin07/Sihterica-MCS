@@ -7593,6 +7593,24 @@
           "en": "Day",
           "hr": "Dan",
           "transferred": false
+        },
+        {
+          "ref": "GrupniUnos",
+          "en": "Group insert",
+          "hr": "Grupni unos",
+          "transferred": false
+        },
+        {
+          "ref": "ZaposlenizaGrupu",
+          "en": "Group workers",
+          "hr": "Radnici grupe ",
+          "transferred": false
+        },
+        {
+          "ref": "organiz-jedinica",
+          "en": "Org. Unit",
+          "hr": "Org. Jed.",
+          "transferred": false
         }
     ]
 }

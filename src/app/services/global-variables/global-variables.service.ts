@@ -1142,21 +1142,24 @@ export class GlobalVariablesService {
     name: 'NAZIV_RADNIKA'
   };
 
+  public ID_GRUPEColumn: ColumnRef = {
+    displayedName: 'ID_GRUPE',
+    name: 'ID_GRUPE'
+  };
+  public NAZ_GRUPEColumn: ColumnRef = {
+    displayedName: 'NAZ_GRUPE',
+    name: 'NAZ_GRUPE'
+  };
   public GrupeDisplayedColumns: ColumnRef[] = [
-    this.SIF_SHEMEColumn,
-    this.NAZ_SHEMEColumn,
-    this.ID_RADNIKAColumn,
-    this.ID_OPERATERAColumn,
+    this.RNColumn,
+    this.ID_GRUPEColumn,
+    this.NAZ_GRUPEColumn,
   ];
 
   public GrupeColumnsList: ColumnRef[] = [
     this.RNColumn,
-    this.SIF_VLASColumn,
-    this.SIF_SHEMEColumn,
-    this.NAZ_SHEMEColumn,
-    this.ID_RADNIKAColumn,
-    this.NAZIV_RADNIKAColumn,
-    this.ID_OPERATERAColumn,
+    this.ID_GRUPEColumn,
+    this.NAZ_GRUPEColumn,
   ];
 
   public sidebarItems: SidebarItem[] = [
@@ -1336,7 +1339,7 @@ export class GlobalVariablesService {
         {
           namePrefix: '3.7',
           name: 'GrupniUnos',
-          icon: 'groups',
+          icon: 'group_add',
           url: '/grupni-unos',
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
@@ -1512,7 +1515,7 @@ export class GlobalVariablesService {
         },
         {
           name: 'GrupniUnos',
-          icon: 'groups',
+          icon: 'group_add',
           url: '/grupni-unos',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }

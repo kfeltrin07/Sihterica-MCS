@@ -620,12 +620,23 @@ export interface Sheme{
 export interface Grupe{
   UKUPANBROJSLOGOVA: number;
   RN: number;
-  SIF_VLAS: string;
-  SIF_SHEME: string; // help sheme
-  NAZ_SHEME: string;
-  ID_RADNIKA: string; // help zaposleici
-  NAZIV_RADNIKA:string;
-  ID_OPERATERA: string; // priojavljeni korisnik
+  ID_GRUPE: string;
+  NAZ_GRUPE: string; // help sheme
+}
+
+
+export interface ZaposleniGrupe{
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIFVLAS: string;
+  MBR: string;
+  PREZIME_IME: string;
+  SIF_RM: string;
+  NAZ_ZAN: string;
+  NAZ_RM: string;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+  U_GRUPI: string
 }
 
 

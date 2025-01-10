@@ -36,14 +36,10 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 export class PdfGrupeComponent {
   public grupe!: Grupe[];
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA: 0,
-    RN: 0,
-    SIF_VLAS: "",
-    SIF_SHEME: "", 
-    NAZ_SHEME: "",
-    ID_RADNIKA: "",
-    NAZIV_RADNIKA: "",
-    ID_OPERATERA: "",
+    UKUPANBROJSLOGOVA:0,
+    RN:0,
+    ID_GRUPE: "",
+    NAZ_GRUPE: "",
   };
 
 

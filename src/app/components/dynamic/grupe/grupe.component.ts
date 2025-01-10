@@ -25,6 +25,7 @@ import { GlobalFunctionsService } from 'src/app/services/global-functions/global
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { RadniciGrupeComponent } from './radnici-grupe/radnici-grupe.component';
 
 @Component({
   selector: 'app-grupe',
@@ -51,18 +52,14 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './grupe.component.scss'
 })
 export class GrupeComponent implements OnInit {
-  public displayedColumns: string[] = ['SIF_SHEME','NAZ_SHEME', 'ID_RADNIKA','NAZIV_RADNIKA', 'ID_OPERATERA', 'options'];
+  public displayedColumns: string[] = ['RN','ID_GRUPE', 'NAZ_GRUPE', 'options'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA: 0,
-    RN: 0,
-    SIF_VLAS: "",
-    SIF_SHEME: "", 
-    NAZ_SHEME: "",
-    ID_RADNIKA: "",
-    NAZIV_RADNIKA: "",
-    ID_OPERATERA: "",
+    UKUPANBROJSLOGOVA:0,
+    RN:0,
+    ID_GRUPE: "",
+    NAZ_GRUPE: "",
   };
 
 
@@ -70,7 +67,7 @@ export class GrupeComponent implements OnInit {
   public searchParam: string = '';
   public loading: boolean = true;
   public sorting: Sorting = {
-    active: 'NAZ_SHEME',
+    active: 'ID_GRUPE',
     direction: 'ASC'
   };
   public isPaginatorShown: boolean = true;
@@ -166,6 +163,14 @@ export class GrupeComponent implements OnInit {
 
   public openEXCELDialog(item: any): void {
     const dialogRef = this.dialog.open(ExcelGrupeComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public openZaposleniciDialog(item: any): void {
+    const dialogRef = this.dialog.open(RadniciGrupeComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {

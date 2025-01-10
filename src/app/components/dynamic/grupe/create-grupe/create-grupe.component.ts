@@ -36,20 +36,17 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 })
 export class CreateGrupeComponent {
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA: 0,
-    RN: 0,
-    SIF_VLAS: "",
-    SIF_SHEME: "",
-    NAZ_SHEME: "",
-    ID_RADNIKA: "",
-    NAZIV_RADNIKA: "",
-    ID_OPERATERA: ""
+    UKUPANBROJSLOGOVA:0,
+    RN:0,
+    ID_GRUPE: "",
+    NAZ_GRUPE: "",
   };
 
   public varNames: any = {
     NAZ_OJ: ""
   }
 
+  /*
   public ShemeDropdownIndex: number = -1;
   public offeredSheme: Sheme[] = [];
   public selectedSheme: Sheme = {
@@ -71,7 +68,7 @@ export class CreateGrupeComponent {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
-  };
+  };*/
 
   constructor(
     private dialogRef: MatDialogRef<CreateGrupeComponent>,
@@ -86,7 +83,7 @@ export class CreateGrupeComponent {
   public ngOnInit(): void { }
 
   public validateForm(Grupe: Grupe): boolean {
-    if (Grupe.SIF_SHEME != '' && Grupe.ID_RADNIKA != '') {
+    if (Grupe.ID_GRUPE != '' && Grupe.NAZ_GRUPE != '') {
       return false;
     } else {
       return true;
@@ -103,9 +100,8 @@ export class CreateGrupeComponent {
         data: {
           pAkcija: CRUDAction.Insert,
           pSifVlas: this.session.loggedInUser.ownerID,
-          pIdOperatera: this.session.loggedInUser.ID,
-          pSifSheme: this.Grupe.SIF_SHEME,
-          pIdRadnika: this.Grupe.ID_RADNIKA,
+          pIdGrupe: this.Grupe.ID_GRUPE,
+          pNazGrupe: this.Grupe.NAZ_GRUPE,
         }
       }
     ).subscribe((response: any) => {
@@ -118,7 +114,7 @@ export class CreateGrupeComponent {
 
 
 
-
+/*
   //Sheme START
   public pickSheme(): void {
     const dialogRef = this.dialog.open(PickShemeComponent, {});
@@ -307,5 +303,5 @@ export class CreateGrupeComponent {
     this.ZaposleniDropdownIndex = -1;
     document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
-  //ZAPOSLENI END
+  //ZAPOSLENI END*/
 }

@@ -362,7 +362,7 @@ Content-Type: application/json
   }
 }
 
-//get SHEME
+//get GRUPE
 ###
 POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
 Content-Type: application/json
@@ -370,14 +370,65 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getGrupe",
-  "sid": "f2jhka1eedm8br5hce6hpc4ek3",
+  "sid": "90946v4aieg1oeq7tn6oepvkm5",
   "data" : {
     "pDioNaziva" : "",
     "limit": 10,
     "page": 1,
     "sort": [
       {
-        "property": "SIF_SHEME",
+        "property": "NAZ_GRUPE",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get POPIS RADNIKA GRUPE
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getPopisRadnikaGrupe",
+  "sid": "90946v4aieg1oeq7tn6oepvkm5",
+  "data" : {
+    "pSifVlas" : 144,
+    "pIdOperatera" : 15,
+    "pIdGrupe" : 1,
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZIV_RADNIKA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+
+
+// GET ZAPOSLENI U GRUPI (true false)
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getZaposleniGrupe",
+  "sid": "268qqnmtmjjqkdvdokiqscfjd2",
+  "data" : {
+    "pDioNaziva" : "",
+    "pIdGrupe" : 1,
+    "pIdOperatera" : 15,
+    "pSifOj" : "OD108",
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "PREZIME_IME",
         "direction": "ASC"
       }
     ]

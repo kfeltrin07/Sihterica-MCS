@@ -438,10 +438,12 @@ label {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    mat-icon{
+
+    mat-icon {
         width: 30px;
     }
-    span{
+
+    span {
         max-width: 115px;
     }
 }
@@ -2333,6 +2335,31 @@ app-konto .mat-column-charts-of-accounts-name {
     display: none;
 }
 
-.cal-header{
+.cal-header {
     text-transform: capitalize;
+}
+
+.event-title-div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    word-wrap: break-word;
+    color: black;
+}
+
+.dialog-toolbar {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: var(--color-primary);
+    text-align: center;
+    color: var(--color-white);
+    font-size: 15px;
+}
+
+.button-bar {
+    width: 100% !important;
+    position: relative !important;
+    right: -60% !important;
 }

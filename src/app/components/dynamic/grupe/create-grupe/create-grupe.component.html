@@ -23,78 +23,16 @@ class="colored-header text-align-center">
 				<td>
 					<label for="VRSTA_IZRACUNA" class="minimum-margin-top">{{ 'Shema' | translate }}:</label>
 				</td>
-                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickSheme();" (contextmenu)="removeSheme($event)"
-                        matTooltip="{{ (!Grupe.SIF_SHEME ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="Grupe.NAZ_SHEME">
-                        {{ Grupe!.NAZ_SHEME ? 'done' : 'import_contacts'}}
-                    </mat-icon>
-                    <span (mouseleave)="resetSheme();"
-                        (click)="refreshSheme(Grupe!.SIF_SHEME, false);">
-                        <input type="text" [(ngModel)]="Grupe.SIF_SHEME" maxlength="22"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedSheme()"
-                            (ngModelChange)="refreshSheme(Grupe!.SIF_SHEME, false);"
-                            (focus)="refreshSheme(Grupe!.SIF_SHEME, false);"
-                            (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
-                            (keyup.escape)="resetSheme();">
-                        <div id="offeredOpisVrste-dropdown" class="select-dropdown-content max-height-300px"
-                            style="z-index: 500;">
-                            <div [id]="'offeredOpisVrste-dropdown-' + i"
-                                *ngFor="let opisVrste of offeredSheme; index as i" matRipple
-                                class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == ShemeDropdownIndex"
-                                (mousedown)="selectSheme(opisVrste);">
-                                <span>
-                                    <b>{{ opisVrste.SIF_SHEME }}</b> ({{ opisVrste.OPIS }})
-                                </span>
-                            </div>
-                        </div>
-                    </span>
-                    <span style="width: 350px;" class="small-margin-left margin-right" matTooltip="{{ Grupe!.NAZ_SHEME }}"
-                        matTooltipShowDelay="1000">{{
-                        Grupe!.NAZ_SHEME }}</span>
-                </td>
+                <td>
+                    <input type="text" [(ngModel)]="Grupe.ID_GRUPE">
+                </td> 
 			</tr>
             <tr>
 				<td>
 					<label for="VRSTA_IZRACUNA" class="minimum-margin-top">{{ 'Zaposlenik' | translate }}:</label>
 				</td>
-                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickZaposleni();" (contextmenu)="removeZaposleni($event)"
-                        matTooltip="{{ (!Grupe.ID_RADNIKA ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="Grupe.NAZIV_RADNIKA">
-                        {{ Grupe!.NAZIV_RADNIKA ? 'done' : 'import_contacts'}}
-                    </mat-icon>
-                    <span (mouseleave)="resetZaposleniIndex();"
-                        (click)="refreshZaposleni(Grupe!.ID_RADNIKA, false);">
-                        <input type="text" [(ngModel)]="Grupe.ID_RADNIKA" maxlength="22"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedZaposleni()"
-                            (ngModelChange)="refreshZaposleni(Grupe!.ID_RADNIKA, false);"
-                            (focus)="refreshZaposleni(Grupe!.ID_RADNIKA, false);"
-                            (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
-                            (keyup.escape)="resetZaposleniIndex();">
-                        <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
-                            style="z-index: 500;">
-                            <div [id]="'offeredZaposleni-dropdown-' + i"
-                                *ngFor="let opisVrste of offeredZaposleni; index as i" matRipple
-                                class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == ZaposleniDropdownIndex"
-                                (mousedown)="selectZaposleni(opisVrste);">
-                                <span>
-                                    <b>{{ opisVrste.MBR }}</b> ({{ opisVrste.PREZIME_IME }})
-                                </span>
-                            </div>
-                        </div>
-                    </span>
-                    <span style="width: 350px;" class="small-margin-left margin-right" matTooltip="{{ Grupe!.NAZIV_RADNIKA }}"
-                        matTooltipShowDelay="1000">{{
-                        Grupe!.NAZIV_RADNIKA }}</span>
+                <td>
+                    <input type="text" [(ngModel)]="Grupe.NAZ_GRUPE">
                 </td>
 			</tr>
 		</table>

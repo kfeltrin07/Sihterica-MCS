@@ -8,7 +8,7 @@
     height: 700px;
     margin-left: 16px;
     margin-top: 20px;
-
+    border-radius: 15px;
 }
 
 .grupni-unos{
@@ -27,8 +27,25 @@
 }
 
 .sheme-card{
-    padding: 30px 16px 16px 16px;
-    border-radius: 15px;
+    padding: 16px 0px 16px 16px;
+    border-radius: 15px 15px 0px 0px;
     position: relative;
     color: black;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.4) !important;
+    height: 229px;
+}
+
+.listEvents{
+    max-height: 229px;
+    overflow-y: auto;
+}
+
+input{
+    border: 0.5px #d6d6d6 solid;
+    border-radius: 5px;
+    box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
+    min-width: 60px;
+    height: 20px;
+    padding-left: 10px;
+    text-overflow: ellipsis;
 }

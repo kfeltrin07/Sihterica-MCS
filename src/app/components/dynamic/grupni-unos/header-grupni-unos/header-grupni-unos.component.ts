@@ -38,17 +38,30 @@ export class HeaderGrupniUnosComponent {
   CalendarView = CalendarView;
 }
 
-export const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
+export const colors: any = [
+  {
+      primary: '#ad2121', //  RED
+      secondary: '#FAE3E3',
+    
   },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
+  {
+      primary: '#1e90ff', // BLUE
+      secondary: '#D1E8FF',
+    
   },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
+  {
+      primary: '#e3bc08', // YELLOW
+      secondary: '#FDF1BA',
+    
   },
-};
+  {
+      primary: '#7bc379', // GREEN
+      secondary: '#93e990',
+    
+  },
+  {
+      primary: '#bf90e9', // PURPLE
+      secondary: '#9570b5',
+    
+  }
+];

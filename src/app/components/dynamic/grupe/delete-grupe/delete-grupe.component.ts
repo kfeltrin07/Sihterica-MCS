@@ -51,9 +51,7 @@ constructor(
         data: {
           pAkcija: CRUDAction.Delete,
           pSifVlas: this.session.loggedInUser.ownerID,
-          pIdOperatera: this.recievedGrupe.ID_OPERATERA,
-          pSifSheme: this.recievedGrupe.SIF_SHEME,
-          pIdRadnika: this.recievedGrupe.ID_RADNIKA,
+          pIdGrupe: this.recievedGrupe.ID_GRUPE,
         }
       }
     ).subscribe((response: any) => {
