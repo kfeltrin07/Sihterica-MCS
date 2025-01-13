@@ -62,13 +62,12 @@ class="colored-header text-align-center">
                         [class.color-valid]="EvidencijaRadVreZag.OPISVRSTE">
                         {{ EvidencijaRadVreZag!.OPISVRSTE ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetOpisVrste();"
-                        (click)="refreshOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA, false);">
+                    <span (click)="refreshOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZag.VRSTA_SLOGA" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedOpisVrste()"
-                            (ngModelChange)="refreshOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA, false);"
+                            (blur)="OfferedOpisVrste();resetOpisVrste();"
+                            (ngModelChange)="filterOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA);"
                             (focus)="refreshOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA, false);"
                             (keyup.enter)="selectOpisVrste(offeredOpisVrste[OpisVrsteDropdownIndex]);"
                             (keyup.escape)="resetOpisVrste();">

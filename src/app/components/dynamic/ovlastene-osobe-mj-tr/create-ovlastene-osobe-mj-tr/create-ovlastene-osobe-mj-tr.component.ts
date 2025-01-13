@@ -56,6 +56,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
 
   public OrganizacijskeJediniceDropdownIndex: number = -1;
   public offeredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
+  public filteredEvidVezeIzracuna: OrganizacijskeJedinice[] = [];
   public selectedOrganizacijskeJedinice: OrganizacijskeJedinice = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -80,6 +81,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
 
   public ZaposleniDropdownIndex: number = -1;
   public offeredZaposleni: Zaposleni[] = [];
+  public filteredZaposleni: Zaposleni[] = [];
   public selectedZaposleni: Zaposleni = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -185,10 +187,58 @@ export class CreateOvlasteneOsobeMjTrComponent {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredOrganizacijskeJedinice = response.debugData.data;
+      this.filteredEvidVezeIzracuna = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
+  }
+
+  public OfferedOrganizationalUnits(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getOJ',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.OvlastenaOsobaMjTr.SIFMJTR,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredOrganizacijskeJedinice = response.debugData.data;
+      for (let item of this.offeredOrganizacijskeJedinice) {
+        if (item.SIF_OJ.toUpperCase() == this.OvlastenaOsobaMjTr.SIFMJTR.toUpperCase()) {
+          this.varNames.NAZ_OJ = item.NAZ_OJ;
+          this.OvlastenaOsobaMjTr.SIFMJTR = item.SIF_OJ;
+        }
+      }
+    });
+  }
+
+  public filterOrganizationalUnits(text: string): void {
+    if (!text) {
+      this.refreshOrganizationalUnits("",false);
+      return;
+    }
+  
+    this.offeredOrganizacijskeJedinice = this.filteredEvidVezeIzracuna.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredOrganizacijskeJedinice.length == 0){
+      this.refreshOrganizationalUnits(text,false);
+    }
   }
 
   public selectOrganizationalUnits(OrganizacijskeJedinice: OrganizacijskeJedinice): void {
@@ -250,10 +300,58 @@ export class CreateOvlasteneOsobeMjTrComponent {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
+      this.filteredZaposleni = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
+  }
+
+  public OfferedZaposleni(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getZaposleni',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.OvlastenaOsobaMjTr.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredZaposleni = response.debugData.data;
+      for (let item of this.offeredZaposleni) {
+        if (item.MBR.toUpperCase() == this.OvlastenaOsobaMjTr.ID.toUpperCase()) {
+          this.varNames.PREZIME_IME = item.PREZIME_IME;
+          this.OvlastenaOsobaMjTr.ID = item.MBR;
+        }
+      }
+    });
+  }
+
+  public filterZaposleni(text: string): void {
+    if (!text) {
+      this.refreshZaposleni("",false);
+      return;
+    }
+  
+    this.offeredZaposleni = this.filteredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredZaposleni.length == 0){
+      this.refreshZaposleni(text,false);
+    }
   }
 
   public selectZaposleni(Zaposleni: Zaposleni): void {

@@ -23,7 +23,7 @@ class="colored-header text-align-center">
 				<td>
 					<label for="Code" class="minimum-margin-top">{{ 'Code' | translate }}:</label>
 				</td>
-                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                <td style="width: 250px;display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickEvidVezeSifra();" (contextmenu)="removeEvidVezeSifra($event)"
                         matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_STUPCA ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
@@ -62,7 +62,7 @@ class="colored-header text-align-center">
 				<td>
 					<label for="VRSTA_IZRACUNA" class="minimum-margin-top">{{ 'VRSTA_IZRACUNA' | translate }}:</label>
 				</td>
-                <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                <td style="width: 250px;display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickEvidVezeIzracuna();" (contextmenu)="removeEvidVezeIzracuna($event)"
                         matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"

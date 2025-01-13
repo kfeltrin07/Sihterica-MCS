@@ -30,12 +30,13 @@ class="colored-header text-align-center">
                         [class.color-valid]="varNames.PREZIME_IME">
                         {{ varNames!.PREZIME_IME ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetZaposleni();"
+                    <span
                         (click)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);">
                         <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.ID" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (ngModelChange)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);"
+                            (blur)="OfferedZaposleni();resetZaposleni();"
+                            (ngModelChange)="filterZaposleni(OvlastenaOsobaMjTr!.ID);"
                             (focus)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);"
                             (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
                             (keyup.escape)="resetZaposleni();">
@@ -68,12 +69,13 @@ class="colored-header text-align-center">
                         [class.color-valid]="varNames.NAZ_OJ">
                         {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetOrganizationalUnits();"
+                    <span
                         (click)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);">
                         <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.SIFMJTR" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (ngModelChange)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
+                            (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
+                            (ngModelChange)="filterOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR);"
                             (focus)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
                             (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
                             (keyup.escape)="resetOrganizationalUnits();">

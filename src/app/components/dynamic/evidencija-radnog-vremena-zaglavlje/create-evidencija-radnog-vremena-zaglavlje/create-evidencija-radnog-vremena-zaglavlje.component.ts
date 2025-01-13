@@ -52,6 +52,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
 
   public OpisVrsteDropdownIndex: number = -1;
   public offeredOpisVrste: OpisVrste[] = [];
+  public filteredEvidVezeIzracuna: OpisVrste[] = [];
   public selectedOpisVrste: OpisVrste = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -152,6 +153,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredOpisVrste = response.debugData.data;
+      this.filteredEvidVezeIzracuna = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredOpisVrste-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -182,11 +184,27 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredOpisVrste = response.debugData.data;
       for (let item of this.offeredOpisVrste) {
-        if (item.SIFRA == this.EvidencijaRadVreZag.VRSTA_SLOGA) {
+        if (item.SIFRA.toUpperCase() == this.EvidencijaRadVreZag.VRSTA_SLOGA.toUpperCase()) {
           this.EvidencijaRadVreZag.OPISVRSTE = item.OPIS;
+          this.EvidencijaRadVreZag.VRSTA_SLOGA=item.SIFRA;
         }
       }
     });
+  }
+
+  public filterOpisVrste(text: string): void {
+    if (!text) {
+      this.refreshOpisVrste("",false);
+      return;
+    }
+  
+    this.offeredOpisVrste = this.filteredEvidVezeIzracuna.filter(
+      item => item?.SIFRA.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredOpisVrste.length == 0){
+      this.refreshOpisVrste(text,false);
+    }
   }
 
   public selectOpisVrste(OpisVrste: OpisVrste): void {

@@ -25,6 +25,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PickOrgJediniceComponent } from 'src/app/components/pickers/pick-org-jedinice/pick-org-jedinice.component';
 import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-sheme.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-radnici-grupe',
@@ -42,6 +43,7 @@ import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-s
     MatSortModule,
     MatInputModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
 
     CdkDrag,
     CdkDragHandle,
@@ -235,6 +237,7 @@ export class RadniciGrupeComponent {
         method: 'getPopisRadnikaGrupe',
         sid: this.session.loggedInUser.sessionID,
         data: {
+          pDioNaziva: this.searchParam,
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
@@ -302,7 +305,7 @@ export class RadniciGrupeComponent {
               pAkcija: 1,
               pSifVlas: this.session.loggedInUser.ownerID,
               pIdOperatera: this.session.loggedInUser.ID,
-              pSifSheme: this.varNames.SIF_SHEME,
+              pSifSheme: this.receivedGrupa.SIF_SHEME,
               pIdRadnika: zaposlenik.MBR,
               pIdGrupe: this.receivedGrupa.ID_GRUPE
             }
@@ -323,7 +326,7 @@ export class RadniciGrupeComponent {
               pAkcija: 0,
               pSifVlas: this.session.loggedInUser.ownerID,
               pIdOperatera: this.session.loggedInUser.ID,
-              pSifSheme: this.varNames.SIF_SHEME,
+              pSifSheme: this.receivedGrupa.SIF_SHEME,
               pIdRadnika: zaposlenik.MBR,
               pIdGrupe: this.receivedGrupa.ID_GRUPE
             }
@@ -353,6 +356,7 @@ export class RadniciGrupeComponent {
     if (OrganizacijskeJedinice) {
       this.varNames.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
       this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
+      this.refresh();
     }
   }
 
@@ -360,6 +364,7 @@ export class RadniciGrupeComponent {
     e.preventDefault();
     this.varNames.SIFMJTR = "";
     this.varNames.NAZ_OJ = "";
+    this.refresh();
 
   }
 
@@ -420,6 +425,7 @@ export class RadniciGrupeComponent {
         if (item.SIF_OJ.toUpperCase() == this.varNames.SIFMJTR.toUpperCase()) {
           this.varNames.SIFMJTR = item.SIF_OJ;
           this.varNames.NAZ_OJ = item.NAZ_OJ;
+          this.refresh();
         }
       }
     });
@@ -444,6 +450,7 @@ export class RadniciGrupeComponent {
   public selectOrganizationalUnits(OrganizacijskeJedinice: OrganizacijskeJedinice): void {
     this.varNames.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
     this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
+    this.refresh();
     document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.OrganizacijskeJediniceDropdownIndex = -1;
   }

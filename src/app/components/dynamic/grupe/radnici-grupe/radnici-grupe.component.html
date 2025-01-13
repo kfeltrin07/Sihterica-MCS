@@ -2,7 +2,9 @@
     <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
         class="dialog-toolbar">
         {{ 'ZaposlenizaGrupu' | translate }}: <b>{{ receivedGrupa.NAZ_GRUPE }}</b>, {{ 'ID' | translate }}: <b>{{
-            receivedGrupa.ID_GRUPE }}</b>
+            receivedGrupa.ID_GRUPE }}</b>, {{ 'Shema' | translate }}: <b>{{ receivedGrupa.SIF_SHEME }}</b> - <b>{{ varNames.NAZ_SHEME }}</b>
+                <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+
     </div>
 
     <mat-dialog-content>
@@ -90,6 +92,11 @@
             </tr>-->
         </table>
         <div class="display-flex small-margin-bottom button-bar" style="justify-content: space-between;">
+            <div>
+                <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left" matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
+                    <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Zaposleni' | translate }}">
+                  </mat-form-field>
+            </div>
 
             <div >
                 <button class="small-horizontal-margins" mat-mini-fab color="primary" 
@@ -101,15 +108,15 @@
                     <mat-icon>close</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab matTooltip="{{ 'SelectAll' | translate }}"
-                    color="primary" [disabled]="varNames.NAZ_SHEME=='' || varNames.NAZ_OJ==''"  (click)="selectAll();">
+                    color="primary" (click)="selectAll();">
                     <mat-icon>check_box</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab matTooltip="{{ 'DeselectAll' | translate }}"
-                    color="primary" [disabled]="varNames.NAZ_SHEME=='' || varNames.NAZ_OJ==''" (click)="deselectAll();">
+                    color="primary" (click)="deselectAll();">
                     <mat-icon>check_box_outline_blank</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab [mat-dialog-close]="true"
-                    matTooltip="{{ 'SaveChanges' | translate }}" [disabled]="varNames.NAZ_SHEME=='' || varNames.NAZ_OJ==''"  color="primary" (click)="save();">
+                    matTooltip="{{ 'SaveChanges' | translate }}"  color="primary" (click)="save();">
                     <mat-icon>save</mat-icon>
                 </button>
             </div>
