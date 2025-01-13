@@ -55,6 +55,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
 
   public EvidVezeSifraDropdownIndex: number = -1;
   public offeredEvidVezeSifra: EvidVezeSifra[] = [];
+  public filteredEvidVezeSifra: EvidVezeSifra[] = [];
   public selectedEvidVezeSifra: EvidVezeSifra = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -64,6 +65,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
 
   public EvidVezeIzracunaDropdownIndex: number = -1;
   public offeredEvidVezeIzracuna: EvidVezeIzracuna[] = [];
+  public filteredEvidVezeIzracuna: EvidVezeIzracuna[] = [];
   public selectedEvidVezeIzracuna: EvidVezeIzracuna = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -164,6 +166,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidVezeSifra = response.debugData.data;
+      this.filteredEvidVezeSifra = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredEvidVezeSifra-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -194,11 +197,27 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidVezeSifra = response.debugData.data;
       for (let item of this.offeredEvidVezeSifra) {
-        if (item.SIF_STUPCA == this.EvidencijaRadVreZagVeze.SIF_STUPCA) {
+        if (item.SIF_STUPCA.toUpperCase() == this.EvidencijaRadVreZagVeze.SIF_STUPCA.toUpperCase()) {
           this.EvidencijaRadVreZagVeze.KNAZIV = item.KNAZIV;
+          this.EvidencijaRadVreZagVeze.SIF_STUPCA = item.SIF_STUPCA;
         }
       }
     });
+  }
+
+  public filterEvidVezeSifra(text: string): void {
+    if (!text) {
+      this.refreshEvidVezeSifra("",false);
+      return;
+    }
+  
+    this.offeredEvidVezeSifra = this.filteredEvidVezeSifra.filter(
+      item => item?.SIF_STUPCA.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredEvidVezeSifra.length == 0){
+      this.refreshEvidVezeSifra(text,false);
+    }
   }
 
   public selectEvidVezeSifra(EvidVezeSifra: EvidVezeSifra): void {
@@ -260,6 +279,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidVezeIzracuna = response.debugData.data;
+      this.filteredEvidVezeIzracuna = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredEvidVezeIzracuna-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -290,11 +310,27 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidVezeIzracuna = response.debugData.data;
       for (let item of this.offeredEvidVezeIzracuna) {
-        if (item.SIFRA == this.EvidencijaRadVreZagVeze.SIF_VP) {
+        if (item.SIFRA.toUpperCase() == this.EvidencijaRadVreZagVeze.SIF_VP.toUpperCase()) {
           this.EvidencijaRadVreZagVeze.NAZ_VP = item.OPIS;
+          this.EvidencijaRadVreZagVeze.SIF_VP = item.SIFRA;
         }
       }
     });
+  }
+
+  public filterEvidVezeIzracuna(text: string): void {
+    if (!text) {
+      this.refreshEvidVezeIzracuna("",false);
+      return;
+    }
+  
+    this.offeredEvidVezeIzracuna = this.filteredEvidVezeIzracuna.filter(
+      item => item?.SIFRA.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredEvidVezeIzracuna.length == 0){
+      this.refreshEvidVezeIzracuna(text,false);
+    }
   }
 
   public selectEvidVezeIzracuna(EvidVezeIzracuna: EvidVezeIzracuna): void {

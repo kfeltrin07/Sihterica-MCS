@@ -30,13 +30,13 @@ class="colored-header text-align-center">
                         [class.color-valid]="EvidencijaRadVreZagVeze.KNAZIV">
                         {{ EvidencijaRadVreZagVeze!.KNAZIV ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetEvidVezeSifra();"
+                    <span
                         (click)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_STUPCA" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidVezeSifra()"
-                            (ngModelChange)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
+                            (blur)="OfferedEvidVezeSifra();resetEvidVezeSifra();"
+                            (ngModelChange)="filterEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA);"
                             (focus)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
                             (keyup.enter)="selectEvidVezeSifra(offeredEvidVezeSifra[EvidVezeSifraDropdownIndex]);"
                             (keyup.escape)="resetEvidVezeSifra();">
@@ -69,13 +69,12 @@ class="colored-header text-align-center">
                         [class.color-valid]="EvidencijaRadVreZagVeze.NAZ_VP">
                         {{ EvidencijaRadVreZagVeze!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetEvidVezeIzracuna();"
-                        (click)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
+                    <span (click)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_VP" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidVezeIzracuna()"
-                            (ngModelChange)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
+                            (blur)="OfferedEvidVezeIzracuna();resetEvidVezeIzracuna();"
+                            (ngModelChange)="filterEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP);"
                             (focus)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
                             (keyup.enter)="selectEvidVezeIzracuna(offeredEvidVezeIzracuna[EvidVezeIzracunaDropdownIndex]);"
                             (keyup.escape)="resetEvidVezeIzracuna();">

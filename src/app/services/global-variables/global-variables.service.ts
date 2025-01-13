@@ -1151,15 +1151,16 @@ export class GlobalVariablesService {
     name: 'NAZ_GRUPE'
   };
   public GrupeDisplayedColumns: ColumnRef[] = [
-    this.RNColumn,
     this.ID_GRUPEColumn,
     this.NAZ_GRUPEColumn,
+    this.SIF_SHEMEColumn
   ];
 
   public GrupeColumnsList: ColumnRef[] = [
     this.RNColumn,
     this.ID_GRUPEColumn,
     this.NAZ_GRUPEColumn,
+    this.SIF_SHEMEColumn
   ];
 
   public sidebarItems: SidebarItem[] = [

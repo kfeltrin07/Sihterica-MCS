@@ -621,7 +621,8 @@ export interface Grupe{
   UKUPANBROJSLOGOVA: number;
   RN: number;
   ID_GRUPE: string;
-  NAZ_GRUPE: string; // help sheme
+  NAZ_GRUPE: string;
+  SIF_SHEME: string;
 }
 
 

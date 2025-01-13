@@ -55,6 +55,7 @@ export class EventGrupniUnosComponent implements OnInit {
     RN: 0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   };
 
   public dataSource = this.grupe;

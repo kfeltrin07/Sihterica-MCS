@@ -26,6 +26,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 import { RadniciGrupeComponent } from './radnici-grupe/radnici-grupe.component';
+import { EditGrupeComponent } from './edit-grupe/edit-grupe.component';
 
 @Component({
   selector: 'app-grupe',
@@ -52,14 +53,15 @@ import { RadniciGrupeComponent } from './radnici-grupe/radnici-grupe.component';
   styleUrl: './grupe.component.scss'
 })
 export class GrupeComponent implements OnInit {
-  public displayedColumns: string[] = ['RN','ID_GRUPE', 'NAZ_GRUPE', 'options'];
+  public displayedColumns: string[] = ['RN', 'ID_GRUPE', 'NAZ_GRUPE', 'options'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA:0,
-    RN:0,
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   };
 
 
@@ -126,23 +128,33 @@ export class GrupeComponent implements OnInit {
   }
 
 
-    public openCreateDialog(): void {
-  
-      const dialogRef = this.dialog.open(CreateGrupeComponent, {
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
-      });
-    }
-  
-    public openDeleteDialog(item: any): void {
-      const dialogRef = this.dialog.open(DeleteGrupeComponent, {
-        data: item
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
-      });
-    }
+  public openCreateDialog(): void {
+
+    const dialogRef = this.dialog.open(CreateGrupeComponent, {
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
+
+  public openEditDialog(item:any): void {
+
+    const dialogRef = this.dialog.open(EditGrupeComponent, {
+      data:item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
+
+  public openDeleteDialog(item: any): void {
+    const dialogRef = this.dialog.open(DeleteGrupeComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 1000);
+    });
+  }
 
   public openDetailsDialog(item: any): void {
     const dialogRef = this.dialog.open(DetailsGrupeComponent, {

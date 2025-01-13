@@ -47,6 +47,7 @@
                         varNames!.NAZ_OJ }}</span>
                 </td>
             </tr>
+            <!--
             <tr>
                 <td>
                     <label for="SIF_SHEME" class="minimum-margin-top">{{ 'Shema' | translate }}:</label>
@@ -55,18 +56,18 @@
                     style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickSheme();" (contextmenu)="removeSheme($event)"
-                        matTooltip="{{ (!varNames.SIF_SHEME ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        matTooltip="{{ (!receivedGrupa.SIF_SHEME ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="varNames.NAZ_SHEME">
                         {{ varNames!.NAZ_SHEME ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span
-                        (click)="refreshSheme(varNames!.SIF_SHEME, false);">
-                        <input type="text" [(ngModel)]="varNames.SIF_SHEME" maxlength="22"
+                        (click)="refreshSheme(receivedGrupa!.SIF_SHEME, false);">
+                        <input type="text" [(ngModel)]="receivedGrupa.SIF_SHEME" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
                             (blur)="OfferedSheme();resetSheme();"
-                            (ngModelChange)="filterSheme(varNames!.SIF_SHEME);"
-                            (focus)="refreshSheme(varNames!.SIF_SHEME, false);"
+                            (ngModelChange)="filterSheme(receivedGrupa!.SIF_SHEME);"
+                            (focus)="refreshSheme(receivedGrupa!.SIF_SHEME, false);"
                             (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
                             (keyup.escape)="resetSheme();">
                         <div id="offeredSheme-dropdown"
@@ -86,7 +87,7 @@
                         matTooltipShowDelay="1000">{{
                         varNames!.NAZ_SHEME }}</span>
                 </td>
-            </tr>
+            </tr>-->
         </table>
         <div class="display-flex small-margin-bottom button-bar" style="justify-content: space-between;">
 

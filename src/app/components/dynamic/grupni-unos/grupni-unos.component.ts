@@ -108,6 +108,7 @@ export class GrupniUnosComponent implements OnChanges, OnInit {
     RN:0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   };
 
   public varNames: any = {

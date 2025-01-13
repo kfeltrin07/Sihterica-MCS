@@ -48,13 +48,14 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './pick-grupe.component.scss'
 })
 export class PickGrupeComponent implements OnInit {
-  public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE'];
+  public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE', 'SIF_SHEME'];
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
     UKUPANBROJSLOGOVA:0,
     RN:0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   };
 
   public dataSource = this.grupe;

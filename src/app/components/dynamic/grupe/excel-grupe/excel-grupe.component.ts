@@ -38,6 +38,7 @@ export class ExcelGrupeComponent {
     RN:0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   }
 
   public allColumns: boolean = true;

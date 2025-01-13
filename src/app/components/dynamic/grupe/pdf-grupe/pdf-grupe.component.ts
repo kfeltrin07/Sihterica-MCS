@@ -40,6 +40,7 @@ export class PdfGrupeComponent {
     RN:0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
+    SIF_SHEME: "",
   };
 
 

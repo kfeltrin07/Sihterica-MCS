@@ -66,8 +66,10 @@
             (click)="openPDFDialog({headers: displayedColumns, searchParam: searchParam});"
             matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
           <mat-icon id="ZaposleniciButton" class="cursor-pointer minimum-margin-left-and-right"
-            (click)="openZaposleniciDialog(grupa);"
-            matTooltip="{{ 'Zaposlenici' | translate }}">person</mat-icon>
+            (click)="openZaposleniciDialog(grupa);" matTooltip="{{ 'Zaposlenici' | translate }}">person</mat-icon>
+          <mat-icon id="editButton" *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus"
+            class="cursor-pointer minimum-margin-left-and-right" (click)="openEditDialog(grupa);"
+            matTooltip="{{ 'Edit' | translate }}">edit</mat-icon>
           <mat-icon id="deleteButton" *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus"
             class="cursor-pointer minimum-margin-left-and-right" (click)="openDeleteDialog(grupa);"
             matTooltip="{{ 'Delete' | translate }}">delete</mat-icon>

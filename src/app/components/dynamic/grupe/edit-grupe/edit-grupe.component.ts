@@ -1,15 +1,14 @@
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { PickEvidencijaHelpRadniciComponent } from 'src/app/components/pickers/pick-evidencija-help-radnici/pick-evidencija-help-radnici.component';
 import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-sheme.component';
-import { CRUDAction, Grupe, Sheme, EvRadnogVremenaHelpRadnici } from 'src/app/models/models.service';
+import { Grupe, Sheme, CRUDAction } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -17,7 +16,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-create-grupe',
+  selector: 'app-edit-grupe',
   standalone: true,
   imports: [
     MatDialogModule,
@@ -31,13 +30,13 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
     CommonModule,
     TranslationPipe
   ],
-  templateUrl: './create-grupe.component.html',
-  styleUrl: './create-grupe.component.scss'
+  templateUrl: './edit-grupe.component.html',
+  styleUrl: './edit-grupe.component.scss'
 })
-export class CreateGrupeComponent {
+export class EditGrupeComponent {
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA:0,
-    RN:0,
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
@@ -73,7 +72,8 @@ export class CreateGrupeComponent {
   };*/
 
   constructor(
-    private dialogRef: MatDialogRef<CreateGrupeComponent>,
+    @Inject(MAT_DIALOG_DATA) public receivedGrupe: Grupe,
+    private dialogRef: MatDialogRef<EditGrupeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,
@@ -82,7 +82,10 @@ export class CreateGrupeComponent {
     public dialog: MatDialog
   ) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void { 
+    this.Grupe = this.receivedGrupe;
+    this.OfferedSheme();
+  }
 
   public validateForm(Grupe: Grupe): boolean {
     if (Grupe.ID_GRUPE != '' && Grupe.NAZ_GRUPE != '') {
@@ -100,12 +103,11 @@ export class CreateGrupeComponent {
         method: 'updateGrupe',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pAkcija: CRUDAction.Insert,
+          pAkcija: CRUDAction.Update,
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdGrupe: this.Grupe.ID_GRUPE,
           pNazGrupe: this.Grupe.NAZ_GRUPE,
           pSifSheme: this.Grupe.SIF_SHEME,
-
         }
       }
     ).subscribe((response: any) => {
@@ -119,7 +121,7 @@ export class CreateGrupeComponent {
 
 
 
- //Sheme START
+  //Sheme START
   public pickSheme(): void {
     const dialogRef = this.dialog.open(PickShemeComponent, {});
 
@@ -206,16 +208,16 @@ export class CreateGrupeComponent {
 
   public filterSheme(text: string): void {
     if (!text) {
-      this.refreshSheme("",false);
+      this.refreshSheme("", false);
       return;
     }
-  
+
     this.offeredSheme = this.filteredSheme.filter(
       item => item?.SIF_SHEME.toLowerCase().includes(text.toLowerCase())
     );
 
-    if(this.offeredSheme.length == 0){
-      this.refreshSheme(text,false);
+    if (this.offeredSheme.length == 0) {
+      this.refreshSheme(text, false);
     }
   }
 
@@ -230,100 +232,4 @@ export class CreateGrupeComponent {
     this.ShemeDropdownIndex = -1;
     document.getElementById("offeredSheme-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
-  //Sheme END
-/*
-  //ZAPOSLENI START
-  public pickZaposleni(): void {
-    const dialogRef = this.dialog.open(PickEvidencijaHelpRadniciComponent, {});
-
-    dialogRef.afterClosed().subscribe((EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici) => {
-      this.setZaposleniFromDialog(EvRadnogVremenaHelpRadnici);
-    });
-  }
-
-  public setZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
-    if (EvRadnogVremenaHelpRadnici) {
-      this.Grupe.ID_RADNIKA = EvRadnogVremenaHelpRadnici.MBR;
-      this.Grupe.NAZIV_RADNIKA = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-    }
-  }
-
-  public removeZaposleni(e: Event): void {
-    e.preventDefault();
-    this.Grupe.ID_RADNIKA = "";
-    this.Grupe.NAZIV_RADNIKA = "";
-  }
-
-  public refreshZaposleni(searchParam: string, isSelected: boolean): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getEvRadnogVremenaHelpRadnici',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pMbr: searchParam,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "MBR",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-      console.log(response);
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      if (!isSelected) {
-        document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
-      }
-    });
-  }
-
-  public OfferedZaposleni(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getEvRadnogVremenaHelpRadnici',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pMbr: this.Grupe.ID_RADNIKA,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "MBR",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      for (let item of this.offeredZaposleni) {
-        if (item.MBR == this.Grupe.ID_RADNIKA) {
-          this.Grupe.NAZIV_RADNIKA = item.PREZIME_IME;
-        }
-      }
-    });
-  }
-
-  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici): void {
-    this.Grupe.ID_RADNIKA = EvRadnogVremenaHelpRadnici.MBR;
-    this.Grupe.NAZIV_RADNIKA = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.ZaposleniDropdownIndex = -1;
-  }
-
-  public resetZaposleniIndex(): void {
-    this.ZaposleniDropdownIndex = -1;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-  }
-  //ZAPOSLENI END*/
 }

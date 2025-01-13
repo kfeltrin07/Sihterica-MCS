@@ -141,6 +141,8 @@ export class RadniciGrupeComponent {
   ) { }
 
   public ngOnInit(): void {
+    this.getZaposleni();
+    this.OfferedSheme();
   }
 
   public getZaposleni(): void {
@@ -152,7 +154,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.searchParam,
-          pSifSheme: this.varNames.SIF_SHEME,
+          pSifSheme: this.receivedGrupa.SIF_SHEME,
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
           pIdOperatera: this.session.loggedInUser.ID,
           pSifOj: this.varNames.SIFMJTR,
@@ -464,14 +466,14 @@ export class RadniciGrupeComponent {
 
   public setShemeFromDialog(Sheme?: Sheme): void {
     if (Sheme) {
-      this.varNames.SIF_SHEME = Sheme.SIF_SHEME;
+      this.receivedGrupa.SIF_SHEME = Sheme.SIF_SHEME;
       this.varNames.NAZ_SHEME = Sheme.OPIS;
     }
   }
 
   public removeSheme(e: Event): void {
     e.preventDefault();
-    this.varNames.SIF_SHEME = "";
+    this.receivedGrupa.SIF_SHEME = "";
     this.varNames.NAZ_SHEME = "";
   }
 
@@ -513,7 +515,7 @@ export class RadniciGrupeComponent {
         method: 'getSheme',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: this.varNames.SIF_SHEME,
+          pDioNaziva: this.receivedGrupa.SIF_SHEME,
           limit: 100,
           page: 1,
           sort: [
@@ -529,9 +531,9 @@ export class RadniciGrupeComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredSheme = response.debugData.data;
       for (let item of this.offeredSheme) {
-        if (item.SIF_SHEME.toUpperCase() == this.varNames.SIF_SHEME.toUpperCase()) {
+        if (item.SIF_SHEME.toUpperCase() == this.receivedGrupa.SIF_SHEME.toUpperCase()) {
           this.varNames.NAZ_SHEME = item.OPIS;
-          this.varNames.SIF_SHEME = item.SIF_SHEME;
+          this.receivedGrupa.SIF_SHEME = item.SIF_SHEME;
 
         }
       }
@@ -554,7 +556,7 @@ export class RadniciGrupeComponent {
   }
 
   public selectSheme(Sheme: Sheme): void {
-    this.varNames.SIF_SHEME = Sheme.SIF_SHEME;
+    this.receivedGrupa.SIF_SHEME = Sheme.SIF_SHEME;
     this.varNames.NAZ_SHEME = Sheme.OPIS;
     document.getElementById("offeredSheme-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.ShemeDropdownIndex = -1;
