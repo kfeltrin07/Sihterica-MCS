@@ -19,12 +19,13 @@
                         [class.color-valid]="varNames.NAZ_OJ">
                         {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetOrganizationalUnits();"
+                    <span 
                         (click)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
                         <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (ngModelChange)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
+                            (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
+                            (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
                             (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
                             (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
                             (keyup.escape)="resetOrganizationalUnits();">
@@ -58,13 +59,13 @@
                         [class.color-valid]="varNames.NAZ_SHEME">
                         {{ varNames!.NAZ_SHEME ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mouseleave)="resetSheme();"
+                    <span
                         (click)="refreshSheme(varNames!.SIF_SHEME, false);">
                         <input type="text" [(ngModel)]="varNames.SIF_SHEME" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedSheme()"
-                            (ngModelChange)="refreshSheme(varNames!.SIF_SHEME, false);"
+                            (blur)="OfferedSheme();resetSheme();"
+                            (ngModelChange)="filterSheme(varNames!.SIF_SHEME);"
                             (focus)="refreshSheme(varNames!.SIF_SHEME, false);"
                             (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
                             (keyup.escape)="resetSheme();">

@@ -49,43 +49,43 @@
                 </div>
             </div>
         </div>
-        <table class="varNamesi-table" style="margin-top: 20px;">
+        <table style="width: 250px;" style="margin-top: 20px;">
             <tr>
                 <td>
-                    <label for="MBR">{{ 'mjesto-troska' | translate }}:</label>
+                    <label for="MBR">{{ 'GRUPA' | translate }}:</label>
                 </td>
-                <td>
+                <td  style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickGrupe();" (contextmenu)="removeGrupe($event)"
                         matTooltip="{{ (!varNames.ID_GRUPE ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="varNames!.NAZ_GRUPE">
                         {{ varNames!.NAZ_GRUPE ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                </td>
-                <td class="varNames-result">
-                    <span (mouseleave)="resetGrupeIndex();"
+
+                    <span
                         (click)="refreshGrupe(varNames!.ID_GRUPE, false);">
                         <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe()"
-                            (ngModelChange)="refreshGrupe(varNames!.ID_GRUPE, false);"
+                            placeholder="{{ 'Code' | translate }}" 
+                            (blur)="OfferedGrupe();resetGrupeIndex();"
+                            (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
                             (focus)="refreshGrupe(varNames!.ID_GRUPE, false);"
                             (keyup.enter)="selectGrupe(offeredGrupe[GrupeDropdownIndex]);"
                             (keyup.escape)="resetGrupeIndex();">
-                        <div id="offeredGrupe-dropdown" class="select-dropdown-content max-height-300px"
+                        <div id="offeredGrupe1-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
-                            <div [id]="'offeredGrupe-dropdown-' + i"
-                                *ngFor="let evidencijaRadVreOj of offeredGrupe; index as i" matRipple
+                            <div [id]="'offeredGrupe1-dropdown-' + i"
+                                *ngFor="let Grupe of offeredGrupe; index as i" matRipple
                                 class="dropdown-content-item display-flex align-items-center space-between"
                                 [class.gray-background]="i == GrupeDropdownIndex"
-                                (mousedown)="selectGrupe(evidencijaRadVreOj);">
+                                (mousedown)="selectGrupe(Grupe);">
                                 <span>
-                                    <b>{{evidencijaRadVreOj.ID_GRUPE}}</b> - {{ evidencijaRadVreOj.NAZ_GRUPE}}
+                                    <b>{{Grupe.ID_GRUPE}}</b> - {{ Grupe.NAZ_GRUPE}}
                                 </span>
                             </div>
                         </div>
                     </span>
-                    <span *ngIf="varNames.NAZ_GRUPE!=''" class="small-margin-left margin-right">{{ varNames.NAZ_GRUPE }}</span>
+                    <span style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right">{{ varNames!.NAZ_GRUPE }}</span>
                 </td>
             </tr>
         </table>

@@ -102,6 +102,7 @@ export class GrupniUnosComponent implements OnChanges, OnInit {
 
   public GrupeDropdownIndex: number = -1;
   public offeredGrupe: Grupe[] = [];
+  public filteredGrupe: Grupe[] = [];
   public selectedGrupe: Grupe = {
     UKUPANBROJSLOGOVA:0,
     RN:0,
@@ -402,8 +403,9 @@ export class GrupniUnosComponent implements OnChanges, OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredGrupe = response.debugData.data;
+      this.filteredGrupe=this.offeredGrupe;
       if (!isSelected) {
-        document.getElementById("offeredGrupe-dropdown")?.classList.add("select-dropdown-content-visible");
+        document.getElementById("offeredGrupe1-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
   }
@@ -432,23 +434,42 @@ export class GrupniUnosComponent implements OnChanges, OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredGrupe = response.debugData.data;
       for (let item of this.offeredGrupe) {
-        if (item.ID_GRUPE == this.varNames.ID_GRUPE) {
+        console.log(item.ID_GRUPE);
+        console.log(this.varNames.ID_GRUPE);
+        if (item.ID_GRUPE.toUpperCase() === this.varNames.ID_GRUPE.toUpperCase()) {
+          console.log(item);
           this.varNames.NAZ_GRUPE = item.NAZ_GRUPE;
+          this.varNames.ID_GRUPE = item.ID_GRUPE;
         }
       }
     });
   }
 
+  public filterGrupe(text: string): void {
+    if (!text) {
+      this.refreshGrupe("",false);
+      return;
+    }
+  
+    this.offeredGrupe = this.filteredGrupe.filter(
+      item => item?.ID_GRUPE.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredGrupe.length == 0){
+      this.refreshGrupe(text,false);
+    }
+  }
+
   public selectGrupe(Grupe: Grupe): void {
     this.varNames.ID_GRUPE = Grupe.ID_GRUPE;
     this.varNames.NAZ_GRUPE = Grupe.NAZ_GRUPE;
-    document.getElementById("offeredGrupe-dropdown")?.classList.remove("select-dropdown-content-visible");
+    document.getElementById("offeredGrupe1-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.GrupeDropdownIndex = -1;
   }
 
   public resetGrupeIndex(): void {
     this.GrupeDropdownIndex = -1;
-    document.getElementById("offeredGrupe-dropdown")?.classList.remove("select-dropdown-content-visible");
+    document.getElementById("offeredGrupe1-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
   //GRUPE END
 }

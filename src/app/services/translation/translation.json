@@ -7611,6 +7611,18 @@
           "en": "Org. Unit",
           "hr": "Org. Jed.",
           "transferred": false
+        },
+        {
+          "ref": "ID_GRUPE",
+          "en": "Group ID",
+          "hr": "ID Grupe",
+          "transferred": false
+        },
+        {
+          "ref": "NAZ_GRUPE",
+          "en": "Group name",
+          "hr": "Naziv grupe",
+          "transferred": false
         }
     ]
 }

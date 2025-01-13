@@ -74,6 +74,7 @@ export class RadniciGrupeComponent {
 
   public OrganizacijskeJediniceDropdownIndex: number = -1;
   public offeredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
+  public filteredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
   public selectedOrganizacijskeJedinice: OrganizacijskeJedinice = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -98,6 +99,7 @@ export class RadniciGrupeComponent {
 
   public ShemeDropdownIndex: number = -1;
   public offeredSheme: Sheme[] = [];
+  public filteredSheme: Sheme[] = [];
   public selectedSheme: Sheme = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -150,6 +152,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.searchParam,
+          pSifSheme: this.varNames.SIF_SHEME,
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
           pIdOperatera: this.session.loggedInUser.ID,
           pSifOj: this.varNames.SIFMJTR,
@@ -381,11 +384,60 @@ export class RadniciGrupeComponent {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredOrganizacijskeJedinice = response.debugData.data;
+      this.filteredOrganizacijskeJedinice = this.offeredOrganizacijskeJedinice;
       if (!isSelected) {
         document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
   }
+
+  public OfferedOrganizationalUnits(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getOJ',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.varNames.SIFMJTR,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredOrganizacijskeJedinice = response.debugData.data;
+      for (let item of this.offeredOrganizacijskeJedinice) {
+        if (item.SIF_OJ.toUpperCase() == this.varNames.SIFMJTR.toUpperCase()) {
+          this.varNames.SIFMJTR = item.SIF_OJ;
+          this.varNames.NAZ_OJ = item.NAZ_OJ;
+        }
+      }
+    });
+  }
+
+  public filterOrganizationalUnits(text: string): void {
+    if (!text) {
+      this.refreshOrganizationalUnits("",false);
+      return;
+    }
+  
+    this.offeredOrganizacijskeJedinice = this.filteredOrganizacijskeJedinice.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredOrganizacijskeJedinice.length == 0){
+      this.refreshOrganizationalUnits(text,false);
+    }
+  }
+
 
   public selectOrganizationalUnits(OrganizacijskeJedinice: OrganizacijskeJedinice): void {
     this.varNames.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
@@ -446,6 +498,7 @@ export class RadniciGrupeComponent {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredSheme = response.debugData.data;
+      this.filteredSheme = this.offeredSheme;
       if (!isSelected) {
         document.getElementById("offeredSheme-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -476,11 +529,28 @@ export class RadniciGrupeComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredSheme = response.debugData.data;
       for (let item of this.offeredSheme) {
-        if (item.SIF_SHEME == this.varNames.SIF_SHEME) {
+        if (item.SIF_SHEME.toUpperCase() == this.varNames.SIF_SHEME.toUpperCase()) {
           this.varNames.NAZ_SHEME = item.OPIS;
+          this.varNames.SIF_SHEME = item.SIF_SHEME;
+
         }
       }
     });
+  }
+
+  public filterSheme(text: string): void {
+    if (!text) {
+      this.refreshSheme("",false);
+      return;
+    }
+  
+    this.offeredSheme = this.filteredSheme.filter(
+      item => item?.SIF_SHEME.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if(this.offeredSheme.length == 0){
+      this.refreshSheme(text,false);
+    }
   }
 
   public selectSheme(Sheme: Sheme): void {
