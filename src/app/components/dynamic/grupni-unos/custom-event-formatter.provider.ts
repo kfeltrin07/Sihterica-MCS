@@ -14,14 +14,6 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
 
     // you can override any of the methods defined in the parent class
 
-    public override month(event: CalendarEvent): string {
-        return `${event.title}`;
-    }
-
-    public override monthTooltip(event: CalendarEvent): string {
-        return `${event.title}`;
-    }
-
     public override week(event: CalendarEvent): string {
         return `<div class="event-title-div"> 
         <label>${event.title}</label>

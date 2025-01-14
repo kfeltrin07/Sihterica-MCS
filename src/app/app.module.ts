@@ -16,13 +16,13 @@ import { TranslationPipe } from './pipes/translation/translation.pipe';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarCommonModule, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -36,7 +36,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     SidenavComponent,
     ToolbarComponent,
     TranslationPipe,
-    
+    CalendarCommonModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }
+    ),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

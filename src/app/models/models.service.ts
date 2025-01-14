@@ -43,12 +43,12 @@ export interface LoginBody {
   data: UserMetadata;
 }
 
-export interface Owner { 
+export interface Owner {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   ID_KORISNIKA: string;
   ID_VLASNIKA: string;
-  NAZIV_VLASNIKA:string;
+  NAZIV_VLASNIKA: string;
   USERNAME: string;
 }
 
@@ -82,7 +82,7 @@ export interface UserInfoBody {
 export interface DashboardItem {
   name: string;
   icon: string;
-  rowHeight:number;
+  rowHeight: number;
   rightsState: RightsState;
   items: DashboardSubitem[];
   url: string
@@ -386,12 +386,12 @@ export interface OvlastenaOsobaMjTr {
   USERNAME: string;
   SIFMJTR: string;
   NAZMJTR: string;
-  OD:string;
-  DO:string;
-  SATI:string;
+  OD: string;
+  DO: string;
+  SATI: string;
 }
 
-export interface EvidencijaRadVreZag{
+export interface EvidencijaRadVreZag {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   RID: string;
@@ -403,7 +403,7 @@ export interface EvidencijaRadVreZag{
   OPISVRSTE: string;
 }
 
-export interface OpisVrste{
+export interface OpisVrste {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_VLAS: string;
@@ -411,7 +411,7 @@ export interface OpisVrste{
   OPIS: string;
 }
 
-export interface EvidencijaRadVreZagVeze{
+export interface EvidencijaRadVreZagVeze {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   RID: string;
@@ -425,14 +425,14 @@ export interface EvidencijaRadVreZagVeze{
   SIF_VLAS: string;
 }
 
-export interface EvidVezeSifra{
+export interface EvidVezeSifra {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_STUPCA: string;
   KNAZIV: string;
 }
 
-export interface EvidVezeIzracuna{
+export interface EvidVezeIzracuna {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_VLAS: string;
@@ -440,7 +440,7 @@ export interface EvidVezeIzracuna{
   OPIS: string;
 }
 
-export interface EvidencijaRadVreRad{
+export interface EvidencijaRadVreRad {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIFRANAZIV: string;
@@ -481,10 +481,10 @@ export interface EvidencijaRadVreRad{
   SATI_29: string;
 }
 
-export interface EvidencijaRadVre{
+export interface EvidencijaRadVre {
   UKUPANBROJSLOGOVA: number;
   RN: number;
-  NAZIV_OJ:string;
+  NAZIV_OJ: string;
   SIFRANAZIV: string;
   NAZIVRAD: string;
   SIF_MT: string;
@@ -525,7 +525,7 @@ export interface EvidencijaRadVre{
   BEMPTYROWAFTER: string;
 }
 
-export interface EvidencijaRadVreOj{
+export interface EvidencijaRadVreOj {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_OJ: string;
@@ -533,7 +533,7 @@ export interface EvidencijaRadVreOj{
   VRSTA: string;
 }
 
-export interface FondSati{
+export interface FondSati {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   MBR: string;
@@ -543,7 +543,7 @@ export interface FondSati{
   NAZ_OJ: string;
 }
 
-export interface FondSatiHelpOJ{
+export interface FondSatiHelpOJ {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_OJ: string;
@@ -551,7 +551,7 @@ export interface FondSatiHelpOJ{
   VRSTA: string;
 }
 
-export interface PomocnaLista{
+export interface PomocnaLista {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   XDUMMY: string;
@@ -606,7 +606,7 @@ export interface PomocnaLista{
   BEMPTYROWAFTER: string;
 }
 
-export interface Sheme{
+export interface Sheme {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIF_SHEME: string;
@@ -617,7 +617,7 @@ export interface Sheme{
   PAUZA_DO: string;
 }
 
-export interface Grupe{
+export interface Grupe {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   ID_GRUPE: string;
@@ -626,7 +626,7 @@ export interface Grupe{
 }
 
 
-export interface ZaposleniGrupe{
+export interface ZaposleniGrupe {
   UKUPANBROJSLOGOVA: number;
   RN: number;
   SIFVLAS: string;
@@ -640,6 +640,55 @@ export interface ZaposleniGrupe{
   U_GRUPI: string
 }
 
+export interface ZaposleniPoGrupiIShemi {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIFVLAS: string;
+  ID_GRUPE: string;
+  SIF_SHEME: string;
+  NAZ_SHEME: string;
+  OD: string;
+  DO: string;
+  SATI: string;
+  ID_RADNIKA: string;
+  NAZIV_RADNIKA: string;
+  SIF_RM: string;
+  NAZ_RM: string;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+}
+
+export interface EvidencijaMjesecna {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SATI2: string;
+  ISATI2: string;
+  IODHH: string;
+  IDOHH: string;
+  DAN: string;
+  IDK_N: string;
+  ODHH: string;
+  DOHH: string;
+  D1: string;
+  RID: string;
+  SIFVLAS: string;
+  DATUM: string;
+  MBR: string;
+  SIF_MT: string;
+  SIF_VP: string;
+  SATI: string;
+  IDK: string;
+  SYSD: string;
+  OD: string;
+  DO: string;
+  RNALOG: string;
+  DATUM_DAN: string;
+  SATI_DAN: string;
+  OPIS_DAN: string;
+  SIF_VP_N: string;
+  SIF_MT_N: string;
+  NAZIV: string;
+}
 
 export enum TodoState {
   Urgent,
@@ -759,10 +808,10 @@ export interface ReadPostRequestBody {
   pZaglavlje3?: string;
   pZaglavlje4?: string;
   pComputerID?: number;
-  pStatusID?:number;
-  pStatusAktivnostiID?:number;
-  pIDNew?:string;
-  pUsernameNew?:string;
+  pStatusID?: number;
+  pStatusAktivnostiID?: number;
+  pIDNew?: string;
+  pUsernameNew?: string;
   pUkupno?: boolean;
   page?: number;
   sort?: ReadPostRequestPropertyAndDirection[];

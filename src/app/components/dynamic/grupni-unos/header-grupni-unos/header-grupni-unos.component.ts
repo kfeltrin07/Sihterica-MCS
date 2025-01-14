@@ -40,28 +40,41 @@ export class HeaderGrupniUnosComponent {
 
 export const colors: any = [
   {
-      primary: '#ad2121', //  RED
-      secondary: '#FAE3E3',
-    
+    primary: '#ad2121', //  RED
+    secondary: '#FAE3E3',
+
   },
   {
-      primary: '#1e90ff', // BLUE
-      secondary: '#D1E8FF',
-    
+    primary: '#1e90ff', // BLUE
+    secondary: '#D1E8FF',
+
   },
   {
-      primary: '#e3bc08', // YELLOW
-      secondary: '#FDF1BA',
-    
+    primary: '#e3bc08', // YELLOW
+    secondary: '#FDF1BA',
+
   },
   {
-      primary: '#7bc379', // GREEN
-      secondary: '#93e990',
-    
+    primary: '#7bc379', // GREEN
+    secondary: '#93e990',
+
   },
   {
-      primary: '#bf90e9', // PURPLE
-      secondary: '#9570b5',
-    
-  }
+    primary: '#bf90e9', // PURPLE
+    secondary: '#9570b5',
+
+  },
+  {
+    primary: '#0ccf94', // green
+    secondary: '#1af0b0',
+  },
+
 ];
+
+
+export const colorsHoliday: any = [
+  {
+    primary: '#a36b0a', // PURPLE 2
+    secondary: '#f0cb8b',
+  }
+]

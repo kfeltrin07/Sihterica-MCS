@@ -99,6 +99,8 @@ export class GrupeComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%' + this.searchParam + '%',
+          pSifSheme: '',
+          pIdKorisnika:this.session.loggedInUser.ID,
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [

@@ -1,32 +1,71 @@
-.calendar{
+.calendar {
     width: 80%;
 }
 
-.unos-form{
+.unos-form {
     background-color: var(--color-white);
     width: 306px;
     height: 700px;
     margin-left: 16px;
     margin-top: 20px;
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-between;
 }
 
-.grupni-unos{
+.grupni-unos {
     display: flex;
-    
+
+}
+
+.grupni-unos-buttons {
+    width: 100%;
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.grupni-unos-helpovi {
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 12px;
+
+    table {
+        max-width: 294px;
+        width: 100%;
+        border-collapse: collapse;
+
+        tr {
+            td {
+                max-width: 58px;
+            }
+
+            ;
+        }
+    }
+
+    ;
+}
+
+.grupni-unos-sheme {
+    width: 100%;
 }
 
 .drag-active {
     position: relative;
     z-index: 1;
     pointer-events: none;
-  }
+}
 
 .drag-over {
     background-color: #eee;
 }
 
-.sheme-card{
+.sheme-card {
     padding: 16px 0px 16px 16px;
     border-radius: 15px 15px 0px 0px;
     position: relative;
@@ -35,12 +74,12 @@
     height: 229px;
 }
 
-.listEvents{
+.listEvents {
     max-height: 229px;
     overflow-y: auto;
 }
 
-input{
+input {
     border: 0.5px #d6d6d6 solid;
     border-radius: 5px;
     box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
@@ -48,4 +87,38 @@ input{
     height: 20px;
     padding-left: 10px;
     text-overflow: ellipsis;
+}
+
+.event-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+        scale: 0.8;
+    }
+}
+
+.event-title {
+    margin-left: 5px;
+}
+
+.select-dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    min-width: 300px;
+    max-width: 300px !important;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 500 !important;
+    right: 33px;
+}
+
+.select-dropdown-content-visible {
+    display: block;
 }

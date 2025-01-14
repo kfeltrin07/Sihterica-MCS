@@ -2363,3 +2363,11 @@ app-konto .mat-column-charts-of-accounts-name {
     position: relative !important;
     flex-direction: row;
 }
+
+.selected {
+    background-color: rgb(160, 164, 187) !important;
+}
+
+.selected:hover {
+    background-color: rgb(192, 197, 225) !important;
+}

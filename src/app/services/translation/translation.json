@@ -7623,6 +7623,30 @@
           "en": "Group name",
           "hr": "Naziv grupe",
           "transferred": false
+        },
+        {
+          "ref": "DohvatPodataka",
+          "en": "Data retrieval",
+          "hr": "Dohvat podataka",
+          "transferred": false
+        },
+        {
+          "ref": "Unos",
+          "en": "Insert",
+          "hr": "Unos",
+          "transferred": false
+        },
+        {
+          "ref": "VrstaPosla",
+          "en": "Job type",
+          "hr": "Vrsta posla",
+          "transferred": false
+        },
+        {
+          "ref": "OcistiKalendar",
+          "en": "Clear calendar",
+          "hr": "Očisti kalendar",
+          "transferred": false
         }
     ]
 }

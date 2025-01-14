@@ -1163,6 +1163,33 @@ export class GlobalVariablesService {
     this.SIF_SHEMEColumn
   ];
 
+  public ZaposleniPoGrupiIShemiDisplayedColumns: ColumnRef[] = [
+    this.ID_RADNIKAColumn,
+    this.NAZIV_RADNIKAColumn,
+    this.NAZ_RMColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.SATIColumn,
+  ];
+
+  public ZaposleniPoGrupiIShemiColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.ID_GRUPEColumn,
+    this.ID_RADNIKAColumn,
+    this.NAZIV_RADNIKAColumn,
+    this.SIF_RMColumn,
+    this.NAZ_RMColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.SATIColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
+    this.ID_GRUPEColumn,
+    this.NAZ_GRUPEColumn,
+    this.SIF_SHEMEColumn,
+    this.SIF_VLASColumn
+  ];
+
   public sidebarItems: SidebarItem[] = [
     {
       namePrefix: '0',

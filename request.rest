@@ -370,9 +370,10 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getGrupe",
-  "sid": "90946v4aieg1oeq7tn6oepvkm5",
+  "sid": "3cr1fnihmoqhoe3b6ihhvoqii7",
   "data" : {
-    "pDioNaziva" : "",
+    "pDioNaziva" : "1",
+
     "limit": 10,
     "page": 1,
     "sort": [
@@ -429,6 +430,57 @@ Content-Type: application/json
     "sort": [
       {
         "property": "PREZIME_IME",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get POPIS RADNIKA GRUPE
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getPopisRadnikaGrupe",
+  "sid": "3cr1fnihmoqhoe3b6ihhvoqii7",
+  "data" : {
+    "pSifVlas" : 144,
+    "pIdOperatera" : 15,
+    "pIdGrupe" : 1,
+    "limit": 10,
+    "page": 1,
+    "sort": [
+      {
+        "property": "NAZIV_RADNIKA",
+        "direction": "ASC"
+      }
+    ]
+  }
+}
+
+//get EVIDENCIJA MJESEČNA
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getEvidencijaMjesecna",
+  "sid": "3cr1fnihmoqhoe3b6ihhvoqii7",
+  "data" : {
+    "pIdKorisnika" : 4,
+    "pMbr" : "250",
+    "pZaMjesec": "01.2025",
+    "pSifMjTr": "OD107",
+    "pZSifMt": "OD107",
+    "pZSifVp": "RRR",
+    "limit": 10,
+    "page": 2,
+    "sort": [
+      {
+        "property": "D1",
         "direction": "ASC"
       }
     ]
