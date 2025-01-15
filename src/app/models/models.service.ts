@@ -690,6 +690,33 @@ export interface EvidencijaMjesecna {
   NAZIV: string;
 }
 
+export interface EvidencijaDnevna {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIFVLAS: string;
+  MBR: string;
+  MBRX: string;
+  OSOBA:  string;
+  SIF_VP: string;
+  SIF_VP_N: string;
+  ODHH: string;
+  DOHH: string;
+  RID: string;
+  SATI: string;
+  IDK: string;
+  SYSD: string;
+  OD: string;
+  DO: string;
+  IDK_N: string;
+  ISATI: string;
+  IODHH: string;
+  IDOHH: string;
+  SIF_MT: string;
+  SIF_MT_N: string;
+  DATUM: string;
+}
+
+
 export enum TodoState {
   Urgent,
   InProgress,

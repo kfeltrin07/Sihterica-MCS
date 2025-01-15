@@ -7647,6 +7647,60 @@
           "en": "Clear calendar",
           "hr": "Očisti kalendar",
           "transferred": false
+        },
+        {
+          "ref": "D1",
+          "en": "Date",
+          "hr": "Datum",
+          "transferred": false
+        },
+        {
+          "ref": "DAN",
+          "en": "Day",
+          "hr": "Dan",
+          "transferred": false
+        },
+        {
+          "ref": "SIF_MT_N",
+          "en": "Place of expense",
+          "hr": "Mjesto Troška",
+          "transferred": false
+        },
+        {
+          "ref": "ODHH",
+          "en": "From (hh)",
+          "hr": "Od (hh)",
+          "transferred": false
+        },
+        {
+          "ref": "DOHH",
+          "en": "To (hh)",
+          "hr": "Do (hh)",
+          "transferred": false
+        },
+        {
+          "ref": "IDK_N",
+          "en": "Wrote",
+          "hr": "Upisao",
+          "transferred": false
+        },
+        {
+          "ref": "MjesecnaEvidencija",
+          "en": "Monthly record",
+          "hr": "Mjesečna evidencija",
+          "transferred": false
+        },
+        {
+          "ref": "KopirajPodatkeOd",
+          "en": "Copy data from",
+          "hr": "Kopiraj podatke od",
+          "transferred": false
+        },
+        {
+          "ref": "DnevnaEvidencija",
+          "en": "Daily record",
+          "hr": "Dnevna evidencija",
+          "transferred": false
         }
     ]
 }

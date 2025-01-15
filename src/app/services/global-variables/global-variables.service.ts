@@ -927,7 +927,7 @@ export class GlobalVariablesService {
     displayedName: 'S17',
     name: 'S17'
   };
-  
+
   public S18Column: ColumnRef = {
     displayedName: 'S18',
     name: 'S18'
@@ -1012,12 +1012,12 @@ export class GlobalVariablesService {
     displayedName: 'SatIzn',
     name: 'SatIzn'
   };
-  
+
   public SifraNazivColumn: ColumnRef = {
     displayedName: 'SifraNaziv',
     name: 'SifraNaziv'
   };
-  
+
   public NazivVPColumn: ColumnRef = {
     displayedName: 'NazivVP',
     name: 'NazivVP'
@@ -1188,6 +1188,144 @@ export class GlobalVariablesService {
     this.NAZ_GRUPEColumn,
     this.SIF_SHEMEColumn,
     this.SIF_VLASColumn
+  ];
+
+  public DANColumn: ColumnRef = {
+    displayedName: 'DAN',
+    name: 'DAN'
+  };
+  public SIF_MT_NColumn: ColumnRef = {
+    displayedName: 'SIF_MT_N',
+    name: 'SIF_MT_N'
+  };
+  public SIF_VP_NColumn: ColumnRef = {
+    displayedName: 'SIF_VP_N',
+    name: 'SIF_VP_N'
+  };
+  public ODHHColumn: ColumnRef = {
+    displayedName: 'ODHH',
+    name: 'ODHH'
+  };
+  public DOHHColumn: ColumnRef = {
+    displayedName: 'DOHH',
+    name: 'DOHH'
+  };
+  public IDK_NColumn: ColumnRef = {
+    displayedName: 'IDK_N',
+    name: 'IDK_N'
+  };
+  public SATI2Column: ColumnRef = {
+    displayedName: 'SATI2',
+    name: 'SATI2'
+  };
+  public ISATI2Column: ColumnRef = {
+    displayedName: 'ISATI2',
+    name: 'ISATI2'
+  };
+  public RNALOGColumn: ColumnRef = {
+    displayedName: 'RNALOG',
+    name: 'RNALOG'
+  };
+  public DATUM_DANColumn: ColumnRef = {
+    displayedName: 'DATUM_DAN',
+    name: 'DATUM_DAN'
+  };
+  public SATI_DANColumn: ColumnRef = {
+    displayedName: 'SATI_DAN',
+    name: 'SATI_DAN'
+  };
+  public OPIS_DANColumn: ColumnRef = {
+    displayedName: 'OPIS_DAN',
+    name: 'OPIS_DAN'
+  };
+
+
+  public EvidencijaMjesecnaDisplayedColumns: ColumnRef[] = [
+    this.DATUMColumn,
+    this.DANColumn,
+    this.SIF_MT_NColumn,
+    this.SIF_VP_NColumn,
+    this.SATIColumn,
+    this.ODHHColumn,
+    this.DOHHColumn,
+    this.IDK_NColumn
+  ];
+
+  public EvidencijaMjesecnaColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.DATUMColumn,
+    this.DANColumn,
+    this.SIF_MT_NColumn,
+    this.SIF_VP_NColumn,
+    this.SATIColumn,
+    this.ODHHColumn,
+    this.DOHHColumn,
+    this.IDK_NColumn,
+    this.SATI2Column,
+    this.ISATI2Column,
+    this.SIF_MTColumn,
+    this.SIF_VPColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.RNALOGColumn,
+    this.DATUM_DANColumn,
+    this.SATI_DANColumn,
+    this.OPIS_DANColumn,
+    this.NAZIVColumn
+  ];
+
+
+  public MBRXColumn: ColumnRef = {
+    displayedName: 'MBRX',
+    name: 'MBRX'
+  };
+  public ISATIColumn: ColumnRef = {
+    displayedName: 'ISATI',
+    name: 'ISATI'
+  };
+  public IODHHColumn: ColumnRef = {
+    displayedName: 'IODHH',
+    name: 'IODHH'
+  };
+  public IDOHHColumn: ColumnRef = {
+    displayedName: 'IDOHH',
+    name: 'IDOHH'
+  };
+
+  public EvidencijaDnevnaDisplayedColumns: ColumnRef[] = [
+    this.MBRColumn,
+    this.OSOBAColumn,
+    this.SIF_MT_NColumn,
+    this.SIF_VP_NColumn,
+    this.SATIColumn,
+    this.ODHHColumn,
+    this.DOHHColumn,
+    this.IDK_NColumn
+  ];
+
+  public EvidencijaDnevnaColumnsList: ColumnRef[] = [
+    this.RNColumn,
+    this.SIFVLASColumn,
+    this.MBRColumn,
+    this.MBRXColumn,
+    this.OSOBAColumn,
+    this.SIF_VPColumn,
+    this.SIF_VP_NColumn,
+    this.ODHHColumn,
+    this.DOHHColumn,
+    this.RIDColumn,
+    this.SATIColumn,
+    this.IDKColumn,
+    this.SYSDColumn,
+    this.ODColumn,
+    this.DOColumn,
+    this.IDK_NColumn,
+    this.ISATIColumn,
+    this.IODHHColumn,
+    this.IDOHHColumn,
+    this.SIF_MTColumn,
+    this.SIF_MT_NColumn,
+    this.DATUMColumn
   ];
 
   public sidebarItems: SidebarItem[] = [
@@ -1372,6 +1510,24 @@ export class GlobalVariablesService {
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
+        },
+        {
+          namePrefix: '3.8',
+          name: 'MjesecnaEvidencija',
+          icon: 'group_add',
+          url: '/mjesecna-evidencija',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '3.9',
+          name: 'DnevnaEvidencija',
+          icon: 'view_day',
+          url: '/dnevna-evidencija',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
         }
       ],
 
@@ -1545,6 +1701,18 @@ export class GlobalVariablesService {
           name: 'GrupniUnos',
           icon: 'group_add',
           url: '/grupni-unos',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'MjesecnaEvidencija',
+          icon: 'group_add',
+          url: '/mjesecna-evidencija',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'DnevnaEvidencija',
+          icon: 'view_day',
+          url: '/dnevna-evidencija',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         }
       ],

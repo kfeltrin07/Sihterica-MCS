@@ -7,31 +7,46 @@
             <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (beforeViewRender)="beforeMonthViewRender($event)" (dayClicked)="changeDay($event.day.date)"
-                (eventTimesChanged)="eventDropped($event)" (eventClicked)="eventClicked($event)">
+                (eventTimesChanged)="eventDropped($event)">
             </mwl-calendar-month-view>
             <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 [hourSegments]="1" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
-                (eventClicked)="eventClicked($event)" >
+                 [eventTemplate]="customEventTemplate">
             </mwl-calendar-week-view>
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
-                [hourSegments]="1" [snapDraggedEvents]="false" [refresh]="refresh"
-                (eventTimesChanged)="eventDropped($event)" (eventClicked)="eventClicked($event)">
+                [hourSegments]="1" [snapDraggedEvents]="false" [refresh]="refresh" [eventTemplate]="customEventTemplate"
+                (eventTimesChanged)="eventDropped($event)" >
             </mwl-calendar-day-view>
         </div>
     </div>
     <div class="unos-form">
         <div class="grupni-unos-sheme">
-            <div class="sheme-card" mwlDroppable (drop)="externalDrop($event.dropData.event)" dragOverClass="drag-over">
+            <div class="sheme-card" mwlDroppable (drop)="externalDropSheme($event.dropData.event)" dragOverClass="drag-over">
                 <div class="card-body">
                     <label style="font-size: 14px;" for="">{{'Sheme'|translate}}</label>
-                    <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>
+                    <p *ngIf="externalShemeEvents.length === 0"><em>No events added</em></p>
                     <div class="listEvents">
-                        <div *ngFor="let event of externalEvents" mwlDraggable [dropData]="{event: event}"
+                        <div *ngFor="let event of externalShemeEvents" mwlDraggable [dropData]="{event: event}"
                             [touchStartLongPress]="{ delay: 300, delta: 30 }" dragActiveClass="drag-active">
                             <button mat-flat-button style="margin: 5px 0px;"
-                                [style.background-color]="event.color!.primary">
+                                [style.background-color]="event.color!.secondary">
+                                {{ event.title }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grupe-card" mwlDroppable (drop)="externalDropGrupe($event.dropData.event)" dragOverClass="drag-over">
+                <div class="card-body">
+                    <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
+                    <p *ngIf="externalGrupeEvents.length === 0"><em>No events added</em></p>
+                    <div class="listEvents">
+                        <div *ngFor="let event of externalGrupeEvents" mwlDraggable [dropData]="{event: event}"
+                            [touchStartLongPress]="{ delay: 300, delta: 30 }" dragActiveClass="drag-active">
+                            <button mat-flat-button style="margin: 5px 0px;"
+                                [style.background-color]="event.color!.secondary">
                                 {{ event.title }}
                             </button>
                         </div>
@@ -216,15 +231,15 @@
 
 
 
-<!--
+
 
     <ng-template #customEventTemplate let-weekEvent="weekEvent" let-tooltipPlacement="tooltipPlacement"
-        let-eventClicked="eventClicked" let-tooltipTemplate="tooltipTemplate"
+        let-tooltipTemplate="tooltipTemplate"
         let-tooltipAppendToBody="tooltipAppendToBody" let-tooltipDisabled="tooltipDisabled"
         let-tooltipDelay="tooltipDelay" let-column="column">
 
         <div class="cal-event" style="font-size: 14px;" [ngStyle]="{
-            color: weekEvent.event.color?.secondaryText,
+            color: 'black',
             backgroundColor: weekEvent.event.color?.secondary,
             borderColor: weekEvent.event.color?.primary
           }" [mwlCalendarTooltip]="
@@ -233,7 +248,9 @@
                 | calendarEventTitle: 'weekTooltip':weekEvent.event)
               : ''
           " [tooltipPlacement]="tooltipPlacement" [tooltipEvent]="weekEvent.event" [tooltipTemplate]="tooltipTemplate"
-            [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay" (mwlClick)="eventClicked.emit()">
+            [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay"
+            (click)="eventClicked(weekEvent)"
+            >
             <ng-container *ngIf="!weekEvent.event.meta.groupedEvents">
                 <mwl-calendar-event-actions [event]="weekEvent.event">
                 </mwl-calendar-event-actions>
@@ -243,13 +260,24 @@
             </mwl-calendar-event-title>
             <div>
                 <table>
+                    @if(weekEvent.event.meta.type=='grupa'){
+                        <tr>
+                            <td>
+                                <label for="">
+                                    {{'Shema'|translate}}: <b>{{weekEvent.event.meta.NAZ_SHEME}}</b>
+                                </label>
+                            </td>
+                        </tr>
+                    }
                     <tr>
                         <td>
                             <label for="">
-                                {{'Vrijeme'|translate}}: <b>{{formatDate(weekEvent.start, 'HH:mm', this.locale)}} -
-                                    {{weekEvent.event.end}}</b>
+                                {{'Vrijeme'|translate}}: <b>{{weekEvent.event.start|date: 'HH:mm': this.locale}} -
+                                    {{weekEvent.event.end|date: 'HH:mm': this.locale}}</b>
                             </label>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <label for="">
                                 {{'Pauza'|translate}}: <b>{{weekEvent.event.meta.PAUZA_OD}} -
@@ -257,16 +285,25 @@
                             </label>
                         </td>
 
-                        @if(!weekEvent.event.meta.NOVASHEMA){
+                    </tr>
+                   
+                    @if(!weekEvent.event.meta.NOVASHEMA){
+                    <tr>
                         <td>
                             <label for="">
-                                {{'MjTr'|translate}}: <b>{{weekEvent.event.meta.SIF_MT}}</b>
+                                {{'organiz-jedinica'|translate}}: <b>{{weekEvent.event.meta.SIF_MT}}</b>
                             </label>
                         </td>
-                        }
                     </tr>
+                    <tr>
+                        <td>
+                            <label for="">
+                                {{'VP'|translate}}: <b>{{weekEvent.event.meta.SIF_VP_N }}</b>
+                            </label>
+                        </td>
+                    </tr>
+                    }
                 </table>
             </div>
         </div>
     </ng-template>
-    -->

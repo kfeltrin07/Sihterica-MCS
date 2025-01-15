@@ -18,6 +18,8 @@ import { PomocneListeComponent } from './components/dynamic/pomocne-liste/pomocn
 import { ShemeComponent } from './components/dynamic/sheme/sheme.component';
 import { GrupeComponent } from './components/dynamic/grupe/grupe.component';
 import { GrupniUnosComponent } from './components/dynamic/grupni-unos/grupni-unos.component';
+import { MjesecnaEvidencijaComponent } from './components/dynamic/mjesecna-evidencija/mjesecna-evidencija.component';
+import { DnevnaEvidencijaComponent } from './components/dynamic/dnevna-evidencija/dnevna-evidencija.component';
 
 const routes: Routes = [
 
@@ -35,6 +37,8 @@ const routes: Routes = [
   { path: 'sheme', component: ShemeComponent, canActivate: [authGuard()] },
   { path: 'grupe', component: GrupeComponent, canActivate: [authGuard()] },
   { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard()] },
+  { path: 'mjesecna-evidencija', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
+  { path: 'dnevna-evidencija', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },
   { path: 'login', component: LoginComponent, canActivate: [noLoginGuard()] },

@@ -40,14 +40,7 @@ import { PickPopisRadnikaGrupeComponent } from '../../pickers/pick-popis-radnika
 import { PickOrgJediniceComponent } from '../../pickers/pick-org-jedinice/pick-org-jedinice.component';
 import {CustomDateFormatter} from './custom-date-formatter.provider';
 
-interface Holiday {
-  date: string;
-  name: string;
-}
 
-type CalendarEventWithMeta = CalendarEvent<
-  { type: 'holiday'; holiday: Holiday } | { type: 'normal' }
->;
 
 @Component({
   selector: 'app-grupni-unos',
@@ -73,11 +66,11 @@ type CalendarEventWithMeta = CalendarEvent<
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
     },
-
+/*
     {
       provide: CalendarEventTitleFormatter,
       useClass: CustomEventTitleFormatter
-    }
+    }*/
   ],
 })
 export class GrupniUnosComponent implements OnInit {
@@ -98,6 +91,15 @@ export class GrupniUnosComponent implements OnInit {
   public offeredGrupe: Grupe[] = [];
   public filteredGrupe: Grupe[] = [];
   public selectedGrupe: Grupe = {
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
+    ID_GRUPE: "",
+    NAZ_GRUPE: "",
+    SIF_SHEME: "",
+  };
+
+  public grupe: Grupe[] = [];
+  public Grupe: Grupe = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
     ID_GRUPE: "",
@@ -184,12 +186,11 @@ export class GrupniUnosComponent implements OnInit {
   public match: boolean = false;
 
   viewDate = new Date();
-  viewDate1 = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), this.viewDate.getDate(), 16, 0, 0, 0);
   activeDayIsOpen = false;
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
-  public externalEvents: CalendarEvent[] = [
+  public externalShemeEvents: CalendarEvent[] = [
     /*
     {
       id: 1,
@@ -218,6 +219,9 @@ export class GrupniUnosComponent implements OnInit {
     }*/
   ];
 
+  public externalGrupeEvents: CalendarEvent[] = [
+  ];
+
   public events: CalendarEvent[] = [
   ];
 
@@ -233,8 +237,8 @@ export class GrupniUnosComponent implements OnInit {
 
 
   public ngOnInit(): void {
-    console.log(this.externalEvents);
     this.getSheme();
+    this.getGrupeEvents();
     this.getHolidays();
   }
 
@@ -312,8 +316,14 @@ export class GrupniUnosComponent implements OnInit {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
 
-  public externalDrop(event: CalendarEvent) {
-    if (this.externalEvents.indexOf(event) === -1) {
+  public externalDropSheme(event: CalendarEvent) {
+    if (this.externalShemeEvents.indexOf(event) === -1) {
+      this.events = this.events.filter((iEvent) => iEvent !== event);
+    }
+  }
+
+  public externalDropGrupe(event: CalendarEvent) {
+    if (this.externalGrupeEvents.indexOf(event) === -1) {
       this.events = this.events.filter((iEvent) => iEvent !== event);
     }
   }
@@ -327,6 +337,7 @@ export class GrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%%',
+          pSifSheme:'',
           limit: 100000,
           page: 1,
           sort: [
@@ -352,7 +363,7 @@ export class GrupniUnosComponent implements OnInit {
         if (index == colors.length) {
           colorindex = 0
         }
-        this.externalEvents = [...this.externalEvents, {
+        this.externalShemeEvents = [...this.externalShemeEvents, {
           id: index,
           title: shema.OPIS,
           start: dateOd,
@@ -385,9 +396,108 @@ export class GrupniUnosComponent implements OnInit {
     });
   }
 
+  public getGrupeEvents(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getGrupe',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: '%%',
+          pSifSheme: '',
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "ID_GRUPE",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.grupe = response.debugData.data;
+
+
+
+      let index = 0;
+      let colorindex = 0;
+
+      for (let grupe of this.grupe) {
+
+        this.http.post(
+          this.globalVar.APIHost + this.globalVar.APIFile,
+          {
+            action: 'Sihterica',
+            method: 'getSheme',
+            sid: this.session.loggedInUser.sessionID,
+            data: {
+              pDioNaziva: '%%',
+              pSifSheme: grupe.SIF_SHEME,
+              limit: 100000,
+              page: 1,
+              sort: [
+                {
+                  property: 'SIF_SHEME',
+                  direction: 'ASC'
+                }
+              ]
+            }
+          }
+        ).subscribe((response: any) => {
+          console.log(response);
+          
+          let shema = response.debugData.data[0];
+
+          let date: Date = new Date();
+
+          let dateOd: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.OD.substring(0, 2), +shema.OD.substring(3, 4));
+          let dateDo: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.DO.substring(0, 2), +shema.DO.substring(3, 4));
+  
+          if (index == colors.length) {
+            colorindex = 0
+          };
+          this.externalGrupeEvents = [...this.externalGrupeEvents, {
+            id: index,
+            title: grupe.NAZ_GRUPE,
+            start: dateOd,
+            end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
+            color: colors[colorindex],
+            draggable: true,
+            meta: {
+              OD: shema?.OD,
+              DO: shema?.DO,
+              NAZ_GRUPE: grupe?.NAZ_GRUPE,
+              ID_GRUPE: grupe?.ID_GRUPE,
+              NAZ_SHEME: shema?.OPIS,
+              SIF_SHEME: shema?.SIF_SHEME,
+              OPIS: shema?.OPIS,
+              PAUZA_DO: shema?.PAUZA_DO,
+              PAUZA_OD: shema?.PAUZA_OD,
+              UKUPANBROJSLOGOVA: shema?.UKUPANBROJSLOGOVA,
+              RN: shema?.RN,
+              NOVASHEMA: true,
+              type: 'grupa',
+              incrementsBadgeTotal: true,
+  
+            },
+            resizable: {
+              beforeStart: true,
+              afterEnd: true,
+            },
+          }];
+          index++;
+          colorindex++;
+        });
+        };
+    });
+  }
 
   public  eventClicked(event: any): void {
-
+    console.log('event clicked');
     if (event.meta?.type != 'holiday') {
       const dialogRef = this.dialog.open(EventGrupniUnosComponent, {
         data: event
@@ -988,6 +1098,8 @@ export class GrupniUnosComponent implements OnInit {
 
 
   public getEvidencijaMjesecna(): void {
+    this.events = this.events.filter((iEvent) => iEvent.meta.type === "holiday");
+
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1017,8 +1129,6 @@ export class GrupniUnosComponent implements OnInit {
       let index = 0;
       let colorindex = 0;
 
-      this.events=[];
-      this.getHolidays();
 
       for (let satnica of this.evidencijaMjesecna) {
         if (satnica.OD != null || satnica.DO != null) {
@@ -1035,21 +1145,22 @@ export class GrupniUnosComponent implements OnInit {
             title: this.varNames.NAZ_SHEME,
             start: dateOd,
             end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
-           // color: colors[colorindex],
-            color: this.externalEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.color,
+            color: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.color,
             draggable: true,
             meta: {
+              UKUPANBROJSLOGOVA: satnica?.UKUPANBROJSLOGOVA,
+              RN: satnica?.RN,
               OD: satnica?.OD,
               DO: satnica?.DO,
+              PAUZA_DO: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_DO,
+              PAUZA_OD: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_OD,
               SIF_MT: satnica?.SIF_MT,
               MBR: satnica?.MBR,
               SIF_VP: satnica?.SIF_VP,
               SIF_MT_N: satnica?.SIF_MT_N,
               NAZIV: satnica?.NAZIV,
-              UKUPANBROJSLOGOVA: satnica?.UKUPANBROJSLOGOVA,
-              RN: satnica?.RN,
               incrementsBadgeTotal: true,
-
+              SIF_VP_N: satnica?.SIF_VP_N,  
             },
             resizable: {
               beforeStart: true,
@@ -1060,11 +1171,9 @@ export class GrupniUnosComponent implements OnInit {
         ];
           index++;
           colorindex++;
-          this.refresh.next();
 
         }
       }
-      console.log(this.events);
     });
     
   }
