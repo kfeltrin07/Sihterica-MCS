@@ -22,6 +22,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SelectionModel } from '@angular/cdk/collections';
+import { RadniciGrupeComponent } from '../../grupe/radnici-grupe/radnici-grupe.component';
 
 @Component({
   selector: 'app-event-grupni-unos',
@@ -52,7 +53,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class EventGrupniUnosComponent implements OnInit {
   public displayedColumns1: string[] = ['ID_GRUPE', 'NAZ_GRUPE'];
-  public displayedColumns2: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA','NAZ_RM','OD','DO','SATI'];
+  public displayedColumns2: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA', 'NAZ_RM', 'OD', 'DO', 'SATI'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
@@ -82,6 +83,11 @@ export class EventGrupniUnosComponent implements OnInit {
     NAZ_OJ: ""
 
   };
+
+  public varNames: any = {
+    OD: "",
+    DO: ""
+  }
 
   public dataSource1 = this.grupe;
   public dataSource2 = this.zaposleniPoGrupiIShemi;
@@ -123,6 +129,10 @@ export class EventGrupniUnosComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.varNames.OD = new Date(this.receivedSheme.start).toISOString().slice(0, 16);
+    this.varNames.DO = new Date(this.receivedSheme.end).toISOString().slice(0, 16);
+
+
     this.getGrupe();
   }
 
@@ -134,8 +144,8 @@ export class EventGrupniUnosComponent implements OnInit {
         method: 'getGrupe',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: '%' + this.searchParam+ '%',
-          pSifSheme: this.receivedSheme.event.meta.SIF_SHEME,
+          pDioNaziva: '%' + this.searchParam + '%',
+          pSifSheme: this.receivedSheme.meta.SIF_SHEME,
           pIdKorisnika: this.session.loggedInUser.ID,
           limit: this.pageSize1,
           page: (this.pageIndex1 + 1),
@@ -153,7 +163,7 @@ export class EventGrupniUnosComponent implements OnInit {
       this.dataSource1 = this.grupe;
       this.length1 = +response.debugData.data[0]?.UKUPANBROJSLOGOVA;
       console.log(this.length1);
-      if(!this.length1){
+      if (!this.length1) {
         this.dataSource1.push({
           UKUPANBROJSLOGOVA: 0,
           RN: 0,
@@ -249,4 +259,17 @@ export class EventGrupniUnosComponent implements OnInit {
     }
   }
 
+  public openZaposleniciDialog(): void {
+    const dialogRef = this.dialog.open(RadniciGrupeComponent, {
+      data: this.selection.selected[0]
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  public save(): void {
+    this.receivedSheme.start = new Date(this.varNames.OD);
+    this.receivedSheme.end = new Date(this.varNames.DO);
+    this.dialogRef.close(this.receivedSheme);
+  }
 }

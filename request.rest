@@ -419,18 +419,19 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getZaposleniGrupe",
-  "sid": "268qqnmtmjjqkdvdokiqscfjd2",
+  "sid": "fa2cl58f7b23c4l43ef1dcv8q3",
   "data" : {
     "pDioNaziva" : "",
-    "pIdGrupe" : 1,
-    "pIdOperatera" : 15,
-    "pSifOj" : "OD108",
+    "pSifSheme": 2,
+    "pIdGrupe" : 4,
+    "pIdOperatera" : 4,
+    "pSifOj" : "OD107",
     "limit": 10,
     "page": 1,
     "sort": [
       {
-        "property": "PREZIME_IME",
-        "direction": "ASC"
+        "property": "U_GRUPI",
+        "direction": "DESC"
       }
     ]
   }
@@ -444,11 +445,11 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "getPopisRadnikaGrupe",
-  "sid": "3cr1fnihmoqhoe3b6ihhvoqii7",
+  "sid": "fa2cl58f7b23c4l43ef1dcv8q3",
   "data" : {
     "pSifVlas" : 144,
-    "pIdOperatera" : 15,
-    "pIdGrupe" : 1,
+    "pIdOperatera" : 4,
+    "pIdGrupe" : 4,
     "limit": 10,
     "page": 1,
     "sort": [

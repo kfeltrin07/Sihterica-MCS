@@ -96,6 +96,10 @@
         <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
       </button>
 
+      <button mat-mini-fab color="primary" matTooltip="{{ 'Dodaj' | translate }}"  class="small-margin-left" (click)="openZaposleniciDialog();">
+        <mat-icon>add</mat-icon>
+      </button>
+
     </mat-toolbar>
 
     <div class="tablediv">
@@ -129,20 +133,37 @@
             <label for="">{{'Od'|translate}}</label>
           </td>
           <td>
-            <input type="datetime-local" [(ngModel)]="receivedSheme.start">
+            <input type="datetime-local" [(ngModel)]="varNames.OD">
           </td>
-        </tr>
-        <tr>
           <td>
             <label for="">{{'Do'|translate}}</label>
 
           </td>
           <td>
-            <input type="datetime-local" [(ngModel)]="receivedSheme.end">
+            <input type="datetime-local" [(ngModel)]="varNames.DO">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="">{{'PAUZAOD'|translate}}</label>
+          </td>
+          <td>
+            <input type="time" [(ngModel)]="receivedSheme.meta.PAUZA_OD">
+          </td>
+          <td>
+            <label for="">{{'PAUZADO'|translate}}</label>
+
+          </td>
+          <td>
+            <input type="time" [(ngModel)]="receivedSheme.meta.PAUZA_DO">
 
           </td>
         </tr>
       </table>
+    </div>
+    <div style="margin: 20px;">
+      <button mat-flat-button color="primary" (click)="save()">{{'Save'|translate}}</button>
     </div>
   </mat-tab>
 

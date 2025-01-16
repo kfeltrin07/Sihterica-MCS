@@ -1514,7 +1514,7 @@ export class GlobalVariablesService {
         {
           namePrefix: '3.8',
           name: 'MjesecnaEvidencija',
-          icon: 'group_add',
+          icon: 'calendar_month',
           url: '/mjesecna-evidencija',
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
@@ -1705,7 +1705,7 @@ export class GlobalVariablesService {
         },
         {
           name: 'MjesecnaEvidencija',
-          icon: 'group_add',
+          icon: 'calendar_month',
           url: '/mjesecna-evidencija',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         },

@@ -238,7 +238,7 @@
         let-tooltipAppendToBody="tooltipAppendToBody" let-tooltipDisabled="tooltipDisabled"
         let-tooltipDelay="tooltipDelay" let-column="column">
 
-        <div class="cal-event" style="font-size: 14px;" [ngStyle]="{
+        <div class="cal-event" style="font-size: 14px;display: flex;flex-direction: column;justify-content: space-evenly;" [ngStyle]="{
             color: 'black',
             backgroundColor: weekEvent.event.color?.secondary,
             borderColor: weekEvent.event.color?.primary
@@ -249,7 +249,6 @@
               : ''
           " [tooltipPlacement]="tooltipPlacement" [tooltipEvent]="weekEvent.event" [tooltipTemplate]="tooltipTemplate"
             [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay"
-            (click)="eventClicked(weekEvent)"
             >
             <ng-container *ngIf="!weekEvent.event.meta.groupedEvents">
                 <mwl-calendar-event-actions [event]="weekEvent.event">
@@ -304,6 +303,10 @@
                     </tr>
                     }
                 </table>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <button mat-mini-fab style="scale: 0.7;" (click)="eventClicked(weekEvent.event)"><mat-icon>edit</mat-icon></button>
+                <button color="primary" mat-mini-fab style="scale: 0.7;" (click)="deleteEvent(weekEvent.event)"><mat-icon>delete</mat-icon></button>
             </div>
         </div>
     </ng-template>

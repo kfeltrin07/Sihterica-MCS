@@ -25,7 +25,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PickOrgJediniceComponent } from 'src/app/components/pickers/pick-org-jedinice/pick-org-jedinice.component';
 import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-sheme.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-radnici-grupe',
@@ -123,8 +123,8 @@ export class RadniciGrupeComponent {
   public searchParam: string = '';
   public loading: boolean = true;
   public sorting: Sorting = {
-    active: 'MBR',
-    direction: 'ASC'
+    active: 'U_GRUPI',
+    direction: 'DESC'
   };
   public isPaginatorShown: boolean = true;
   public pageIndex: number = 0;
@@ -293,8 +293,8 @@ export class RadniciGrupeComponent {
   }
 
   public save(): void {
-    for(let zaposlenik of this.zaposleniGrupe){
-      if(this.selection.isSelected(zaposlenik) && !this.oldSelection.isSelected(zaposlenik)){
+    for (let zaposlenik of this.zaposleniGrupe) {
+      if (this.selection.isSelected(zaposlenik) && !this.oldSelection.isSelected(zaposlenik)) {
         this.http.post(
           this.globalVar.APIHost + this.globalVar.APIFile,
           {
@@ -312,10 +312,10 @@ export class RadniciGrupeComponent {
           }
         ).subscribe((response: any) => {
           this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-          
+
         });
       }
-      if(!this.selection.isSelected(zaposlenik) && this.oldSelection.isSelected(zaposlenik)){
+      if (!this.selection.isSelected(zaposlenik) && this.oldSelection.isSelected(zaposlenik)) {
         this.http.post(
           this.globalVar.APIHost + this.globalVar.APIFile,
           {
@@ -333,11 +333,11 @@ export class RadniciGrupeComponent {
           }
         ).subscribe((response: any) => {
           this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-          
+
         });
       }
     }
-    
+
   }
 
 
@@ -433,16 +433,16 @@ export class RadniciGrupeComponent {
 
   public filterOrganizationalUnits(text: string): void {
     if (!text) {
-      this.refreshOrganizationalUnits("",false);
+      this.refreshOrganizationalUnits("", false);
       return;
     }
-  
+
     this.offeredOrganizacijskeJedinice = this.filteredOrganizacijskeJedinice.filter(
       item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
     );
 
-    if(this.offeredOrganizacijskeJedinice.length == 0){
-      this.refreshOrganizationalUnits(text,false);
+    if (this.offeredOrganizacijskeJedinice.length == 0) {
+      this.refreshOrganizationalUnits(text, false);
     }
   }
 
@@ -549,16 +549,16 @@ export class RadniciGrupeComponent {
 
   public filterSheme(text: string): void {
     if (!text) {
-      this.refreshSheme("",false);
+      this.refreshSheme("", false);
       return;
     }
-  
+
     this.offeredSheme = this.filteredSheme.filter(
       item => item?.SIF_SHEME.toLowerCase().includes(text.toLowerCase())
     );
 
-    if(this.offeredSheme.length == 0){
-      this.refreshSheme(text,false);
+    if (this.offeredSheme.length == 0) {
+      this.refreshSheme(text, false);
     }
   }
 

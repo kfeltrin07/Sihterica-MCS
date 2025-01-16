@@ -503,6 +503,23 @@ export class GrupniUnosComponent implements OnInit {
         data: event
       });
       dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.events = this.events.map((iEvent) => {
+            if (iEvent === event) {
+              return {
+                ...event,
+                title: result.title,
+                start: result.start,
+                end: result.end,
+                color: result.color,
+                meta: result.meta,
+                draggable: result.draggable,
+                resizable: result.resizable,
+              };
+            }
+            return iEvent;
+          });
+        }
       });
     }
 

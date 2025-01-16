@@ -61,7 +61,7 @@ export const colors: any = [
   },
   {
     primary: '#bf90e9', // PURPLE
-    secondary: '#9570b5',
+    secondary: '#cd9bfa',
 
   },
   {
