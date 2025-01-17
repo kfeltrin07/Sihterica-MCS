@@ -128,67 +128,32 @@
         </tr>
         <tr>
             <td>
-                <label for="MBR">{{ 'KopirajPodatkeOd' | translate }}:</label>
-            </td>
-            <td>
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                    (click)="pickZaposleni('2');" (contextmenu)="removeZaposleni($event,'2')"
-                    matTooltip="{{ (!filter.MBR2 ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                    [class.color-valid]="filter!.PREZIME_IME2">
-                    {{ filter!.PREZIME_IME2 ? 'done' : 'import_contacts'}}
-                </mat-icon>
-            </td>
-            <td class="filter-result2">
-                <span (click)="refreshZaposleni(filter!.MBR2, false,'2');">
-                    <input type="text" [(ngModel)]="filter!.MBR2" maxlength="22"
-                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni('2');resetZaposleniIndex('2');"
-                        (ngModelChange)="filterZaposleni(filter!.MBR2,'2');"
-                        (focus)="refreshZaposleni(filter!.MBR2, false,'2');"
-                        (keyup.enter)="selectZaposleni(offeredZaposleniKopija[ZaposleniKopijaDropdownIndex],'2');"
-                        (keyup.escape)="resetZaposleniIndex('2');">
-                    <div id="offeredZaposleniKopija-dropdown" class="select-dropdown-content max-height-300px"
-                        style="z-index: 500;">
-                        <div [id]="'offeredZaposleniKopija-dropdown-' + i"
-                            *ngFor="let zaposleni of offeredZaposleniKopija; index as i" matRipple
-                            class="dropdown-content-item display-flex align-items-center space-between"
-                            [class.gray-background]="i == ZaposleniKopijaDropdownIndex"
-                            (mousedown)="selectZaposleni(zaposleni,'2');">
-                            <span>
-                                <b>{{zaposleni.MBR}}</b> - {{ zaposleni.OSOBA }}
-                            </span>
-                        </div>
-                    </div>
-                </span>
-                <span *ngIf="filter.OSOBA2!=''" class="small-margin-left margin-right">{{ filter.OSOBA2 }}</span>
-            </td>
-            <td>
                 <label for="MBR">{{ 'Zaposleni' | translate }}:</label>
             </td>
             <td>
                 <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                    (click)="pickZaposleni('1');" (contextmenu)="removeZaposleni($event,'1')"
+                    (click)="pickZaposleni();" (contextmenu)="removeZaposleni($event)"
                     matTooltip="{{ (!filter.MBR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                     [class.color-valid]="filter!.PREZIME_IME">
                     {{ filter!.PREZIME_IME ? 'done' : 'import_contacts'}}
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (click)="refreshZaposleni(filter!.MBR, false,'1');">
+                <span (click)="refreshZaposleni(filter!.MBR, false);">
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni('1');resetZaposleniIndex('1');"
-                        (ngModelChange)="filterZaposleni(filter!.MBR,'1');"
-                        (focus)="refreshZaposleni(filter!.MBR, false,'1');"
-                        (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex],'1');"
-                        (keyup.escape)="resetZaposleniIndex('1');">
+                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
+                        (ngModelChange)="filterZaposleni(filter!.MBR);"
+                        (focus)="refreshZaposleni(filter!.MBR, false);"
+                        (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
+                        (keyup.escape)="resetZaposleniIndex();">
                     <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredZaposleni-dropdown-' + i"
                             *ngFor="let zaposleni of offeredZaposleni; index as i" matRipple
                             class="dropdown-content-item display-flex align-items-center space-between"
                             [class.gray-background]="i == ZaposleniDropdownIndex"
-                            (mousedown)="selectZaposleni(zaposleni,'1');">
+                            (mousedown)="selectZaposleni(zaposleni);">
                             <span>
                                 <b>{{zaposleni.MBR}}</b> - {{ zaposleni.OSOBA }}
                             </span>
@@ -199,6 +164,9 @@
             </td>
         </tr>
     </table>
+    <div style="display: flex;justify-content: flex-end;">
+        <button mat-flat-button color="primary" [disabled]="filter.MBR=='' || filter.SIF_VP=='' ||filter.SIF_OJ==''" (click)="openCopyDataDialog()"> <mat-icon>copy</mat-icon> {{'KopiranjePodataka'|translate}}</button>
+    </div>
 </div>
 
 <div class="tablediv">

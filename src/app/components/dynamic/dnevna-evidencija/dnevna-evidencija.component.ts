@@ -26,6 +26,7 @@ import { PickEvidencijaHelpOjComponent } from '../../pickers/pick-evidencija-hel
 import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencija-help-radnici/pick-evidencija-help-radnici.component';
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
 import { DetailsMjesecnaEvidencijaComponent } from '../mjesecna-evidencija/details-mjesecna-evidencija/details-mjesecna-evidencija.component';
+import { CopyDnevnaEvidencijaComponent } from './copy-dnevna-evidencija/copy-dnevna-evidencija.component';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -253,6 +254,19 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
 
+  public openCopyDataDialog(): void {
+    let data={
+      SIF_OJ: this.filter.SIF_OJ,
+      SIF_VP: this.filter.SIF_VP,
+      MBR: this.filter.MBR,
+      PREZIME_IME: this.filter.PREZIME_IME,
+    }
+    const dialogRef = this.dialog.open(CopyDnevnaEvidencijaComponent, {
+      data: data
+    });
+    dialogRef.afterClosed().subscribe((result) => { });
+  }
+
   public refresh(): void {
     this.loading = true;
     this.getEvidencijaMjesecna();
@@ -404,42 +418,32 @@ export class DnevnaEvidencijaComponent implements OnInit {
   //EvidencijaRadVreOj END
 
   //ZAPOSLENI START
-  public pickZaposleni(odabir: string): void {
+  public pickZaposleni(): void {
     const dialogRef = this.dialog.open(PickEvidencijaHelpRadniciComponent, {});
 
     dialogRef.afterClosed().subscribe((EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici) => {
-      this.setZaposleniFromDialog(EvRadnogVremenaHelpRadnici, odabir);
+      this.setZaposleniFromDialog(EvRadnogVremenaHelpRadnici);
     });
   }
 
-  public setZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici, odabir?: string): void {
+  public setZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
     if (EvRadnogVremenaHelpRadnici) {
-      if (odabir == '1') {
         this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
         this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
         this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
-      } else {
-        this.filter.MBR2 = EvRadnogVremenaHelpRadnici.MBR;
-        this.filter.PREZIME_IME2 = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-        this.filter.OSOBA2 = EvRadnogVremenaHelpRadnici.OSOBA;
-      }
+
     }
   }
 
-  public removeZaposleni(e: Event, odabir: string): void {
+  public removeZaposleni(e: Event ): void {
     e.preventDefault();
-    if (odabir == '1') {
       this.filter.MBR = "";
       this.filter.PREZIME_IME = "";
       this.filter.OSOBA = "";
-    } else {
-      this.filter.MBR2 = "";
-      this.filter.PREZIME_IME2 = "";
-      this.filter.OSOBA2 = "";
-    }
+
   }
 
-  public refreshZaposleni(searchParam: string, isSelected: boolean, odabir: string): void {
+  public refreshZaposleni(searchParam: string, isSelected: boolean, ): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -461,23 +465,16 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      if (odabir == '1') {
         this.offeredZaposleni = response.debugData.data;
         this.filteredZaposleni = response.debugData.data;
         if (!isSelected) {
           document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
         }
-      } else {
-        this.offeredZaposleniKopija = response.debugData.data;
-        this.filteredZaposleniKopija = response.debugData.data;
-        if (!isSelected) {
-          document.getElementById("offeredZaposleniKopija-dropdown")?.classList.add("select-dropdown-content-visible");
-        }
-      }
+
     });
   }
 
-  public OfferedZaposleni(odabir: string): void {
+  public OfferedZaposleni(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -485,7 +482,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: odabir == '1' ? this.filter.MBR : this.filter.MBR2,
+          pMbr: this.filter.MBR,
           limit: 100,
           page: 1,
           sort: [
@@ -499,7 +496,6 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
 
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      if (odabir == '1') {
         this.offeredZaposleni = response.debugData.data;
         for (let item of this.offeredZaposleni) {
           if (item.MBR.toUpperCase() == this.filter.MBR.toUpperCase()) {
@@ -508,74 +504,40 @@ export class DnevnaEvidencijaComponent implements OnInit {
             this.filter.MBR = item.MBR;
           }
         }
-      }
-      else {
-        this.offeredZaposleniKopija = response.debugData.data;
-        for (let item of this.offeredZaposleniKopija) {
-          if (item.MBR == this.filter.MBR2) {
-            this.filter.PREZIME_IME2 = item.PREZIME_IME;
-            this.filter.OSOBA2 = item.OSOBA;
-            this.filter.MBR2 = item.MBR;
-          }
-        }
-      }
+      
     });
   }
 
-  public filterZaposleni(text: string, odabir: string): void {
+  public filterZaposleni(text: string): void {
     if (!text) {
-      this.refreshZaposleni("", false, odabir);
+      this.refreshZaposleni("", false);
       return;
     }
 
-    if (odabir == '1') {
       this.offeredZaposleni = this.filteredZaposleni.filter(
         item => item?.MBR.toLowerCase().includes(text.toLowerCase())
       );
-    } else {
-      this.offeredZaposleniKopija = this.filteredZaposleniKopija.filter(
-        item => item?.PREZIME_IME.toLowerCase().includes(text.toLowerCase())
-      );
-    }
 
-    if (odabir == '1') {
+
       if (this.offeredZaposleni.length == 0) {
-        this.refreshZaposleni(text, false, odabir);
+        this.refreshZaposleni(text, false);
       }
-    } else {
-      if (this.offeredZaposleniKopija.length == 0) {
-        this.refreshZaposleni(text, false, odabir);
-      }
-    }
+
   }
 
-  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici, odabir: string): void {
-    if (odabir == '1') {
+  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici, ): void {
       this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
       this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
       this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
 
       document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
       this.ZaposleniDropdownIndex = -1;
-    } else {
 
-      this.filter.MBR2 = EvRadnogVremenaHelpRadnici.MBR;
-      this.filter.PREZIME_IME2 = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-      this.filter.OSOBA2 = EvRadnogVremenaHelpRadnici.OSOBA;
-
-      document.getElementById("offeredZaposleniKopija-dropdown")?.classList.remove("select-dropdown-content-visible");
-      this.ZaposleniKopijaDropdownIndex = -1;
-    }
   }
 
-  public resetZaposleniIndex(odabir: string): void {
-    if (odabir == '1') {
+  public resetZaposleniIndex(): void {
       this.ZaposleniDropdownIndex = -1;
       document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-    } else {
-      this.ZaposleniKopijaDropdownIndex = -1;
-      document.getElementById("offeredZaposleniKopija-dropdown")?.classList.remove("select-dropdown-content-visible");
-    }
   }
   //ZAPOSLENI END
 

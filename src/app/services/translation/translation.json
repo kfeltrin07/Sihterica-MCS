@@ -7701,6 +7701,30 @@
           "en": "Daily record",
           "hr": "Dnevna evidencija",
           "transferred": false
+        },
+        {
+          "ref": "Kopiranje",
+          "en": "Copying",
+          "hr": "Kopiranje",
+          "transferred": false
+        },
+        {
+          "ref": "Copy",
+          "en": "Copy",
+          "hr": "Kopiraj",
+          "transferred": false
+        },
+        {
+          "ref": "KopiranjeZa",
+          "en": "Copy for",
+          "hr": "Kopiranje za",
+          "transferred": false
+        },
+        {
+          "ref": "KopiranjePodataka",
+          "en": "Data copying",
+          "hr": "Kopiranje podataka",
+          "transferred": false
         }
     ]
 }

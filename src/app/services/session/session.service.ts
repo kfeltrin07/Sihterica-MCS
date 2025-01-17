@@ -174,7 +174,9 @@ export class SessionService {
         /*this.cookies.setCookie('logged-in-user-role-id', this.loggedInUser.roleID!.toString());
         this.cookies.setCookie('logged-in-user-password', this.loggedInUser.password!.toString());*/
         //this.router.navigate(['/dashboard']);
-        this.router.navigate(['/selection-screen']);
+        if (this.router.url == '/login') {
+          this.router.navigate(['/selection-screen']);
+        }
         this.getDynamicMenu();
       }
     });
