@@ -54,7 +54,7 @@ export class PomocneListeComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'NAZIV', 'SI', 'SIF_VP', 'NAZ_VP', 'SIF_MT', 'MJESEC', 'S1', 'S2', 'UKUPNO', 'VRSTA', 'UKUP', 'options'];
 
   public filter: any = {
-    MBR: "%",
+    MBR: "",
     PREZIME_IME: "",
     NAZ_ZAN: "",
     NAZ_RM: "",
@@ -158,7 +158,7 @@ export class PomocneListeComponent implements OnInit {
   public searchParam: string = '';
   public loading: boolean = false;
   public sorting: Sorting = {
-    active: 'NAZIV_MT',
+    active: 'MBR',
     direction: 'ASC'
   };
   public isPaginatorShown: boolean = true;

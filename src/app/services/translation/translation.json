@@ -7175,556 +7175,874 @@
             "transferred": false
         },
         {
-          "ref": "ColumnsShown",
-          "en": "Columns shown",
-          "hr": "Prikazani stupci",
-          "transferred": true
+            "ref": "ColumnsShown",
+            "en": "Columns shown",
+            "hr": "Prikazani stupci",
+            "transferred": true
         },
         {
-          "ref": "All",
-          "en": "All",
-          "hr": "Sve",
-          "transferred": true
+            "ref": "All",
+            "en": "All",
+            "hr": "Sve",
+            "transferred": true
         },
         {
-          "ref": "OnlyDisplayed",
-          "en": "Only displayed",
-          "hr": "Samo prikazani",
-          "transferred": true
+            "ref": "OnlyDisplayed",
+            "en": "Only displayed",
+            "hr": "Samo prikazani",
+            "transferred": true
         },
         {
-          "ref": "Ordinal",
-          "en": "#",
-          "hr": "R. br.",
-          "transferred": true
+            "ref": "Ordinal",
+            "en": "#",
+            "hr": "R. br.",
+            "transferred": true
         },
         {
-          "ref": "OvlasteneOsobeMjTrCreation",
-          "en": "Creating authorized persons by sale location",
-          "hr": "Ovlaštene osobe Mj. Tr. kreiranje",
-          "transferred": true
+            "ref": "OvlasteneOsobeMjTrCreation",
+            "en": "Creating authorized persons by sale location",
+            "hr": "Ovlaštene osobe Mj. Tr. kreiranje",
+            "transferred": true
         },
         {
-          "ref": "OD",
-          "en": "From",
-          "hr": "Od",
-          "transferred": true
+            "ref": "OD",
+            "en": "From",
+            "hr": "Od",
+            "transferred": true
         },
         {
-          "ref": "DO",
-          "en": "To",
-          "hr": "Do",
-          "transferred": true
+            "ref": "DO",
+            "en": "To",
+            "hr": "Do",
+            "transferred": true
         },
         {
-          "ref": "SATI",
-          "en": "Hours",
-          "hr": "Sati",
-          "transferred": true
+            "ref": "SATI",
+            "en": "Hours",
+            "hr": "Sati",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadVremZag",
-          "en": "Work time record header",
-          "hr": "Evidencija Radnog Vremena Zaglavlje",
-          "transferred": true
+            "ref": "EvidencijaRadVremZag",
+            "en": "Work time record header",
+            "hr": "Evidencija Radnog Vremena Zaglavlje",
+            "transferred": true
         },
         {
-          "ref": "KNAZIV",
-          "en": "Acronym",
-          "hr": "Kratica naziv",
-          "transferred": true
+            "ref": "KNAZIV",
+            "en": "Acronym",
+            "hr": "Kratica naziv",
+            "transferred": true
         },
         {
-          "ref": "SIF_STUPCA",
-          "en": "Row code",
-          "hr": "Šifra stupca",
-          "transferred": true
+            "ref": "SIF_STUPCA",
+            "en": "Row code",
+            "hr": "Šifra stupca",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadnogVremenaZaglavlje",
-          "en": "Work time recording header",
-          "hr": "Evidencija radnog vremena zaglavlje",
-          "transferred": true
+            "ref": "EvidencijaRadnogVremenaZaglavlje",
+            "en": "Work time recording header",
+            "hr": "Evidencija radnog vremena zaglavlje",
+            "transferred": true
         },
         {
-          "ref": "OpisVrste",
-          "en": "Type description",
-          "hr": "Opis vrste",
-          "transferred": true
+            "ref": "OpisVrste",
+            "en": "Type description",
+            "hr": "Opis vrste",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadVreZagCreation",
-          "en": "Work time recording header creation",
-          "hr": "Kreiranje evidencije radnog vremena zaglavlje",
-          "transferred": true
+            "ref": "EvidencijaRadVreZagCreation",
+            "en": "Work time recording header creation",
+            "hr": "Kreiranje evidencije radnog vremena zaglavlje",
+            "transferred": true
         },
         {
-          "ref": "VRSTA_IZRACUNA",
-          "en": "Calculation type",
-          "hr": "Vrsta izračuna",
-          "transferred": true
+            "ref": "VRSTA_IZRACUNA",
+            "en": "Calculation type",
+            "hr": "Vrsta izračuna",
+            "transferred": true
         },
         {
-          "ref": "RBROJ",
-          "en": "Ordinal number",
-          "hr": "Redni broj",
-          "transferred": true
+            "ref": "RBROJ",
+            "en": "Ordinal number",
+            "hr": "Redni broj",
+            "transferred": true
         },
         {
-          "ref": "Creating",
-          "en": "Creating",
-          "hr": "Kreiranje",
-          "transferred": true
+            "ref": "Creating",
+            "en": "Creating",
+            "hr": "Kreiranje",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadVreZagEditing",
-          "en": "Work time recording header editing",
-          "hr": "Uređivanje evidencije radnog vremena zaglavlje",
-          "transferred": true
+            "ref": "EvidencijaRadVreZagEditing",
+            "en": "Work time recording header editing",
+            "hr": "Uređivanje evidencije radnog vremena zaglavlje",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadVremZagVeze",
-          "en": "Work time record header",
-          "hr": "Evidencija Radnog Vremena Zaglavlja Veze",
-          "transferred": true
+            "ref": "EvidencijaRadVremZagVeze",
+            "en": "Work time record header",
+            "hr": "Evidencija Radnog Vremena Zaglavlja Veze",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadnogVremenaZaglavljeVeze",
-          "en": "Work time recording header connections",
-          "hr": "Evidencija radnog vremena zaglavlje veze",
-          "transferred": true
+            "ref": "EvidencijaRadnogVremenaZaglavljeVeze",
+            "en": "Work time recording header connections",
+            "hr": "Evidencija radnog vremena zaglavlje veze",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadnogVremenaRadnika",
-          "en": "Employee Working Time Rec.",
-          "hr": "Evidencija Radnog Vremena Radnika",
-          "transferred": true
+            "ref": "EvidencijaRadnogVremenaRadnika",
+            "en": "Employee Working Time Rec.",
+            "hr": "Evidencija Radnog Vremena Radnika",
+            "transferred": true
         },
         {
-          "ref": "SIFRANAZIV",
-          "en": "Code and name",
-          "hr": "Šifra i naziv",
-          "transferred": true
+            "ref": "SIFRANAZIV",
+            "en": "Code and name",
+            "hr": "Šifra i naziv",
+            "transferred": true
         },
         {
-          "ref": "SIF_MT",
-          "en": "Pl. of exp. code",
-          "hr": "Šifra Mj Tr",
-          "transferred": true
+            "ref": "SIF_MT",
+            "en": "Pl. of exp. code",
+            "hr": "Šifra Mj Tr",
+            "transferred": true
         },
         {
-          "ref": "NAZIV_MT",
-          "en": "Pl. of exp. name",
-          "hr": "Naziv Mj Tr",
-          "transferred": true
+            "ref": "NAZIV_MT",
+            "en": "Pl. of exp. name",
+            "hr": "Naziv Mj Tr",
+            "transferred": true
         },
         {
-          "ref": "REDAK",
-          "en": "Row",
-          "hr": "Redak",
-          "transferred": true
+            "ref": "REDAK",
+            "en": "Row",
+            "hr": "Redak",
+            "transferred": true
         },
         {
-          "ref": "VRSTA",
-          "en": "Type",
-          "hr": "Vrsta",
-          "transferred": true
+            "ref": "VRSTA",
+            "en": "Type",
+            "hr": "Vrsta",
+            "transferred": true
         },
         {
-          "ref": "POCETAK",
-          "en": "Start",
-          "hr": "Početak",
-          "transferred": true
+            "ref": "POCETAK",
+            "en": "Start",
+            "hr": "Početak",
+            "transferred": true
         },
         {
-          "ref": "ZAVRSETAK",
-          "en": "End",
-          "hr": "Završetak",
-          "transferred": true
+            "ref": "ZAVRSETAK",
+            "en": "End",
+            "hr": "Završetak",
+            "transferred": true
         },
         {
-          "ref": "ZaMjesec",
-          "en": "For month",
-          "hr": "Za mjesec",
-          "transferred": true
+            "ref": "ZaMjesec",
+            "en": "For month",
+            "hr": "Za mjesec",
+            "transferred": true
         },
         {
-          "ref": "Siječanj",
-          "en": "January",
-          "hr": "Siječanj",
-          "transferred": true
+            "ref": "Siječanj",
+            "en": "January",
+            "hr": "Siječanj",
+            "transferred": true
         },
         {
-          "ref": "Veljača",
-          "en": "February",
-          "hr": "Veljača",
-          "transferred": true
+            "ref": "Veljača",
+            "en": "February",
+            "hr": "Veljača",
+            "transferred": true
         },
         {
-          "ref": "Ožujak",
-          "en": "March",
-          "hr": "Ožujak",
-          "transferred": true
+            "ref": "Ožujak",
+            "en": "March",
+            "hr": "Ožujak",
+            "transferred": true
         },
         {
-          "ref": "Travanj",
-          "en": "April",
-          "hr": "Travanj",
-          "transferred": true
+            "ref": "Travanj",
+            "en": "April",
+            "hr": "Travanj",
+            "transferred": true
         },
         {
-          "ref": "Svibanj",
-          "en": "May",
-          "hr": "Svibanj",
-          "transferred": true
+            "ref": "Svibanj",
+            "en": "May",
+            "hr": "Svibanj",
+            "transferred": true
         },
         {
-          "ref": "Lipanj",
-          "en": "June",
-          "hr": "Lipanj",
-          "transferred": true
+            "ref": "Lipanj",
+            "en": "June",
+            "hr": "Lipanj",
+            "transferred": true
         },
         {
-          "ref": "Srpanj",
-          "en": "July",
-          "hr": "Srpanj",
-          "transferred": true
+            "ref": "Srpanj",
+            "en": "July",
+            "hr": "Srpanj",
+            "transferred": true
         },
         {
-          "ref": "Kolovoz",
-          "en": "August",
-          "hr": "Kolovoz",
-          "transferred": true
+            "ref": "Kolovoz",
+            "en": "August",
+            "hr": "Kolovoz",
+            "transferred": true
         },
         {
-          "ref": "Rujan",
-          "en": "September",
-          "hr": "Rujan",
-          "transferred": true
+            "ref": "Rujan",
+            "en": "September",
+            "hr": "Rujan",
+            "transferred": true
         },
         {
-          "ref": "Listopad",
-          "en": "October",
-          "hr": "Listopad",
-          "transferred": true
+            "ref": "Listopad",
+            "en": "October",
+            "hr": "Listopad",
+            "transferred": true
         },
         {
-          "ref": "Studeni",
-          "en": "November",
-          "hr": "Studeni",
-          "transferred": true
+            "ref": "Studeni",
+            "en": "November",
+            "hr": "Studeni",
+            "transferred": true
         },
         {
-          "ref": "Prosinac",
-          "en": "December",
-          "hr": "Prosinac",
-          "transferred": true
+            "ref": "Prosinac",
+            "en": "December",
+            "hr": "Prosinac",
+            "transferred": true
         },
         {
-          "ref": "FondSati",
-          "en": "Fond of hours",
-          "hr": "Fond sati",
-          "transferred": true
+            "ref": "FondSati",
+            "en": "Fond of hours",
+            "hr": "Fond sati",
+            "transferred": true
         },
         {
-          "ref": "EvidencijaRadnogVremena",
-          "en": "Work Time Record",
-          "hr": "Evidencija Radnog Vremena",
-          "transferred": true
+            "ref": "EvidencijaRadnogVremena",
+            "en": "Work Time Record",
+            "hr": "Evidencija Radnog Vremena",
+            "transferred": true
         },
         {
-          "ref": "NAZIV_OJ",
-          "en": "Organization unit",
-          "hr": "Organizacijska jedinica",
-          "transferred": false
+            "ref": "NAZIV_OJ",
+            "en": "Organization unit",
+            "hr": "Organizacijska jedinica",
+            "transferred": false
         },
         {
-          "ref": "KontrolaFondaSati",
-          "en": "Number of hours control",
-          "hr": "Kontrola fonda sati",
-          "transferred": false
+            "ref": "KontrolaFondaSati",
+            "en": "Number of hours control",
+            "hr": "Kontrola fonda sati",
+            "transferred": false
         },
         {
-          "ref": "ZaDan",
-          "en": "For day",
-          "hr": "Za dan",
-          "transferred": false
+            "ref": "ZaDan",
+            "en": "For day",
+            "hr": "Za dan",
+            "transferred": false
         },
         {
-          "ref": "Dnevni",
-          "en": "Daily",
-          "hr": "Dnevni",
-          "transferred": false
+            "ref": "Dnevni",
+            "en": "Daily",
+            "hr": "Dnevni",
+            "transferred": false
         },
         {
-          "ref": "Mjesecni",
-          "en": "Monthly",
-          "hr": "Mjesečni",
-          "transferred": false
+            "ref": "Mjesecni",
+            "en": "Monthly",
+            "hr": "Mjesečni",
+            "transferred": false
         },
         {
-          "ref": "ZadaniSati",
-          "en": "Default hours",
-          "hr": "Zadani sati",
-          "transferred": false
+            "ref": "ZadaniSati",
+            "en": "Default hours",
+            "hr": "Zadani sati",
+            "transferred": false
         },
         {
-          "ref": "PomocneListe",
-          "en": "Auxiliary lists",
-          "hr": "Pomoćne liste",
-          "transferred": false
+            "ref": "PomocneListe",
+            "en": "Auxiliary lists",
+            "hr": "Pomoćne liste",
+            "transferred": false
         },
         {
-          "ref": "GrupeCreation",
-          "en": "Creating groups",
-          "hr": "Kreiranje grupe",
-          "transferred": false
+            "ref": "GrupeCreation",
+            "en": "Creating groups",
+            "hr": "Kreiranje grupe",
+            "transferred": false
         },
         {
-          "ref": "Shema",
-          "en": "Scheme",
-          "hr": "Shema",
-          "transferred": false
+            "ref": "Shema",
+            "en": "Scheme",
+            "hr": "Shema",
+            "transferred": false
         },
         {
-          "ref": "Zaposlenik",
-          "en": "Employee",
-          "hr": "Zaposlenik",
-          "transferred": false
+            "ref": "Zaposlenik",
+            "en": "Employee",
+            "hr": "Zaposlenik",
+            "transferred": false
         },
         {
-          "ref": "Grupe",
-          "en": "Groups",
-          "hr": "Grupe",
-          "transferred": false
+            "ref": "Grupe",
+            "en": "Groups",
+            "hr": "Grupe",
+            "transferred": false
         },
         {
-          "ref": "SIF_SHEME",
-          "en": "Scheme code",
-          "hr": "Šifra sheme",
-          "transferred": false
+            "ref": "SIF_SHEME",
+            "en": "Scheme code",
+            "hr": "Šifra sheme",
+            "transferred": false
         },
         {
-          "ref": "NAZ_SHEME",
-          "en": "Scheme name",
-          "hr": "Naziv sheme",
-          "transferred": false
+            "ref": "NAZ_SHEME",
+            "en": "Scheme name",
+            "hr": "Naziv sheme",
+            "transferred": false
         },
         {
-          "ref": "ID_RADNIKA",
-          "en": "Employee ID",
-          "hr": "ID radnika",
-          "transferred": false
+            "ref": "ID_RADNIKA",
+            "en": "Employee ID",
+            "hr": "ID radnika",
+            "transferred": false
         },
         {
-          "ref": "NAZIV_RADNIKA",
-          "en": "Employee",
-          "hr": "Radnik",
-          "transferred": false
+            "ref": "NAZIV_RADNIKA",
+            "en": "Employee",
+            "hr": "Radnik",
+            "transferred": false
         },
         {
-          "ref": "ID_OPERATERA",
-          "en": "Operator ID",
-          "hr": "ID operatera",
-          "transferred": false
+            "ref": "ID_OPERATERA",
+            "en": "Operator ID",
+            "hr": "ID operatera",
+            "transferred": false
         },
         {
-          "ref": "SIF_VLAS",
-          "en": "Owner code",
-          "hr": "Šifra vlasnika",
-          "transferred": false
+            "ref": "SIF_VLAS",
+            "en": "Owner code",
+            "hr": "Šifra vlasnika",
+            "transferred": false
         },
         {
-          "ref": "PAUZA_OD",
-          "en": "Break from",
-          "hr": "Pauza od",
-          "transferred": false
+            "ref": "PAUZA_OD",
+            "en": "Break from",
+            "hr": "Pauza od",
+            "transferred": false
         },
         {
-          "ref": "PAUZA_DO",
-          "en": "Break to",
-          "hr": "Pauza do",
-          "transferred": false
+            "ref": "PAUZA_DO",
+            "en": "Break to",
+            "hr": "Pauza do",
+            "transferred": false
         },
         {
-          "ref": "PAUZAOD",
-          "en": "Break from",
-          "hr": "Pauza od",
-          "transferred": false
+            "ref": "PAUZAOD",
+            "en": "Break from",
+            "hr": "Pauza od",
+            "transferred": false
         },
         {
-          "ref": "PAUZADO",
-          "en": "Break to",
-          "hr": "Pauza do",
-          "transferred": false
+            "ref": "PAUZADO",
+            "en": "Break to",
+            "hr": "Pauza do",
+            "transferred": false
         },
         {
-          "ref": "ShemeCreation",
-          "en": "Creating schemes",
-          "hr": "Kreiranje sheme",
-          "transferred": false
+            "ref": "ShemeCreation",
+            "en": "Creating schemes",
+            "hr": "Kreiranje sheme",
+            "transferred": false
         },
         {
-          "ref": "ShemeEditing",
-          "en": "Editing schemes",
-          "hr": "Uređivanje sheme",
-          "transferred": false
+            "ref": "ShemeEditing",
+            "en": "Editing schemes",
+            "hr": "Uređivanje sheme",
+            "transferred": false
         },
         {
-          "ref": "Today",
-          "en": "Today",
-          "hr": "Danas",
-          "transferred": false
+            "ref": "Today",
+            "en": "Today",
+            "hr": "Danas",
+            "transferred": false
         },
         {
-          "ref": "Month",
-          "en": "Month",
-          "hr": "Mjesec",
-          "transferred": false
+            "ref": "Month",
+            "en": "Month",
+            "hr": "Mjesec",
+            "transferred": false
         },
         {
-          "ref": "Week",
-          "en": "Week",
-          "hr": "Tjedan",
-          "transferred": false
+            "ref": "Week",
+            "en": "Week",
+            "hr": "Tjedan",
+            "transferred": false
         },
         {
-          "ref": "Day",
-          "en": "Day",
-          "hr": "Dan",
-          "transferred": false
+            "ref": "Day",
+            "en": "Day",
+            "hr": "Dan",
+            "transferred": false
         },
         {
-          "ref": "GrupniUnos",
-          "en": "Group insert",
-          "hr": "Grupni unos",
-          "transferred": false
+            "ref": "GrupniUnos",
+            "en": "Group insert",
+            "hr": "Grupni unos",
+            "transferred": false
         },
         {
-          "ref": "ZaposlenizaGrupu",
-          "en": "Group workers",
-          "hr": "Radnici grupe ",
-          "transferred": false
+            "ref": "ZaposlenizaGrupu",
+            "en": "Group workers",
+            "hr": "Radnici grupe ",
+            "transferred": false
         },
         {
-          "ref": "organiz-jedinica",
-          "en": "Org. Unit",
-          "hr": "Org. Jed.",
-          "transferred": false
+            "ref": "organiz-jedinica",
+            "en": "Org. Unit",
+            "hr": "Org. Jed.",
+            "transferred": false
         },
         {
-          "ref": "ID_GRUPE",
-          "en": "Group ID",
-          "hr": "ID Grupe",
-          "transferred": false
+            "ref": "ID_GRUPE",
+            "en": "Group ID",
+            "hr": "ID Grupe",
+            "transferred": false
         },
         {
-          "ref": "NAZ_GRUPE",
-          "en": "Group name",
-          "hr": "Naziv grupe",
-          "transferred": false
+            "ref": "NAZ_GRUPE",
+            "en": "Group name",
+            "hr": "Naziv grupe",
+            "transferred": false
         },
         {
-          "ref": "DohvatPodataka",
-          "en": "Data retrieval",
-          "hr": "Dohvat podataka",
-          "transferred": false
+            "ref": "DohvatPodataka",
+            "en": "Data retrieval",
+            "hr": "Dohvat podataka",
+            "transferred": false
         },
         {
-          "ref": "Unos",
-          "en": "Insert",
-          "hr": "Unos",
-          "transferred": false
+            "ref": "Unos",
+            "en": "Insert",
+            "hr": "Unos",
+            "transferred": false
         },
         {
-          "ref": "VrstaPosla",
-          "en": "Job type",
-          "hr": "Vrsta posla",
-          "transferred": false
+            "ref": "VrstaPosla",
+            "en": "Job type",
+            "hr": "Vrsta posla",
+            "transferred": false
         },
         {
-          "ref": "OcistiKalendar",
-          "en": "Clear calendar",
-          "hr": "Očisti kalendar",
-          "transferred": false
+            "ref": "OcistiKalendar",
+            "en": "Clear calendar",
+            "hr": "Očisti kalendar",
+            "transferred": false
         },
         {
-          "ref": "D1",
-          "en": "Date",
-          "hr": "Datum",
-          "transferred": false
+            "ref": "D1",
+            "en": "Date",
+            "hr": "Datum",
+            "transferred": false
         },
         {
-          "ref": "DAN",
-          "en": "Day",
-          "hr": "Dan",
-          "transferred": false
+            "ref": "DAN",
+            "en": "Day",
+            "hr": "Dan",
+            "transferred": false
         },
         {
-          "ref": "SIF_MT_N",
-          "en": "Place of expense",
-          "hr": "Mjesto Troška",
-          "transferred": false
+            "ref": "SIF_MT_N",
+            "en": "Place of expense",
+            "hr": "Mjesto Troška",
+            "transferred": false
         },
         {
-          "ref": "ODHH",
-          "en": "From (hh)",
-          "hr": "Od (hh)",
-          "transferred": false
+            "ref": "ODHH",
+            "en": "From (hh)",
+            "hr": "Od (hh)",
+            "transferred": false
         },
         {
-          "ref": "DOHH",
-          "en": "To (hh)",
-          "hr": "Do (hh)",
-          "transferred": false
+            "ref": "DOHH",
+            "en": "To (hh)",
+            "hr": "Do (hh)",
+            "transferred": false
         },
         {
-          "ref": "IDK_N",
-          "en": "Wrote",
-          "hr": "Upisao",
-          "transferred": false
+            "ref": "IDK_N",
+            "en": "Wrote",
+            "hr": "Upisao",
+            "transferred": false
         },
         {
-          "ref": "MjesecnaEvidencija",
-          "en": "Monthly record",
-          "hr": "Mjesečna evidencija",
-          "transferred": false
+            "ref": "MjesecnaEvidencija",
+            "en": "Monthly record",
+            "hr": "Mjesečna evidencija",
+            "transferred": false
         },
         {
-          "ref": "KopirajPodatkeOd",
-          "en": "Copy data from",
-          "hr": "Kopiraj podatke od",
-          "transferred": false
+            "ref": "KopirajPodatkeOd",
+            "en": "Copy data from",
+            "hr": "Kopiraj podatke od",
+            "transferred": false
         },
         {
-          "ref": "DnevnaEvidencija",
-          "en": "Daily record",
-          "hr": "Dnevna evidencija",
-          "transferred": false
+            "ref": "DnevnaEvidencija",
+            "en": "Daily record",
+            "hr": "Dnevna evidencija",
+            "transferred": false
         },
         {
-          "ref": "Kopiranje",
-          "en": "Copying",
-          "hr": "Kopiranje",
-          "transferred": false
+            "ref": "Kopiranje",
+            "en": "Copying",
+            "hr": "Kopiranje",
+            "transferred": false
         },
         {
-          "ref": "Copy",
-          "en": "Copy",
-          "hr": "Kopiraj",
-          "transferred": false
+            "ref": "Copy",
+            "en": "Copy",
+            "hr": "Kopiraj",
+            "transferred": false
         },
         {
-          "ref": "KopiranjeZa",
-          "en": "Copy for",
-          "hr": "Kopiranje za",
-          "transferred": false
+            "ref": "KopiranjeZa",
+            "en": "Copy for",
+            "hr": "Kopiranje za",
+            "transferred": false
         },
         {
-          "ref": "KopiranjePodataka",
-          "en": "Data copying",
-          "hr": "Kopiranje podataka",
-          "transferred": false
+            "ref": "KopiranjePodataka",
+            "en": "Data copying",
+            "hr": "Kopiranje podataka",
+            "transferred": false
+        },
+        {
+            "ref": "SYSD",
+            "en": "System datetime",
+            "hr": "Sistemsko vrijeme",
+            "transferred": false
+        },
+        {
+            "ref": "IDK",
+            "en": "User ID",
+            "hr": "ID korisnika",
+            "transferred": false
+        },
+        {
+            "ref": "IND1",
+            "en": "Indikator 1",
+            "hr": "Indikator 1",
+            "transferred": false
+        },
+        {
+            "ref": "Generate",
+            "en": "Generate",
+            "hr": "Generiraj",
+            "transferred": false
+        },
+        {
+            "ref": "KreirajExcel",
+            "en": "Create Excel",
+            "hr": "Kreiraj Excel",
+            "transferred": false
+        },
+        {
+            "ref": "ExcelOptions",
+            "en": "Excel options",
+            "hr": "Excel opcije",
+            "transferred": false
+        },
+        {
+            "ref": "KreirajPDF",
+            "en": "Create PDF",
+            "hr": "Kreiraj PDF",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_1",
+            "en": "Hours 1",
+            "hr": "Sati 1",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_2",
+            "en": "Hours 2",
+            "hr": "Sati 2",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_3",
+            "en": "Hours 3",
+            "hr": "Sati 3",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_4",
+            "en": "Hours 4",
+            "hr": "Sati 4",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_5",
+            "en": "Hours 5",
+            "hr": "Sati 5",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_6",
+            "en": "Hours 6",
+            "hr": "Sati 6",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_7",
+            "en": "Hours 7",
+            "hr": "Sati 7",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_8",
+            "en": "Hours 8",
+            "hr": "Sati 8",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_9",
+            "en": "Hours 9",
+            "hr": "Sati 9",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_10",
+            "en": "Hours 10",
+            "hr": "Sati 10",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_11",
+            "en": "Hours 11",
+            "hr": "Sati 11",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_12",
+            "en": "Hours 12",
+            "hr": "Sati 12",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_13",
+            "en": "Hours 13",
+            "hr": "Sati 13",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_14",
+            "en": "Hours 14",
+            "hr": "Sati 14",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_15",
+            "en": "Hours 15",
+            "hr": "Sati 15",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_16",
+            "en": "Hours 16",
+            "hr": "Sati 16",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_17",
+            "en": "Hours 17",
+            "hr": "Sati 17",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_18",
+            "en": "Hours 18",
+            "hr": "Sati 18",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_19",
+            "en": "Hours 19",
+            "hr": "Sati 19",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_20",
+            "en": "Hours 20",
+            "hr": "Sati 20",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_21",
+            "en": "Hours 21",
+            "hr": "Sati 21",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_22",
+            "en": "Hours 22",
+            "hr": "Sati 22",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_23",
+            "en": "Hours 23",
+            "hr": "Sati 23",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_24",
+            "en": "Hours 24",
+            "hr": "Sati 24",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_25",
+            "en": "Hours 25",
+            "hr": "Sati 25",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_26",
+            "en": "Hours 26",
+            "hr": "Sati 26",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_27",
+            "en": "Hours 27",
+            "hr": "Sati 27",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_28",
+            "en": "Hours 28",
+            "hr": "Sati 28",
+            "transferred": false
+        },
+        {
+            "ref": "SATI_29",
+            "en": "Hours 29",
+            "hr": "Sati 29",
+            "transferred": false
+        },
+        {
+            "ref": "MJESEC",
+            "en": "Month",
+            "hr": "Mjesec",
+            "transferred": false
+        },
+        {
+            "ref": "UKUPNO",
+            "en": "Total",
+            "hr": "Ukupno",
+            "transferred": false
+        },
+        {
+            "ref": "OSOBA",
+            "en": "Person",
+            "hr": "Osoba",
+            "transferred": false
+        },
+        {
+            "ref": "USERNAME",
+            "en": "Username",
+            "hr": "Korisničko Ime",
+            "transferred": false
+        },
+        {
+            "ref": "NAPOMENA",
+            "en": "Note",
+            "hr": "Napomena",
+            "transferred": false
+        },
+        {
+            "ref": "ULOGA",
+            "en": "Role",
+            "hr": "Uloga",
+            "transferred": false
+        },
+        {
+            "ref": "IDULOGE",
+            "en": "Role ID",
+            "hr": "ID uloge",
+            "transferred": false
+        },
+        {
+            "ref": "PASSWORD",
+            "en": "Password",
+            "hr": "Lozinka",
+            "transferred": false
+        },
+        {
+            "ref": "VRSTA_SLOGA",
+            "en": "Type of record",
+            "hr": "Vrsta sloga",
+            "transferred": false
+        },
+        {
+            "ref": "OPISVRSTE",
+            "en": "Description of type",
+            "hr": "Opis vrste",
+            "transferred": false
+        },
+        {
+            "ref": "RID",
+            "en": "ID",
+            "hr": "ID",
+            "transferred": false
+        },
+        {
+            "ref": "EvidencijaRadVreZagVezeCreating",
+            "en": "Creating work time record header connections",
+            "hr": "Kreiranje evidencije radnog vremena zaglavlje veze",
+            "transferred": false
+        },
+        {
+            "ref": "FaktorMnozenja",
+            "en": "Multiplication factor",
+            "hr": "Faktor množenja",
+            "transferred": false
+        },
+        {
+            "ref": "EvidencijaRadVreZagVezeEditing",
+            "en": "Editing work time record header connections",
+            "hr": "Uređivanje evidencije radnog vremena zaglavlje veze",
+            "transferred": false
+        },
+        {
+            "ref": "GrupeEditing",
+            "en": "Editing groups",
+            "hr": "Uređivanje grupe",
+            "transferred": false
+        },
+        {
+            "ref": "UKUP",
+            "en": "Tota",
+            "hr": "Ukup",
+            "transferred": false
+        },
+        {
+            "ref": "SIF_VP_N",
+            "en": "Job type",
+            "hr": "Vrsta posla",
+            "transferred": false
         }
     ]
 }
