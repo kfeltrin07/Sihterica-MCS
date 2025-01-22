@@ -66,8 +66,6 @@ export class KontrolaFondaSatiComponent implements OnInit {
     DATUM: "",
   }
 
-
-
   public fondSati: FondSati[] = [];
   public FondSati: FondSati = {
     UKUPANBROJSLOGOVA: 0,
@@ -83,6 +81,7 @@ export class KontrolaFondaSatiComponent implements OnInit {
 
   public FondSatiHelpOJDropdownIndex: number = -1;
   public offeredFondSatiHelpOJ: FondSatiHelpOJ[] = [];
+  public filteredFondSatiHelpOJ: FondSatiHelpOJ[] = [];
   public selectedFondSatiHelpOJ: FondSatiHelpOJ = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -107,7 +106,7 @@ export class KontrolaFondaSatiComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog
   ) { }
@@ -277,6 +276,7 @@ export class KontrolaFondaSatiComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredFondSatiHelpOJ = response.debugData.data;
+      this.filteredFondSatiHelpOJ = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredFondSatiHelpOJ-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -304,15 +304,31 @@ export class KontrolaFondaSatiComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredFondSatiHelpOJ = response.debugData.data;
-      for (let item of this.offeredFondSatiHelpOJ) {
-        if (item.SIF_OJ == this.filter.SIF_OJ) {
-          this.filter.NAZ_OJ = item.NAZ_OJ;
-          this.filter.VRSTA = item.VRSTA;
-        }
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredFondSatiHelpOJ = data;
+
+      const matchedItem = this.offeredFondSatiHelpOJ.find(item => item.SIF_OJ.toUpperCase() === this.filter.SIF_OJ.toUpperCase());
+      if (matchedItem) {
+        this.filter.SIF_OJ = matchedItem.SIF_OJ;
+        this.filter.NAZ_OJ = matchedItem.NAZ_OJ;
       }
     });
+  }
+
+  public filterFondSatiHelpOJ(text: string): void {
+    if (!text) {
+      this.refreshFondSatiHelpOJ("", false);
+      return;
+    }
+
+    this.offeredFondSatiHelpOJ = this.filteredFondSatiHelpOJ.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredFondSatiHelpOJ.length == 0) {
+      this.refreshFondSatiHelpOJ(text, false);
+    }
   }
 
   public selectFondSatiHelpOJ(FondSatiHelpOJ: FondSatiHelpOJ): void {
