@@ -193,8 +193,12 @@ export class KontrolaFondaSatiComponent implements OnInit {
   }
 
   public openPDFDialog(item: any): void {
+    let data = {
+      searchParam:item,
+      filter: this.filter
+    };
     const dialogRef = this.dialog.open(PdfKontrolaFondaSatiComponent, {
-      data: item
+      data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
     });
