@@ -23,6 +23,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 import { PickZaposleniComponent } from '../../pickers/pick-zaposleni/pick-zaposleni.component';
 import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencija-help-radnici/pick-evidencija-help-radnici.component';
+import { PdfEvidencijaRadnogVremenaRadnikaComponent } from './pdf-evidencija-radnog-vremena-radnika/pdf-evidencija-radnog-vremena-radnika.component';
 
 @Component({
   selector: 'app-evidencija-radnog-vremena-radnika',
@@ -49,7 +50,7 @@ import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencij
   styleUrl: './evidencija-radnog-vremena-radnika.component.scss'
 })
 export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
-  public displayedColumns: string[] = ['REDAK','SIFRANAZIV', 'SIF_MT', 'NAZIV_MT', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
+  public displayedColumns: string[] = ['REDAK', 'SIFRANAZIV', 'SIF_MT', 'NAZIV_MT', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];
 
   public filter: any = {
     MBR: "",
@@ -273,15 +274,29 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-  /*
+
+
   public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
+    let data = {
+      searchParam:item,
+      MBR: this.filter.MBR,
+      FONDSATI: this.filter.FONDSATI,
+    }
+    const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaRadnikaComponent, {
+      data: data
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  /*
+  public openEXCELDialog(item: any): void {
+    const dialogRef = this.dialog.open(ExcelEvidencijaRadnogVremenaZaglavljeComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
     });
   }*/
-
 
   //ZAPOSLENI START
   public pickZaposleni(): void {

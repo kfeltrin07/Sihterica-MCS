@@ -124,7 +124,7 @@ export class PdfShemeComponent {
 
   }
 
-  public getData(selectedSearchOption: string): void {
+  public getData(): void {
 
     this.http.postWithParams(
       this.globalVar.APIHost + this.globalVar.APIFile,
@@ -133,7 +133,7 @@ export class PdfShemeComponent {
         method: 'getSheme',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: '%' + this.dialogData.searchParam + '%',
+          pDioNaziva: '%' + this.dialogData + '%',
           limit: 1000,
           sort: [
             {

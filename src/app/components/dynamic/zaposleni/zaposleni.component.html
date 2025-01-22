@@ -32,7 +32,6 @@
   </button>
 
 </mat-toolbar>
-
 <div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
   <table class="filteri-table">
     <tr>
@@ -41,7 +40,7 @@
       </td>
       <td>
         <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
-          (click)="openEXCELDialog(searchParam);">
+          (click)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});">
           <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
             matTooltip="{{ 'EXCEL' | translate }}">
             <img src="assets/icons/png/excel.png" alt="" height="20">
@@ -57,7 +56,6 @@
     </tr>
   </table>
 </div>
-
 <div class="tablediv">
   <table matSort (matSortChange)="sort($event);" mat-table [dataSource]="dataSource">
 

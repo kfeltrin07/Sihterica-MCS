@@ -22,6 +22,7 @@ import { GlobalFunctionsService } from 'src/app/services/global-functions/global
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
+import { PdfEvidencijaRadnogVremenaComponent } from './pdf-evidencija-radnog-vremena/pdf-evidencija-radnog-vremena.component';
 
 @Component({
   selector: 'app-evidencija-radnog-vremena',
@@ -208,34 +209,18 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
     }
   }
 
-  /*
-  public openCreateDialog(): void {
-
-    const dialogRef = this.dialog.open(CreateEvidencijaRadnogVremenaZaglavljeComponent, {
+  public openPDFDialog(item: any): void {
+    let data = {
+      FONDSATI: this.filter.FONDSATI,
+    }
+    const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaComponent, {
+      data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
     });
   }
 
-  public openEditDialog(item: any): void {
-    const dialogRef = this.dialog.open(EditEvidencijaRadnogVremenaZaglavljeComponent, {
-      data: item
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
-    });
-  }
 
-  public openDeleteDialog(item: any): void {
-    const dialogRef = this.dialog.open(DeleteEvidencijaRadnogVremenaZaglavljeComponent, {
-      data: item
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
-    });
-  }
-*/
   public openDetailsDialog(item: any): void {
     const dialogRef = this.dialog.open(DetailsEvidencijaRadnogVremenaComponent, {
       data: item,

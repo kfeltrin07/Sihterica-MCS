@@ -9,6 +9,17 @@
   <mat-dialog-content>
     <p>{{ 'KreirajPDF' | translate }}</p>
 
+    <table>
+        <tr>
+            <td>
+                <label for="">{{'DATUM'|translate}}</label>
+            </td>
+            <td>
+                <input type="date" id="datum" name="datum" [(ngModel)]="datum">
+            </td>
+        </tr>
+    </table>
+
   </mat-dialog-content>
 
 
@@ -16,7 +27,7 @@
 
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="generatePDF();">{{
+    <button mat-raised-button color="primary" mat-dialog-close [disabled]="!datum" (click)="generatePDF();">{{
       'Yes' | translate }}</button>
   </mat-dialog-actions>
 

@@ -47,7 +47,7 @@
             </td>
             <td>
                 <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
-                    (click)="openEXCELDialog(searchParam);">
+                    (click)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});">
                     <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
                         matTooltip="{{ 'EXCEL' | translate }}">
                         <img src="assets/icons/png/excel.png" alt="" height="20">

@@ -6,20 +6,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import moment from 'moment';
-import { Operateri } from 'src/app/models/models.service';
+import { EvidencijaRadVreRad } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
-import { HttpService } from 'src/app/services/http/http.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { TranslationService } from 'src/app/services/translation/translation.service';
-import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-pdf-pregled-operatera',
+  selector: 'app-pdf-evidencija-radnog-vremena-radnika',
   standalone: true,
   imports: [
     MatDialogModule,
@@ -31,30 +25,35 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
     FormsModule,
     TranslationPipe
   ],
-  templateUrl: './pdf-pregled-operatera.component.html',
-  styleUrl: './pdf-pregled-operatera.component.scss'
+  templateUrl: './pdf-evidencija-radnog-vremena-radnika.component.html',
+  styleUrl: './pdf-evidencija-radnog-vremena-radnika.component.scss'
 })
-export class PdfPregledOperateraComponent {
-  public operateri!: Operateri[];
+export class PdfEvidencijaRadnogVremenaRadnikaComponent {
+  public zaposleni!: EvidencijaRadVreRad[];
 
   public allColumns: boolean = true;
-  public robotoFont: string = RobotoFont.robotoFont;
+
+  public datum: any = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
+    public globalFn: GlobalFunctionsService,
     private session: SessionService,
   ) {}
 
   public generatePDF(): void {
 
     this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIReport +  '/hOsobe.php',
+      this.globalVar.APIHost + this.globalVar.APIReport +  '/hEvRadVrSviRad.php',
       {
         pSID: this.session.loggedInUser.sessionID,
         pSifVlas: this.session.loggedInUser.ownerID,
-        pDioNaziva: this.dialogData,
+        pIdKorisnika: this.session.loggedInUser.ID,
+        pMbr: this.dialogData.MBR,
+        pFondSati: this.dialogData.FondSati,
+        pDatum: this.globalFn.formatDate(this.datum),
       },
       {
         headers: new HttpHeaders({

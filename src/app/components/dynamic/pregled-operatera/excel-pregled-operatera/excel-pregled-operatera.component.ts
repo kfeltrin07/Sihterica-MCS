@@ -104,7 +104,7 @@ export class ExcelPregledOperateraComponent {
     XLSX.writeFile(wb, fileName);
   }
 
-  public getData(selectedSearchOption: string): void {
+  public getData(): void {
 
     this.http.postWithParams(
       this.globalVar.APIHost + this.globalVar.APIFile,
