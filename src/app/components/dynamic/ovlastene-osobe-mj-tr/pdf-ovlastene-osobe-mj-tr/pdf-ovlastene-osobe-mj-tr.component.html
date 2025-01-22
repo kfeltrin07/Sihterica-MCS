@@ -1,24 +1,23 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
   class="dialog-header">
-  {{ 'KreirajPDF' | translate }}?
+  {{ 'PDF' | translate }}?
 
   <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
 
 </div>
-<mat-dialog-content>
-  <p>{{ 'ColumnsShown' | translate }}:</p>
+<div>
+  <mat-dialog-content>
+    <p>{{ 'KreirajPDF' | translate }}</p>
 
-  <mat-radio-group [(ngModel)]="allColumns">
-    <mat-radio-button [value]="true">{{ 'All' | translate }}</mat-radio-button>
-    <mat-radio-button [value]="false">{{ 'OnlyDisplayed' | translate }}</mat-radio-button>
-  </mat-radio-group>
-</mat-dialog-content>
+  </mat-dialog-content>
 
 
 
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
-  <button mat-raised-button color="primary" mat-dialog-close (click)="getData();">{{
-    'Yes' | translate }}</button>
-</mat-dialog-actions>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="generatePDF();">{{
+      'Yes' | translate }}</button>
+  </mat-dialog-actions>
+
+</div>
