@@ -39,6 +39,7 @@ const routes: Routes = [
   { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard()] },
   { path: 'mjesecna-evidencija', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
   { path: 'dnevna-evidencija', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
+  { path: 'dnevna-evidencija/:data', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },
   { path: 'login', component: LoginComponent, canActivate: [noLoginGuard()] },

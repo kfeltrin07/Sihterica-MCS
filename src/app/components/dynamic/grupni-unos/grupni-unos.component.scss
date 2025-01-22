@@ -5,12 +5,11 @@
 .unos-form {
     background-color: var(--color-white);
     width: 306px;
-    height: 700px;
+    height: 760px;
     margin-left: 16px;
     margin-top: 20px;
     border-radius: 15px;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     align-content: space-around;
     justify-content: space-between;
@@ -138,4 +137,18 @@ input {
 
 .select-dropdown-content-visible {
     display: block;
+}
+
+
+.test-cell-css{
+    .cell-totals{
+        .cell-button{
+            scale: 1;
+        }
+    }
+
+}
+
+.cal-day-number:hover{
+    opacity: 0.8;
 }

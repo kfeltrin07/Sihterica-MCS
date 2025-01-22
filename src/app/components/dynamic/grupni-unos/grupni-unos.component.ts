@@ -38,7 +38,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
 import { PickPopisRadnikaGrupeComponent } from '../../pickers/pick-popis-radnika-grupe/pick-popis-radnika-grupe.component';
 import { PickOrgJediniceComponent } from '../../pickers/pick-org-jedinice/pick-org-jedinice.component';
-import {CustomDateFormatter} from './custom-date-formatter.provider';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
+import { DnevnaEvidencijaComponent } from '../dnevna-evidencija/dnevna-evidencija.component';
 
 
 
@@ -54,6 +57,7 @@ import {CustomDateFormatter} from './custom-date-formatter.provider';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatAutocompleteModule,
 
     FormsModule,
     CommonModule,
@@ -66,11 +70,11 @@ import {CustomDateFormatter} from './custom-date-formatter.provider';
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
     },
-/*
-    {
-      provide: CalendarEventTitleFormatter,
-      useClass: CustomEventTitleFormatter
-    }*/
+    /*
+        {
+          provide: CalendarEventTitleFormatter,
+          useClass: CustomEventTitleFormatter
+        }*/
   ],
 })
 export class GrupniUnosComponent implements OnInit {
@@ -176,7 +180,7 @@ export class GrupniUnosComponent implements OnInit {
     ID_GRUPE: "",
     ID_RADNIKA: "",
     NAZ_OJ: "",
-    SIFMJTR:""
+    SIFMJTR: ""
   }
 
 
@@ -233,6 +237,7 @@ export class GrupniUnosComponent implements OnInit {
     public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog,
+    public router: Router,
   ) { }
 
 
@@ -256,7 +261,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public clearCalendar(): void {
-    this.events=[];
+    this.events = [];
     this.getHolidays();
   }
 
@@ -337,7 +342,7 @@ export class GrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%%',
-          pSifSheme:'',
+          pSifSheme: '',
           limit: 100000,
           page: 1,
           sort: [
@@ -449,14 +454,14 @@ export class GrupniUnosComponent implements OnInit {
           }
         ).subscribe((response: any) => {
           console.log(response);
-          
+
           let shema = response.debugData.data[0];
 
           let date: Date = new Date();
 
           let dateOd: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.OD.substring(0, 2), +shema.OD.substring(3, 4));
           let dateDo: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.DO.substring(0, 2), +shema.DO.substring(3, 4));
-  
+
           if (index == colors.length) {
             colorindex = 0
           };
@@ -482,7 +487,7 @@ export class GrupniUnosComponent implements OnInit {
               NOVASHEMA: true,
               type: 'grupa',
               incrementsBadgeTotal: true,
-  
+
             },
             resizable: {
               beforeStart: true,
@@ -492,11 +497,11 @@ export class GrupniUnosComponent implements OnInit {
           index++;
           colorindex++;
         });
-        };
+      };
     });
   }
 
-  public  eventClicked(event: any): void {
+  public eventClicked(event: any): void {
     console.log('event clicked');
     if (event.meta?.type != 'holiday') {
       const dialogRef = this.dialog.open(EventGrupniUnosComponent, {
@@ -1040,7 +1045,7 @@ export class GrupniUnosComponent implements OnInit {
   }
   //Organizacijska jedinica  END
 
-  public getZaposleniGrupe(): void {
+  public getZaposleniGrupe(event: any): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1050,7 +1055,7 @@ export class GrupniUnosComponent implements OnInit {
         data: {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
-          pIdGrupe: this.varNames.ID_GRUPE,
+          pIdGrupe: event.meta.ID_GRUPE,
           limit: 1000000,
           page: 1,
           sort: [
@@ -1064,19 +1069,20 @@ export class GrupniUnosComponent implements OnInit {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.zaposleniPoGrupiIShemi = response.debugData.data;
-      for (let event of this.events) {
-        if (event.meta?.type != 'holiday') {
-          console.log(event);
-          for (let zaposleni of this.zaposleniPoGrupiIShemi) {
-            this.upisSihterice(event, zaposleni);
-          }
-        }
+      for (let zaposleni of this.zaposleniPoGrupiIShemi) {
+        this.upisSihterice(event, zaposleni);
       }
+
+
     });
   }
 
   public async save() {
-    await this.getZaposleniGrupe();
+    for (let event of this.events) {
+      if (event.meta?.type != 'holiday') {
+        await this.getZaposleniGrupe(event);
+      }
+    }
   }
 
   public upisSihterice(event: any, zaposleni: ZaposleniPoGrupiIShemi): void {
@@ -1151,8 +1157,8 @@ export class GrupniUnosComponent implements OnInit {
         if (satnica.OD != null || satnica.DO != null) {
           console.log("Upisivanje satnice");
 
-          let dateOd: Date = new Date(+satnica.DATUM.slice(6, 10), +satnica.DATUM.slice(3, 5)-1, +satnica.DATUM.slice(0, 2), +satnica.OD.substring(0, 2), +satnica.OD.substring(3, 4));
-          let dateDo: Date = new Date(+satnica.DATUM.slice(6, 10), +satnica.DATUM.slice(3, 5)-1, +satnica.DATUM.slice(0, 2), +satnica.DO.substring(0, 2), +satnica.DO.substring(3, 4));
+          let dateOd: Date = new Date(+satnica.DATUM.slice(6, 10), +satnica.DATUM.slice(3, 5) - 1, +satnica.DATUM.slice(0, 2), +satnica.OD.substring(0, 2), +satnica.OD.substring(3, 4));
+          let dateDo: Date = new Date(+satnica.DATUM.slice(6, 10), +satnica.DATUM.slice(3, 5) - 1, +satnica.DATUM.slice(0, 2), +satnica.DO.substring(0, 2), +satnica.DO.substring(3, 4));
 
           if (index == colors.length) {
             colorindex = 0
@@ -1177,23 +1183,29 @@ export class GrupniUnosComponent implements OnInit {
               SIF_MT_N: satnica?.SIF_MT_N,
               NAZIV: satnica?.NAZIV,
               incrementsBadgeTotal: true,
-              SIF_VP_N: satnica?.SIF_VP_N,  
+              SIF_VP_N: satnica?.SIF_VP_N,
             },
             resizable: {
               beforeStart: true,
               afterEnd: true,
             },
-            
+
           }
-        ];
+          ];
           index++;
           colorindex++;
 
         }
       }
     });
-    
+
   }
 
-}
+  public goToDnevnaEvidencija(event:any):void{
+    let data= { ID_RADNIKA: this.varNames.ID_RADNIKA, SIFMJTR: this.varNames.SIFMJTR, SIF_VP: this.varNames.SIF_VP,DATUM:event.date.toLocaleString() } ;
+  
+    this.router.navigate(["dnevna-evidencija", data]);
 
+
+  }
+}

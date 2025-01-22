@@ -6,24 +6,25 @@
         <div [ngSwitch]="view">
             <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
-                (beforeViewRender)="beforeMonthViewRender($event)" (dayClicked)="changeDay($event.day.date)"
-                (eventTimesChanged)="eventDropped($event)">
+                (beforeViewRender)="beforeMonthViewRender($event)" (eventTimesChanged)="eventDropped($event)"
+                [cellTemplate]="customCellTemplate">
             </mwl-calendar-month-view>
             <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
-                [hourSegments]="1" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
+                [hourSegments]="2" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
-                 [eventTemplate]="customEventTemplate">
+                [eventTemplate]="customEventTemplate">
             </mwl-calendar-week-view>
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
-                [hourSegments]="1" [snapDraggedEvents]="false" [refresh]="refresh" [eventTemplate]="customEventTemplate"
-                (eventTimesChanged)="eventDropped($event)" >
+                [hourSegments]="2" [snapDraggedEvents]="false" [refresh]="refresh" [eventTemplate]="customEventTemplate"
+                (eventTimesChanged)="eventDropped($event)">
             </mwl-calendar-day-view>
         </div>
     </div>
     <div class="unos-form">
         <div class="grupni-unos-sheme">
-            <div class="sheme-card" mwlDroppable (drop)="externalDropSheme($event.dropData.event)" dragOverClass="drag-over">
+            <div class="sheme-card" mwlDroppable (drop)="externalDropSheme($event.dropData.event)"
+                dragOverClass="drag-over">
                 <div class="card-body">
                     <label style="font-size: 14px;" for="">{{'Sheme'|translate}}</label>
                     <p *ngIf="externalShemeEvents.length === 0"><em>No events added</em></p>
@@ -38,7 +39,8 @@
                     </div>
                 </div>
             </div>
-            <div class="grupe-card" mwlDroppable (drop)="externalDropGrupe($event.dropData.event)" dragOverClass="drag-over">
+            <div class="grupe-card" mwlDroppable (drop)="externalDropGrupe($event.dropData.event)"
+                dragOverClass="drag-over">
                 <div class="card-body">
                     <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
                     <p *ngIf="externalGrupeEvents.length === 0"><em>No events added</em></p>
@@ -60,8 +62,10 @@
                     <td>
                         <label for="ID_RADNIKA">{{ 'GRUPA' | translate }}:</label>
                     </td>
+                </tr>
+                <tr>
                     <td
-                        style="display: flex;max-width: 180px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                        style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                         <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                             (click)="pickGrupe();" (contextmenu)="removeGrupe($event)"
                             matTooltip="{{ (!varNames.ID_GRUPE ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
@@ -76,7 +80,9 @@
                                 (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
                                 (focus)="refreshGrupe(varNames!.ID_GRUPE, false);"
                                 (keyup.enter)="selectGrupe(offeredGrupe[GrupeDropdownIndex]);"
-                                (keyup.escape)="resetGrupeIndex();">
+                                (keyup.escape)="resetGrupeIndex();"
+                                (keyup.arrowdown)="GrupeDropdownIndex = (GrupeDropdownIndex + 1) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);"
+                                (keyup.arrowup)="GrupeDropdownIndex = (GrupeDropdownIndex - 1 + offeredGrupe.length) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);">
                             <div id="offeredGrupe1-dropdown" class="select-dropdown-content ">
                                 @for(grupe of offeredGrupe;track grupe;let i=$index){
                                 <div [id]="'offeredGrupe1-dropdown-' + i" matRipple
@@ -89,55 +95,19 @@
                                 }
                             </div>
                         </span>
-                        <span style="width: 60px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                             class="small-margin-left margin-right">{{ varNames!.NAZ_GRUPE }}</span>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label for="VrstaPosla">{{ 'VrstaPosla' | translate }}:</label>
-                    </td>
-                    <td style="display: flex;max-width: 180px;white-space: nowrap;text-overflow: ellipsis;">
-                        <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                            (click)="pickVrstePosla();" (contextmenu)="removeVrstePosla($event)"
-                            matTooltip="{{ (!varNames.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                            [class.color-valid]="varNames!.NAZ_VP">
-                            {{ varNames!.NAZ_VP ? 'done' : 'import_contacts'}}
-                        </mat-icon>
 
-                        <span (click)="refreshVrstePosla(varNames!.SIF_VP, false);">
-                            <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
-                                class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                                placeholder="{{ 'Code' | translate }}"
-                                (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
-                                (ngModelChange)="filterVrstePosla(varNames!.SIF_VP);"
-                                (focus)="refreshVrstePosla(varNames!.SIF_VP, false);"
-                                (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
-                                (keyup.escape)="resetVrstePoslaIndex();">
-                            <div id="offeredVrstePosla-dropdown" class="select-dropdown-content ">
-                                @for(vrsteposla of offeredVrstePosla;track vrsteposla;let i=$index){
-                                <div [id]="'offeredVrstePosla-dropdown-' + i" matRipple
-                                    class="dropdown-content-item display-flex align-items-center space-between"
-                                    [class.gray-background]="i == VrstePoslaDropdownIndex"
-                                    (mousedown)="selectVrstePosla(vrsteposla);">
-                                    <span>
-                                        <b>{{vrsteposla.SIF_VP}}</b> - {{ vrsteposla.NAZ_VP}}
-                                    </span>
-                                </div>
-                                }
-
-                            </div>
-                        </span>
-                        <span style="width: 60px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
-                            class="small-margin-left margin-right">{{ varNames!.NAZ_VP }}</span>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <label for="SIF_OJ" class="minimum-margin-top">{{ 'SIF_OJ' | translate }}:</label>
                     </td>
+                </tr>
+                <tr>
                     <td
-                        style="display: flex;max-width: 180px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                        style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                         <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                             (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
                             matTooltip="{{ (!varNames.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
@@ -152,7 +122,9 @@
                                 (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
                                 (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
                                 (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
-                                (keyup.escape)="resetOrganizationalUnits();">
+                                (keyup.escape)="resetOrganizationalUnits();"
+                                (keyup.arrowdown)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex + 1) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);"
+                                (keyup.arrowup)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex - 1 + offeredOrganizacijskeJedinice.length) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);">
                             <div id="offeredOrganizacijskeJedinice-dropdown" class="select-dropdown-content ">
                                 <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
                                     *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i"
@@ -166,7 +138,7 @@
                                 </div>
                             </div>
                         </span>
-                        <span style="width: 60px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                             class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
                             matTooltipShowDelay="1000">{{
                             varNames!.NAZ_OJ }}</span>
@@ -176,7 +148,9 @@
                     <td>
                         <label for="ID_RADNIKA">{{ 'Zaposleni' | translate }}:</label>
                     </td>
-                    <td style="display: flex;max-width: 180px;white-space: nowrap;text-overflow: ellipsis;">
+                </tr>
+                <tr>
+                    <td style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;">
                         <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                             (click)="pickZaposleniPoGrupiIShemi();" (contextmenu)="removeZaposleniPoGrupiIShemi($event)"
                             matTooltip="{{ (!varNames.ID_RADNIKA ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
@@ -192,7 +166,9 @@
                                 (ngModelChange)="filterZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA);"
                                 (focus)="refreshZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA, false);"
                                 (keyup.enter)="selectZaposleniPoGrupiIShemi(offeredZaposleniPoGrupiIShemi[ZaposleniPoGrupiIShemiDropdownIndex]);"
-                                (keyup.escape)="resetZaposleniPoGrupiIShemiIndex();">
+                                (keyup.escape)="resetZaposleniPoGrupiIShemiIndex();"
+                                (keyup.arrowdown)="ZaposleniPoGrupiIShemiDropdownIndex = (ZaposleniPoGrupiIShemiDropdownIndex + 1) % offeredZaposleniPoGrupiIShemi.length;globalFn.scroll('offeredZaposleniPoGrupiIShemi-dropdown-' + ZaposleniPoGrupiIShemiDropdownIndex);"
+                                (keyup.arrowup)="ZaposleniPoGrupiIShemiDropdownIndex = (ZaposleniPoGrupiIShemiDropdownIndex - 1 + offeredZaposleniPoGrupiIShemi.length) % offeredZaposleniPoGrupiIShemi.length;globalFn.scroll('offeredZaposleniPoGrupiIShemi-dropdown-' + ZaposleniPoGrupiIShemiDropdownIndex);">
                             <div id="offeredZaposleniPoGrupiIShemi-dropdown" class="select-dropdown-content ">
                                 @for(ZaposleniPoGrupiIShemi of offeredZaposleniPoGrupiIShemi;track
                                 ZaposleniPoGrupiIShemi;let i=$index){
@@ -208,8 +184,51 @@
                                 }
                             </div>
                         </span>
-                        <span style="width: 60px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                             class="small-margin-left margin-right">{{ varNames.NAZIV_RADNIKA }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="VrstaPosla">{{ 'VrstaPosla' | translate }}:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;">
+                        <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                            (click)="pickVrstePosla();" (contextmenu)="removeVrstePosla($event)"
+                            matTooltip="{{ (!varNames.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                            [class.color-valid]="varNames!.NAZ_VP">
+                            {{ varNames!.NAZ_VP ? 'done' : 'import_contacts'}}
+                        </mat-icon>
+
+                        <span (click)="refreshVrstePosla(varNames!.SIF_VP, false);">
+                            <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
+                                class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                                placeholder="{{ 'Code' | translate }}"
+                                (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                                (ngModelChange)="filterVrstePosla(varNames!.SIF_VP);"
+                                (focus)="refreshVrstePosla(varNames!.SIF_VP, false);"
+                                (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
+                                (keyup.escape)="resetVrstePoslaIndex();"
+                                (keyup.arrowdown)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex + 1) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                                (keyup.arrowup)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex - 1 + offeredVrstePosla.length) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);">
+                            <div id="offeredVrstePosla-dropdown" class="select-dropdown-content ">
+                                @for(vrsteposla of offeredVrstePosla;track vrsteposla;let i=$index){
+                                <div [id]="'offeredVrstePosla-dropdown-' + i" matRipple
+                                    class="dropdown-content-item display-flex align-items-center space-between"
+                                    [class.gray-background]="i == VrstePoslaDropdownIndex"
+                                    (mousedown)="selectVrstePosla(vrsteposla);">
+                                    <span>
+                                        <b>{{vrsteposla.SIF_VP}}</b> - {{ vrsteposla.NAZ_VP}}
+                                    </span>
+                                </div>
+                                }
+
+                            </div>
+                        </span>
+                        <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                            class="small-margin-left margin-right">{{ varNames!.NAZ_VP }}</span>
                     </td>
                 </tr>
             </table>
@@ -218,8 +237,7 @@
             <button style="margin: 15px;" color="primary" mat-flat-button
                 [disabled]="varNames.ID_RADNIKA==''||varNames.NAZ_GRUPE==''||varNames.SIF_VP==''||varNames.SIFMJTR==''"
                 (click)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>
-            <button style="margin: 15px;" color="primary" mat-flat-button
-                [disabled]="varNames.NAZ_VP==''||varNames.NAZ_GRUPE==''"
+            <button style="margin: 15px;" color="primary" mat-flat-button [disabled]="varNames.NAZ_VP==''"
                 (click)="save()"><mat-icon>add_alarm</mat-icon>{{'Unos'|translate}}</button>
             <button style="margin: 15px;" color="primary" mat-flat-button
                 (click)="clearCalendar()"><mat-icon>cancel</mat-icon>{{'OcistiKalendar'|translate}}</button>
@@ -234,11 +252,11 @@
 
 
     <ng-template #customEventTemplate let-weekEvent="weekEvent" let-tooltipPlacement="tooltipPlacement"
-        let-tooltipTemplate="tooltipTemplate"
-        let-tooltipAppendToBody="tooltipAppendToBody" let-tooltipDisabled="tooltipDisabled"
-        let-tooltipDelay="tooltipDelay" let-column="column">
+        let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody"
+        let-tooltipDisabled="tooltipDisabled" let-tooltipDelay="tooltipDelay" let-column="column">
 
-        <div class="cal-event" style="font-size: 14px;display: flex;flex-direction: column;justify-content: space-evenly;" [ngStyle]="{
+        <div class="cal-event"
+            style="font-size: 14px;display: flex;flex-direction: column;justify-content: space-evenly;" [ngStyle]="{
             color: 'black',
             backgroundColor: weekEvent.event.color?.secondary,
             borderColor: weekEvent.event.color?.primary
@@ -248,25 +266,24 @@
                 | calendarEventTitle: 'weekTooltip':weekEvent.event)
               : ''
           " [tooltipPlacement]="tooltipPlacement" [tooltipEvent]="weekEvent.event" [tooltipTemplate]="tooltipTemplate"
-            [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay"
-            >
+            [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay">
             <ng-container *ngIf="!weekEvent.event.meta.groupedEvents">
                 <mwl-calendar-event-actions [event]="weekEvent.event">
                 </mwl-calendar-event-actions>
                 &ngsp;
             </ng-container>
-            <mwl-calendar-event-title [event]="weekEvent.event" view="week">
+            <mwl-calendar-event-title  [event]="weekEvent.event" view="week">
             </mwl-calendar-event-title>
             <div>
                 <table>
                     @if(weekEvent.event.meta.type=='grupa'){
-                        <tr>
-                            <td>
-                                <label for="">
-                                    {{'Shema'|translate}}: <b>{{weekEvent.event.meta.NAZ_SHEME}}</b>
-                                </label>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <label for="">
+                                {{'Shema'|translate}}: <b>{{weekEvent.event.meta.NAZ_SHEME}}</b>
+                            </label>
+                        </td>
+                    </tr>
                     }
                     <tr>
                         <td>
@@ -285,7 +302,7 @@
                         </td>
 
                     </tr>
-                   
+
                     @if(!weekEvent.event.meta.NOVASHEMA){
                     <tr>
                         <td>
@@ -305,8 +322,32 @@
                 </table>
             </div>
             <div style="display: flex; justify-content: flex-end;">
-                <button mat-mini-fab style="scale: 0.7;" (click)="eventClicked(weekEvent.event)"><mat-icon>edit</mat-icon></button>
-                <button color="primary" mat-mini-fab style="scale: 0.7;" (click)="deleteEvent(weekEvent.event)"><mat-icon>delete</mat-icon></button>
+                <button mat-mini-fab style="scale: 0.7;"
+                    (click)="eventClicked(weekEvent.event)"><mat-icon>edit</mat-icon></button>
+                <button color="primary" mat-mini-fab style="scale: 0.7;"
+                    (click)="deleteEvent(weekEvent.event)"><mat-icon>delete</mat-icon></button>
             </div>
         </div>
+    </ng-template>
+
+
+    <ng-template #customCellTemplate let-day="day" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
+        let-tooltipPlacement="tooltipPlacement" let-locale="locale">
+            <div class="cal-cell-top" (click)="changeDay(day.date)">
+                <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+                <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+            </div>
+            <div class="cell-totals" style="margin: 5px;display: flex;justify-content: space-between;">
+                <div>
+                    <div class="cal-event" *ngFor="let event of day.events"
+                        [style.backgroundColor]="event.color.primary" [ngClass]="event?.cssClass"
+                        (mouseenter)="highlightDay.emit({event: event})"
+                        (mouseleave)="unhighlightDay.emit({event: event})"
+                        [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+                        [tooltipPlacement]="tooltipPlacement">
+                    </div>
+                </div>
+                <button class="cell-button cal-day-number" color="primary" style="scale:0.7;" mat-mini-fab (click)="goToDnevnaEvidencija(day)"
+                    [matTooltip]="'DnevnaEvidencija'|translate"><mat-icon>view_day</mat-icon></button>
+            </div>
     </ng-template>

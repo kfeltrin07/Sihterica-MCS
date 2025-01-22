@@ -347,4 +347,20 @@ export class GlobalFunctionsService {
     let year: number = +date.substring(0, 4);
     return this.conditionalZeroPrefix(day) + '.' + this.conditionalZeroPrefix(month) + '.' + year.toString();
   }
+
+  public formatDateForDateForm(date: string): string {
+    let day: number = +date.substring(0, 2);
+    let month: number = +date.substring(4, 6);
+    let year: number = +date.substring(8,12);
+    return year + '-' + this.conditionalZeroPrefix(month) + '-' + this.conditionalZeroPrefix(day);
+  }
+
+  public scroll(element: string) {
+    let el = document.getElementById(element);
+    el?.scrollIntoView({
+      behavior: 'auto',
+      block: 'center',
+      inline: 'center'
+    });
+  }
 }

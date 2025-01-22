@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { FormsModule, FormControl } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatLabel } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +27,7 @@ import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencij
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
 import { DetailsMjesecnaEvidencijaComponent } from '../mjesecna-evidencija/details-mjesecna-evidencija/details-mjesecna-evidencija.component';
 import { CopyDnevnaEvidencijaComponent } from './copy-dnevna-evidencija/copy-dnevna-evidencija.component';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -65,7 +66,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     SIF_OJ: "%",
     NAZ_OJ: "",
     SIF_VP: "",
-    DATUM: new Date().toISOString().slice(0, 10),
+    DATUM: "",
   }
 
   public varNames: any = {
@@ -159,17 +160,37 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public pageSizeOptions: number[] = [5, 10, 15, 20];
   public length = 0;
 
+  public IncomingData: any = {};
+
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
     private globalFn: GlobalFunctionsService,
     public session: SessionService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+
   ) { }
 
   public ngOnInit(): void {
-    this.filter.GODINA = (new Date()).getFullYear();
-    this.filter.MJESEC = new Date().getMonth() + 1;
+    this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
+    console.log(this.IncomingData);
+
+    if (this.IncomingData.DATUM) {
+
+      this.filter.DATUM = this.globalFn.formatDateForDateForm(this.IncomingData.DATUM.toLocaleString());
+      this.filter.MBR = this.IncomingData.ID_RADNIKA;
+      this.filter.SIF_OJ = this.IncomingData.SIFMJTR;
+      this.filter.SIF_VP = this.IncomingData.SIF_VP;
+      this.OfferedEvidencijaRadVreOj();
+      this.OfferedVrstePosla();
+      this.OfferedZaposleni();
+      this.getEvidencijaMjesecna();
+    }
+    else {
+      this.filter.DATUM = new Date().toISOString().slice(0, 10);
+    }
+
     this.getVrstePosla()
   }
 
@@ -199,7 +220,6 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.evidencijaDnevna = response.debugData.data;
       this.dataSource = this.evidencijaDnevna;
       this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
@@ -255,7 +275,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
 
   public openCopyDataDialog(): void {
-    let data={
+    let data = {
       SIF_OJ: this.filter.SIF_OJ,
       SIF_VP: this.filter.SIF_VP,
       MBR: this.filter.MBR,
@@ -375,7 +395,6 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
       for (let item of this.offeredEvidencijaRadVreOj) {
         if (item.SIF_OJ.toUpperCase() == this.filter.SIF_OJ.toUpperCase()) {
@@ -428,22 +447,22 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public setZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
     if (EvRadnogVremenaHelpRadnici) {
-        this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
-        this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-        this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+      this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
+      this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+      this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
 
     }
   }
 
-  public removeZaposleni(e: Event ): void {
+  public removeZaposleni(e: Event): void {
     e.preventDefault();
-      this.filter.MBR = "";
-      this.filter.PREZIME_IME = "";
-      this.filter.OSOBA = "";
+    this.filter.MBR = "";
+    this.filter.PREZIME_IME = "";
+    this.filter.OSOBA = "";
 
   }
 
-  public refreshZaposleni(searchParam: string, isSelected: boolean, ): void {
+  public refreshZaposleni(searchParam: string, isSelected: boolean,): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -465,11 +484,11 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.offeredZaposleni = response.debugData.data;
-        this.filteredZaposleni = response.debugData.data;
-        if (!isSelected) {
-          document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
-        }
+      this.offeredZaposleni = response.debugData.data;
+      this.filteredZaposleni = response.debugData.data;
+      if (!isSelected) {
+        document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
 
     });
   }
@@ -495,16 +514,15 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.offeredZaposleni = response.debugData.data;
-        for (let item of this.offeredZaposleni) {
-          if (item.MBR.toUpperCase() == this.filter.MBR.toUpperCase()) {
-            this.filter.PREZIME_IME = item.PREZIME_IME;
-            this.filter.OSOBA = item.OSOBA;
-            this.filter.MBR = item.MBR;
-          }
+      this.offeredZaposleni = response.debugData.data;
+      for (let item of this.offeredZaposleni) {
+        if (item.MBR.toUpperCase() == this.filter.MBR.toUpperCase()) {
+          this.filter.PREZIME_IME = item.PREZIME_IME;
+          this.filter.OSOBA = item.OSOBA;
+          this.filter.MBR = item.MBR;
         }
-      
+      }
+
     });
   }
 
@@ -514,30 +532,30 @@ export class DnevnaEvidencijaComponent implements OnInit {
       return;
     }
 
-      this.offeredZaposleni = this.filteredZaposleni.filter(
-        item => item?.MBR.toLowerCase().includes(text.toLowerCase())
-      );
+    this.offeredZaposleni = this.filteredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    );
 
 
-      if (this.offeredZaposleni.length == 0) {
-        this.refreshZaposleni(text, false);
-      }
+    if (this.offeredZaposleni.length == 0) {
+      this.refreshZaposleni(text, false);
+    }
 
   }
 
-  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici, ): void {
-      this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
-      this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
-      this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+  public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici,): void {
+    this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
+    this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+    this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
 
-      document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-      this.ZaposleniDropdownIndex = -1;
+    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.ZaposleniDropdownIndex = -1;
 
   }
 
   public resetZaposleniIndex(): void {
-      this.ZaposleniDropdownIndex = -1;
-      document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.ZaposleniDropdownIndex = -1;
+    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
   //ZAPOSLENI END
 
@@ -616,8 +634,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
+      this.offeredVrstePosla = response.debugData.data;
       for (let item of this.offeredVrstePosla) {
         if (item.SIF_VP.toUpperCase() == this.filter.SIF_VP.toUpperCase()) {
           this.filter.NAZ_VP = item.NAZ_VP;
@@ -732,7 +749,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
 
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
+      this.offeredVrstePosla = response.debugData.data;
       for (let item of this.offeredVrstePosla) {
         if (item.SIF_VP.toUpperCase() == this.filter.SIF_VP.toUpperCase()) {
           this.filter.NAZ_VP = item.NAZ_VP;
