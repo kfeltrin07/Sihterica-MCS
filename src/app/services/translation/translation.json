@@ -8043,6 +8043,12 @@
             "en": "Job type",
             "hr": "Vrsta posla",
             "transferred": false
+        },
+        {
+            "ref": "OvlasteneOsobeMjTrEditing",
+            "en": "Editing authorized persons by sale location",
+            "hr": "Ovlaštene osobe Mj. Tr. uređivanje",
+            "transferred": false
         }
     ]
 }

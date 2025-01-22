@@ -1,28 +1,21 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
   class="dialog-header">
-  {{ 'KreirajExcel' | translate }}?
+  {{ 'Excel' | translate }}?
 
   <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
 
 </div>
 
-<div class="software-excel--small-margin">
+<div>
 
-    <mat-dialog-content>
-      {{ 'ExcelOptions' | translate }}
-    </mat-dialog-content>
-  
-    <p>{{ 'ColumnsShown' | translate }}:</p>
-    
-    <mat-radio-group [(ngModel)]="allColumns">
-      <mat-radio-button [value]="true">{{ 'All' | translate }}</mat-radio-button>
-      <mat-radio-button [value]="false">{{ 'OnlyDisplayed' | translate }}</mat-radio-button>
-    </mat-radio-group>
-    
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>{{ 'Cancel' | translate }}</button>
-      <button mat-raised-button color="primary" mat-dialog-close (click)="getData(dialogData.selectedSearchOption);">{{ 'Generate' | translate }}</button>
-    </mat-dialog-actions>
-  
-  </div>
-  
+  <mat-dialog-content>
+    <p>{{ 'KreirajExcel' | translate }}</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="getData(dialogData.selectedSearchOption);">{{
+      'Yes' | translate }}</button>
+  </mat-dialog-actions>
+
+</div>

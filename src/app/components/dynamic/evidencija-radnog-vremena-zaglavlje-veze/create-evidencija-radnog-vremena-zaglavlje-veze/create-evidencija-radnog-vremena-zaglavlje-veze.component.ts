@@ -45,7 +45,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
     OPIS: "",
     NAZ_VP: "",
     SI: "",
-    XFAKTOR: "",
+    XFAKTOR: "1",
     SIF_VLAS: "",
   };
 

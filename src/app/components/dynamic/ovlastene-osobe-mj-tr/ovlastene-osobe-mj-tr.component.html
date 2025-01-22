@@ -39,6 +39,31 @@
 
 </mat-toolbar>
 
+<div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
+  <table class="filteri-table">
+    <tr>
+      <td>
+        <label for="" style="font-size: 14px;">{{'Ispis'|translate}}</label>
+      </td>
+      <td>
+        <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
+          (click)="openEXCELDialog(searchParam);">
+          <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
+            matTooltip="{{ 'EXCEL' | translate }}">
+            <img src="assets/icons/png/excel.png" alt="" height="20">
+          </mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
+          (click)="openPDFDialog(searchParam);">
+          <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
+            matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
+        </button>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
 <div class="tablediv">
   <table matSort (matSortChange)="sort($event);" mat-table [dataSource]="dataSource">
 
@@ -58,14 +83,7 @@
         <div class="options-cell">
           <mat-icon id="detailsButton" class="cursor-pointer minimum-margin-left-and-right"
             (click)="openDetailsDialog(lokacija);" matTooltip="{{ 'Details' | translate }}">search</mat-icon>
-          <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
-            (click)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});"
-            matTooltip="{{ 'EXCEL' | translate }}">
-            <img src="assets/icons/png/excel.png" alt="" height="20">
-          </mat-icon>
-          <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
-            (click)="openPDFDialog({headers: displayedColumns, searchParam: searchParam});"
-            matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
+
           <mat-icon id="editButton" *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus"
             class="cursor-pointer minimum-margin-left-and-right" (click)="openEditDialog(lokacija);"
             matTooltip="{{ 'Edit' | translate }}">edit</mat-icon>
