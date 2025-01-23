@@ -321,8 +321,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public setVisibleColumnsFromEvent(): void {
     this.displayedColumns = [];
-    for (let i = 0; i < this.globalVar.PomocnaListaDisplayedColumns.length; i++) {
-      this.displayedColumns.push(this.globalVar.PomocnaListaDisplayedColumns[i].name);
+    for (let i = 0; i < this.globalVar.EvidencijaDnevnaColumnsList.length; i++) {
+      this.displayedColumns.push(this.globalVar.EvidencijaDnevnaColumnsList[i].name);
     }
     this.displayedColumns.push('options');
   }
