@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CookiesService } from '../cookies/cookies.service';
 import { Konekcija, DynamicMenu, RightsState, DashboardItem, DynamicMenuReference, SidebarItem, ColumnRef } from 'src/app/models/models.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import { CalendarEvent } from 'angular-calendar';
 
 type AvailableLanguages = 'en' | 'hr';
 
@@ -30,6 +32,15 @@ export class GlobalVariablesService {
 
   public headerTitle: string = '';
   public headerImage: string = '';
+
+  public sideNav!: MatSidenav;
+
+  public externalShemeEvents: CalendarEvent[] = [];
+
+  public externalGrupeEvents: CalendarEvent[] = [];
+
+  public events: CalendarEvent[] = [];
+
   // END: development helpers
 
   // START: logging in messages

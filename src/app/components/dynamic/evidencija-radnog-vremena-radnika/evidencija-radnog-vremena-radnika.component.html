@@ -54,14 +54,16 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mouseleave)="resetZaposleniIndex();" (click)="refreshZaposleni(filter!.MBR, false);">
+                <span (click)="refreshZaposleni(filter!.MBR, false);">
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni()"
-                        (ngModelChange)="refreshZaposleni(filter!.MBR, false);"
+                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
+                        (ngModelChange)="filterZaposleni(filter!.MBR);"
                         (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
-                        (keyup.escape)="resetZaposleniIndex();">
+                        (keyup.escape)="resetZaposleniIndex();"
+                        (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
+                        (keyup.arrowup)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex - 1 + offeredZaposleni.length) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);">
                     <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredZaposleni-dropdown-' + i"

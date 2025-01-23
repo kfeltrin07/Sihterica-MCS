@@ -125,6 +125,7 @@ export class PomocneListeComponent implements OnInit {
 
   public EvidencijaRadVreOjDropdownIndex: number = -1;
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
   public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -135,6 +136,7 @@ export class PomocneListeComponent implements OnInit {
 
   public ZaposleniDropdownIndex: number = -1;
   public offeredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public filteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public selectedZaposleni: EvRadnogVremenaHelpRadnici = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -145,12 +147,13 @@ export class PomocneListeComponent implements OnInit {
 
   public VrstePoslaDropdownIndex: number = -1;
   public offeredVrstePosla: VrstePosla[] = [];
+  public filteredVrstePosla: VrstePosla[] = [];
   public selectedVrstePosla: VrstePosla = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
     SIF_VP: "",
     NAZ_VP: "",
-    SIFVLAS:"",
+    SIFVLAS: "",
     SI: "",
   };
 
@@ -170,7 +173,7 @@ export class PomocneListeComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog
   ) { }
@@ -190,7 +193,7 @@ export class PomocneListeComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          pZaMjesec: this.filter.MJESEC+'.'+this.filter.GODINA,
+          pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
           pSifMjTr: this.filter.SIF_OJ,
           pMbr: this.filter.MBR,
           pSifVp: this.filter.SIF_VP,
@@ -305,7 +308,7 @@ export class PomocneListeComponent implements OnInit {
       this.filter.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
       this.filter.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
       this.filter.VRSTA = EvidencijaRadVreOj.VRSTA;
-      
+
     }
   }
 
@@ -314,7 +317,7 @@ export class PomocneListeComponent implements OnInit {
     this.filter.SIF_OJ = "";
     this.filter.NAZMJTR = "";
     this.filter.VRSTA = "";
-    
+
   }
 
   public refreshEvidencijaRadVreOj(searchParam: string, isSelected: boolean): void {
@@ -340,6 +343,7 @@ export class PomocneListeComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
+      this.filteredEvidencijaRadVreOj = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -367,23 +371,39 @@ export class PomocneListeComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
-      for (let item of this.offeredEvidencijaRadVreOj) {
-        if (item.SIF_OJ == this.filter.SIF_OJ) {
-          this.filter.NAZMJTR = item.NAZMJTR;
-          this.filter.VRSTA = item.VRSTA;
-          
-        }
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredEvidencijaRadVreOj = data;
+
+      const matchedItem = this.offeredEvidencijaRadVreOj.find(item => item.SIF_OJ.toUpperCase() === this.filter.SIF_OJ.toUpperCase());
+      if (matchedItem) {
+        this.filter.SIF_OJ = matchedItem.SIF_OJ;
+        this.filter.NAZMJTR = matchedItem.NAZMJTR;
+        this.filter.VRSTA = matchedItem.VRSTA;
       }
     });
+  }
+
+  public filterEvidencijaRadVreOj(text: string): void {
+    if (!text) {
+      this.refreshEvidencijaRadVreOj("", false);
+      return;
+    }
+
+    this.offeredEvidencijaRadVreOj = this.filteredEvidencijaRadVreOj.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredEvidencijaRadVreOj.length == 0) {
+      this.refreshEvidencijaRadVreOj(text, false);
+    }
   }
 
   public selectEvidencijaRadVreOj(EvidencijaRadVreOj: EvidencijaRadVreOj): void {
     this.filter.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
     this.filter.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
     this.filter.VRSTA = EvidencijaRadVreOj.VRSTA;
-    
+
     document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.EvidencijaRadVreOjDropdownIndex = -1;
   }
@@ -408,7 +428,7 @@ export class PomocneListeComponent implements OnInit {
       this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
       this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
       this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
-      
+
     }
   }
 
@@ -417,7 +437,7 @@ export class PomocneListeComponent implements OnInit {
     this.filter.MBR = "";
     this.filter.PREZIME_IME = "";
     this.filter.OSOBA = "";
-    
+
 
   }
 
@@ -444,6 +464,7 @@ export class PomocneListeComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
+      this.filteredZaposleni = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -471,23 +492,39 @@ export class PomocneListeComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      for (let item of this.offeredZaposleni) {
-        if (item.MBR == this.filter.MBR) {
-          this.filter.PREZIME_IME = item.PREZIME_IME;
-          this.filter.OSOBA = item.OSOBA;
-          
-        }
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredZaposleni = data;
+
+      const matchedItem = this.offeredZaposleni.find(item => item.MBR.toUpperCase() === this.filter.MBR.toUpperCase());
+      if (matchedItem) {
+        this.filter.MBR = matchedItem.MBR;
+        this.filter.PREZIME_IME = matchedItem.PREZIME_IME;
+        this.filter.OSOBA = matchedItem.OSOBA;
       }
     });
+  }
+
+  public filterZaposleni(text: string): void {
+    if (!text) {
+      this.refreshZaposleni("", false);
+      return;
+    }
+
+    this.offeredZaposleni = this.offeredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredZaposleni.length == 0) {
+      this.refreshZaposleni(text, false);
+    }
   }
 
   public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici): void {
     this.filter.MBR = EvRadnogVremenaHelpRadnici.MBR;
     this.filter.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
     this.filter.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
-    
+
     document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.ZaposleniDropdownIndex = -1;
   }
@@ -499,101 +536,118 @@ export class PomocneListeComponent implements OnInit {
   //ZAPOSLENI END
 
 
-    //VrstaPosla START
-    public pickVrstePosla(): void {
-      const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
-  
-      dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
-        this.setVrstePoslaFromDialog(VrstePosla);
-      });
-    }
-  
-    public setVrstePoslaFromDialog(VrstePosla?: VrstePosla): void {
-      if (VrstePosla) {
-        this.filter.SIF_VP = VrstePosla.SIF_VP;
-        this.filter.NAZ_VP = VrstePosla.NAZ_VP;
-        
-      }
-    }
-  
-    public removeVrstePosla(e: Event): void {
-      e.preventDefault();
-      this.filter.SIF_VP = "";
-      this.filter.NAZ_VP = "";      
-    }
-  
-    public refreshVrstePosla(searchParam: string, isSelected: boolean): void {
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'getVrstePosla',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pDioNaziva: searchParam,
-            limit: 100,
-            page: 1,
-            sort: [
-              {
-                property: "SIF_VP",
-                direction: "ASC"
-              }
-            ]
-          }
-        }
-      ).subscribe((response: any) => {
-        console.log(response);
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.offeredVrstePosla = response.debugData.data;
-        if (!isSelected) {
-          document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
-        }
-      });
-    }
-  
-    public OfferedVrstePosla(): void {
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'getVrstePosla',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pDioNaziva: this.filter.SIF_VP,
-            limit: 100,
-            page: 1,
-            sort: [
-              {
-                property: "SIF_VP",
-                direction: "ASC"
-              }
-            ]
-          }
-        }
-      ).subscribe((response: any) => {
-  
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.offeredEvidencijaRadVreOj = response.debugData.data;
-        for (let item of this.offeredVrstePosla) {
-          if (item.SIF_VP == this.filter.SIF_VP) {
-            this.filter.NAZ_VP = item.NAZ_VP;
-            
-          }
-        }
-      });
-    }
-  
-    public selectVrstePosla(VrstePosla: VrstePosla): void {
+  //VrstaPosla START
+  public pickVrstePosla(): void {
+    const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
+
+    dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
+      this.setVrstePoslaFromDialog(VrstePosla);
+    });
+  }
+
+  public setVrstePoslaFromDialog(VrstePosla?: VrstePosla): void {
+    if (VrstePosla) {
       this.filter.SIF_VP = VrstePosla.SIF_VP;
-      this.filter.NAZ_VP = VrstePosla.NAZ_VP;      
-      document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
-      this.VrstePoslaDropdownIndex = -1;
+      this.filter.NAZ_VP = VrstePosla.NAZ_VP;
+
     }
+  }
+
+  public removeVrstePosla(e: Event): void {
+    e.preventDefault();
+    this.filter.SIF_VP = "";
+    this.filter.NAZ_VP = "";
+  }
+
+  public refreshVrstePosla(searchParam: string, isSelected: boolean): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getVrstePosla',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: searchParam,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_VP",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredVrstePosla = response.debugData.data;
+      this.filteredVrstePosla = response.debugData.data;
+      if (!isSelected) {
+        document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
+    });
+  }
+
+  public OfferedVrstePosla(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getVrstePosla',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.filter.SIF_VP,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_VP",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredVrstePosla = data;
+
+      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        this.filter.SIF_VP = matchedItem.SIF_VP;
+        this.filter.NAZ_VP = matchedItem.NAZ_VP;
+      }
+    });
+  }
+
+  public filterVrstePosla(text: string): void {
+    if (!text) {
+      this.refreshVrstePosla("", false);
+      return;
+    }
+
+    this.offeredVrstePosla = this.filteredVrstePosla.filter(
+      item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredVrstePosla.length == 0) {
+      this.refreshVrstePosla(text, false);
+    }
+  }
   
-    public resetVrstePoslaIndex(): void {
-      this.VrstePoslaDropdownIndex = -1;
-      document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
-    }
-    //VrstaPosla END
+  public selectVrstePosla(VrstePosla: VrstePosla): void {
+    this.filter.SIF_VP = VrstePosla.SIF_VP;
+    this.filter.NAZ_VP = VrstePosla.NAZ_VP;
+    document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.VrstePoslaDropdownIndex = -1;
+  }
+
+  public resetVrstePoslaIndex(): void {
+    this.VrstePoslaDropdownIndex = -1;
+    document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
+  }
+  //VrstaPosla END
 
 }

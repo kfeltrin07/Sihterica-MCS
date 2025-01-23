@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarCommonModule, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AppRoutingModule,
     MainContentComponent,
     SidenavComponent,
+    MatSidenavModule,
     ToolbarComponent,
     TranslationPipe,
     CalendarCommonModule.forRoot({

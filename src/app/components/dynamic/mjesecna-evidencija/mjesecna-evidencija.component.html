@@ -86,14 +86,16 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}"
                         (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
-                        (keyup.escape)="resetEvidencijaRadVreOjIndex();">
+                        (keyup.escape)="resetEvidencijaRadVreOjIndex();"
+                        (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex + 1) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                        (keyup.arrowup)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex - 1 + offeredEvidencijaRadVreOj.length) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);">
                     <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredEvidencijaRadVreOj-dropdown-' + i"
@@ -122,13 +124,15 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshVrstePosla(filter!.SIF_VP, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
-                        (keyup.escape)="resetVrstePoslaIndex();">
+                        (keyup.escape)="resetVrstePoslaIndex();"
+                        (keyup.arrowdown)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex + 1) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                        (keyup.arrowup)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex - 1 + offeredVrstePosla.length) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);">
                     <div id="offeredVrstePosla-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredVrstePosla-dropdown-' + i"
@@ -159,13 +163,15 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshZaposleni(filter!.MBR2, false,'2');">
-                    <input type="text" [(ngModel)]="filter!.MBR2" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.MBR2" maxlength="22" id="offeredZaposleniKopija-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni('2');resetZaposleniIndex('2');"
                         (ngModelChange)="filterZaposleni(filter!.MBR2,'2');"
                         (focus)="refreshZaposleni(filter!.MBR2, false,'2');"
                         (keyup.enter)="selectZaposleni(offeredZaposleniKopija[ZaposleniKopijaDropdownIndex],'2');"
-                        (keyup.escape)="resetZaposleniIndex('2');">
+                        (keyup.escape)="resetZaposleniIndex('2');"
+                        (keyup.arrowdown)="ZaposleniKopijaDropdownIndex = (ZaposleniKopijaDropdownIndex + 1) % offeredZaposleniKopija.length;globalFn.scroll('offeredZaposleniKopija-dropdown-' + ZaposleniKopijaDropdownIndex);"
+                        (keyup.arrowup)="ZaposleniKopijaDropdownIndex = (ZaposleniKopijaDropdownIndex - 1 + offeredZaposleniKopija.length) % offeredZaposleniKopija.length;globalFn.scroll('offeredZaposleniKopija-dropdown-' + ZaposleniKopijaDropdownIndex);">
                     <div id="offeredZaposleniKopija-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredZaposleniKopija-dropdown-' + i"
@@ -194,13 +200,15 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshZaposleni(filter!.MBR, false,'1');">
-                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni('1');resetZaposleniIndex('1');"
                         (ngModelChange)="filterZaposleni(filter!.MBR,'1');"
                         (focus)="refreshZaposleni(filter!.MBR, false,'1');"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex],'1');"
-                        (keyup.escape)="resetZaposleniIndex('1');">
+                        (keyup.escape)="resetZaposleniIndex('1');"
+                        (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
+                        (keyup.arrowup)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex - 1 + offeredZaposleni.length) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);">
                     <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredZaposleni-dropdown-' + i"

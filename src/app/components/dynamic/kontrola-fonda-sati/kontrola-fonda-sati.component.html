@@ -54,12 +54,12 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mouseleave)="resetFondSatiHelpOJIndex();"
+                <span
                     (click)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);">
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedFondSatiHelpOJ()"
-                        (ngModelChange)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);"
+                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
+                        (ngModelChange)="filterFondSatiHelpOJ(filter!.SIF_OJ);"
                         (focus)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectFondSatiHelpOJ(offeredFondSatiHelpOJ[FondSatiHelpOJDropdownIndex]);"
                         (keyup.escape)="resetFondSatiHelpOJIndex();"

@@ -56,7 +56,9 @@ class="colored-header text-align-center">
                             (ngModelChange)="filterSheme(Grupe!.SIF_SHEME);"
                             (focus)="refreshSheme(Grupe!.SIF_SHEME, false);"
                             (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
-                            (keyup.escape)="resetSheme();">
+                            (keyup.escape)="resetSheme();"
+                            (keyup.arrowdown)="ShemeDropdownIndex = (ShemeDropdownIndex + 1) % offeredSheme.length;globalFn.scroll('offeredSheme-dropdown-' + ShemeDropdownIndex);"
+                            (keyup.arrowup)="ShemeDropdownIndex = (ShemeDropdownIndex - 1 + offeredSheme.length) % offeredSheme.length;globalFn.scroll('offeredSheme-dropdown-' + ShemeDropdownIndex);">
                         <div id="offeredSheme-dropdown"
                             class="select-dropdown-content max-height-300px" style="z-index: 500;">
                             <div [id]="'offeredSheme-dropdown-' + i"

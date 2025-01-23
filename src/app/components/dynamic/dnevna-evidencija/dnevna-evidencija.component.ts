@@ -15,7 +15,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Observable } from 'rxjs';
+import { debounceTime, Observable, Subject, Subscription } from 'rxjs';
 import { EvidencijaMjesecna, EvidencijaRadVreOj, EvRadnogVremenaHelpRadnici, VrstePosla, Sorting, EvidencijaDnevna } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
@@ -58,14 +58,14 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'OSOBA', 'SIF_MT_N', 'SIF_VP_N', 'SATI', 'ODHH', 'DOHH', 'IDK_N', 'options'];
 
   public filter: any = {
-    MBR: "",
+    MBR: "%",
     PREZIME_IME2: "",
     PREZIME_IME: "",
     NAZ_ZAN: "",
     NAZ_RM: "",
     SIF_OJ: "%",
     NAZ_OJ: "",
-    SIF_VP: "",
+    SIF_VP: "%",
     DATUM: "",
   }
 
@@ -162,15 +162,33 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public IncomingData: any = {};
 
+  private modelChanged: Subject<string> = new Subject<string>();
+  private subscription!: Subscription;
+
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog,
     private route: ActivatedRoute
+  ) {
+    this.subscription = this.modelChanged
+      .pipe(
+        debounceTime(1000),
+      )
+      .subscribe(() => {
+        this.getEvidencijaDnevna();
+      });
+  }
 
-  ) { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  inputChanged(event:any) {
+    this.modelChanged.next(event);
+  }
 
   public ngOnInit(): void {
     this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
@@ -185,16 +203,17 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
       this.OfferedZaposleni();
-      this.getEvidencijaMjesecna();
+      this.getEvidencijaDnevna();
     }
     else {
       this.filter.DATUM = new Date().toISOString().slice(0, 10);
+      this.getEvidencijaDnevna();
     }
 
     this.getVrstePosla()
   }
 
-  public getEvidencijaMjesecna(): void {
+  public getEvidencijaDnevna(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -289,7 +308,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public refresh(): void {
     this.loading = true;
-    this.getEvidencijaMjesecna();
+    this.getEvidencijaDnevna();
   }
 
   public sort(event: any): void {
@@ -368,7 +387,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
       this.filteredEvidencijaRadVreOj = response.debugData.data;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredEvidencijaRadVreOj-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
@@ -486,7 +507,10 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
       this.filteredZaposleni = response.debugData.data;
-      if (!isSelected) {
+
+      var dummyEl = document.getElementById('offeredZaposleni-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
       }
 
@@ -607,7 +631,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredVrstePosla = response.debugData.data;
       this.filteredVrstePosla = response.debugData.data;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredVrstePosla-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });

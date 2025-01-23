@@ -42,14 +42,12 @@
 <div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
     <table class="filteri-table">
         <tr>
-
             <td>
                 <label for="">{{"DATUM"|translate}}</label>
             </td>
             <td>
-                <input type="date" [(ngModel)]="filter.DATUM">
+                <input type="date" [(ngModel)]="filter.DATUM" (change)="inputChanged($event);">
             </td>
-
         </tr>
     </table>
     <table>
@@ -74,7 +72,10 @@
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
-                        (keyup.escape)="resetEvidencijaRadVreOjIndex();">
+                        (keyup.escape)="resetEvidencijaRadVreOjIndex();"
+                        (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex + 1) % offeredEvidencijaRadVreOj.length; globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                        (keyup.arrowup)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex - 1 + offeredEvidencijaRadVreOj.length) % offeredEvidencijaRadVreOj.length; globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                        id="offeredEvidencijaRadVreOj-help-span">
                     <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredEvidencijaRadVreOj-dropdown-' + i"
@@ -109,7 +110,10 @@
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
-                        (keyup.escape)="resetVrstePoslaIndex();">
+                        (keyup.escape)="resetVrstePoslaIndex();"
+                        (keyup.arrowdown)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex + 1) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                        (keyup.arrowup)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex - 1 + offeredVrstePosla.length) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                        id="offeredVrstePosla-help-span">
                     <div id="offeredVrstePosla-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredVrstePosla-dropdown-' + i"
@@ -131,8 +135,8 @@
                 <label for="MBR">{{ 'Zaposleni' | translate }}:</label>
             </td>
             <td>
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                    (click)="pickZaposleni();" (contextmenu)="removeZaposleni($event)"
+                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickZaposleni();"
+                    (contextmenu)="removeZaposleni($event)"
                     matTooltip="{{ (!filter.MBR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                     [class.color-valid]="filter!.PREZIME_IME">
                     {{ filter!.PREZIME_IME ? 'done' : 'import_contacts'}}
@@ -143,10 +147,12 @@
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
-                        (ngModelChange)="filterZaposleni(filter!.MBR);"
-                        (focus)="refreshZaposleni(filter!.MBR, false);"
+                        (ngModelChange)="filterZaposleni(filter!.MBR);" (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
-                        (keyup.escape)="resetZaposleniIndex();">
+                        (keyup.escape)="resetZaposleniIndex();"
+                        (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
+                        (keyup.arrowup)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex - 1 + offeredZaposleni.length) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
+                        id="offeredZaposleni-help-span">
                     <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredZaposleni-dropdown-' + i"
@@ -165,7 +171,8 @@
         </tr>
     </table>
     <div style="display: flex;justify-content: flex-end;">
-        <button mat-flat-button color="primary" [disabled]="filter.MBR=='' || filter.SIF_VP=='' ||filter.SIF_OJ==''" (click)="openCopyDataDialog()"> <mat-icon>copy</mat-icon> {{'KopiranjePodataka'|translate}}</button>
+        <button mat-flat-button color="primary" [disabled]="filter.MBR=='' || filter.SIF_VP=='' ||filter.SIF_OJ==''"
+            (click)="openCopyDataDialog()"> <mat-icon>copy</mat-icon> {{'KopiranjePodataka'|translate}}</button>
     </div>
 </div>
 
@@ -178,7 +185,8 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija"><input style="width: 40px;" type="text" [(ngModel)]="evidencija[item.key]">
+            <td mat-cell *matCellDef="let evidencija"><input style="width: 40px;" type="text"
+                    [(ngModel)]="evidencija[item.key]">
             </td>
         </ng-container>
         }
@@ -187,7 +195,8 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]">
+            <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time"
+                    [(ngModel)]="evidencija[item.key]">
             </td>
         </ng-container>
         }
@@ -196,7 +205,8 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]">
+            <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time"
+                    [(ngModel)]="evidencija[item.key]">
             </td>
         </ng-container>
         }

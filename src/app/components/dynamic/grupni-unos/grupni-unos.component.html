@@ -4,18 +4,18 @@
         </app-header-grupni-unos>
 
         <div [ngSwitch]="view">
-            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (beforeViewRender)="beforeMonthViewRender($event)" (eventTimesChanged)="eventDropped($event)"
                 [cellTemplate]="customCellTemplate">
             </mwl-calendar-month-view>
-            <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+            <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [hourSegments]="2" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
                 [eventTemplate]="customEventTemplate">
             </mwl-calendar-week-view>
-            <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+            <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [hourSegments]="2" [snapDraggedEvents]="false" [refresh]="refresh" [eventTemplate]="customEventTemplate"
                 (eventTimesChanged)="eventDropped($event)">
             </mwl-calendar-day-view>
@@ -23,13 +23,14 @@
     </div>
     <div class="unos-form">
         <div class="grupni-unos-sheme">
+            <!--
             <div class="sheme-card" mwlDroppable (drop)="externalDropSheme($event.dropData.event)"
                 dragOverClass="drag-over">
                 <div class="card-body">
                     <label style="font-size: 14px;" for="">{{'Sheme'|translate}}</label>
-                    <p *ngIf="externalShemeEvents.length === 0"><em>No events added</em></p>
+                    <p *ngIf="globalVar.externalShemeEvents.length === 0"><em>No events added</em></p>
                     <div class="listEvents">
-                        <div *ngFor="let event of externalShemeEvents" mwlDraggable [dropData]="{event: event}"
+                        <div *ngFor="let event of globalVar.externalShemeEvents" mwlDraggable [dropData]="{event: event}"
                             [touchStartLongPress]="{ delay: 300, delta: 30 }" dragActiveClass="drag-active">
                             <button mat-flat-button style="margin: 5px 0px;"
                                 [style.background-color]="event.color!.secondary">
@@ -39,13 +40,14 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="grupe-card" mwlDroppable (drop)="externalDropGrupe($event.dropData.event)"
                 dragOverClass="drag-over">
                 <div class="card-body">
                     <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
-                    <p *ngIf="externalGrupeEvents.length === 0"><em>No events added</em></p>
+                    <p *ngIf="globalVar.externalGrupeEvents.length === 0"><em>No events added</em></p>
                     <div class="listEvents">
-                        <div *ngFor="let event of externalGrupeEvents" mwlDraggable [dropData]="{event: event}"
+                        <div *ngFor="let event of globalVar.externalGrupeEvents" mwlDraggable [dropData]="{event: event}"
                             [touchStartLongPress]="{ delay: 300, delta: 30 }" dragActiveClass="drag-active">
                             <button mat-flat-button style="margin: 5px 0px;"
                                 [style.background-color]="event.color!.secondary">
@@ -74,7 +76,7 @@
                         </mat-icon>
 
                         <span (click)="refreshGrupe(varNames!.ID_GRUPE, false);">
-                            <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22"
+                            <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22" id="offeredGrupe1-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe();resetGrupeIndex();"
                                 (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
@@ -109,39 +111,39 @@
                     <td
                         style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                         <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                            (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
+                            (click)="pickEvidencijaRadVreOj();" (contextmenu)="removeEvidencijaRadVreOj($event)"
                             matTooltip="{{ (!varNames.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                            [class.color-valid]="varNames.NAZ_OJ">
-                            {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
+                            [class.color-valid]="varNames.NAZMJTR">
+                            {{ varNames!.NAZMJTR ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span (click)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
-                            <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
+                        <span (click)="refreshEvidencijaRadVreOj(varNames!.SIFMJTR, false);">
+                            <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
-                                (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
-                                (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
-                                (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
-                                (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
-                                (keyup.escape)="resetOrganizationalUnits();"
-                                (keyup.arrowdown)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex + 1) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);"
-                                (keyup.arrowup)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex - 1 + offeredOrganizacijskeJedinice.length) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);">
-                            <div id="offeredOrganizacijskeJedinice-dropdown" class="select-dropdown-content ">
-                                <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
-                                    *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i"
+                                (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                                (ngModelChange)="filterEvidencijaRadVreOj(varNames!.SIFMJTR);"
+                                (focus)="refreshEvidencijaRadVreOj(varNames!.SIFMJTR, false);"
+                                (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
+                                (keyup.escape)="resetEvidencijaRadVreOjIndex();"
+                                (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex + 1) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                                (keyup.arrowup)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex - 1 + offeredEvidencijaRadVreOj.length) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);">
+                            <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content ">
+                                <div [id]="'offeredEvidencijaRadVreOj-dropdown-' + i"
+                                    *ngFor="let organizationalUnits of offeredEvidencijaRadVreOj; index as i"
                                     matRipple
                                     class="dropdown-content-item display-flex align-items-center space-between"
-                                    [class.gray-background]="i == OrganizacijskeJediniceDropdownIndex"
-                                    (mousedown)="selectOrganizationalUnits(organizationalUnits);">
+                                    [class.gray-background]="i == EvidencijaRadVreOjDropdownIndex"
+                                    (mousedown)="selectEvidencijaRadVreOj(organizationalUnits);">
                                     <span>
-                                        <b>{{ organizationalUnits.SIF_OJ }}</b> ({{ organizationalUnits.NAZ_OJ }})
+                                        <b>{{ organizationalUnits.SIF_OJ }}</b> ({{ organizationalUnits.NAZMJTR }})
                                     </span>
                                 </div>
                             </div>
                         </span>
                         <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
-                            class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
+                            class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZMJTR }}"
                             matTooltipShowDelay="1000">{{
-                            varNames!.NAZ_OJ }}</span>
+                            varNames!.NAZMJTR }}</span>
                     </td>
                 </tr>
                 <tr>
@@ -158,11 +160,10 @@
                             {{ varNames!.NAZIV_RADNIKA ? 'done' : 'import_contacts'}}
                         </mat-icon>
                         <span (click)="refreshZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA, false);">
-                            <input type="text" [(ngModel)]="varNames!.ID_RADNIKA" maxlength="22"
+                            <input type="text" [(ngModel)]="varNames!.ID_RADNIKA" maxlength="22" id="offeredZaposleniPoGrupiIShemi-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
                                 (blur)="OfferedZaposleniPoGrupiIShemi();resetZaposleniPoGrupiIShemiIndex()"
-                                [disabled]="varNames.NAZ_OJ==''"
                                 (ngModelChange)="filterZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA);"
                                 (focus)="refreshZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA, false);"
                                 (keyup.enter)="selectZaposleniPoGrupiIShemi(offeredZaposleniPoGrupiIShemi[ZaposleniPoGrupiIShemiDropdownIndex]);"
@@ -203,7 +204,7 @@
                         </mat-icon>
 
                         <span (click)="refreshVrstePosla(varNames!.SIF_VP, false);">
-                            <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
+                            <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
                                 (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"

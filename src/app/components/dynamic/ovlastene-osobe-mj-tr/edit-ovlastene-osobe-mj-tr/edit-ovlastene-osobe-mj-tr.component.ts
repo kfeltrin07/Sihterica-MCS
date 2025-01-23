@@ -8,8 +8,9 @@ import { MatDialogRef, MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angu
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PickOrgJediniceComponent } from 'src/app/components/pickers/pick-org-jedinice/pick-org-jedinice.component';
+import { PickOvlasteneOsobeComponent } from 'src/app/components/pickers/pick-ovlastene-osobe/pick-ovlastene-osobe.component';
 import { PickZaposleniComponent } from 'src/app/components/pickers/pick-zaposleni/pick-zaposleni.component';
-import { OvlastenaOsobaMjTr, OrganizacijskeJedinice, Zaposleni, CRUDAction } from 'src/app/models/models.service';
+import { OvlastenaOsobaMjTr, OrganizacijskeJedinice, Zaposleni, CRUDAction, Operateri } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -55,6 +56,7 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
 
   public OrganizacijskeJediniceDropdownIndex: number = -1;
   public offeredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
+  public filteredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
   public selectedOrganizacijskeJedinice: OrganizacijskeJedinice = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -77,22 +79,21 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
     SYSD: ""
   };
 
-  public ZaposleniDropdownIndex: number = -1;
-  public offeredZaposleni: Zaposleni[] = [];
-  public selectedZaposleni: Zaposleni = {
+  public OperateriDropdownIndex: number = -1;
+  public offeredOperateri: Operateri[] = [];
+  public filteredOperateri: Operateri[] = [];
+  public selectedOperateri: Operateri = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
-    SIFVLAS: "",
-    MBR: "",
-    PREZIME_IME: "",
-    SIF_RM: "",
-    NAZ_ZAN: "",
-    NAZ_RM: "",
-    SIF_OJ: "",
-    NAZ_OJ: "",
-    IND: "",
+    ID: "",
+    NAZIV: "",
+    USERNAME: "",
+    PASSWORD: "",
+    NAPOMENA: "",
+    IDULOGE: "",
+    ULOGA: "",
   };
-
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedOvlastenaOsobaMjTr: OvlastenaOsobaMjTr,
     private dialogRef: MatDialogRef<EditOvlasteneOsobeMjTrComponent>,
@@ -113,7 +114,7 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
 
   public ngOnInit(): void { 
     this.OfferedOrganizationalUnits();
-    this.OfferedZaposleni();
+    this.OfferedOperateri();
   }
 
   public validateForm(OvlastenaOsobaMjTr: OvlastenaOsobaMjTr): boolean {
@@ -245,99 +246,116 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
   }
   //Organizacijska jedinica  END
 
-  //ZAPOSLENI START
-  public pickZaposleni(): void {
-    const dialogRef = this.dialog.open(PickZaposleniComponent, {});
-
-    dialogRef.afterClosed().subscribe((Zaposleni?: Zaposleni) => {
-      this.setZaposleniFromDialog(Zaposleni);
-    });
-  }
-
-  public setZaposleniFromDialog(Zaposleni?: Zaposleni): void {
-    if (Zaposleni) {
-      this.OvlastenaOsobaMjTr.ID = Zaposleni.MBR;
-      this.varNames.PREZIME_IME = Zaposleni.PREZIME_IME;
+   //ZAPOSLENI START
+    public pickOperateri(): void {
+      const dialogRef = this.dialog.open(PickOvlasteneOsobeComponent, {});
+  
+      dialogRef.afterClosed().subscribe((Operateri?: Operateri) => {
+        this.setOperateriFromDialog(Operateri);
+      });
     }
-  }
-
-  public removeZaposleni(e: Event): void {
-    e.preventDefault();
-    this.OvlastenaOsobaMjTr.ID = "";
-    this.varNames.PREZIME_IME = "";
-
-  }
-
-  public refreshZaposleni(searchParam: string, isSelected: boolean): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getZaposleni',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: searchParam,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "MBR",
-              direction: "ASC"
-            }
-          ]
+  
+    public setOperateriFromDialog(Operateri?: Operateri): void {
+      if (Operateri) {
+        this.OvlastenaOsobaMjTr.ID = Operateri.ID;
+        this.varNames.NAZIV = Operateri.NAZIV;
+      }
+    }
+  
+    public removeOperateri(e: Event): void {
+      e.preventDefault();
+      this.OvlastenaOsobaMjTr.ID = "";
+      this.varNames.NAZIV = "";
+  
+    }
+  
+    public refreshOperateri(searchParam: string, isSelected: boolean): void {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'getPregledOperatera',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pDioNaziva: searchParam,
+            limit: 100,
+            page: 1,
+            sort: [
+              {
+                property: "ID",
+                direction: "ASC"
+              }
+            ]
+          }
         }
-      }
-    ).subscribe((response: any) => {
-      console.log(response);
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      if (!isSelected) {
-        document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
-      }
-    });
-  }
-
-  public OfferedZaposleni(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getZaposleni',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: this.OvlastenaOsobaMjTr.ID,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "MBR",
-              direction: "ASC"
-            }
-          ]
+      ).subscribe((response: any) => {
+        console.log(response);
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.offeredOperateri = response.debugData.data;
+        this.filteredOperateri = response.debugData.data;
+        if (!isSelected) {
+          document.getElementById("offeredOperateri-dropdown")?.classList.add("select-dropdown-content-visible");
         }
-      }
-    ).subscribe((response: any) => {
-
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      for (let item of this.offeredZaposleni) {
-        if (item.MBR == this.OvlastenaOsobaMjTr.ID) {
-          this.varNames.PREZIME_IME = item.PREZIME_IME;
+      });
+    }
+  
+    public OfferedOperateri(): void {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'getPregledOperatera',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pDioNaziva: this.OvlastenaOsobaMjTr.ID,
+            limit: 100,
+            page: 1,
+            sort: [
+              {
+                property: "ID",
+                direction: "ASC"
+              }
+            ]
+          }
         }
+      ).subscribe((response: any) => {
+  
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.offeredOperateri = response.debugData.data;
+        for (let item of this.offeredOperateri) {
+          if (item.ID.toUpperCase() == this.OvlastenaOsobaMjTr.ID.toUpperCase()) {
+            this.varNames.NAZIV = item.NAZIV;
+            this.OvlastenaOsobaMjTr.ID = item.ID;
+          }
+        }
+      });
+    }
+  
+    public filterOperateri(text: string): void {
+      if (!text) {
+        this.refreshOperateri("",false);
+        return;
       }
-    });
-  }
-
-  public selectZaposleni(Zaposleni: Zaposleni): void {
-    this.OvlastenaOsobaMjTr.ID = Zaposleni.MBR;
-    this.varNames.PREZIME_IME = Zaposleni.PREZIME_IME;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.ZaposleniDropdownIndex = -1;
-  }
-
-  public resetZaposleni(): void {
-    this.ZaposleniDropdownIndex = -1;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-  }
-  //ZAPOSLENI END
+    
+      this.offeredOperateri = this.filteredOperateri.filter(
+        item => item?.ID.toLowerCase().includes(text.toLowerCase())
+      );
+  
+      if(this.offeredOperateri.length == 0){
+        this.refreshOperateri(text,false);
+      }
+    }
+  
+    public selectOperateri(Operateri: Operateri): void {
+      this.OvlastenaOsobaMjTr.ID = Operateri.ID;
+      this.varNames.NAZIV = Operateri.NAZIV;
+      document.getElementById("offeredOperateri-dropdown")?.classList.remove("select-dropdown-content-visible");
+      this.OperateriDropdownIndex = -1;
+    }
+  
+    public resetOperateri(): void {
+      this.OperateriDropdownIndex = -1;
+      document.getElementById("offeredOperateri-dropdown")?.classList.remove("select-dropdown-content-visible");
+    }
+    //ZAPOSLENI END
 }

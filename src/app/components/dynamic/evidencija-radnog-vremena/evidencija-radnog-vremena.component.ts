@@ -111,6 +111,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
 
   public EvidencijaRadVreOjDropdownIndex: number = -1;
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
   public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -135,7 +136,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog
   ) { }
@@ -311,6 +312,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
+      this.filteredEvidencijaRadVreOj = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -340,14 +342,30 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
 
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
-      for (let item of this.offeredEvidencijaRadVreOj) {
-        if (item.SIF_OJ == this.filter.SIF_OJ) {
-          this.filter.NAZMJTR = item.NAZMJTR;
-          this.filter.VRSTA = item.VRSTA;
-          this.pripremaGotova = false;
-        }
+
+      const matchedItem = this.offeredEvidencijaRadVreOj.find(item => item.SIF_OJ.toUpperCase() === this.filter.SIF_OJ.toUpperCase());
+      if (matchedItem) {
+        this.filter.SIF_OJ = matchedItem.SIF_OJ;
+        this.filter.NAZMJTR = matchedItem.NAZMJTR;
+        this.filter.VRSTA = matchedItem.VRSTA;
       }
+
     });
+  }
+
+  public filterEvidencijaRadVreOj(text: string): void {
+    if (!text) {
+      this.refreshEvidencijaRadVreOj("", false);
+      return;
+    }
+
+    this.offeredEvidencijaRadVreOj = this.filteredEvidencijaRadVreOj.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredEvidencijaRadVreOj.length == 0) {
+      this.refreshEvidencijaRadVreOj(text, false);
+    }
   }
 
   public selectEvidencijaRadVreOj(EvidencijaRadVreOj: EvidencijaRadVreOj): void {

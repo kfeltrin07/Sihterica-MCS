@@ -39,7 +39,9 @@ class="colored-header text-align-center">
                             (ngModelChange)="filterEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA);"
                             (focus)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
                             (keyup.enter)="selectEvidVezeSifra(offeredEvidVezeSifra[EvidVezeSifraDropdownIndex]);"
-                            (keyup.escape)="resetEvidVezeSifra();">
+                            (keyup.escape)="resetEvidVezeSifra();"
+                            (keyup.arrowdown)="EvidVezeSifraDropdownIndex = (EvidVezeSifraDropdownIndex + 1) % offeredEvidVezeSifra.length;globalFn.scroll('offeredEvidVezeSifra-dropdown-' + EvidVezeSifraDropdownIndex);"
+                            (keyup.arrowup)="EvidVezeSifraDropdownIndex = (EvidVezeSifraDropdownIndex - 1 + offeredEvidVezeSifra.length) % offeredEvidVezeSifra.length;globalFn.scroll('offeredEvidVezeSifra-dropdown-' + EvidVezeSifraDropdownIndex);">
                         <div id="offeredEvidVezeSifra-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
                             <div [id]="'offeredEvidVezeSifra-dropdown-' + i"
@@ -77,7 +79,9 @@ class="colored-header text-align-center">
                             (ngModelChange)="filterEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP);"
                             (focus)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
                             (keyup.enter)="selectEvidVezeIzracuna(offeredEvidVezeIzracuna[EvidVezeIzracunaDropdownIndex]);"
-                            (keyup.escape)="resetEvidVezeIzracuna();">
+                            (keyup.escape)="resetEvidVezeIzracuna();"
+                            (keyup.arrowdown)="EvidVezeIzracunaDropdownIndex = (EvidVezeIzracunaDropdownIndex + 1) % offeredEvidVezeIzracuna.length;globalFn.scroll('offeredEvidVezeIzracuna-dropdown-' + EvidVezeIzracunaDropdownIndex);"
+                            (keyup.arrowup)="EvidVezeIzracunaDropdownIndex = (EvidVezeIzracunaDropdownIndex - 1 + offeredEvidVezeIzracuna.length) % offeredEvidVezeIzracuna.length;globalFn.scroll('offeredEvidVezeIzracuna-dropdown-' + EvidVezeIzracunaDropdownIndex);">
                         <div id="offeredEvidVezeIzracuna-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
                             <div [id]="'offeredEvidVezeIzracuna-dropdown-' + i"

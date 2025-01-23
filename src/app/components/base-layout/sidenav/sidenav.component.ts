@@ -30,7 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit,AfterContentInit {
+export class SidenavComponent implements OnInit,AfterViewInit {
   @ViewChild('snav') public sidenav!: MatSidenav;
   @ViewChild('spanelement') public spanelement!: ElementRef;
 
@@ -54,7 +54,7 @@ export class SidenavComponent implements OnInit,AfterContentInit {
     this.filterSidebarItems();
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
 

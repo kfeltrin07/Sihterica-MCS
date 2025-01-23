@@ -70,7 +70,9 @@ class="colored-header text-align-center">
                             (ngModelChange)="filterOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA);"
                             (focus)="refreshOpisVrste(EvidencijaRadVreZag!.VRSTA_SLOGA, false);"
                             (keyup.enter)="selectOpisVrste(offeredOpisVrste[OpisVrsteDropdownIndex]);"
-                            (keyup.escape)="resetOpisVrste();">
+                            (keyup.escape)="resetOpisVrste();"
+							(keyup.arrowdown)="OpisVrsteDropdownIndex = (OpisVrsteDropdownIndex + 1) % offeredOpisVrste.length;globalFn.scroll('offeredOpisVrste-dropdown-' + OpisVrsteDropdownIndex);"
+							(keyup.arrowup)="OpisVrsteDropdownIndex = (OpisVrsteDropdownIndex - 1 + offeredOpisVrste.length) % offeredOpisVrste.length;globalFn.scroll('offeredOpisVrste-dropdown-' + OpisVrsteDropdownIndex);">
                         <div id="offeredOpisVrste-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
                             <div [id]="'offeredOpisVrste-dropdown-' + i"

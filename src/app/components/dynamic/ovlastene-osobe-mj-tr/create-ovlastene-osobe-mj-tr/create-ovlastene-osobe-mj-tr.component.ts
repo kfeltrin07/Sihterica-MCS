@@ -9,8 +9,8 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PickOrgJediniceComponent } from 'src/app/components/pickers/pick-org-jedinice/pick-org-jedinice.component';
-import { PickZaposleniComponent } from 'src/app/components/pickers/pick-zaposleni/pick-zaposleni.component';
-import { CRUDAction, OrganizacijskeJedinice, OvlastenaOsobaMjTr, Zaposleni } from 'src/app/models/models.service';
+import { PickOvlasteneOsobeComponent } from 'src/app/components/pickers/pick-ovlastene-osobe/pick-ovlastene-osobe.component';
+import { CRUDAction, Operateri, OrganizacijskeJedinice, OvlastenaOsobaMjTr } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -79,21 +79,19 @@ export class CreateOvlasteneOsobeMjTrComponent {
     SYSD: ""
   };
 
-  public ZaposleniDropdownIndex: number = -1;
-  public offeredZaposleni: Zaposleni[] = [];
-  public filteredZaposleni: Zaposleni[] = [];
-  public selectedZaposleni: Zaposleni = {
+  public OperateriDropdownIndex: number = -1;
+  public offeredOperateri: Operateri[] = [];
+  public filteredOperateri: Operateri[] = [];
+  public selectedOperateri: Operateri = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
-    SIFVLAS: "",
-    MBR: "",
-    PREZIME_IME: "",
-    SIF_RM: "",
-    NAZ_ZAN: "",
-    NAZ_RM: "",
-    SIF_OJ: "",
-    NAZ_OJ: "",
-    IND: "",
+    ID: "",
+    NAZIV: "",
+    USERNAME: "",
+    PASSWORD: "",
+    NAPOMENA: "",
+    IDULOGE: "",
+    ULOGA: "",
   };
 
   constructor(
@@ -255,34 +253,34 @@ export class CreateOvlasteneOsobeMjTrComponent {
   //Organizacijska jedinica  END
 
   //ZAPOSLENI START
-  public pickZaposleni(): void {
-    const dialogRef = this.dialog.open(PickZaposleniComponent, {});
+  public pickOperateri(): void {
+    const dialogRef = this.dialog.open(PickOvlasteneOsobeComponent, {});
 
-    dialogRef.afterClosed().subscribe((Zaposleni?: Zaposleni) => {
-      this.setZaposleniFromDialog(Zaposleni);
+    dialogRef.afterClosed().subscribe((Operateri?: Operateri) => {
+      this.setOperateriFromDialog(Operateri);
     });
   }
 
-  public setZaposleniFromDialog(Zaposleni?: Zaposleni): void {
-    if (Zaposleni) {
-      this.OvlastenaOsobaMjTr.ID = Zaposleni.MBR;
-      this.varNames.PREZIME_IME = Zaposleni.PREZIME_IME;
+  public setOperateriFromDialog(Operateri?: Operateri): void {
+    if (Operateri) {
+      this.OvlastenaOsobaMjTr.ID = Operateri.ID;
+      this.varNames.NAZIV = Operateri.NAZIV;
     }
   }
 
-  public removeZaposleni(e: Event): void {
+  public removeOperateri(e: Event): void {
     e.preventDefault();
     this.OvlastenaOsobaMjTr.ID = "";
-    this.varNames.PREZIME_IME = "";
+    this.varNames.NAZIV = "";
 
   }
 
-  public refreshZaposleni(searchParam: string, isSelected: boolean): void {
+  public refreshOperateri(searchParam: string, isSelected: boolean): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'getZaposleni',
+        method: 'getPregledOperatera',
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
@@ -290,7 +288,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
           page: 1,
           sort: [
             {
-              property: "MBR",
+              property: "ID",
               direction: "ASC"
             }
           ]
@@ -299,20 +297,20 @@ export class CreateOvlasteneOsobeMjTrComponent {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      this.filteredZaposleni = response.debugData.data;
+      this.offeredOperateri = response.debugData.data;
+      this.filteredOperateri = response.debugData.data;
       if (!isSelected) {
-        document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
+        document.getElementById("offeredOperateri-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
   }
 
-  public OfferedZaposleni(): void {
+  public OfferedOperateri(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'getZaposleni',
+        method: 'getPregledOperatera',
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.OvlastenaOsobaMjTr.ID,
@@ -320,7 +318,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
           page: 1,
           sort: [
             {
-              property: "MBR",
+              property: "ID",
               direction: "ASC"
             }
           ]
@@ -329,41 +327,41 @@ export class CreateOvlasteneOsobeMjTrComponent {
     ).subscribe((response: any) => {
 
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredZaposleni = response.debugData.data;
-      for (let item of this.offeredZaposleni) {
-        if (item.MBR.toUpperCase() == this.OvlastenaOsobaMjTr.ID.toUpperCase()) {
-          this.varNames.PREZIME_IME = item.PREZIME_IME;
-          this.OvlastenaOsobaMjTr.ID = item.MBR;
+      this.offeredOperateri = response.debugData.data;
+      for (let item of this.offeredOperateri) {
+        if (item.ID.toUpperCase() == this.OvlastenaOsobaMjTr.ID.toUpperCase()) {
+          this.varNames.NAZIV = item.NAZIV;
+          this.OvlastenaOsobaMjTr.ID = item.ID;
         }
       }
     });
   }
 
-  public filterZaposleni(text: string): void {
+  public filterOperateri(text: string): void {
     if (!text) {
-      this.refreshZaposleni("",false);
+      this.refreshOperateri("",false);
       return;
     }
   
-    this.offeredZaposleni = this.filteredZaposleni.filter(
-      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    this.offeredOperateri = this.filteredOperateri.filter(
+      item => item?.ID.toLowerCase().includes(text.toLowerCase())
     );
 
-    if(this.offeredZaposleni.length == 0){
-      this.refreshZaposleni(text,false);
+    if(this.offeredOperateri.length == 0){
+      this.refreshOperateri(text,false);
     }
   }
 
-  public selectZaposleni(Zaposleni: Zaposleni): void {
-    this.OvlastenaOsobaMjTr.ID = Zaposleni.MBR;
-    this.varNames.PREZIME_IME = Zaposleni.PREZIME_IME;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.ZaposleniDropdownIndex = -1;
+  public selectOperateri(Operateri: Operateri): void {
+    this.OvlastenaOsobaMjTr.ID = Operateri.ID;
+    this.varNames.NAZIV = Operateri.NAZIV;
+    document.getElementById("offeredOperateri-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.OperateriDropdownIndex = -1;
   }
 
-  public resetZaposleni(): void {
-    this.ZaposleniDropdownIndex = -1;
-    document.getElementById("offeredZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
+  public resetOperateri(): void {
+    this.OperateriDropdownIndex = -1;
+    document.getElementById("offeredOperateri-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
   //ZAPOSLENI END
 }

@@ -30,7 +30,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { CRUDAction, EvidencijaMjesecna, Grupe, OrganizacijskeJedinice, Sheme, VrstePosla, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
+import { CRUDAction, EvidencijaMjesecna, Grupe, EvidencijaRadVreOj, Sheme, VrstePosla, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
 import { EventGrupniUnosComponent } from './event-grupni-unos/event-grupni-unos.component';
 import { PickGrupeComponent } from '../../pickers/pick-grupe/pick-grupe.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -42,6 +42,7 @@ import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import { DnevnaEvidencijaComponent } from '../dnevna-evidencija/dnevna-evidencija.component';
+import { PickEvidencijaHelpOjComponent } from '../../pickers/pick-evidencija-help-oj/pick-evidencija-help-oj.component';
 
 
 
@@ -144,29 +145,15 @@ export class GrupniUnosComponent implements OnInit {
     NAZ_OJ: ""
   };
 
-  public OrganizacijskeJediniceDropdownIndex: number = -1;
-  public offeredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
-  public filteredEvidVezeIzracuna: OrganizacijskeJedinice[] = [];
-  public selectedOrganizacijskeJedinice: OrganizacijskeJedinice = {
+  public EvidencijaRadVreOjDropdownIndex: number = -1;
+  public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
-    SIFVLAS: "",
     SIF_OJ: "",
-    NAZ_OJ: "",
-    REG_BR: "",
-    BOD_PC: "",
-    KOEF_PC: "",
-    VR_BOD: "",
-    VR_KOEF: "",
-    PROS_SAT: "",
-    PROS_KOEF: "",
-    PROS_BOD: "",
-    IND1: "",
-    SIF_NAD: "",
-    BRO_HZZO: "",
-    RSOPC: "",
-    IDK: "",
-    SYSD: ""
+    NAZMJTR: "",
+    VRSTA: "",
   };
 
   public zaposleniPoGrupiIShemi: ZaposleniPoGrupiIShemi[] = [];
@@ -180,7 +167,8 @@ export class GrupniUnosComponent implements OnInit {
     ID_GRUPE: "",
     ID_RADNIKA: "",
     NAZ_OJ: "",
-    SIFMJTR: ""
+    SIFMJTR: "%",
+    SIF_OJ: "%",
   }
 
 
@@ -194,40 +182,7 @@ export class GrupniUnosComponent implements OnInit {
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
-  public externalShemeEvents: CalendarEvent[] = [
-    /*
-    {
-      id: 1,
-      title: "Test",
-      start: new Date(),
-      end: this.viewDate1,
-      color: colors[0],
-      draggable: true,
-      actions: this.actions,
-      meta: {
-        OD: new Date(),
-        DO: new Date(),
-        SIF_SHEME:"2",
-        OPIS: "Neki opis",
-        PAUZA_DO: "10:00",
-        PAUZA_OD: "10:30",
-        UKUPANBROJSLOGOVA: "1",
-        RN: "2",
-        incrementsBadgeTotal: true,
 
-      },
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-    }*/
-  ];
-
-  public externalGrupeEvents: CalendarEvent[] = [
-  ];
-
-  public events: CalendarEvent[] = [
-  ];
 
   refresh = new Subject<void>();
 
@@ -242,9 +197,13 @@ export class GrupniUnosComponent implements OnInit {
 
 
   public ngOnInit(): void {
-    this.getSheme();
+    //this.getSheme();
     this.getGrupeEvents();
     this.getHolidays();
+    this.GetInitialGrupe();
+    this.OfferedEvidencijaRadVreOj();
+    this.OfferedVrstePosla();
+    this.getEvidencijaMjesecna();
   }
 
   public beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
@@ -261,7 +220,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public clearCalendar(): void {
-    this.events = [];
+    this.globalVar.events = [];
     this.getHolidays();
   }
 
@@ -272,7 +231,7 @@ export class GrupniUnosComponent implements OnInit {
   }: CalendarEventTimesChangedEvent): void {
     let match: boolean = false;
     const newEvent: CalendarEvent = {
-      id: this.events.length,
+      id: this.globalVar.events.length,
       title: event.title,
       start: newStart,
       end: newEnd,
@@ -284,7 +243,7 @@ export class GrupniUnosComponent implements OnInit {
         afterEnd: true,
       },
     }
-    this.events = this.events.map((iEvent) => {
+    this.globalVar.events = this.globalVar.events.map((iEvent) => {
       if (iEvent === event) {
         match = true;
         return {
@@ -302,7 +261,7 @@ export class GrupniUnosComponent implements OnInit {
     });
 
     if (match == false) {
-      this.events = [...this.events, newEvent];
+      this.globalVar.events = [...this.globalVar.events, newEvent];
     }
   }
 
@@ -318,18 +277,18 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+    this.globalVar.events = this.globalVar.events.filter((event) => event !== eventToDelete);
   }
 
   public externalDropSheme(event: CalendarEvent) {
-    if (this.externalShemeEvents.indexOf(event) === -1) {
-      this.events = this.events.filter((iEvent) => iEvent !== event);
+    if (this.globalVar.externalShemeEvents.indexOf(event) === -1) {
+      this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
     }
   }
 
   public externalDropGrupe(event: CalendarEvent) {
-    if (this.externalGrupeEvents.indexOf(event) === -1) {
-      this.events = this.events.filter((iEvent) => iEvent !== event);
+    if (this.globalVar.externalShemeEvents.indexOf(event) === -1) {
+      this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
     }
   }
 
@@ -368,7 +327,7 @@ export class GrupniUnosComponent implements OnInit {
         if (index == colors.length) {
           colorindex = 0
         }
-        this.externalShemeEvents = [...this.externalShemeEvents, {
+        this.globalVar.externalShemeEvents = [...this.globalVar.externalShemeEvents, {
           id: index,
           title: shema.OPIS,
           start: dateOd,
@@ -465,35 +424,40 @@ export class GrupniUnosComponent implements OnInit {
           if (index == colors.length) {
             colorindex = 0
           };
-          this.externalGrupeEvents = [...this.externalGrupeEvents, {
-            id: index,
-            title: grupe.NAZ_GRUPE,
-            start: dateOd,
-            end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
-            color: colors[colorindex],
-            draggable: true,
-            meta: {
-              OD: shema?.OD,
-              DO: shema?.DO,
-              NAZ_GRUPE: grupe?.NAZ_GRUPE,
-              ID_GRUPE: grupe?.ID_GRUPE,
-              NAZ_SHEME: shema?.OPIS,
-              SIF_SHEME: shema?.SIF_SHEME,
-              OPIS: shema?.OPIS,
-              PAUZA_DO: shema?.PAUZA_DO,
-              PAUZA_OD: shema?.PAUZA_OD,
-              UKUPANBROJSLOGOVA: shema?.UKUPANBROJSLOGOVA,
-              RN: shema?.RN,
-              NOVASHEMA: true,
-              type: 'grupa',
-              incrementsBadgeTotal: true,
 
-            },
-            resizable: {
-              beforeStart: true,
-              afterEnd: true,
-            },
-          }];
+          if(!this.globalVar.externalGrupeEvents.find((iEvent) => iEvent.meta.ID_GRUPE === grupe.ID_GRUPE)){
+            this.globalVar.externalGrupeEvents = [...this.globalVar.externalGrupeEvents, {
+              id: index,
+              title: grupe.NAZ_GRUPE,
+              start: dateOd,
+              end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
+              color: colors[colorindex],
+              draggable: true,
+              meta: {
+                OD: shema?.OD,
+                DO: shema?.DO,
+                NAZ_GRUPE: grupe?.NAZ_GRUPE,
+                ID_GRUPE: grupe?.ID_GRUPE,
+                NAZ_SHEME: shema?.OPIS,
+                SIF_SHEME: shema?.SIF_SHEME,
+                OPIS: shema?.OPIS,
+                PAUZA_DO: shema?.PAUZA_DO,
+                PAUZA_OD: shema?.PAUZA_OD,
+                UKUPANBROJSLOGOVA: shema?.UKUPANBROJSLOGOVA,
+                RN: shema?.RN,
+                NOVASHEMA: true,
+                type: 'grupa',
+                incrementsBadgeTotal: true,
+  
+              },
+              resizable: {
+                beforeStart: true,
+                afterEnd: true,
+              },
+            }];
+          };
+
+          
           index++;
           colorindex++;
         });
@@ -509,7 +473,7 @@ export class GrupniUnosComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.events = this.events.map((iEvent) => {
+          this.globalVar.events = this.globalVar.events.map((iEvent) => {
             if (iEvent === event) {
               return {
                 ...event,
@@ -537,7 +501,7 @@ export class GrupniUnosComponent implements OnInit {
     this.http.get('https://openholidaysapi.org/PublicHolidays?countryIsoCode=HR&languageIsoCode=HR&validFrom=' + (date.getFullYear() - 1) + '-01-01&validTo=' + date.getFullYear() + '-12-31'
 
     ).subscribe((response: any) => {
-      this.events = response.map((holiday: any) => {
+      this.globalVar.events = response.map((holiday: any) => {
         return {
           start: new Date(holiday.startDate),
           title: holiday.name[0].text,
@@ -609,7 +573,9 @@ export class GrupniUnosComponent implements OnInit {
       this.offeredGrupe = response.debugData.data;
       this.filteredGrupe = this.offeredGrupe;
       console.log(isSelected);
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredGrupe1-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredGrupe1-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
@@ -646,6 +612,34 @@ export class GrupniUnosComponent implements OnInit {
           this.varNames.ID_GRUPE = item.ID_GRUPE;
         }
       }
+    });
+  }
+
+  public GetInitialGrupe(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getGrupe',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: '',
+          pSifSheme: '',
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "ID_GRUPE",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.varNames.NAZ_GRUPE = response.debugData.data[0].NAZ_GRUPE;
+      this.varNames.ID_GRUPE =  response.debugData.data[0].ID_GRUPE;
     });
   }
 
@@ -725,7 +719,9 @@ export class GrupniUnosComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredVrstePosla = response.debugData.data;
       this.filteredVrstePosla = this.offeredVrstePosla;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredVrstePosla-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
@@ -857,7 +853,9 @@ export class GrupniUnosComponent implements OnInit {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
         this.offeredZaposleniPoGrupiIShemi = response.debugData.data;
         this.filteredZaposleniPoGrupiIShemi = this.offeredZaposleniPoGrupiIShemi;
-        if (!isSelected) {
+        var dummyEl = document.getElementById('offeredZaposleniPoGrupiIShemi-help-span');
+        var isFocused = (document.activeElement === dummyEl);
+        if (!isSelected && isFocused) {
           document.getElementById("offeredZaposleniPoGrupiIShemi-dropdown")?.classList.add("select-dropdown-content-visible");
         }
       });
@@ -930,39 +928,37 @@ export class GrupniUnosComponent implements OnInit {
   }
   //ZaposleniPoGrupiIShemi END
 
-  //Organizacijska jedinica START
-  public pickOrganizationalUnits(): void {
-    const dialogRef = this.dialog.open(PickOrgJediniceComponent, {});
+public pickEvidencijaRadVreOj(): void {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpOjComponent, {});
 
-    dialogRef.afterClosed().subscribe((OrganizacijskeJedinice?: OrganizacijskeJedinice) => {
-      this.setOrganizationalUnitsFromDialog(OrganizacijskeJedinice);
+    dialogRef.afterClosed().subscribe((EvidencijaRadVreOj?: EvidencijaRadVreOj) => {
+      this.setEvidencijaRadVreOjFromDialog(EvidencijaRadVreOj);
     });
   }
 
-  public setOrganizationalUnitsFromDialog(OrganizacijskeJedinice?: OrganizacijskeJedinice): void {
-    if (OrganizacijskeJedinice) {
-      this.varNames.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
-      this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
+  public setEvidencijaRadVreOjFromDialog(EvidencijaRadVreOj?: EvidencijaRadVreOj): void {
+    if (EvidencijaRadVreOj) {
+      this.varNames.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
+      this.varNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+
     }
   }
 
-  public removeOrganizationalUnits(e: Event): void {
+  public removeEvidencijaRadVreOj(e: Event): void {
     e.preventDefault();
-    this.varNames.SIFMJTR = "";
-    this.varNames.NAZ_OJ = "";
-
+    this.varNames.SIF_OJ = "";
+    this.varNames.NAZMJTR = "";
   }
 
-  public refreshOrganizationalUnits(searchParam: string, isSelected: boolean): void {
-    console.log("refresh was clicked");
+  public refreshEvidencijaRadVreOj(searchParam: string, isSelected: boolean): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'getOJ',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: searchParam,
+          pIdKorisnika: this.session.loggedInUser.ID,
           limit: 100,
           page: 1,
           sort: [
@@ -976,24 +972,25 @@ export class GrupniUnosComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredOrganizacijskeJedinice = response.debugData.data;
-      this.filteredEvidVezeIzracuna = response.debugData.data;
-      console.log("data is here");
-      if (!isSelected) {
-        document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.add("select-dropdown-content-visible");
+      this.offeredEvidencijaRadVreOj = response.debugData.data;
+      this.filteredEvidencijaRadVreOj = response.debugData.data;
+      var dummyEl = document.getElementById('offeredEvidencijaRadVreOj-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
+        document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
   }
 
-  public OfferedOrganizationalUnits(): void {
+  public OfferedEvidencijaRadVreOj(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'getOJ',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: this.varNames.SIFMJTR,
+          pIdKorisnika: this.session.loggedInUser.ID,
           limit: 100,
           page: 1,
           sort: [
@@ -1006,44 +1003,45 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredOrganizacijskeJedinice = response.debugData.data;
-      for (let item of this.offeredOrganizacijskeJedinice) {
-        if (item.SIF_OJ.toUpperCase() == this.varNames.SIFMJTR.toUpperCase()) {
-          this.varNames.NAZ_OJ = item.NAZ_OJ;
-          this.varNames.SIFMJTR = item.SIF_OJ;
+      this.offeredEvidencijaRadVreOj = response.debugData.data;
+      for (let item of this.offeredEvidencijaRadVreOj) {
+        if (item.SIF_OJ.toUpperCase() == this.varNames.SIF_OJ.toUpperCase()) {
+          this.varNames.NAZMJTR = item.NAZMJTR;
+          this.varNames.SIF_OJ = item.SIF_OJ;
         }
       }
     });
   }
 
-  public filterOrganizationalUnits(text: string): void {
+  public filterEvidencijaRadVreOj(text: string): void {
     if (!text) {
-      this.refreshOrganizationalUnits("", false);
+      this.refreshEvidencijaRadVreOj("", false);
       return;
     }
 
-    this.offeredOrganizacijskeJedinice = this.filteredEvidVezeIzracuna.filter(
+    this.offeredEvidencijaRadVreOj = this.filteredEvidencijaRadVreOj.filter(
       item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
     );
 
-    if (this.offeredOrganizacijskeJedinice.length == 0) {
-      this.refreshOrganizationalUnits(text, false);
+    if (this.offeredEvidencijaRadVreOj.length == 0) {
+      this.refreshEvidencijaRadVreOj(text, false);
     }
   }
 
-  public selectOrganizationalUnits(OrganizacijskeJedinice: OrganizacijskeJedinice): void {
-    this.varNames.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
-    this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
-    document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.OrganizacijskeJediniceDropdownIndex = -1;
+  public selectEvidencijaRadVreOj(EvidencijaRadVreOj: EvidencijaRadVreOj): void {
+    this.varNames.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
+    this.varNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+    this.varNames.VRSTA = EvidencijaRadVreOj.VRSTA;
+
+    document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.EvidencijaRadVreOjDropdownIndex = -1;
   }
 
-  public resetOrganizationalUnits(): void {
-    this.OrganizacijskeJediniceDropdownIndex = -1;
-    document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.remove("select-dropdown-content-visible");
+  public resetEvidencijaRadVreOjIndex(): void {
+    this.EvidencijaRadVreOjDropdownIndex = -1;
+    document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
-  //Organizacijska jedinica  END
+  //EvidencijaRadVreOj END
 
   public getZaposleniGrupe(event: any): void {
     this.http.post(
@@ -1078,7 +1076,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public async save() {
-    for (let event of this.events) {
+    for (let event of this.globalVar.events) {
       if (event.meta?.type != 'holiday') {
         await this.getZaposleniGrupe(event);
       }
@@ -1121,7 +1119,7 @@ export class GrupniUnosComponent implements OnInit {
 
 
   public getEvidencijaMjesecna(): void {
-    this.events = this.events.filter((iEvent) => iEvent.meta.type === "holiday");
+    this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent.meta.type === "holiday");
 
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
@@ -1163,20 +1161,20 @@ export class GrupniUnosComponent implements OnInit {
           if (index == colors.length) {
             colorindex = 0
           }
-          this.events = [...this.events, {
+          this.globalVar.events = [...this.globalVar.events, {
             id: index,
             title: this.varNames.NAZ_SHEME,
             start: dateOd,
             end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
-            color: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.color,
+            color: this.globalVar.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.color,
             draggable: true,
             meta: {
               UKUPANBROJSLOGOVA: satnica?.UKUPANBROJSLOGOVA,
               RN: satnica?.RN,
               OD: satnica?.OD,
               DO: satnica?.DO,
-              PAUZA_DO: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_DO,
-              PAUZA_OD: this.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_OD,
+              PAUZA_DO: this.globalVar.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_DO,
+              PAUZA_OD: this.globalVar.externalShemeEvents.find(u => u.meta.SIF_SHEME.toLowerCase() === this.varNames.SIF_SHEME.toLowerCase())?.meta.PAUZA_OD,
               SIF_MT: satnica?.SIF_MT,
               MBR: satnica?.MBR,
               SIF_VP: satnica?.SIF_VP,
@@ -1201,9 +1199,9 @@ export class GrupniUnosComponent implements OnInit {
 
   }
 
-  public goToDnevnaEvidencija(event:any):void{
-    let data= { ID_RADNIKA: this.varNames.ID_RADNIKA, SIFMJTR: this.varNames.SIFMJTR, SIF_VP: this.varNames.SIF_VP,DATUM:event.date.toLocaleString() } ;
-  
+  public goToDnevnaEvidencija(event: any): void {
+    let data = { ID_RADNIKA: this.varNames.ID_RADNIKA, SIFMJTR: this.varNames.SIFMJTR, SIF_VP: this.varNames.SIF_VP, DATUM: event.date.toLocaleString() };
+
     this.router.navigate(["dnevna-evidencija", data]);
 
 

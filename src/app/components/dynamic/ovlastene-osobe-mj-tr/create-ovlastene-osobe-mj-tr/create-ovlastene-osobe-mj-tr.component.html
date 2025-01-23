@@ -25,37 +25,39 @@ class="colored-header text-align-center">
 				</td>
                 <td style="display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickZaposleni();" (contextmenu)="removeZaposleni($event)"
+                        (click)="pickOperateri();" (contextmenu)="removeOperateri($event)"
                         matTooltip="{{ (!OvlastenaOsobaMjTr.ID ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.PREZIME_IME">
-                        {{ varNames!.PREZIME_IME ? 'done' : 'import_contacts'}}
+                        [class.color-valid]="varNames.NAZIV">
+                        {{ varNames!.NAZIV ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span
-                        (click)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);">
+                        (click)="refreshOperateri(OvlastenaOsobaMjTr!.ID, false);">
                         <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.ID" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedZaposleni();resetZaposleni();"
-                            (ngModelChange)="filterZaposleni(OvlastenaOsobaMjTr!.ID);"
-                            (focus)="refreshZaposleni(OvlastenaOsobaMjTr!.ID, false);"
-                            (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
-                            (keyup.escape)="resetZaposleni();">
-                        <div id="offeredZaposleni-dropdown" class="select-dropdown-content max-height-300px"
+                            (blur)="OfferedOperateri();resetOperateri();"
+                            (ngModelChange)="filterOperateri(OvlastenaOsobaMjTr!.ID);"
+                            (focus)="refreshOperateri(OvlastenaOsobaMjTr!.ID, false);"
+                            (keyup.enter)="selectOperateri(offeredOperateri[OperateriDropdownIndex]);"
+                            (keyup.escape)="resetOperateri();"
+                            (keyup.arrowdown)="OperateriDropdownIndex = (OperateriDropdownIndex + 1) % offeredOperateri.length;globalFn.scroll('offeredOperateri-dropdown-' + OperateriDropdownIndex);"
+                            (keyup.arrowup)="OperateriDropdownIndex = (OperateriDropdownIndex - 1 + offeredOperateri.length) % offeredOperateri.length;globalFn.scroll('offeredOperateri-dropdown-' + OperateriDropdownIndex);">
+                        <div id="offeredOperateri-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
-                            <div [id]="'offeredZaposleni-dropdown-' + i"
-                                *ngFor="let zaposleni of offeredZaposleni; index as i" matRipple
+                            <div [id]="'offeredOperateri-dropdown-' + i"
+                                *ngFor="let zaposleni of offeredOperateri; index as i" matRipple
                                 class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == ZaposleniDropdownIndex"
-                                (mousedown)="selectZaposleni(zaposleni);">
+                                [class.gray-background]="i == OperateriDropdownIndex"
+                                (mousedown)="selectOperateri(zaposleni);">
                                 <span>
-                                    <b>{{ zaposleni.MBR }}</b> ({{ zaposleni.PREZIME_IME }})
+                                    <b>{{ zaposleni.ID }}</b> ({{ zaposleni.NAZIV }})
                                 </span>
                             </div>
                         </div>
                     </span>
-                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.PREZIME_IME }}"
+                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZIV }}"
                         matTooltipShowDelay="1000">{{
-                        varNames!.PREZIME_IME }}</span>
+                        varNames!.NAZIV }}</span>
                 </td>
 			</tr>
 			<tr>
@@ -78,7 +80,9 @@ class="colored-header text-align-center">
                             (ngModelChange)="filterOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR);"
                             (focus)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
                             (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
-                            (keyup.escape)="resetOrganizationalUnits();">
+                            (keyup.escape)="resetOrganizationalUnits();"
+                            (keyup.arrowdown)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex + 1) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);"
+                            (keyup.arrowup)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex - 1 + offeredOrganizacijskeJedinice.length) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-' + OrganizacijskeJediniceDropdownIndex);">
                         <div id="offeredOrganizacijskeJedinice-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
                             <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"

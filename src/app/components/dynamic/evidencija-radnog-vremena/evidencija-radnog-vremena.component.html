@@ -54,14 +54,16 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mouseleave)="resetEvidencijaRadVreOjIndex();" (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                <span (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj()"
-                        (ngModelChange)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
+                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                        (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
-                        (keyup.escape)="resetEvidencijaRadVreOjIndex();">
+                        (keyup.escape)="resetEvidencijaRadVreOjIndex();"
+                        (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex + 1) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                        (keyup.arrowup)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex - 1 + offeredEvidencijaRadVreOj.length) % offeredEvidencijaRadVreOj.length;globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);">
                     <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content max-height-300px"
                         style="z-index: 500;">
                         <div [id]="'offeredEvidencijaRadVreOj-dropdown-' + i"

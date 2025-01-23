@@ -108,6 +108,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
 
   public ZaposleniDropdownIndex: number = -1;
   public offeredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public filteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public selectedZaposleni: EvRadnogVremenaHelpRadnici = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -132,7 +133,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog
   ) { }
@@ -377,14 +378,30 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
 
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
-      for (let item of this.offeredZaposleni) {
-        if (item.MBR == this.filter.MBR) {
-          this.filter.PREZIME_IME = item.PREZIME_IME;
-          this.filter.OSOBA = item.OSOBA;
-          this.pripremaGotova = false;
-        }
+
+      const matchedItem = this.offeredZaposleni.find(item => item.MBR.toUpperCase() === this.filter.MBR.toUpperCase());
+      if (matchedItem) {
+        this.filter.MBR = matchedItem.MBR;
+        this.filter.PREZIME_IME = matchedItem.PREZIME_IME;
+        this.filter.OSOBA = matchedItem.OSOBA;
       }
+
     });
+  }
+
+  public filterZaposleni(text: string): void {
+    if (!text) {
+      this.refreshZaposleni("", false);
+      return;
+    }
+
+    this.offeredZaposleni = this.filteredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredZaposleni.length == 0) {
+      this.refreshZaposleni(text, false);
+    }
   }
 
   public selectZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici): void {
