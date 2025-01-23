@@ -53,7 +53,7 @@ export class PdfEvidencijaRadnogVremenaRadnikaComponent {
         pIdKorisnika: this.session.loggedInUser.ID,
         pMbr: this.dialogData.MBR,
         pFondSati: this.dialogData.FondSati,
-        pDatum: this.globalFn.formatDate(this.datum),
+        pDatum: this.globalFn.formatDate(this.dialogData.datum),
       },
       {
         headers: new HttpHeaders({

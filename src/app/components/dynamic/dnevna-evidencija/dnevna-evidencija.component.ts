@@ -491,7 +491,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: searchParam,
+          pDioNaziva: searchParam,
           limit: 100,
           page: 1,
           sort: [
@@ -525,7 +525,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: this.filter.MBR,
+          pDioNaziva: this.filter.MBR,
           limit: 100,
           page: 1,
           sort: [

@@ -1,41 +1,36 @@
-<div 
-cdkDrag
-cdkDragRootElement=".cdk-overlay-pane" 
-cdkDragHandle 
-cdkDragBoundary=".cdk-overlay-container"
-class="colored-header text-align-center">
-	{{ 'Creating' | translate }}
-    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
+    class="colored-header text-align-center">
+    {{ 'Creating' | translate }}
+    <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
 
 </div>
 
 <mat-dialog-content class="small-margin-and-center-title">
 
-	<h2 mat-dialog-title class="text-align-center">
-		<mat-icon class="dialog-title-icon">person</mat-icon>
-		<mat-icon class="dialog-title-icon">add</mat-icon>
-		<span class="dialog-title">{{ 'EvidencijaRadVreZagVezeCreating' | translate }}</span>
-  	</h2>
+    <h2 mat-dialog-title class="text-align-center">
+        <mat-icon class="dialog-title-icon">person</mat-icon>
+        <mat-icon class="dialog-title-icon">add</mat-icon>
+        <span class="dialog-title">{{ 'EvidencijaRadVreZagVezeCreating' | translate }}</span>
+    </h2>
 
-	<div class="form-container">
-		<table>
-			<tr>
-				<td>
-					<label for="Code" class="minimum-margin-top">{{ 'Code' | translate }}:</label>
-				</td>
-                <td style="width: 250px;display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+    <div class="form-container">
+        <table>
+            <tr>
+                <td>
+                    <label for="Code" class="minimum-margin-top">{{ 'Code' | translate }}:</label>
+                </td>
+                <td
+                    style="width: 250px;display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickEvidVezeSifra();" (contextmenu)="removeEvidVezeSifra($event)"
                         matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_STUPCA ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="EvidencijaRadVreZagVeze.KNAZIV">
                         {{ EvidencijaRadVreZagVeze!.KNAZIV ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span
-                        (click)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
+                    <span (click)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_STUPCA" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidVezeSifra();resetEvidVezeSifra();"
+                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidVezeSifra();resetEvidVezeSifra();"
                             (ngModelChange)="filterEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA);"
                             (focus)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);"
                             (keyup.enter)="selectEvidVezeSifra(offeredEvidVezeSifra[EvidVezeSifraDropdownIndex]);"
@@ -59,65 +54,65 @@ class="colored-header text-align-center">
                         matTooltipShowDelay="1000">{{
                         EvidencijaRadVreZagVeze!.KNAZIV }}</span>
                 </td>
-			</tr>
+            </tr>
             <tr>
-				<td>
-					<label for="VrstaPosla" class="minimum-margin-top">{{ 'VrstaPosla' | translate }}:</label>
-				</td>
-                <td style="width: 250px; display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                <td>
+                    <label for="VrstaPosla" class="minimum-margin-top">{{ 'VrstaPosla' | translate }}:</label>
+                </td>
+                <td
+                    style="width: 250px; display: flex;max-width: 250px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickEvidVezeIzracuna();" (contextmenu)="removeEvidVezeIzracuna($event)"
+                        (click)="pickVrstePosla();" (contextmenu)="removeVrstePosla($event)"
                         matTooltip="{{ (!EvidencijaRadVreZagVeze.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="EvidencijaRadVreZagVeze.NAZ_VP">
+                        [class.color-valid]="EvidencijaRadVreZagVeze!.NAZ_VP">
                         {{ EvidencijaRadVreZagVeze!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (click)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
-                        <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_VP" maxlength="22"
+                    <span (click)="refreshVrstePosla(EvidencijaRadVreZagVeze!.SIF_VP, false);">
+                        <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze!.SIF_VP" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidVezeIzracuna();resetEvidVezeIzracuna();"
-                            (ngModelChange)="filterEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP);"
-                            (focus)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);"
-                            (keyup.enter)="selectEvidVezeIzracuna(offeredEvidVezeIzracuna[EvidVezeIzracunaDropdownIndex]);"
-                            (keyup.escape)="resetEvidVezeIzracuna();"
-                            (keyup.arrowdown)="EvidVezeIzracunaDropdownIndex = (EvidVezeIzracunaDropdownIndex + 1) % offeredEvidVezeIzracuna.length;globalFn.scroll('offeredEvidVezeIzracuna-dropdown-' + EvidVezeIzracunaDropdownIndex);"
-                            (keyup.arrowup)="EvidVezeIzracunaDropdownIndex = (EvidVezeIzracunaDropdownIndex - 1 + offeredEvidVezeIzracuna.length) % offeredEvidVezeIzracuna.length;globalFn.scroll('offeredEvidVezeIzracuna-dropdown-' + EvidVezeIzracunaDropdownIndex);">
-                        <div id="offeredEvidVezeIzracuna-dropdown" class="select-dropdown-content max-height-300px"
+                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                            (ngModelChange)="filterVrstePosla(EvidencijaRadVreZagVeze!.SIF_VP);"
+                            (focus)="refreshVrstePosla(EvidencijaRadVreZagVeze!.SIF_VP, false);"
+                            (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
+                            (keyup.escape)="resetVrstePoslaIndex();"
+                            (keyup.arrowdown)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex + 1) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                            (keyup.arrowup)="VrstePoslaDropdownIndex = (VrstePoslaDropdownIndex - 1 + offeredVrstePosla.length) % offeredVrstePosla.length;globalFn.scroll('offeredVrstePosla-dropdown-' + VrstePoslaDropdownIndex);"
+                            id="offeredVrstePosla-help-span">
+                        <div id="offeredVrstePosla-dropdown" class="select-dropdown-content max-height-300px"
                             style="z-index: 500;">
-                            <div [id]="'offeredEvidVezeIzracuna-dropdown-' + i"
-                                *ngFor="let opisVrste of offeredEvidVezeIzracuna; index as i" matRipple
+                            <div [id]="'offeredVrstePosla-dropdown-' + i"
+                                *ngFor="let evidencijaRadVreOj of offeredVrstePosla; index as i" matRipple
                                 class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == EvidVezeIzracunaDropdownIndex"
-                                (mousedown)="selectEvidVezeIzracuna(opisVrste);">
+                                [class.gray-background]="i == VrstePoslaDropdownIndex"
+                                (mousedown)="selectVrstePosla(evidencijaRadVreOj);">
                                 <span>
-                                    <b>{{ opisVrste.SIFRA }}</b> ({{ opisVrste.OPIS }})
+                                    <b>{{evidencijaRadVreOj.SIF_VP}}</b> - {{ evidencijaRadVreOj.NAZ_VP}}
                                 </span>
                             </div>
                         </div>
                     </span>
-                    <span class="small-margin-left margin-right" matTooltip="{{ EvidencijaRadVreZagVeze!.NAZ_VP }}"
-                        matTooltipShowDelay="1000">{{
-                        EvidencijaRadVreZagVeze!.NAZ_VP }}</span>
+                    <span *ngIf="EvidencijaRadVreZagVeze.NAZ_VP!=''" class="small-margin-left margin-right">{{
+                        EvidencijaRadVreZagVeze.NAZ_VP }}</span>
                 </td>
-			</tr>
+            </tr>
             <tr>
-				<td>
-					<label for="FaktorMnozenja" class="minimum-margin-top">{{ 'FaktorMnozenja' | translate }}:</label>
-				</td>
-				<td>
-					<select name="" id="" [(ngModel)]="EvidencijaRadVreZagVeze.XFAKTOR">
+                <td>
+                    <label for="FaktorMnozenja" class="minimum-margin-top">{{ 'FaktorMnozenja' | translate }}:</label>
+                </td>
+                <td>
+                    <select name="" id="" [(ngModel)]="EvidencijaRadVreZagVeze.XFAKTOR">
                         <option (value)="1">1</option>
                         <option (value)="0">0</option>
                         <option (value)="-1">-1</option>
                     </select>
-				</td>
-			</tr>
-		</table>
-	</div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
-	<button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
-		[disabled]="validateForm(EvidencijaRadVreZagVeze!)">{{ 'Create' | translate }}</button>
+    <button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
+    <button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+        [disabled]="validateForm(EvidencijaRadVreZagVeze!)">{{ 'Create' | translate }}</button>
 </mat-dialog-actions>

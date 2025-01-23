@@ -458,7 +458,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: searchParam,
+          pDioNaziva: searchParam,
           limit: 100,
           page: 1,
           sort: [
@@ -500,7 +500,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: odabir == '1' ? this.filter.MBR : this.filter.MBR2,
+          pDioNaziva: odabir == '1' ? this.filter.MBR : this.filter.MBR2,
           limit: 100,
           page: 1,
           sort: [

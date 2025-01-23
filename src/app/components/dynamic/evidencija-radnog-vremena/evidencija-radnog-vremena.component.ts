@@ -213,6 +213,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   public openPDFDialog(item: any): void {
     let data = {
       FONDSATI: this.filter.FONDSATI,
+      DATUM: this.filter.MJESEC + '.' + this.filter.GODINA
     }
     const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaComponent, {
       data: data

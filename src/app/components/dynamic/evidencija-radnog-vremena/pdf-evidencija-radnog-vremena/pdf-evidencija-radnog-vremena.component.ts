@@ -52,7 +52,7 @@ export class PdfEvidencijaRadnogVremenaComponent {
         pSifVlas: this.session.loggedInUser.ownerID,
         pIdKorisnika: this.session.loggedInUser.ID,
         pFondSati: this.dialogData.FondSati,
-        pDatum: this.globalFn.formatDate(this.datum),
+        pDatum: this.globalFn.formatDate(this.dialogData.datum),
       },
       {
         headers: new HttpHeaders({

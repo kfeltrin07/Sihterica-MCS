@@ -9,8 +9,8 @@
         <mat-label>{{ 'DisplayedColumns' | translate }}</mat-label>
 
         <mat-select (selectionChange)="setVisibleColumnsFromEvent();"
-            [(ngModel)]="globalVar.PomocnaListaDisplayedColumns" multiple>
-            <mat-option *ngFor="let column of globalVar.PomocnaListaColumnsList" [value]="column">{{
+            [(ngModel)]="globalVar.EvidencijaDnevnaDisplayedColumns" multiple>
+            <mat-option *ngFor="let column of globalVar.EvidencijaDnevnaColumnsList" [value]="column">{{
                 column.displayedName |
                 translate }}</mat-option>
         </mat-select>

@@ -282,6 +282,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
       searchParam:item,
       MBR: this.filter.MBR,
       FONDSATI: this.filter.FONDSATI,
+      DATUM: this.filter.MJESEC + '.' + this.filter.GODINA
     }
     const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaRadnikaComponent, {
       data: data
@@ -334,7 +335,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: searchParam,
+          pDioNaziva: searchParam,
           limit: 100,
           page: 1,
           sort: [
@@ -349,6 +350,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
+      this.filteredZaposleni = response.debugData.data;
       if (!isSelected) {
         document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
       }
@@ -363,7 +365,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
         method: 'getEvRadnogVremenaHelpRadnici',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pMbr: this.filter.MBR,
+          pDioNaziva: this.filter.MBR,
           limit: 100,
           page: 1,
           sort: [

@@ -176,7 +176,9 @@ export class RadniciGrupeComponent {
       this.zaposleniGrupe = response.debugData.data;
       this.dataSource.data = this.zaposleniGrupe;
       for (let zaposlenik of this.zaposleniGrupe) {
-        (zaposlenik.U_GRUPI == "true") ? this.selection.select(zaposlenik) : ""
+        (zaposlenik.U_GRUPI == "true") ? this.selection.select(zaposlenik) : "";
+        (zaposlenik.U_GRUPI == "true") ? this.oldSelection.select(zaposlenik) : ""
+
       }
       this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
       this.loading = false;
@@ -254,9 +256,11 @@ export class RadniciGrupeComponent {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       for (let zaposlenik of response.debugData.data) {
+        //this.oldSelection.select(zaposlenik);
+
         this.selection.select(zaposlenik);
-        this.oldSelection.select(zaposlenik)
       }
+      this.oldSelection = new SelectionModel<ZaposleniGrupe>(true, this.selection.selected);
     });
   }
 
@@ -293,8 +297,12 @@ export class RadniciGrupeComponent {
   }
 
   public save(): void {
-    for (let zaposlenik of this.zaposleniGrupe) {
-      if (this.selection.isSelected(zaposlenik) && !this.oldSelection.isSelected(zaposlenik)) {
+    for (let zaposlenik of this.dataSource.data) {
+      if (this.selection.isSelected(zaposlenik) && !(this.oldSelection.isSelected(zaposlenik))) {
+        console.log("Upis");
+        console.log(zaposlenik);
+        console.log(this.oldSelection);
+        console.log(this.selection);
         this.http.post(
           this.globalVar.APIHost + this.globalVar.APIFile,
           {
@@ -315,7 +323,10 @@ export class RadniciGrupeComponent {
 
         });
       }
-      if (!this.selection.isSelected(zaposlenik) && this.oldSelection.isSelected(zaposlenik)) {
+      else if (!(this.selection.isSelected(zaposlenik)) && this.oldSelection.isSelected(zaposlenik)) {
+        console.log("Brišem");
+        console.log(zaposlenik);
+
         this.http.post(
           this.globalVar.APIHost + this.globalVar.APIFile,
           {

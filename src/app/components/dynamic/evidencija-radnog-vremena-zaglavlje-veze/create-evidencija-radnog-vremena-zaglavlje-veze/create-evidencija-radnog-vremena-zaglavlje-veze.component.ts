@@ -9,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PickEvidencijaVezeIzracunaComponent } from 'src/app/components/pickers/pick-evidencija-veze-izracuna/pick-evidencija-veze-izracuna.component';
 import { PickEvidencijaVezeSifraComponent } from 'src/app/components/pickers/pick-evidencija-veze-sifra/pick-evidencija-veze-sifra.component';
-import { EvidencijaRadVreZagVeze, EvidVezeSifra, EvidVezeIzracuna, CRUDAction } from 'src/app/models/models.service';
+import { PickVrstaPoslaComponent } from 'src/app/components/pickers/pick-vrsta-posla/pick-vrsta-posla.component';
+import { EvidencijaRadVreZagVeze, EvidVezeSifra, EvidVezeIzracuna, CRUDAction, VrstePosla } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -63,15 +64,16 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
     KNAZIV: ""
   };
 
-  public EvidVezeIzracunaDropdownIndex: number = -1;
-  public offeredEvidVezeIzracuna: EvidVezeIzracuna[] = [];
-  public filteredEvidVezeIzracuna: EvidVezeIzracuna[] = [];
-  public selectedEvidVezeIzracuna: EvidVezeIzracuna = {
+  public VrstePoslaDropdownIndex: number = -1;
+  public offeredVrstePosla: VrstePosla[] = [];
+  public filteredVrstePosla: VrstePosla[] = [];
+  public selectedVrstePosla: VrstePosla = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
-    SIF_VLAS: "",
-    SIFRA: "",
-    OPIS: "",
+    SIF_VP: "",
+    NAZ_VP: "",
+    SIFVLAS: "",
+    SI: "",
   };
 
   constructor(
@@ -233,116 +235,117 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
   }
   //EvidVezeSifra END
 
-  //EvidVezeIzracuna START
-  public pickEvidVezeIzracuna(): void {
-    const dialogRef = this.dialog.open(PickEvidencijaVezeIzracunaComponent, {});
-
-    dialogRef.afterClosed().subscribe((EvidVezeIzracuna?: EvidVezeIzracuna) => {
-      this.setEvidVezeIzracunaFromDialog(EvidVezeIzracuna);
-    });
-  }
-
-  public setEvidVezeIzracunaFromDialog(EvidVezeIzracuna?: EvidVezeIzracuna): void {
-    if (EvidVezeIzracuna) {
-      this.EvidencijaRadVreZagVeze.SIF_VP = EvidVezeIzracuna.SIFRA;
-      this.EvidencijaRadVreZagVeze.NAZ_VP = EvidVezeIzracuna.OPIS;
-    }
-  }
-
-  public removeEvidVezeIzracuna(e: Event): void {
-    e.preventDefault();
-    this.EvidencijaRadVreZagVeze.SIF_VP = "";
-    this.EvidencijaRadVreZagVeze.NAZ_VP = "";
-
-  }
-
-  public refreshEvidVezeIzracuna(searchParam: string, isSelected: boolean): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getEvRadnogVremenaZagVrIzracuna',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: searchParam,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "SIFRA",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-      console.log(response);
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidVezeIzracuna = response.debugData.data;
-      this.filteredEvidVezeIzracuna = response.debugData.data;
-      if (!isSelected) {
-        document.getElementById("offeredEvidVezeIzracuna-dropdown")?.classList.add("select-dropdown-content-visible");
-      }
-    });
-  }
-
-  public OfferedEvidVezeIzracuna(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getEvRadnogVremenaZagVrIzracuna',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "SIFRA",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidVezeIzracuna = response.debugData.data;
-      for (let item of this.offeredEvidVezeIzracuna) {
-        if (item.SIFRA.toUpperCase() == this.EvidencijaRadVreZagVeze.SIF_VP.toUpperCase()) {
-          this.EvidencijaRadVreZagVeze.NAZ_VP = item.OPIS;
-          this.EvidencijaRadVreZagVeze.SIF_VP = item.SIFRA;
-        }
-      }
-    });
-  }
-
-  public filterEvidVezeIzracuna(text: string): void {
-    if (!text) {
-      this.refreshEvidVezeIzracuna("",false);
-      return;
-    }
-  
-    this.offeredEvidVezeIzracuna = this.filteredEvidVezeIzracuna.filter(
-      item => item?.SIFRA.toLowerCase().includes(text.toLowerCase())
-    );
-
-    if(this.offeredEvidVezeIzracuna.length == 0){
-      this.refreshEvidVezeIzracuna(text,false);
-    }
-  }
-
-  public selectEvidVezeIzracuna(EvidVezeIzracuna: EvidVezeIzracuna): void {
-    this.EvidencijaRadVreZagVeze.SIF_VP = EvidVezeIzracuna.SIFRA;
-    this.EvidencijaRadVreZagVeze.NAZ_VP = EvidVezeIzracuna.OPIS;
-    document.getElementById("offeredEvidVezeIzracuna-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.EvidVezeIzracunaDropdownIndex = -1;
-  }
-
-  public resetEvidVezeIzracuna(): void {
-    this.EvidVezeIzracunaDropdownIndex = -1;
-    document.getElementById("offeredEvidVezeIzracuna-dropdown")?.classList.remove("select-dropdown-content-visible");
-  }
-  //EvidVezeSifra END
+   //VrstaPosla START
+   public pickVrstePosla(): void {
+     const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
+ 
+     dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
+       this.setVrstePoslaFromDialog(VrstePosla);
+     });
+   }
+ 
+   public setVrstePoslaFromDialog(VrstePosla?: VrstePosla): void {
+     if (VrstePosla) {
+       this.EvidencijaRadVreZagVeze.SIF_VP = VrstePosla.SIF_VP;
+       this.EvidencijaRadVreZagVeze.NAZ_VP = VrstePosla.NAZ_VP;
+ 
+     }
+   }
+ 
+   public removeVrstePosla(e: Event): void {
+     e.preventDefault();
+     this.EvidencijaRadVreZagVeze.SIF_VP = "";
+     this.EvidencijaRadVreZagVeze.NAZ_VP = "";
+   }
+ 
+   public refreshVrstePosla(searchParam: string, isSelected: boolean): void {
+     this.http.post(
+       this.globalVar.APIHost + this.globalVar.APIFile,
+       {
+         action: 'Sihterica',
+         method: 'getVrstePosla',
+         sid: this.session.loggedInUser.sessionID,
+         data: {
+           pDioNaziva: searchParam,
+           limit: 100,
+           page: 1,
+           sort: [
+             {
+               property: "SIF_VP",
+               direction: "ASC"
+             }
+           ]
+         }
+       }
+     ).subscribe((response: any) => {
+       console.log(response);
+       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+       this.offeredVrstePosla = response.debugData.data;
+       this.filteredVrstePosla = response.debugData.data;
+       var dummyEl = document.getElementById('offeredVrstePosla-help-span');
+       var isFocused = (document.activeElement === dummyEl);
+       if (!isSelected && isFocused) {
+         document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
+       }
+     });
+   }
+ 
+   public OfferedVrstePosla(): void {
+     this.http.post(
+       this.globalVar.APIHost + this.globalVar.APIFile,
+       {
+         action: 'Sihterica',
+         method: 'getVrstePosla',
+         sid: this.session.loggedInUser.sessionID,
+         data: {
+           pDioNaziva: this.EvidencijaRadVreZagVeze.SIF_VP,
+           limit: 100,
+           page: 1,
+           sort: [
+             {
+               property: "SIF_VP",
+               direction: "ASC"
+             }
+           ]
+         }
+       }
+     ).subscribe((response: any) => {
+ 
+       this.offeredVrstePosla = response.debugData.data;
+       for (let item of this.offeredVrstePosla) {
+         if (item.SIF_VP.toUpperCase() == this.EvidencijaRadVreZagVeze.SIF_VP.toUpperCase()) {
+           this.EvidencijaRadVreZagVeze.NAZ_VP = item.NAZ_VP;
+           this.EvidencijaRadVreZagVeze.SIF_VP = item.SIF_VP;
+         }
+       }
+     });
+   }
+ 
+   public filterVrstePosla(text: string): void {
+     if (!text) {
+       this.refreshVrstePosla("", false);
+       return;
+     }
+ 
+     this.offeredVrstePosla = this.filteredVrstePosla.filter(
+       item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
+     );
+ 
+     if (this.offeredVrstePosla.length == 0) {
+       this.refreshVrstePosla(text, false);
+     }
+   }
+ 
+   public selectVrstePosla(VrstePosla: VrstePosla): void {
+     this.EvidencijaRadVreZagVeze.SIF_VP = VrstePosla.SIF_VP;
+     this.EvidencijaRadVreZagVeze.NAZ_VP = VrstePosla.NAZ_VP;
+     document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
+     this.VrstePoslaDropdownIndex = -1;
+   }
+ 
+   public resetVrstePoslaIndex(): void {
+     this.VrstePoslaDropdownIndex = -1;
+     document.getElementById("offeredVrstePosla-dropdown")?.classList.remove("select-dropdown-content-visible");
+   }
+   //VrstaPosla END
 }

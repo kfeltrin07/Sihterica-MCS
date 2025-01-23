@@ -8,95 +8,55 @@
     </div>
 
     <mat-dialog-content>
-        <table class="small-margin-left">
-            <tr>
-                <td>
-                    <label for="NAZJM" class="minimum-margin-top">{{ 'organiz-jedinica' | translate }}:</label>
-                </td>
-                <td
-                    style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
-                        matTooltip="{{ (!varNames.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.NAZ_OJ">
-                        {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
-                    </mat-icon>
-                    <span 
-                        (click)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
-                        <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
-                            (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
-                            (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
-                            (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
-                            (keyup.escape)="resetOrganizationalUnits();">
-                        <div id="offeredOrganizacijskeJedinice-dropdown"
-                            class="select-dropdown-content max-height-300px" style="z-index: 500;">
-                            <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
-                                *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i" matRipple
-                                class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == OrganizacijskeJediniceDropdownIndex"
-                                (mousedown)="selectOrganizationalUnits(organizationalUnits);">
-                                <span>
-                                    <b>{{ organizationalUnits.SIF_OJ }}</b> ({{ organizationalUnits.NAZ_OJ }})
-                                </span>
-                            </div>
-                        </div>
-                    </span>
-                    <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
-                        matTooltipShowDelay="1000">{{
-                        varNames!.NAZ_OJ }}</span>
-                </td>
-            </tr>
-            <!--
-            <tr>
-                <td>
-                    <label for="SIF_SHEME" class="minimum-margin-top">{{ 'Shema' | translate }}:</label>
-                </td>
-                <td
-                    style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickSheme();" (contextmenu)="removeSheme($event)"
-                        matTooltip="{{ (!receivedGrupa.SIF_SHEME ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.NAZ_SHEME">
-                        {{ varNames!.NAZ_SHEME ? 'done' : 'import_contacts'}}
-                    </mat-icon>
-                    <span
-                        (click)="refreshSheme(receivedGrupa!.SIF_SHEME, false);">
-                        <input type="text" [(ngModel)]="receivedGrupa.SIF_SHEME" maxlength="22"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedSheme();resetSheme();"
-                            (ngModelChange)="filterSheme(receivedGrupa!.SIF_SHEME);"
-                            (focus)="refreshSheme(receivedGrupa!.SIF_SHEME, false);"
-                            (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
-                            (keyup.escape)="resetSheme();">
-                        <div id="offeredSheme-dropdown"
-                            class="select-dropdown-content max-height-300px" style="z-index: 500;">
-                            <div [id]="'offeredSheme-dropdown-' + i"
-                                *ngFor="let sheme of offeredSheme; index as i" matRipple
-                                class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == ShemeDropdownIndex"
-                                (mousedown)="selectSheme(sheme);">
-                                <span>
-                                    <b>{{ sheme.SIF_SHEME }}</b> ({{ sheme.OPIS }})
-                                </span>
-                            </div>
-                        </div>
-                    </span>
-                    <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_SHEME }}"
-                        matTooltipShowDelay="1000">{{
-                        varNames!.NAZ_SHEME }}</span>
-                </td>
-            </tr>-->
-        </table>
+        <div>
+            <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left" matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
+                <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+              </mat-form-field>
+        </div>
         <div class="display-flex small-margin-bottom button-bar" style="justify-content: space-between;">
-            <div>
-                <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left" matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-                    <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Zaposleni' | translate }}">
-                  </mat-form-field>
-            </div>
+            <table class="small-margin-left">
+                <tr>
+                    <td>
+                        <label for="NAZJM" class="minimum-margin-top">{{ 'organiz-jedinica' | translate }}:</label>
+                    </td>
+                    <td
+                        style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                        <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                            (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
+                            matTooltip="{{ (!varNames.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                            [class.color-valid]="varNames.NAZ_OJ">
+                            {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
+                        </mat-icon>
+                        <span 
+                            (click)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
+                            <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
+                                class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                                placeholder="{{ 'Code' | translate }}"
+                                (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
+                                (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
+                                (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
+                                (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
+                                (keyup.escape)="resetOrganizationalUnits();">
+                            <div id="offeredOrganizacijskeJedinice-dropdown"
+                                class="select-dropdown-content max-height-300px" style="z-index: 500;">
+                                <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
+                                    *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i" matRipple
+                                    class="dropdown-content-item display-flex align-items-center space-between"
+                                    [class.gray-background]="i == OrganizacijskeJediniceDropdownIndex"
+                                    (mousedown)="selectOrganizationalUnits(organizationalUnits);">
+                                    <span>
+                                        <b>{{ organizationalUnits.SIF_OJ }}</b> ({{ organizationalUnits.NAZ_OJ }})
+                                    </span>
+                                </div>
+                            </div>
+                        </span>
+                        <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
+                            matTooltipShowDelay="1000">{{
+                            varNames!.NAZ_OJ }}</span>
+                    </td>
+                </tr>
+            </table>
+
 
             <div >
                 <button class="small-horizontal-margins" mat-mini-fab color="primary" 
@@ -128,7 +88,7 @@
                 <ng-container matColumnDef="yes-no">
                     <th mat-header-cell *matHeaderCellDef>{{ 'YesNo' | translate }}</th>
                     <td mat-cell *matCellDef="let owner">
-                        <mat-checkbox ngDefaultControl [checked]="selection.isSelected(owner)"
+                        <mat-checkbox ngDefaultControl [checked]="selection.isSelected(owner)" (change)="selection.toggle(owner)"
                             color="primary"></mat-checkbox>
                     </td>
                 </ng-container>
@@ -146,7 +106,7 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row style="height: 20px;" *matRowDef="let row; columns: displayedColumns;"
-                    [class.selected]="selection.isSelected(row)" (click)="selection.toggle(row)"
+                    [class.selected]="selection.isSelected(row)"
                     [class.select]="selection.isSelected(row)"></tr>
 
             </table>

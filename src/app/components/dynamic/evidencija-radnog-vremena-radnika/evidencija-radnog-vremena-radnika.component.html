@@ -60,7 +60,7 @@
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);"
                         (focus)="refreshZaposleni(filter!.MBR, false);"
-                        (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
+                        (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);refresh();"
                         (keyup.escape)="resetZaposleniIndex();"
                         (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
                         (keyup.arrowup)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex - 1 + offeredZaposleni.length) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);">
