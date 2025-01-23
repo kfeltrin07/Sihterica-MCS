@@ -88,10 +88,10 @@ export class PickZaposleniComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getOJ();
+    this.getZaposleni();
   }
 
-  public getOJ(): void {
+  public getZaposleni(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -130,7 +130,7 @@ export class PickZaposleniComponent implements OnInit {
 
   public refresh(): void {
     this.loading = true;
-    this.getOJ();
+    this.getZaposleni();
   }
 
   public sort(event: any): void {
