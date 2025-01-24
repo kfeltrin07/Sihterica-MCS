@@ -515,3 +515,27 @@ Content-Type: application/json
     ]
   }
 }
+
+// UPDATE ŠIHTERICE DNEVNA EVIDENCIJA
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "upisSihterice",
+  "sid": "3fm4n7m60kbak1vmh4r3sik1o1",
+  "data" : {
+    "pAkcija" : 2,
+    "pSifVlas" : 144,
+    "pDatum" : "24.01.2025",
+    "pMbr" : 318,
+    "pSifOj" : "OD109",
+    "pSifVP" : "RRR",
+    "pSati" : "7",
+    "pOd" : "07:01",
+    "pDo" : "15:01",
+    "pIdOperatera" : 15,
+    "RID" : "AAAE8QAAFAAAGckAAG"
+  }
+}

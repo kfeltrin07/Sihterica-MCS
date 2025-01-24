@@ -697,7 +697,9 @@ export interface EvidencijaDnevna {
   MBR: string;
   MBRX: string;
   OSOBA:  string;
+  OSOBAX: string;
   SIF_VP: string;
+  SIF_VPX: string;
   SIF_VP_N: string;
   ODHH: string;
   DOHH: string;
@@ -712,6 +714,7 @@ export interface EvidencijaDnevna {
   IODHH: string;
   IDOHH: string;
   SIF_MT: string;
+  SIF_MTX: string;
   SIF_MT_N: string;
   DATUM: string;
 }

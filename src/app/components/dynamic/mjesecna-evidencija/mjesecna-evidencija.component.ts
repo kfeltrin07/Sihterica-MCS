@@ -26,6 +26,7 @@ import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencij
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
+import { PdfMjesecnaEvidencijaComponent } from './pdf-mjesecna-evidencija/pdf-mjesecna-evidencija.component';
 
 @Component({
   selector: 'app-mjesecna-evidencija',
@@ -283,14 +284,20 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-  /*
-  public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
-      data: item
+
+  public openPDFDialog(): void {
+    let data = {
+      DATUM: this.filter.MJESEC + '.' + this.filter.GODINA,
+      MBR: this.filter.MBR,
+      SIF_OJ: this.filter.SIF_OJ,
+      SIF_VP: this.filter.SIF_VP,
+    }
+    const dialogRef = this.dialog.open(PdfMjesecnaEvidencijaComponent, {
+      data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
     });
-  }*/
+  }
 
 
   //EvidencijaRadVreOj START
@@ -371,16 +378,17 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredEvidencijaRadVreOj = data;
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
-      for (let item of this.offeredEvidencijaRadVreOj) {
-        if (item.SIF_OJ.toUpperCase() == this.filter.SIF_OJ.toUpperCase()) {
-          this.filter.NAZMJTR = item.NAZMJTR;
-          this.filter.VRSTA = item.VRSTA;
-          this.filter.SIF_OJ = item.SIF_OJ;
-        }
+      const matchedItem = this.offeredEvidencijaRadVreOj.find(item => item.SIF_OJ.toUpperCase() === this.filter.SIF_OJ.toUpperCase());
+      if (matchedItem) {
+        this.filter.NAZMJTR = matchedItem.NAZMJTR;
+        this.filter.VRSTA = matchedItem.VRSTA;
+        this.filter.SIF_OJ = matchedItem.SIF_OJ;
       }
+
     });
   }
 
@@ -513,25 +521,25 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+
       if (odabir == '1') {
-        this.offeredZaposleni = response.debugData.data;
-        for (let item of this.offeredZaposleni) {
-          if (item.MBR.toUpperCase() == this.filter.MBR.toUpperCase()) {
-            this.filter.PREZIME_IME = item.PREZIME_IME;
-            this.filter.OSOBA = item.OSOBA;
-            this.filter.MBR = item.MBR;
-          }
+        this.offeredZaposleni = data;
+        const matchedItem = this.offeredZaposleni.find(item => item.MBR.toUpperCase() === this.filter.MBR.toUpperCase());
+        if (matchedItem) {
+          this.filter.PREZIME_IME = matchedItem.PREZIME_IME;
+          this.filter.OSOBA = matchedItem.OSOBA;
+          this.filter.MBR = matchedItem.MBR;
         }
       }
       else {
-        this.offeredZaposleniKopija = response.debugData.data;
-        for (let item of this.offeredZaposleniKopija) {
-          if (item.MBR == this.filter.MBR2) {
-            this.filter.PREZIME_IME2 = item.PREZIME_IME;
-            this.filter.OSOBA2 = item.OSOBA;
-            this.filter.MBR2 = item.MBR;
-          }
+        this.offeredZaposleniKopija = data;
+        const matchedItem = this.offeredZaposleniKopija.find(item => item.MBR.toUpperCase() === this.filter.MBR2.toUpperCase());
+        if (matchedItem) {
+          this.filter.PREZIME_IME2 = matchedItem.PREZIME_IME;
+          this.filter.OSOBA2 = matchedItem.OSOBA;
+          this.filter.MBR2 = matchedItem.MBR;
         }
       }
     });
@@ -670,14 +678,14 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredVrstePosla = data;
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
-      for (let item of this.offeredVrstePosla) {
-        if (item.SIF_VP.toUpperCase() == this.filter.SIF_VP.toUpperCase()) {
-          this.filter.NAZ_VP = item.NAZ_VP;
-          this.filter.SIF_VP = item.SIF_VP;
-        }
+      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        this.filter.NAZ_VP = matchedItem.NAZ_VP;
+        this.filter.SIF_VP = matchedItem.SIF_VP;
       }
     });
   }
@@ -787,14 +795,14 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredVrstePosla = data;
 
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
-      for (let item of this.offeredVrstePosla) {
-        if (item.SIF_VP.toUpperCase() == this.filter.SIF_VP.toUpperCase()) {
-          this.filter.NAZ_VP = item.NAZ_VP;
-          this.varNames.SIF_VP = item.SIF_VP;
-        }
+      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        this.filter.NAZ_VP = matchedItem.NAZ_VP;
+        this.filter.SIF_VP = matchedItem.SIF_VP;
       }
     });
   }

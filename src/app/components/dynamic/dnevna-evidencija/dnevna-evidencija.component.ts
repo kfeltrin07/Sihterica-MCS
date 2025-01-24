@@ -16,7 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { debounceTime, Observable, Subject, Subscription } from 'rxjs';
-import { EvidencijaMjesecna, EvidencijaRadVreOj, EvRadnogVremenaHelpRadnici, VrstePosla, Sorting, EvidencijaDnevna } from 'src/app/models/models.service';
+import { EvidencijaMjesecna, EvidencijaRadVreOj, EvRadnogVremenaHelpRadnici, VrstePosla, Sorting, EvidencijaDnevna, Zaposleni, OrganizacijskeJedinice, CRUDAction } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -28,6 +28,7 @@ import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrs
 import { DetailsMjesecnaEvidencijaComponent } from '../mjesecna-evidencija/details-mjesecna-evidencija/details-mjesecna-evidencija.component';
 import { CopyDnevnaEvidencijaComponent } from './copy-dnevna-evidencija/copy-dnevna-evidencija.component';
 import { ActivatedRoute, Params } from '@angular/router';
+import { PdfDnevnaEvidencijaComponent } from './pdf-dnevna-evidencija/pdf-dnevna-evidencija.component';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -98,14 +99,55 @@ export class DnevnaEvidencijaComponent implements OnInit {
     IDOHH: '',
     SIF_MT: '',
     SIF_MT_N: '',
-    DATUM: ''
+    DATUM: '',
+    OSOBAX: '',
+    SIF_VPX: '',
+    SIF_MTX: '',
   };
+
+  public newEvidencijaDnevna: EvidencijaDnevna = {
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
+    SIFVLAS: '',
+    MBR: '',
+    MBRX: '',
+    OSOBA: '',
+    SIF_VP: '',
+    SIF_VP_N: '',
+    ODHH: '',
+    DOHH: '',
+    RID: '',
+    SATI: '',
+    IDK: '',
+    SYSD: '',
+    OD: '',
+    DO: '',
+    IDK_N: '',
+    ISATI: '',
+    IODHH: '',
+    IDOHH: '',
+    SIF_MT: '',
+    SIF_MT_N: '',
+    DATUM: '',
+    OSOBAX: '',
+    SIF_VPX: '',
+    SIF_MTX: '',
+  }
+
+  public newVarNames: any = {};
 
   public pripremaGotova: boolean = false;
 
   public EvidencijaRadVreOjDropdownIndex: number = -1;
+  public EvidencijaRadVreOjDropdownIndexNew: number = -1;
+
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public offeredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
+
   public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
+  public listEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+
   public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -116,12 +158,16 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public ZaposleniDropdownIndex: number = -1;
   public ZaposleniKopijaDropdownIndex: number = -1;
+  public NewZaposleniDropdownIndex: number = -1;
 
   public offeredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public offeredZaposleniKopija: EvRadnogVremenaHelpRadnici[] = [];
+  public NewOfferedZaposleni: EvRadnogVremenaHelpRadnici[] = [];
 
   public filteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public filteredZaposleniKopija: EvRadnogVremenaHelpRadnici[] = [];
+  public NewFilteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public listZaposleni: EvRadnogVremenaHelpRadnici[] = [];
 
   public selectedZaposleni: EvRadnogVremenaHelpRadnici = {
     UKUPANBROJSLOGOVA: 0,
@@ -132,8 +178,15 @@ export class DnevnaEvidencijaComponent implements OnInit {
   };
 
   public VrstePoslaDropdownIndex: number = -1;
+  public VrstePoslaDropdownIndexNew: number = -1;
+
   public offeredVrstePosla: VrstePosla[] = [];
+  public offeredVrstePoslaNew: VrstePosla[] = [];
+
   public filteredVrstePosla: VrstePosla[] = [];
+  public filteredVrstePoslaNew: VrstePosla[] = [];
+  public listVrstePosla: VrstePosla[] = [];
+
   public selectedVrstePosla: VrstePosla = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -144,7 +197,6 @@ export class DnevnaEvidencijaComponent implements OnInit {
   };
   public filteredOptions!: Observable<VrstePosla[]>;
   public myControl = new FormControl('');
-  public filteredVrstePoslaNew: VrstePosla[] = [];
 
 
   public dataSource = this.evidencijaDnevna;
@@ -186,7 +238,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  inputChanged(event:any) {
+  inputChanged(event: any) {
     this.modelChanged.next(event);
   }
 
@@ -210,7 +262,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.getEvidencijaDnevna();
     }
 
-    this.getVrstePosla()
+    this.getVrstePosla();
+    this.getZaposleni();
+    this.getOJ();
   }
 
   public getEvidencijaDnevna(): void {
@@ -321,20 +375,25 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public setVisibleColumnsFromEvent(): void {
     this.displayedColumns = [];
-    for (let i = 0; i < this.globalVar.EvidencijaDnevnaColumnsList.length; i++) {
-      this.displayedColumns.push(this.globalVar.EvidencijaDnevnaColumnsList[i].name);
+    for (let i = 0; i < this.globalVar.EvidencijaDnevnaDisplayedColumns.length; i++) {
+      this.displayedColumns.push(this.globalVar.EvidencijaDnevnaDisplayedColumns[i].name);
     }
     this.displayedColumns.push('options');
   }
 
-  /*
-  public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
-      data: item
+  public openPDFDialog(): void {
+    let data = {
+      DATUM: this.filter.DATUM,
+      MBR: this.filter.MBR,
+      SIF_OJ: this.filter.SIF_OJ,
+      SIF_VP: this.filter.SIF_VP,
+    }
+    const dialogRef = this.dialog.open(PdfDnevnaEvidencijaComponent, {
+      data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
     });
-  }*/
+  }
 
 
   //EvidencijaRadVreOj START
@@ -700,118 +759,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
 
 
-  //VrstaPosla START
-  public pickVrstePoslaNew(): void {
-    const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
 
-    dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
-      this.setVrstePoslaFromDialog(VrstePosla);
-    });
-  }
-
-  public setVrstePoslaFromDialogNew(VrstePosla?: VrstePosla): void {
-    if (VrstePosla) {
-      this.filter.SIF_VP = VrstePosla.SIF_VP;
-      this.varNames.NAZ_VP = VrstePosla.NAZ_VP;
-
-    }
-  }
-
-  public removeVrstePoslaNew(e: Event): void {
-    e.preventDefault();
-    this.filter.SIF_VP = "";
-    this.varNames.NAZ_VP = "";
-  }
-
-  public refreshVrstePoslaNew(searchParam: string, isSelected: boolean): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getVrstePosla',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: searchParam,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "SIF_VP",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-      console.log(response);
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredVrstePosla = response.debugData.data;
-      this.filteredVrstePosla = response.debugData.data;
-      if (!isSelected) {
-        document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
-      }
-    });
-  }
-
-  public OfferedVrstePoslaNew(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getVrstePosla',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: this.filter.SIF_VP,
-          limit: 100,
-          page: 1,
-          sort: [
-            {
-              property: "SIF_VP",
-              direction: "ASC"
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredVrstePosla = response.debugData.data;
-      for (let item of this.offeredVrstePosla) {
-        if (item.SIF_VP.toUpperCase() == this.filter.SIF_VP.toUpperCase()) {
-          this.filter.NAZ_VP = item.NAZ_VP;
-          this.varNames.SIF_VP = item.SIF_VP;
-        }
-      }
-    });
-  }
-
-  public filterVrstePoslaNew(text: string): void {
-    if (!text) {
-      this.refreshVrstePoslaNew("", false);
-      return;
-    }
-
-    this.offeredVrstePosla = this.filteredVrstePosla.filter(
-      item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
-    );
-
-    if (this.offeredVrstePosla.length == 0) {
-      this.refreshVrstePoslaNew(text, false);
-    }
-  }
-
-  public selectVrstePoslaNew(VrstePosla: VrstePosla): void {
-    this.filter.SIF_VP = VrstePosla.SIF_VP;
-    this.varNames.NAZ_VP = VrstePosla.NAZ_VP;
-    document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.VrstePoslaDropdownIndex = -1;
-  }
-
-  public resetVrstePoslaNewIndex(): void {
-    this.VrstePoslaDropdownIndex = -1;
-    document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
-  }
-  //VrstaPosla END
 
 
   public getVrstePosla(): void {
@@ -836,8 +784,786 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.filteredVrstePoslaNew = response.debugData.data;
+      this.listVrstePosla = response.debugData.data;
     });
+  }
+
+  public getZaposleni(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaHelpRadnici',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: '%',
+          limit: 1000,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.listZaposleni = response.debugData.data;
+    });
+  }
+
+  public getOJ(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 1000,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.listEvidencijaRadVreOj = response.debugData.data;
+    });
+  }
+
+
+  //ZAPOSLENI START
+  public pickNewZaposleni(): void {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpRadniciComponent, {});
+
+    dialogRef.afterClosed().subscribe((EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici) => {
+      this.setNewZaposleniFromDialog(EvRadnogVremenaHelpRadnici);
+    });
+  }
+
+  public setNewZaposleniFromDialog(EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
+    if (EvRadnogVremenaHelpRadnici) {
+      this.newEvidencijaDnevna.MBR = EvRadnogVremenaHelpRadnici.MBR;
+      this.newVarNames.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+      this.newVarNames.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+
+    }
+  }
+
+  public removeNewZaposleni(e: Event): void {
+    e.preventDefault();
+    this.newEvidencijaDnevna.MBR = "";
+    this.newVarNames.PREZIME_IME = "";
+    this.newVarNames.OSOBA = "";
+
+  }
+
+  public refreshNewZaposleni(searchParam: string, isSelected: boolean,): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaHelpRadnici',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: searchParam,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.NewOfferedZaposleni = response.debugData.data;
+      this.NewFilteredZaposleni = response.debugData.data;
+
+      var dummyEl = document.getElementById('NewOfferedZaposleni-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
+        document.getElementById("NewOfferedZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
+
+    });
+  }
+
+  public OfferedNewZaposleni(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaHelpRadnici',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.newEvidencijaDnevna.MBR,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.NewOfferedZaposleni = data;
+
+      const matchedItem = this.NewOfferedZaposleni.find(item => item.MBR.toUpperCase() === this.newEvidencijaDnevna.MBR.toUpperCase());
+      if (matchedItem) {
+        this.newVarNames.PREZIME_IME = matchedItem.PREZIME_IME;
+        this.newVarNames.OSOBA = matchedItem.OSOBA;
+        this.newEvidencijaDnevna.MBR = matchedItem.MBR;
+      }
+
+    });
+  }
+
+  public filterNewZaposleni(text: string): void {
+    if (!text) {
+      this.refreshNewZaposleni("", false);
+      return;
+    }
+
+    this.NewOfferedZaposleni = this.NewFilteredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.toLowerCase())
+    );
+
+
+    if (this.NewOfferedZaposleni.length == 0) {
+      this.refreshNewZaposleni(text, false);
+    }
+
+  }
+
+  public selectNewZaposleni(EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici,): void {
+    this.newEvidencijaDnevna.MBR = EvRadnogVremenaHelpRadnici.MBR;
+    this.newVarNames.PREZIME_IME = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+    this.newVarNames.OSOBA = EvRadnogVremenaHelpRadnici.OSOBA;
+
+    document.getElementById("NewOfferedZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.NewZaposleniDropdownIndex = -1;
+
+  }
+
+  public resetNewZaposleniIndex(): void {
+    this.NewZaposleniDropdownIndex = -1;
+    document.getElementById("NewOfferedZaposleni-dropdown")?.classList.remove("select-dropdown-content-visible");
+  }
+  //ZAPOSLENI END
+
+
+  //VrstaPosla NEW START
+  public pickVrstePoslaNew(): void {
+    const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
+
+    dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
+      this.setVrstePoslaNewDialog(VrstePosla);
+    });
+  }
+
+  public setVrstePoslaNewDialog(VrstePosla?: VrstePosla): void {
+    if (VrstePosla) {
+      this.newEvidencijaDnevna.SIF_VP = VrstePosla.SIF_VP;
+      this.newVarNames.NAZ_VP = VrstePosla.NAZ_VP;
+
+    }
+  }
+
+  public removeVrstePoslaNew(e: Event): void {
+    e.preventDefault();
+    this.newEvidencijaDnevna.SIF_VP = "";
+    this.newVarNames.NAZ_VP = "";
+  }
+
+  public refreshVrstePoslaNew(searchParam: string, isSelected: boolean): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getVrstePosla',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: searchParam,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_VP",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredVrstePoslaNew = response.debugData.data;
+      this.filteredVrstePoslaNew = response.debugData.data;
+      var dummyEl = document.getElementById('offeredVrstePoslaNew-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
+        document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
+    });
+  }
+
+  public OfferedVrstePoslaNew(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getVrstePosla',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: this.newEvidencijaDnevna.SIF_VP,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_VP",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredVrstePoslaNew = data;
+
+      const matchedItem = this.offeredVrstePoslaNew.find(item => item.SIF_VP.toUpperCase() === this.newEvidencijaDnevna.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        this.newEvidencijaDnevna.SIF_VP = matchedItem.SIF_VP;
+        this.newVarNames.NAZ_VP = matchedItem.NAZ_VP;
+      }
+    });
+  }
+
+  public filterVrstePoslaNew(text: string): void {
+    if (!text) {
+      this.refreshVrstePoslaNew("", false);
+      return;
+    }
+
+    this.offeredVrstePoslaNew = this.filteredVrstePoslaNew.filter(
+      item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredVrstePoslaNew.length == 0) {
+      this.refreshVrstePoslaNew(text, false);
+    }
+  }
+
+  public selectVrstePoslaNew(VrstePosla: VrstePosla): void {
+    this.newEvidencijaDnevna.SIF_VP = VrstePosla.SIF_VP;
+    this.newVarNames.NAZ_VP = VrstePosla.NAZ_VP;
+    document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.VrstePoslaDropdownIndexNew = -1;
+  }
+
+  public resetVrstePoslaNewIndex(): void {
+    this.VrstePoslaDropdownIndexNew = -1;
+    document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+  }
+  //VrstaPosla NEW END
+
+  //EvidencijaRadVreOj START
+  public pickEvidencijaRadVreOjNew(): void {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpOjComponent, {});
+
+    dialogRef.afterClosed().subscribe((EvidencijaRadVreOj?: EvidencijaRadVreOj) => {
+      this.setEvidencijaRadVreNewOjFromDialog(EvidencijaRadVreOj);
+    });
+  }
+
+  public setEvidencijaRadVreNewOjFromDialog(EvidencijaRadVreOj?: EvidencijaRadVreOj): void {
+    if (EvidencijaRadVreOj) {
+      this.newEvidencijaDnevna.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
+      this.newVarNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+
+    }
+  }
+
+  public removeEvidencijaRadVreOjNew(e: Event): void {
+    e.preventDefault();
+    this.newEvidencijaDnevna.SIF_MT = "";
+    this.newVarNames.NAZMJTR = "";
+
+  }
+
+  public refreshEvidencijaRadVreOjNew(searchParam: string, isSelected: boolean): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
+      var dummyEl = document.getElementById('offeredEvidencijaRadVreOjNew-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
+        document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
+    });
+  }
+
+  public OfferedEvidencijaRadVreOjNew(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      for (let item of this.offeredEvidencijaRadVreOjNew) {
+        if (item.SIF_OJ.toUpperCase() == this.newEvidencijaDnevna.SIF_MT.toUpperCase()) {
+          this.newEvidencijaDnevna.SIF_MT = item.SIF_OJ;
+          this.newVarNames.NAZMJTR = item.NAZMJTR;
+        }
+      }
+    });
+  }
+
+  public filterEvidencijaRadVreOjNew(text: string): void {
+    if (!text) {
+      this.refreshEvidencijaRadVreOjNew("", false);
+      return;
+    }
+
+    this.offeredEvidencijaRadVreOjNew = this.filteredEvidencijaRadVreOjNew.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredEvidencijaRadVreOjNew.length == 0) {
+      this.refreshEvidencijaRadVreOjNew(text, false);
+    }
+  }
+
+  public selectEvidencijaRadVreOjNew(EvidencijaRadVreOj: EvidencijaRadVreOj): void {
+    this.newEvidencijaDnevna.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
+    this.newVarNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+
+    document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.EvidencijaRadVreOjDropdownIndexNew = -1;
+  }
+
+  public resetEvidencijaRadVreOjNewIndex(): void {
+    this.EvidencijaRadVreOjDropdownIndexNew = -1;
+    document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+  }
+  //EvidencijaRadVreOj END
+
+  public Save(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'upisSihterice',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pAkcija: CRUDAction.Insert,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pDatum: this.globalFn.formatDate(this.filter.DATUM),
+          pMbr: this.newEvidencijaDnevna.MBR,
+          pSifOj: this.newEvidencijaDnevna.SIF_MT,
+          pSifVP: this.newEvidencijaDnevna.SIF_VP,
+          pSati: this.newEvidencijaDnevna.SATI,
+          pOd: this.newEvidencijaDnevna.ODHH,
+          pDo: this.newEvidencijaDnevna.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: ""
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+
+    });
+  }
+
+  public Update(item: any): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'upisSihterice',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pAkcija: CRUDAction.Update,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pDatum: this.globalFn.formatDate(this.filter.DATUM),
+          pMbr: item.MBR,
+          pSifOj: item.SIF_MT,
+          pSifVP: item.SIF_VP,
+          pSati: item.SATI,
+          pOd: item.ODHH,
+          pDo: item.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: item.RID
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+  //EvidencijaRadVreOj START
+  public pickEvidencijaRadVreOjRow(row: EvidencijaDnevna) {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpOjComponent, {});
+
+    dialogRef.afterClosed().subscribe((EvidencijaRadVreOj?: EvidencijaRadVreOj) => {
+      return this.setEvidencijaRadVreOjRowFromDialog(row, EvidencijaRadVreOj);
+    });
+  }
+
+  public setEvidencijaRadVreOjRowFromDialog(row: EvidencijaDnevna, EvidencijaRadVreOj?: EvidencijaRadVreOj) {
+    if (EvidencijaRadVreOj) {
+      row.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
+      row.SIF_MTX = EvidencijaRadVreOj.NAZMJTR;
+    }
+    return "";
+  }
+
+  public removeEvidencijaRadVreOjRow(e: Event, row: EvidencijaDnevna): void {
+    e.preventDefault();
+    row.SIF_MT = "";
+    row.SIF_MTX = "";
+
+  }
+
+  public refreshEvidencijaRadVreOjRow(searchParam: string, isSelected: boolean): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
+    });
+  }
+
+  public OfferedEvidencijaRadVreOjRow(row: EvidencijaDnevna): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      for (let item of this.offeredEvidencijaRadVreOjNew) {
+        if (item.SIF_OJ.toUpperCase() == row.SIF_MT.toUpperCase()) {
+          row.SIF_MT = item.SIF_OJ;
+          row.SIF_MTX = item.NAZMJTR;
+        }
+      }
+    });
+  }
+
+  public filterEvidencijaRadVreOjRow(row: EvidencijaDnevna): void {
+    if (!row.SIF_MT) {
+      this.refreshEvidencijaRadVreOjRow("", false);
+      return;
+    }
+
+    this.offeredEvidencijaRadVreOjNew = this.filteredEvidencijaRadVreOjNew.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(row.SIF_MT.toLowerCase())
+    );
+
+    if (this.offeredEvidencijaRadVreOjNew.length == 0) {
+      this.refreshEvidencijaRadVreOjRow(row.SIF_MT, false);
+    }
+  }
+
+  //EvidencijaRadVreOj END
+
+
+  //VrstaPosla NEW START
+  public pickVrstePoslaRow(row: EvidencijaDnevna): void {
+    const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
+
+    dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
+      this.setVrstePoslaRowDialog(row, VrstePosla);
+    });
+  }
+
+  public setVrstePoslaRowDialog(row: EvidencijaDnevna, VrstePosla?: VrstePosla): void {
+    if (VrstePosla) {
+      row.SIF_VP = VrstePosla.SIF_VP;
+      row.SIF_VP_N = VrstePosla.NAZ_VP;
+
+    }
+  }
+
+  public removeVrstePoslaRow(e: Event, row: EvidencijaDnevna): void {
+    e.preventDefault();
+    row.SIF_VP = "";
+    row.SIF_VP_N = "";
+  }
+
+  public refreshVrstePoslaRow(searchParam: string, isSelected: boolean): void {
+    if (this.offeredVrstePosla.length == 0) {
+
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'getVrstePosla',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pDioNaziva: searchParam,
+            limit: 100,
+            page: 1,
+            sort: [
+              {
+                property: "SIF_VP",
+                direction: "ASC"
+              }
+            ]
+          }
+        }
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.offeredVrstePosla = response.debugData.data;
+        this.filteredVrstePosla = response.debugData.data;
+
+      });
+    }
+  }
+
+  public OfferedVrstePoslaRow(row: EvidencijaDnevna): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getVrstePosla',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: row.SIF_VP,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_VP",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.offeredVrstePosla = data;
+
+      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === row.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        row.SIF_VP = matchedItem.SIF_VP;
+        row.SIF_VP_N = matchedItem.NAZ_VP;
+      }
+    });
+  }
+
+  public filterVrstePoslaRow(text: string): void {
+    if (!text) {
+      this.refreshVrstePoslaRow("", false);
+      return;
+    }
+
+    this.offeredVrstePosla = this.filteredVrstePosla.filter(
+      item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredVrstePosla.length == 0) {
+      this.refreshVrstePoslaRow(text, false);
+    }
+  }
+
+  //ZAPOSLENI START
+  public pickZaposleniRow(row: EvidencijaDnevna): void {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpRadniciComponent, {});
+
+    dialogRef.afterClosed().subscribe((EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici) => {
+      this.setZaposleniRowFromDialog(row, EvRadnogVremenaHelpRadnici);
+    });
+  }
+
+  public setZaposleniRowFromDialog(row: EvidencijaDnevna, EvRadnogVremenaHelpRadnici?: EvRadnogVremenaHelpRadnici): void {
+    if (EvRadnogVremenaHelpRadnici) {
+      row.MBR = EvRadnogVremenaHelpRadnici.MBR;
+      row.OSOBAX = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+    }
+  }
+
+  public removeZaposleniRow(e: Event, row: EvidencijaDnevna): void {
+    e.preventDefault();
+    row.MBR = "";
+    row.OSOBAX = "";
+  }
+
+  public refreshZaposleniRow(searchParam: string, isSelected: boolean,): void {
+
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'getEvRadnogVremenaHelpRadnici',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pDioNaziva: searchParam,
+            limit: 100,
+            page: 1,
+            sort: [
+              {
+                property: "MBR",
+                direction: "ASC"
+              }
+            ]
+          }
+        }
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.NewOfferedZaposleni = response.debugData.data;
+        this.NewFilteredZaposleni = response.debugData.data;
+
+
+      });
+    
+  }
+
+  public OfferedZaposleniRow(row: EvidencijaDnevna): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaHelpRadnici',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: row.MBR,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      const { metadata, data } = response.debugData;
+      this.globalFn.showSnackbarError(metadata.OPIS);
+      this.NewOfferedZaposleni = data;
+
+      const matchedItem = this.NewOfferedZaposleni.find(item => item.MBR.toUpperCase() === row.MBR.toUpperCase());
+      if (matchedItem) {
+        row.MBR = matchedItem.MBR;
+        row.OSOBAX = matchedItem.PREZIME_IME;
+      }
+
+    });
+  }
+
+  public filterZaposleniRow(text: any): void {
+    if (!text.MBR) {
+      this.refreshZaposleniRow("", false);
+      return;
+    }
+
+    this.NewOfferedZaposleni = this.NewFilteredZaposleni.filter(
+      item => item?.MBR.toLowerCase().includes(text.MBR.toLowerCase())
+    );
+
+    if (this.NewOfferedZaposleni.length == 0) {
+      this.refreshZaposleniRow(text.MBR, false);
+    }
+
   }
 }
 
