@@ -249,9 +249,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (this.IncomingData.DATUM) {
 
       this.filter.DATUM = this.globalFn.formatDateForDateForm(this.IncomingData.DATUM.toLocaleString());
-      this.filter.MBR = this.IncomingData.ID_RADNIKA;
-      this.filter.SIF_OJ = this.IncomingData.SIFMJTR;
-      this.filter.SIF_VP = this.IncomingData.SIF_VP;
+      this.filter.MBR = this.IncomingData.ID_RADNIKA?this.IncomingData.ID_RADNIKA:"%";
+      this.filter.SIF_OJ = this.IncomingData.SIFMJTR?this.IncomingData.SIFMJTR:"%";
+      this.filter.SIF_VP = this.IncomingData.SIF_VP?this.IncomingData.SIF_VP:"%";
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
       this.OfferedZaposleni();
