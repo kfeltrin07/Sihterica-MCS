@@ -25,6 +25,7 @@ import { PickEvidencijaHelpOjComponent } from '../../pickers/pick-evidencija-hel
 import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencija-help-radnici/pick-evidencija-help-radnici.component';
 import { PickOpisVrsteComponent } from '../../pickers/pick-opis-vrste/pick-opis-vrste.component';
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
+import { PdfPomocneListeComponent } from './pdf-pomocne-liste/pdf-pomocne-liste.component';
 
 @Component({
   selector: 'app-pomocne-liste',
@@ -54,11 +55,11 @@ export class PomocneListeComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'NAZIV', 'SI', 'SIF_VP', 'NAZ_VP', 'SIF_MT', 'MJESEC', 'S1', 'S2', 'UKUPNO', 'VRSTA', 'UKUP', 'options'];
 
   public filter: any = {
-    MBR: "",
+    MBR: "%",
     PREZIME_IME: "",
     NAZ_ZAN: "",
     NAZ_RM: "",
-    SIF_OJ: "%%%",
+    SIF_OJ: "%",
     NAZ_OJ: "",
     SIF_VP: "%",
   }
@@ -284,14 +285,20 @@ export class PomocneListeComponent implements OnInit {
     this.displayedColumns.push('options');
   }
 
-  /*
-  public openPDFDialog(item: any): void {
-    const dialogRef = this.dialog.open(OrganizacijskeJedinicePdfComponent, {
-      data: item
+  public openPDFDialog(): void {
+    let data={
+      MBR: this.filter.MBR,
+      SIF_OJ: this.filter.SIF_OJ,
+      SIF_VP: this.filter.SIF_VP,
+      GODINA: this.filter.GODINA,
+      MJESEC: this.filter.MJESEC
+    }
+    const dialogRef = this.dialog.open(PdfPomocneListeComponent, {
+      data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
     });
-  }*/
+  }
 
 
   //EvidencijaRadVreOj START

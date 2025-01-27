@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SessionUser, LoginBody, LogoutBody, UserMetadata } from 'src/app/models/models.service';
@@ -10,11 +10,14 @@ import { TranslationService } from '../translation/translation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoggingInComponent } from 'src/app/components/dynamic/login/logging-in/logging-in.component';
 import { LoggingOutComponent } from 'src/app/components/dynamic/login/logging-out/logging-out.component';
+import { MatSidenav } from '@angular/material/sidenav';
+import { SidenavService } from '../sidenav/sidenav.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
+  @ViewChild('snav') public sidenav!:MatSidenav;
 
   public loggingInDialogRef: any;
   public loggingOutDialogRef: any;
@@ -27,7 +30,8 @@ export class SessionService {
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private t: TranslationService
+    private t: TranslationService,
+    public sidenavservice:SidenavService
   ) { }
 
   loggedInUser: SessionUser = { // prijavljeni korisnik
@@ -81,6 +85,7 @@ export class SessionService {
         if (response.debugData.metadata.OPIS != 'SQL:OK' && response.debugData.metadata.OPIS != 'O.K.') {
           this.openSnackBar(response.debugData.metadata.OPIS, this.t.translate('Okay'));
         }
+        this.sidenavservice.setSidenav(this.sidenav);
         this.sessionInfo(response.debugData.sessionInfo.sid);
         this.loggingInDialogRef.close();
         this.cookies.setCookie('logged-in-user-username', userLogin.pUsername ? userLogin.pUsername : "");

@@ -199,12 +199,19 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija"><input style="width: 40px;" type="text"
-                    [(ngModel)]="evidencija[item.key]">
+            <td mat-cell *matCellDef="let evidencija">
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
+                <input style="width: 40px;" type="text" [(ngModel)]="evidencija[item.key]">
+                }@else {
+                {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
             <td mat-footer-cell *matFooterCellDef>
                 <input style="width: 40px;" type="text" [(ngModel)]="newEvidencijaDnevna[item.key]">
             </td>
+        }
         </ng-container>
         }
         @else if (item.key=='ODHH') {
@@ -213,11 +220,18 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
                 <input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]">
+                }@else {
+                {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
             <td mat-footer-cell *matFooterCellDef>
                 <input style="width: 70px;" type="time" [(ngModel)]="newEvidencijaDnevna[item.key]">
             </td>
+            }
         </ng-container>
         }
         @else if (item.key=='DOHH') {
@@ -225,12 +239,19 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time"
-                    [(ngModel)]="evidencija[item.key]">
+            <td mat-cell *matCellDef="let evidencija">
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+                    <input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]">
+                }@else {
+                    {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
             <td mat-footer-cell *matFooterCellDef>
                 <input style="width: 70px;" type="time" [(ngModel)]="newEvidencijaDnevna[item.key]">
             </td>
+        }
         </ng-container>
         }
         @else if (item.key=='MBR') {
@@ -241,9 +262,12 @@
             <td mat-cell *matCellDef="let evidencija">
                 {{evidencija[item.key]}}
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
             <td mat-footer-cell *matFooterCellDef>
                 <label for="">{{newEvidencijaDnevna.MBR}}</label>
             </td>
+            }
         </ng-container>
         }
         @else if (item.key=='OSOBA') {
@@ -252,37 +276,48 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
                 <div style="display: flex;align-content: center;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" style="min-height: 24;min-width: 24px;"
-                        (click)="pickZaposleniRow(evidencija);" (contextmenu)="removeZaposleniRow($event,evidencija)"
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        style="min-height: 24;min-width: 24px;" (click)="pickZaposleniRow(evidencija);"
+                        (contextmenu)="removeZaposleniRow($event,evidencija)"
                         matTooltip="{{ (!evidencija.MBR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="evidencija.OSOBAX">
                         {{ evidencija!.OSOBAX ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshZaposleniRow(evidencija.MBR, false);">
                         <input [class.red-input]="evidencija!.OSOBAX && evidencija!.MBR==''" type="text"
-                            [(ngModel)]="evidencija!.MBR"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
+                            [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
+                            style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
                             (ngModelChange)="filterZaposleniRow(evidencija);"
                             (focus)="refreshZaposleniRow(evidencija.MBR, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of NewOfferedZaposleni;track oj){
-                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.MBR" (onSelectionChange)="evidencija.OSOBAX=oj.PREZIME_IME">
-                                <span style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.MBR+' - '+oj.PREZIME_IME}}</span>
+                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.MBR"
+                                (onSelectionChange)="evidencija.OSOBAX=oj.PREZIME_IME">
+                                <span
+                                    style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.MBR+'
+                                    - '+oj.PREZIME_IME}}</span>
                             </mat-option>
                             }
-                        </mat-autocomplete>                    
+                        </mat-autocomplete>
                     </span>
-                                            
+
                     <span matTooltip="{{ evidencija!.OSOBAX }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{evidencija.OSOBAX}}</span>
                 </div>
+                }@else {
+                {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
             <td mat-footer-cell *matFooterCellDef>
                 <div style="display: flex;align-content: center;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" style="min-height: 24;min-width: 24px;"
-                        (click)="pickNewZaposleni();" (contextmenu)="removeNewZaposleni($event)"
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        style="min-height: 24;min-width: 24px;" (click)="pickNewZaposleni();"
+                        (contextmenu)="removeNewZaposleni($event)"
                         matTooltip="{{ (!newEvidencijaDnevna.MBR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="newVarNames.OSOBA">
                         {{ newVarNames!.OSOBA ? 'done' : 'import_contacts'}}
@@ -316,6 +351,7 @@
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.PREZIME_IME}}</span>
                 </div>
             </td>
+            }
         </ng-container>
         }
         @else if (item.key=='SIF_MT_N') {
@@ -324,34 +360,43 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
 
                 <div style="display: flex;align-content: center;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" style="min-height: 24;min-width: 24px;"
-                        (click)="pickEvidencijaRadVreOjRow(evidencija);" (contextmenu)="removeEvidencijaRadVreOjRow($event,evidencija)"
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        style="min-height: 24;min-width: 24px;" (click)="pickEvidencijaRadVreOjRow(evidencija);"
+                        (contextmenu)="removeEvidencijaRadVreOjRow($event,evidencija)"
                         matTooltip="{{ (!evidencija.SIF_MT ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="evidencija.SIF_MTX">
                         {{ evidencija!.SIF_MTX ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <input [class.red-input]="evidencija!.SIF_MTX && evidencija!.SIF_MT=='' " type="text"
-                            [(ngModel)]="evidencija!.SIF_MT"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
+                            [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
+                            style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
                             (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredEvidencijaRadVreOjNew;track oj){
-                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_OJ" (onSelectionChange)="evidencija.SIF_MTX=oj.NAZMJTR">
-                                <span style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_OJ+' - '+oj.NAZMJTR}}</span>
+                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_OJ"
+                                (onSelectionChange)="evidencija.SIF_MTX=oj.NAZMJTR">
+                                <span
+                                    style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_OJ+'
+                                    - '+oj.NAZMJTR}}</span>
                             </mat-option>
                             }
-                        </mat-autocomplete>                    
+                        </mat-autocomplete>
                     </span>
-                                            
+
                     <span matTooltip="{{ evidencija!.SIF_MTX }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{evidencija.SIF_MTX}}</span>
                 </div>
+                }@else {
+                {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
             <td mat-footer-cell *matFooterCellDef>
                 <div style="display: flex;align-content: center;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
@@ -389,6 +434,7 @@
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZMJTR}}</span>
                 </div>
             </td>
+            }
         </ng-container>
         }
         @else if (item.key=='SIF_VP_N') {
@@ -397,33 +443,43 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">
-                               <div style="display: flex;align-content: center;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" style="min-height: 24;min-width: 24px;"
-                        (click)="pickVrstePoslaRow(evidencija);" (contextmenu)="removeVrstePoslaRow($event,evidencija)"
+                @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
+                <div style="display: flex;align-content: center;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        style="min-height: 24;min-width: 24px;" (click)="pickVrstePoslaRow(evidencija);"
+                        (contextmenu)="removeVrstePoslaRow($event,evidencija)"
                         matTooltip="{{ (!evidencija.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                         [class.color-valid]="evidencija.SIF_VP_N">
                         {{ evidencija!.SIF_VP_N ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshVrstePoslaRow(evidencija, false);">
                         <input [class.red-input]="evidencija!.SIF_VP_N && evidencija!.SIF_VP=='' " type="text"
-                            [(ngModel)]="evidencija!.SIF_VP"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
+                            [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
+                            style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
                             (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP);"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
-                        <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400" >
+                        <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredVrstePosla;track oj){
-                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_VP" (onSelectionChange)="evidencija.SIF_VP_N=oj.NAZ_VP">
-                                <span style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_VP+' - '+oj.NAZ_VP.substring(7,100)}}</span>
+                            <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_VP"
+                                (onSelectionChange)="evidencija.SIF_VP_N=oj.NAZ_VP">
+                                <span
+                                    style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_VP+'
+                                    - '+oj.NAZ_VP.substring(7,100)}}</span>
                             </mat-option>
                             }
-                        </mat-autocomplete>                    
+                        </mat-autocomplete>
                     </span>
-                                            
+
                     <span matTooltip="{{ evidencija!.SIF_VP_N }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{evidencija.SIF_VP_N.substring(7,100)}}</span>
                 </div>
+                }
+                @else {
+                {{evidencija[item.key]}}
+                }
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
             <td mat-footer-cell *matFooterCellDef>
                 <div style="display: flex;align-content: center;">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
@@ -461,6 +517,7 @@
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZ_VP}}</span>
                 </div>
             </td>
+            }
         </ng-container>
         }
         @else {
@@ -469,7 +526,10 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">{{ evidencija[item.key] }}</td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
+
             <td mat-footer-cell *matFooterCellDef> </td>
+            }
         </ng-container>
         }
 
@@ -500,15 +560,19 @@
 
                 </div>
             </td>
+            @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
             <td mat-footer-cell *matFooterCellDef>
                 <button mat-flat-button type="button" [disabled]="!globalFn.checkValidity(newEvidencijaDnevna.MBR)"
                     (click)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
             </td>
+            }
         </ng-container>
 
         <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row style="height: 20px;" *matRowDef="let row; columns: displayedColumns;"></tr>
+        @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
         <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        }
 
     </table>
 </div>
