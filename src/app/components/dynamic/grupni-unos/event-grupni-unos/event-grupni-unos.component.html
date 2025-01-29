@@ -127,18 +127,21 @@
         [length]="length2" [pageSize]="pageSize2" (messageEvent)="receiveMessage($event);"></app-pagination>
     </div>
   </mat-tab>
+  
   <mat-tab label="{{'Edit'|translate}}">
-    <div style="min-width: 820px; min-height: 220px;">
+    <div style="min-width: 720px; min-height: 160px;display: flex;justify-content: space-around;">
       <table style="margin-left: 20px;">
         <tr>
           <td>
-            <label for="">{{'Od'|translate}}</label>
+            <label >{{'Od'|translate}}</label>
           </td>
           <td>
             <input type="datetime-local" [(ngModel)]="varNames.OD">
           </td>
+        </tr>
+        <tr>
           <td>
-            <label for="">{{'Do'|translate}}</label>
+            <label >{{'Do'|translate}}</label>
 
           </td>
           <td>
@@ -148,13 +151,15 @@
         </tr>
         <tr>
           <td>
-            <label for="">{{'PAUZAOD'|translate}}</label>
+            <label >{{'PAUZAOD'|translate}}</label>
           </td>
           <td>
             <input type="time" [(ngModel)]="receivedSheme.meta.PAUZA_OD">
           </td>
+        </tr>
+        <tr>
           <td>
-            <label for="">{{'PAUZADO'|translate}}</label>
+            <label >{{'PAUZADO'|translate}}</label>
 
           </td>
           <td>

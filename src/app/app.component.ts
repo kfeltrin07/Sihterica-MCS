@@ -58,6 +58,9 @@ export class AppComponent implements OnInit {
     this.session.loggedInUser.sessionID = this.cookies.getCookie('logged-in-user-session-id');
     this.session.loggedInUser.owner = this.cookies.getCookie('logged-in-user-owner');
     this.session.loggedInUser.ownerID = +this.cookies.getCookie('logged-in-user-owner-id');
+    this.session.loggedInUser.ULOGA = this.cookies.getCookie('ULOGA');
+    this.session.loggedInUser.ULOGA_NAZIV = this.cookies.getCookie('ULOGA_NAZIV');
+
     if (this.cookies.getCookie('selected-language') != '') {
       this.globalVar.selectedLanguage = this.cookies.getCookie('selected-language') as Language;
     }

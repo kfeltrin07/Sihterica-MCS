@@ -162,12 +162,6 @@ export class RadniciGrupeComponent {
           pSifOj: this.varNames.SIFMJTR,
           limit: 100000,
           page: 1,
-          sort: [
-            {
-              property: this.sorting.active,
-              direction: this.sorting.direction
-            }
-          ]
         }
       }
     ).subscribe((response: any) => {

@@ -31,6 +31,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PdfDnevnaEvidencijaComponent } from './pdf-dnevna-evidencija/pdf-dnevna-evidencija.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDnevnaEvidencijaComponent } from './delete-dnevna-evidencija/delete-dnevna-evidencija.component';
+import { CreateDnevnaEvidencijaComponent } from './create-dnevna-evidencija/create-dnevna-evidencija.component';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -313,15 +314,16 @@ export class DnevnaEvidencijaComponent implements OnInit {
     }
   }
 
+    public openCreateDialog(): void {
+  
+      const dialogRef = this.dialog.open(CreateDnevnaEvidencijaComponent, {
+        data: this.filter
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        setTimeout(() => this.refresh(), 3000);
+      });
+    }
   /*
-  public openCreateDialog(): void {
-
-    const dialogRef = this.dialog.open(CreateEvidencijaRadnogVremenaZaglavljeComponent, {
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
-    });
-  }
 
   public openEditDialog(item: any): void {
     const dialogRef = this.dialog.open(EditEvidencijaRadnogVremenaZaglavljeComponent, {

@@ -750,6 +750,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public OfferedVrstePosla(): void {
+    this.varNames.NAZ_VP="";
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1078,12 +1079,6 @@ export class GrupniUnosComponent implements OnInit {
           pIdGrupe: event.meta.ID_GRUPE,
           limit: 1000000,
           page: 1,
-          sort: [
-            {
-              property: 'NAZIV_RADNIKA',
-              direction: 'ASC'
-            }
-          ]
         }
       }
     ).subscribe((response: any) => {

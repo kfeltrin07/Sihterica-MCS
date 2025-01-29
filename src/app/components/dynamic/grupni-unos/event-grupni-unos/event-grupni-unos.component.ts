@@ -194,12 +194,6 @@ export class EventGrupniUnosComponent implements OnInit {
           pIdGrupe: this.receivedSheme.meta.ID_GRUPE,
           limit: this.pageSize2,
           page: (this.pageIndex2 + 1),
-          sort: [
-            {
-              property: this.sorting2.active,
-              direction: this.sorting2.direction
-            }
-          ]
         }
       }
     ).subscribe((response: any) => {
@@ -266,7 +260,7 @@ export class EventGrupniUnosComponent implements OnInit {
 
   public openZaposleniciDialog(): void {
     const dialogRef = this.dialog.open(RadniciGrupeComponent, {
-      data: this.selection.selected[0]
+      data: this.receivedSheme.meta
     });
     dialogRef.afterClosed().subscribe((result) => {
     });

@@ -750,6 +750,8 @@ label {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 99;
     max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .select-dropdown-content-visible {

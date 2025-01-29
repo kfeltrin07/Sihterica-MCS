@@ -46,7 +46,7 @@ constructor(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'updateGrupe',
+        method: 'upisSihterice',
         sid: this.session.loggedInUser.sessionID,
         data: {
           pAkcija: CRUDAction.Delete,

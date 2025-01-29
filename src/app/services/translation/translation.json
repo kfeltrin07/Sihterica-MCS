@@ -8055,6 +8055,12 @@
             "en": "Save all",
             "hr": "Spremi sve",
             "transferred": false
+        },
+        {
+            "ref": "GrupniUnosNaDan",
+            "en": "Group insert on day",
+            "hr": "Grupni unos na dan",
+            "transferred": false
         }
     ]
 }
