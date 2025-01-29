@@ -8049,6 +8049,12 @@
             "en": "Editing authorized persons by sale location",
             "hr": "Ovlaštene osobe Mj. Tr. uređivanje",
             "transferred": false
+        },
+        {
+            "ref": "SpremiSve",
+            "en": "Save all",
+            "hr": "Spremi sve",
+            "transferred": false
         }
     ]
 }

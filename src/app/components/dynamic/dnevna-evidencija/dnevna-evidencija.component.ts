@@ -1227,7 +1227,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-
+      this.refresh();
     });
   }
 
@@ -1582,6 +1582,14 @@ export class DnevnaEvidencijaComponent implements OnInit {
     this.router.navigate(["mjesecna-evidencija", data]);
 
 
+  }
+
+
+  public saveAll(): void {
+    for(let item of this.selection.selected){
+      this.Update(item);
+    }
+    this.refresh();
   }
 }
 
