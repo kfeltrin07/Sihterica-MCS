@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DashboardSubitem, DashboardItem } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-selection-screen',
@@ -25,6 +26,7 @@ export class SelectionScreenComponent implements OnInit {
 
   constructor(
     public globalVar: GlobalVariablesService,
+    public session: SessionService,
     private elementRef: ElementRef,
     public router: Router
   ) {}

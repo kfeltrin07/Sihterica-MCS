@@ -3,7 +3,7 @@
         <app-header-grupni-unos [(view)]="view" [(viewDate)]="viewDate" (viewChange)="view = $event">
         </app-header-grupni-unos>
 
-        <div [ngSwitch]="view">
+        <div [ngSwitch]="view" >
             <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (beforeViewRender)="beforeMonthViewRender($event)" (eventTimesChanged)="eventDropped($event)"
@@ -11,7 +11,7 @@
             </mwl-calendar-month-view>
 
             <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
-                [hourSegments]="2" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
+                [hourSegments]="1" [hourSegmentHeight]="26" [snapDraggedEvents]="false" [refresh]="refresh"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
                 [eventTemplate]="customEventTemplate">
@@ -340,8 +340,8 @@
 
 
     <ng-template #customCellTemplate let-day="day" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
-        let-tooltipPlacement="tooltipPlacement" let-locale="locale">
-            <div class="cal-cell-top">
+        let-tooltipPlacement="tooltipPlacement" let-locale="locale" style="height: 125px;min-height: 125px;">
+            <div class="cal-cell-top" style="min-height: 50px;">
                 <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
                 <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
             </div>

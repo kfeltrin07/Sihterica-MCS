@@ -35,6 +35,8 @@ export interface SessionUser {
   owner?: string;
   ownerID?: number;
   IDVlasnika?: number;
+  ULOGA?: string;
+  ULOGA_NAZIV: string;
 }
 
 export interface LoginBody {

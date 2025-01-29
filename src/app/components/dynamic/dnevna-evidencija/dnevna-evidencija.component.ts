@@ -30,6 +30,7 @@ import { CopyDnevnaEvidencijaComponent } from './copy-dnevna-evidencija/copy-dne
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PdfDnevnaEvidencijaComponent } from './pdf-dnevna-evidencija/pdf-dnevna-evidencija.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DeleteDnevnaEvidencijaComponent } from './delete-dnevna-evidencija/delete-dnevna-evidencija.component';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -226,7 +227,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     public session: SessionService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    public router:Router
+    public router: Router
   ) {
     this.subscription = this.modelChanged
       .pipe(
@@ -252,9 +253,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (this.IncomingData.DATUM) {
       console.log(this.IncomingData.DATUM);
       this.filter.DATUM = this.globalFn.formatDateForDateForm(this.IncomingData.DATUM.toLocaleString());
-      this.filter.MBR = this.IncomingData.ID_RADNIKA?this.IncomingData.ID_RADNIKA:"%";
-      this.filter.SIF_OJ = this.IncomingData.SIFMJTR?this.IncomingData.SIFMJTR:"%";
-      this.filter.SIF_VP = this.IncomingData.SIF_VP?this.IncomingData.SIF_VP:"%";
+      this.filter.MBR = this.IncomingData.ID_RADNIKA ? this.IncomingData.ID_RADNIKA : "%";
+      this.filter.SIF_OJ = this.IncomingData.SIFMJTR ? this.IncomingData.SIFMJTR : "%";
+      this.filter.SIF_VP = this.IncomingData.SIF_VP ? this.IncomingData.SIF_VP : "%";
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
       this.OfferedZaposleni();
@@ -331,15 +332,17 @@ export class DnevnaEvidencijaComponent implements OnInit {
     });
   }
 
+
+*/
   public openDeleteDialog(item: any): void {
-    const dialogRef = this.dialog.open(DeleteEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(DeleteDnevnaEvidencijaComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => this.refresh(), 1000);
     });
   }
-*/
+
   public openDetailsDialog(item: any): void {
     const dialogRef = this.dialog.open(DetailsMjesecnaEvidencijaComponent, {
       data: item,
@@ -1492,32 +1495,32 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public refreshZaposleniRow(searchParam: string, isSelected: boolean,): void {
 
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'getEvRadnogVremenaHelpRadnici',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pDioNaziva: searchParam,
-            limit: 100,
-            page: 1,
-            sort: [
-              {
-                property: "MBR",
-                direction: "ASC"
-              }
-            ]
-          }
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaHelpRadnici',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pDioNaziva: searchParam,
+          limit: 100,
+          page: 1,
+          sort: [
+            {
+              property: "MBR",
+              direction: "ASC"
+            }
+          ]
         }
-      ).subscribe((response: any) => {
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.NewOfferedZaposleni = response.debugData.data;
-        this.NewFilteredZaposleni = response.debugData.data;
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.NewOfferedZaposleni = response.debugData.data;
+      this.NewFilteredZaposleni = response.debugData.data;
 
 
-      });
-    
+    });
+
   }
 
   public OfferedZaposleniRow(row: EvidencijaDnevna): void {
@@ -1586,7 +1589,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
 
   public saveAll(): void {
-    for(let item of this.selection.selected){
+    for (let item of this.selection.selected) {
       this.Update(item);
     }
     this.refresh();

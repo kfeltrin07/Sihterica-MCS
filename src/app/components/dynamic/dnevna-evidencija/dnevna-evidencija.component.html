@@ -190,7 +190,7 @@
                 <mat-icon>save</mat-icon> {{'SpremiSve'|translate}}</button>
             <button mat-flat-button color="primary" style="margin-left: 10px;"
                 [disabled]="filter.MBR=='' || filter.SIF_VP=='' ||filter.SIF_OJ==''" (click)="openCopyDataDialog()">
-                <mat-icon>copy</mat-icon> {{'KopiranjePodataka'|translate}}</button>
+                <mat-icon>content_copy</mat-icon> {{'KopiranjePodataka'|translate}}</button>
         </div>
 
     </div>
@@ -561,15 +561,16 @@
                         (click)="goToMjesecnaEvidencija(EvidencijaRadVreZag);"
                         matTooltip="{{ 'calendar_month' | translate }}">calendar_month</mat-icon>
 
+                    <mat-icon id="deleteButton" class="cursor-pointer minimum-margin-left-and-right"
+                        (click)="openDeleteDialog(EvidencijaRadVreZag);"
+                        matTooltip="{{ 'Delete' | translate }}">delete</mat-icon>
+
                     <mat-icon id="editButton" *ngIf="selection.isSelected(EvidencijaRadVreZag)"
                         class="cursor-pointer minimum-margin-left-and-right" (click)="Update(EvidencijaRadVreZag);"
                         matTooltip="{{ 'Save' | translate }}">save</mat-icon>
-                    <!--
-                        
-                    <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
-                      (click)="openPDFDialog({headers: displayedColumns, searchParam: searchParam});"
-                      matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
-                    -->
+
+
+
 
                 </div>
             </td>

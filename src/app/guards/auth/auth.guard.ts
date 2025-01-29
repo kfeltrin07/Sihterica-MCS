@@ -24,6 +24,25 @@ export function authGuard(): CanActivateFn {
 
 }
 
+export function roleGuard(): CanActivateFn {
+
+  return (): boolean => {
+    const session: SessionService = inject(SessionService);
+    const cookies: CookiesService = inject(CookiesService);
+    const globalFn: GlobalFunctionsService = inject(GlobalFunctionsService);
+    const globalVar: GlobalVariablesService = inject(GlobalVariablesService);
+
+    cookies.getCookie('ULOGA')
+
+    if (cookies.getCookie('ULOGA') == '0' || !globalVar.environment.isLoginRequired) {
+      return true;
+    }
+    globalFn.goToRoute('/selection-screen');
+    return false;
+  };
+
+}
+
 export function noLoginGuard(): CanActivateFn {
 
   return (): boolean => {

@@ -42,7 +42,9 @@ export class SessionService {
     username: '',
     password: '',
     sessionID: '',
-    roleID: 0
+    roleID: 0,
+    ULOGA: '',
+    ULOGA_NAZIV: '',
   };
 
   loginBody: LoginBody = { // koristi se za slanje podataka za prijavu na Login komponenti
@@ -132,6 +134,8 @@ export class SessionService {
         owner: "",
         ownerID: 0,
         IDVlasnika: 0,
+        ULOGA: "",
+        ULOGA_NAZIV: ""
       };
       this.cookies.deleteCookie('logged-in-user-session-id');
       this.loggingOutDialogRef.close();
@@ -167,13 +171,18 @@ export class SessionService {
           username: response.debugData.data['0'].USERNAME,
           sessionID: response.debugData.data['0'].SID,
           owner: response.debugData.data['0'].IMEVLASNIKA,
-          ownerID: +response.debugData.data['0'].IDVLASNIKA
+          ownerID: +response.debugData.data['0'].IDVLASNIKA,
+          ULOGA: response.debugData.data['0'].ULOGA,
+          ULOGA_NAZIV: response.debugData.data['0'].ULOGA_NAZIV,
         }
         this.loggingInDialogRef.close();
         this.cookies.setCookie('logged-in-user-id', this.loggedInUser.ID!.toString());
         this.cookies.setCookie('logged-in-user-username', this.loggedInUser.username!.toString());
         this.cookies.setCookie('logged-in-user-session-id', this.loggedInUser.sessionID);
         this.cookies.setCookie('logged-in-user-owner', this.loggedInUser.owner!);
+        this.cookies.setCookie('ULOGA', this.loggedInUser.ULOGA!);
+        this.cookies.setCookie('ULOGA_NAZIV', this.loggedInUser.ULOGA_NAZIV!);
+
         this.cookies.setCookie('logged-in-user-owner-id', this.loggedInUser.ownerID!.toString());
         this.cookies.setCookie('logged-in-user-displayed-username', this.loggedInUser.displayedUsername!);
         /*this.cookies.setCookie('logged-in-user-role-id', this.loggedInUser.roleID!.toString());

@@ -5,7 +5,7 @@
 .unos-form {
     background-color: var(--color-white);
     width: 306px;
-    height: 760px;
+    height: 450px;
     margin-left: 16px;
     margin-top: 20px;
     border-radius: 15px;
@@ -69,7 +69,6 @@
     border-radius: 15px 15px 0px 0px;
     position: relative;
     color: black;
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.4) !important;
     height: 139px;
     .listEvents {
         max-height: 139px;
@@ -81,7 +80,6 @@
     padding: 16px 0px 16px 16px;
     position: relative;
     color: black;
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.4) !important;
     height: 139px;
     .card-body{
         height: 100%;
@@ -152,3 +150,7 @@ input {
 .cal-day-number:hover{
     opacity: 0.8;
 }
+
+.cal-month-view .cal-day-cell {
+    min-height: 0!important;
+  }

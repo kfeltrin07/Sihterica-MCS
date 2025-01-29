@@ -1,6 +1,6 @@
 <div class="selection-screen">
     @for(item of globalVar.dashboardItems;track item){
-      @if(item.rightsState!=0){
+      @if(!(item.name=='Administracija' && this.session.loggedInUser.ULOGA!='0')){
         <div class="selection-div" [style.grid-row]="'span ' +item.rowHeight">
           <mat-card class="selection_card" class="selection-screen-card card">
             <mat-icon class="icon">{{item.icon}}</mat-icon>

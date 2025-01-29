@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dynamic/dashboard/dashboard.component';
 import { LoginComponent } from './components/dynamic/login/login.component';
 import { SelectionScreenComponent } from './components/dynamic/selection-screen/selection-screen.component';
-import { authGuard, noLoginGuard } from './guards/auth/auth.guard';
+import { authGuard, noLoginGuard, roleGuard } from './guards/auth/auth.guard';
 import { ZaposleniComponent } from './components/dynamic/zaposleni/zaposleni.component';
 import { VrstePoslaComponent } from './components/dynamic/vrste-posla/vrste-posla.component';
 import { OrganizacijskeJediniceComponent } from './components/dynamic/organizacijske-jedinice/organizacijske-jedinice.component';
@@ -26,22 +26,22 @@ const routes: Routes = [
   { path: 'zaposleni', component: ZaposleniComponent, canActivate: [authGuard()] },
   { path: 'vrste-posla', component: VrstePoslaComponent, canActivate: [authGuard()] },
   { path: 'oj', component: OrganizacijskeJediniceComponent, canActivate: [authGuard()] },
-  { path: 'operateri', component: PregledOperateraComponent, canActivate: [authGuard()] },
-  { path: 'ovlastene-osobe-mj-tr', component: OvlasteneOsobeMjTrComponent, canActivate: [authGuard()] },
-  { path: 'evidencija-rad-vrem-zag', component: EvidencijaRadnogVremenaZaglavljeComponent, canActivate: [authGuard()] },
-  { path: 'evidencija-rad-vrem-zag-veze', component: EvidencijaRadnogVremenaZaglavljeVezeComponent, canActivate: [authGuard()] },
+  { path: 'operateri', component: PregledOperateraComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'ovlastene-osobe-mj-tr', component: OvlasteneOsobeMjTrComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'evidencija-rad-vrem-zag', component: EvidencijaRadnogVremenaZaglavljeComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'evidencija-rad-vrem-zag-veze', component: EvidencijaRadnogVremenaZaglavljeVezeComponent, canActivate: [authGuard(),roleGuard()] },
   { path: 'evidencija-rad-vrem-rad', component: EvidencijaRadnogVremenaRadnikaComponent, canActivate: [authGuard()] },
   { path: 'evidencija-rad-vrem', component: EvidencijaRadnogVremenaComponent, canActivate: [authGuard()] },
   { path: 'fond-sati', component: KontrolaFondaSatiComponent, canActivate: [authGuard()] },
   { path: 'pomocne-liste', component: PomocneListeComponent, canActivate: [authGuard()] },
-  { path: 'sheme', component: ShemeComponent, canActivate: [authGuard()] },
-  { path: 'grupe', component: GrupeComponent, canActivate: [authGuard()] },
-  { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard()] },
-  { path: 'mjesecna-evidencija', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
-  { path: 'mjesecna-evidencija/:data', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
+  { path: 'sheme', component: ShemeComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'grupe', component: GrupeComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'mjesecna-evidencija', component: MjesecnaEvidencijaComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'mjesecna-evidencija/:data', component: MjesecnaEvidencijaComponent, canActivate: [authGuard(),roleGuard()] },
 
-  { path: 'dnevna-evidencija', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
-  { path: 'dnevna-evidencija/:data', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
+  { path: 'dnevna-evidencija', component: DnevnaEvidencijaComponent, canActivate: [authGuard(),roleGuard()] },
+  { path: 'dnevna-evidencija/:data', component: DnevnaEvidencijaComponent, canActivate: [authGuard(),roleGuard()] },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard()] },
   { path: 'login', component: LoginComponent, canActivate: [noLoginGuard()] },
