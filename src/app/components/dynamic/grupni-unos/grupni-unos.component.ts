@@ -101,6 +101,10 @@ export class GrupniUnosComponent implements OnInit {
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
+
   };
 
   public grupe: Grupe[] = [];
@@ -110,6 +114,10 @@ export class GrupniUnosComponent implements OnInit {
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
+
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -229,6 +237,18 @@ export class GrupniUnosComponent implements OnInit {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
+    console.log(newStart);
+    newStart.setHours(event.meta.OD.substring(0, 2), event.meta.OD.substring(3, 4));
+    console.log(newStart);
+
+    if(!newEnd){
+      newEnd = new Date(newStart);
+      console.log(newEnd);
+    }
+    newEnd?.setHours(event.meta.DO.substring(0, 2), event.meta.DO.substring(3, 4));
+
+    console.log(newEnd);
+
     let match: boolean = false;
     const newEvent: CalendarEvent = {
       id: this.globalVar.events.length,
@@ -425,7 +445,7 @@ export class GrupniUnosComponent implements OnInit {
             colorindex = 0
           };
 
-          if(!this.globalVar.externalGrupeEvents.find((iEvent) => iEvent.meta.ID_GRUPE === grupe.ID_GRUPE)){
+          if (!this.globalVar.externalGrupeEvents.find((iEvent) => iEvent.meta.ID_GRUPE === grupe.ID_GRUPE)) {
             this.globalVar.externalGrupeEvents = [...this.globalVar.externalGrupeEvents, {
               id: index,
               title: grupe.NAZ_GRUPE,
@@ -438,6 +458,8 @@ export class GrupniUnosComponent implements OnInit {
                 DO: shema?.DO,
                 NAZ_GRUPE: grupe?.NAZ_GRUPE,
                 ID_GRUPE: grupe?.ID_GRUPE,
+                SIF_OJ: grupe?.SIF_OJ,
+                NAZ_OJ: grupe?.NAZ_OJ,
                 NAZ_SHEME: shema?.OPIS,
                 SIF_SHEME: shema?.SIF_SHEME,
                 OPIS: shema?.OPIS,
@@ -448,7 +470,7 @@ export class GrupniUnosComponent implements OnInit {
                 NOVASHEMA: true,
                 type: 'grupa',
                 incrementsBadgeTotal: true,
-  
+
               },
               resizable: {
                 beforeStart: true,
@@ -457,7 +479,7 @@ export class GrupniUnosComponent implements OnInit {
             }];
           };
 
-          
+
           index++;
           colorindex++;
         });
@@ -639,7 +661,7 @@ export class GrupniUnosComponent implements OnInit {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.varNames.NAZ_GRUPE = response.debugData.data[0].NAZ_GRUPE;
-      this.varNames.ID_GRUPE =  response.debugData.data[0].ID_GRUPE;
+      this.varNames.ID_GRUPE = response.debugData.data[0].ID_GRUPE;
     });
   }
 
@@ -928,7 +950,7 @@ export class GrupniUnosComponent implements OnInit {
   }
   //ZaposleniPoGrupiIShemi END
 
-public pickEvidencijaRadVreOj(): void {
+  public pickEvidencijaRadVreOj(): void {
     const dialogRef = this.dialog.open(PickEvidencijaHelpOjComponent, {});
 
     dialogRef.afterClosed().subscribe((EvidencijaRadVreOj?: EvidencijaRadVreOj) => {
@@ -1104,7 +1126,7 @@ public pickEvidencijaRadVreOj(): void {
           pSifVlas: this.session.loggedInUser.ownerID,
           pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
           pMbr: zaposleni.ID_RADNIKA,
-          pSifOj: zaposleni.SIF_OJ,
+          pSifOj: event.meta.SIF_OJ,
           pSifVP: this.varNames.SIF_VP,
           pSati: totalHours,
           pOd: event.start.toISOString().slice(11, 16),

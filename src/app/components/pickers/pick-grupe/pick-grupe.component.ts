@@ -48,14 +48,17 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './pick-grupe.component.scss'
 })
 export class PickGrupeComponent implements OnInit {
-  public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE', 'SIF_SHEME'];
+  public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE', 'SIF_SHEME','NAZ_SHEME', 'SIF_OJ', 'NAZ_OJ'];
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA:0,
-    RN:0,
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
   };
 
   public dataSource = this.grupe;
@@ -95,7 +98,7 @@ export class PickGrupeComponent implements OnInit {
         data: {
           pDioNaziva: '%' + this.searchParam + '%',
           pSifSheme: '',
-          pIdKorisnika:this.session.loggedInUser.ID,
+          pIdKorisnika: this.session.loggedInUser.ID,
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [

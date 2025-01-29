@@ -1,88 +1,115 @@
-<div 
-cdkDrag
-cdkDragRootElement=".cdk-overlay-pane" 
-cdkDragHandle 
-cdkDragBoundary=".cdk-overlay-container"
-class="colored-header text-align-center">
-	{{ 'Creating' | translate }}
-    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
+    class="colored-header text-align-center">
+    {{ 'Creating' | translate }}
+    <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
 
 </div>
 
 <mat-dialog-content class="small-margin-and-center-title">
 
-	<h2 mat-dialog-title class="text-align-center">
-		<mat-icon class="dialog-title-icon">person</mat-icon>
-		<mat-icon class="dialog-title-icon">add</mat-icon>
-		<span class="dialog-title">{{ 'GrupeCreation' | translate }}</span>
-  	</h2>
+    <h2 mat-dialog-title class="text-align-center">
+        <mat-icon class="dialog-title-icon">person</mat-icon>
+        <mat-icon class="dialog-title-icon">add</mat-icon>
+        <span class="dialog-title">{{ 'GrupeCreation' | translate }}</span>
+    </h2>
 
-	<div class="form-container">
-		<table>
+    <div class="form-container">
+        <table>
             <tr>
-				<td>
-					<label for="ID_GRUPE" class="minimum-margin-top">{{ 'ID_GRUPE' | translate }}:</label>
-				</td>
                 <td>
-                    <input type="text" [(ngModel)]="Grupe.ID_GRUPE">
-                </td> 
-			</tr>
-            <tr>
-				<td>
-					<label for="NAZ_GRUPE" class="minimum-margin-top">{{ 'NAZ_GRUPE' | translate }}:</label>
-				</td>
+                    <label for="NAZ_GRUPE" class="minimum-margin-top">{{ 'NAZ_GRUPE' | translate }}:</label>
+                </td>
                 <td>
                     <input type="text" [(ngModel)]="Grupe.NAZ_GRUPE">
                 </td>
-			</tr>
-			<tr>
-				<td>
+            </tr>
+            <tr>
+                <td>
                     <label for="SIF_SHEME" class="minimum-margin-top">{{ 'Shema' | translate }}:</label>
                 </td>
                 <td
-                    style="display: flex;max-width: 480px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                        (click)="pickSheme();" (contextmenu)="removeSheme($event)"
+                    style="display: flex;max-width: 580px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickSheme();"
+                        (contextmenu)="removeSheme($event)"
                         matTooltip="{{ (!Grupe.SIF_SHEME ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.NAZ_SHEME">
-                        {{ varNames!.NAZ_SHEME ? 'done' : 'import_contacts'}}
+                        [class.color-valid]="Grupe.NAZ_SHEME">
+                        {{ Grupe!.NAZ_SHEME ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span
-                        (click)="refreshSheme(Grupe!.SIF_SHEME, false);">
+                    <span (click)="refreshSheme(Grupe!.SIF_SHEME, false);">
                         <input type="text" [(ngModel)]="Grupe.SIF_SHEME" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedSheme();resetSheme();"
+                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedSheme();resetSheme();"
                             (ngModelChange)="filterSheme(Grupe!.SIF_SHEME);"
                             (focus)="refreshSheme(Grupe!.SIF_SHEME, false);"
                             (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
                             (keyup.escape)="resetSheme();"
                             (keyup.arrowdown)="ShemeDropdownIndex = (ShemeDropdownIndex + 1) % offeredSheme.length;globalFn.scroll('offeredSheme-dropdown-' + ShemeDropdownIndex);"
                             (keyup.arrowup)="ShemeDropdownIndex = (ShemeDropdownIndex - 1 + offeredSheme.length) % offeredSheme.length;globalFn.scroll('offeredSheme-dropdown-' + ShemeDropdownIndex);">
-                        <div id="offeredSheme-dropdown"
-                            class="select-dropdown-content max-height-300px" style="z-index: 500;">
-                            <div [id]="'offeredSheme-dropdown-' + i"
-                                *ngFor="let sheme of offeredSheme; index as i" matRipple
-                                class="dropdown-content-item display-flex align-items-center space-between"
-                                [class.gray-background]="i == ShemeDropdownIndex"
-                                (mousedown)="selectSheme(sheme);">
+                        <div id="offeredSheme-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredSheme-dropdown-' + i" *ngFor="let sheme of offeredSheme; index as i"
+                                matRipple class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == ShemeDropdownIndex" (mousedown)="selectSheme(sheme);">
                                 <span>
                                     <b>{{ sheme.SIF_SHEME }}</b> ({{ sheme.OPIS }})
                                 </span>
                             </div>
                         </div>
                     </span>
-                    <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_SHEME }}"
+                    <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        class="small-margin-left margin-right" matTooltip="{{ Grupe!.NAZ_SHEME }}"
                         matTooltipShowDelay="1000">{{
-                        varNames!.NAZ_SHEME }}</span>
+                        Grupe!.NAZ_SHEME }}</span>
                 </td>
-			</tr>
-		</table>
-	</div>
+            </tr>
+            <tr>
+                <td>
+                    <label for="MBR" class="minimum-margin-top">{{ 'mjesto-troska' | translate }}:</label>
+                </td>
+                <td
+                    style="display: flex;max-width: 580px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickEvidencijaRadVreOj();" (contextmenu)="removeEvidencijaRadVreOj($event)"
+                        matTooltip="{{ (!Grupe.SIF_OJ ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="Grupe!.NAZ_OJ">
+                        {{ Grupe!.NAZ_OJ ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (click)="refreshEvidencijaRadVreOj(Grupe!.SIF_OJ, false);">
+                        <input type="text" [(ngModel)]="Grupe!.SIF_OJ" maxlength="22"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                            (ngModelChange)="filterEvidencijaRadVreOj(Grupe!.SIF_OJ);"
+                            (focus)="refreshEvidencijaRadVreOj(Grupe!.SIF_OJ, false);"
+                            (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
+                            (keyup.escape)="resetEvidencijaRadVreOjIndex();"
+                            (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex + 1) % offeredEvidencijaRadVreOj.length; globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                            (keyup.arrowup)="EvidencijaRadVreOjDropdownIndex = (EvidencijaRadVreOjDropdownIndex - 1 + offeredEvidencijaRadVreOj.length) % offeredEvidencijaRadVreOj.length; globalFn.scroll('offeredEvidencijaRadVreOj-dropdown-' + EvidencijaRadVreOjDropdownIndex);"
+                            id="offeredEvidencijaRadVreOj-help-span">
+                        <div id="offeredEvidencijaRadVreOj-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredEvidencijaRadVreOj-dropdown-' + i"
+                                *ngFor="let evidencijaRadVreOj of offeredEvidencijaRadVreOj; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == EvidencijaRadVreOjDropdownIndex"
+                                (mousedown)="selectEvidencijaRadVreOj(evidencijaRadVreOj);">
+                                <span>
+                                    <b>{{evidencijaRadVreOj.SIF_OJ}}</b> - {{ evidencijaRadVreOj.NAZMJTR}}
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        class="small-margin-left margin-right" matTooltip="{{ Grupe!.NAZ_OJ }}"
+                        matTooltipShowDelay="1000">{{ Grupe.NAZ_OJ }}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
-	<button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
-		[disabled]="validateForm(Grupe!)">{{ 'Create' | translate }}</button>
+    <button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
+    <button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+        [disabled]="validateForm(Grupe!)">{{ 'Create' | translate }}</button>
 </mat-dialog-actions>

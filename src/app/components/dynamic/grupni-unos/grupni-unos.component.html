@@ -9,16 +9,19 @@
                 (beforeViewRender)="beforeMonthViewRender($event)" (eventTimesChanged)="eventDropped($event)"
                 [cellTemplate]="customCellTemplate">
             </mwl-calendar-month-view>
+
             <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [hourSegments]="2" [hourSegmentHeight]="30" [snapDraggedEvents]="false" [refresh]="refresh"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
                 [eventTemplate]="customEventTemplate">
             </mwl-calendar-week-view>
+                        <!--
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
                 [hourSegments]="2" [snapDraggedEvents]="false" [refresh]="refresh" [eventTemplate]="customEventTemplate"
                 (eventTimesChanged)="eventDropped($event)">
             </mwl-calendar-day-view>
+            -->
         </div>
     </div>
     <div class="unos-form">
@@ -60,6 +63,7 @@
         </div>
         <div class="grupni-unos-helpovi">
             <table>
+                <!--
                 <tr>
                     <td>
                         <label for="ID_RADNIKA">{{ 'GRUPA' | translate }}:</label>
@@ -146,6 +150,7 @@
                             varNames!.NAZMJTR }}</span>
                     </td>
                 </tr>
+
                 <tr>
                     <td>
                         <label for="ID_RADNIKA">{{ 'Zaposleni' | translate }}:</label>
@@ -189,6 +194,7 @@
                             class="small-margin-left margin-right">{{ varNames.NAZIV_RADNIKA }}</span>
                     </td>
                 </tr>
+                -->
                 <tr>
                     <td>
                         <label for="VrstaPosla">{{ 'VrstaPosla' | translate }}:</label>
@@ -235,10 +241,11 @@
             </table>
         </div>
         <div class="grupni-unos-buttons">
+            <!--
             <button style="margin: 15px;" color="primary" mat-flat-button
                 [disabled]="varNames.ID_RADNIKA==''||varNames.NAZ_GRUPE==''||varNames.SIF_VP==''||varNames.SIFMJTR==''"
-                (click)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>
-            <button style="margin: 15px;" color="primary" mat-flat-button [disabled]="varNames.NAZ_VP==''"
+                (click)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>-->
+            <button style="margin: 15px;" color="primary" mat-flat-button [disabled]="varNames.NAZ_VP=='' || varNames.SIF_VP==''"
                 (click)="save()"><mat-icon>add_alarm</mat-icon>{{'Unos'|translate}}</button>
             <button style="margin: 15px;" color="primary" mat-flat-button
                 (click)="clearCalendar()"><mat-icon>cancel</mat-icon>{{'OcistiKalendar'|translate}}</button>
@@ -334,7 +341,7 @@
 
     <ng-template #customCellTemplate let-day="day" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
         let-tooltipPlacement="tooltipPlacement" let-locale="locale">
-            <div class="cal-cell-top" (click)="changeDay(day.date)">
+            <div class="cal-cell-top">
                 <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
                 <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
             </div>
@@ -344,6 +351,7 @@
                         [style.backgroundColor]="event.color.primary" [ngClass]="event?.cssClass"
                         (mouseenter)="highlightDay.emit({event: event})"
                         (mouseleave)="unhighlightDay.emit({event: event})"
+                        (click)="eventClicked(event)"
                         [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
                         [tooltipPlacement]="tooltipPlacement">
                     </div>

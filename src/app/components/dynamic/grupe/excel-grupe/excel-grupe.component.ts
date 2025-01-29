@@ -34,11 +34,14 @@ import * as XLSX from 'xlsx';
 export class ExcelGrupeComponent {
   public grupe!: Grupe[];
   public Grupe: Grupe = {
-    UKUPANBROJSLOGOVA:0,
-    RN:0,
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
   }
 
   public allColumns: boolean = true;

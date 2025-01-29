@@ -53,7 +53,7 @@ import { RadniciGrupeComponent } from '../../grupe/radnici-grupe/radnici-grupe.c
 })
 export class EventGrupniUnosComponent implements OnInit {
   public displayedColumns1: string[] = ['ID_GRUPE', 'NAZ_GRUPE'];
-  public displayedColumns2: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA', 'NAZ_RM', 'OD', 'DO', 'SATI'];
+  public displayedColumns2: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA','SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
@@ -62,6 +62,9 @@ export class EventGrupniUnosComponent implements OnInit {
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
   };
 
   public zaposleniPoGrupiIShemi: ZaposleniPoGrupiIShemi[] = [];
@@ -132,8 +135,7 @@ export class EventGrupniUnosComponent implements OnInit {
     this.varNames.OD = new Date(this.receivedSheme.start).toISOString().slice(0, 16);
     this.varNames.DO = new Date(this.receivedSheme.end).toISOString().slice(0, 16);
 
-
-    this.getGrupe();
+    this.getZaposleniGrupe();
   }
 
   public getGrupe(): void {
@@ -170,6 +172,9 @@ export class EventGrupniUnosComponent implements OnInit {
           ID_GRUPE: "0",
           NAZ_GRUPE: "NEMA GRUPA NA OVOJ SHEMI",
           SIF_SHEME: "",
+          SIF_OJ: "",
+          NAZ_OJ: "",
+          NAZ_SHEME: ""
         });
       }
       this.loading = false;
@@ -186,7 +191,7 @@ export class EventGrupniUnosComponent implements OnInit {
         data: {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
-          pIdGrupe: this.selection.selected[0].ID_GRUPE,
+          pIdGrupe: this.receivedSheme.meta.ID_GRUPE,
           limit: this.pageSize2,
           page: (this.pageIndex2 + 1),
           sort: [

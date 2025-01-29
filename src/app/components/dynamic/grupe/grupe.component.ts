@@ -53,7 +53,7 @@ import { EditGrupeComponent } from './edit-grupe/edit-grupe.component';
   styleUrl: './grupe.component.scss'
 })
 export class GrupeComponent implements OnInit {
-  public displayedColumns: string[] = ['RN', 'ID_GRUPE', 'NAZ_GRUPE', 'options'];
+  public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE', 'SIF_SHEME','NAZ_SHEME', 'SIF_OJ', 'NAZ_OJ', 'options'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
@@ -62,6 +62,9 @@ export class GrupeComponent implements OnInit {
     ID_GRUPE: "",
     NAZ_GRUPE: "",
     SIF_SHEME: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
+    NAZ_SHEME: ""
   };
 
 

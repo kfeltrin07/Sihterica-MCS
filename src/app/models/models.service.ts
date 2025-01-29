@@ -623,6 +623,9 @@ export interface Grupe {
   ID_GRUPE: string;
   NAZ_GRUPE: string;
   SIF_SHEME: string;
+  SIF_OJ: string;
+  NAZ_OJ: string;
+  NAZ_SHEME: string;
 }
 
 

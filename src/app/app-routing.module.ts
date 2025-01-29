@@ -38,6 +38,8 @@ const routes: Routes = [
   { path: 'grupe', component: GrupeComponent, canActivate: [authGuard()] },
   { path: 'grupni-unos', component: GrupniUnosComponent, canActivate: [authGuard()] },
   { path: 'mjesecna-evidencija', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
+  { path: 'mjesecna-evidencija/:data', component: MjesecnaEvidencijaComponent, canActivate: [authGuard()] },
+
   { path: 'dnevna-evidencija', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
   { path: 'dnevna-evidencija/:data', component: DnevnaEvidencijaComponent, canActivate: [authGuard()] },
 

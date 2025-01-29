@@ -355,6 +355,16 @@ export class GlobalFunctionsService {
     return year + '-' + this.conditionalZeroPrefix(month) + '-' + this.conditionalZeroPrefix(day);
   }
 
+  public formatDateForDateForm2(date: string): string {
+    let day: number = +date.substring(0, 2);
+    console.log(day)
+    let month: number = +date.substring(3, 5);
+    console.log(month)
+    let year: number = +date.substring(6,10);
+    console.log(year)
+    return year + '-' + this.conditionalZeroPrefix(month) + '-' + this.conditionalZeroPrefix(day);
+  }
+
   public scroll(element: string) {
     let el = document.getElementById(element);
     el?.scrollIntoView({

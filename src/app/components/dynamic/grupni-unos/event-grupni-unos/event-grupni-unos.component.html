@@ -1,5 +1,6 @@
 <mat-tab-group [selectedIndex]="selected.value"
   (selectedIndexChange)="selected.setValue($event);selection.isEmpty()?'':getZaposleniGrupe();">
+  <!--
   <mat-tab label="{{'Grupe'|translate}}">
     <mat-toolbar class="toolbar">
 
@@ -60,7 +61,8 @@
         [length]="length1" [pageSize]="pageSize1" (messageEvent)="receiveMessage($event);"></app-pagination>
     </div>
   </mat-tab>
-  <mat-tab [disabled]="selection.isEmpty()" label="{{'Zaposleni'|translate}}">
+  -->
+  <mat-tab label="{{'Zaposleni'|translate}}">
     <mat-toolbar class="toolbar">
 
       <span cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container">{{

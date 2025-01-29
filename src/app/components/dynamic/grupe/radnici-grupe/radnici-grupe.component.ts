@@ -55,7 +55,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   styleUrl: './radnici-grupe.component.scss'
 })
 export class RadniciGrupeComponent {
-  public displayedColumns: string[] = ['yes-no', 'MBR', 'PREZIME_IME', 'NAZ_ZAN'];
+  public displayedColumns: string[] = ['yes-no', 'MBR', 'PREZIME_IME','SIF_OJ', 'NAZ_OJ', 'NAZ_RM'];
   public zaposleniGrupe: ZaposleniGrupe[] = [];
   public ZaposleniGrupe: ZaposleniGrupe = {
     UKUPANBROJSLOGOVA: 0,

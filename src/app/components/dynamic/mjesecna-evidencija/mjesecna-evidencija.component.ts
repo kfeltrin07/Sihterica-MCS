@@ -27,6 +27,7 @@ import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrs
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { PdfMjesecnaEvidencijaComponent } from './pdf-mjesecna-evidencija/pdf-mjesecna-evidencija.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mjesecna-evidencija',
@@ -65,7 +66,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     NAZ_RM: "",
     SIF_OJ: "%",
     NAZ_OJ: "",
-    SIF_VP: "",
+    SIF_VP: "%",
   }
 
   public varNames: any = {
@@ -159,6 +160,9 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     active: 'D1',
     direction: 'ASC'
   };
+
+  public IncomingData: any = {};
+
   public isPaginatorShown: boolean = true;
   public pageIndex: number = 0;
   public pageSize = 20;
@@ -170,17 +174,38 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,
     public session: SessionService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    public router: Router,
+
   ) { }
 
   public ngOnInit(): void {
-    this.filter.GODINA = (new Date()).getFullYear();
-    this.filter.MJESEC = new Date().getMonth() + 1;
-    this.OfferedEvidencijaRadVreOj();
-    this.OfferedVrstePosla();
-    this.OfferedZaposleni('1');
-    this.OfferedZaposleni('2');
-    this.getVrstePosla()
+    this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
+  
+    if(this.IncomingData.GODINA){
+      this.filter.MBR = this.IncomingData.MBR;
+      this.filter.SIF_OJ = this.IncomingData.SIF_OJ;
+      this.filter.GODINA= this.IncomingData.GODINA;
+      this.filter.MJESEC= this.IncomingData.MJESEC;
+      this.filter.SIF_VP= this.IncomingData.SIF_VP;
+      this.OfferedEvidencijaRadVreOj();
+      this.OfferedVrstePosla();
+      this.OfferedZaposleni('1');
+      this.OfferedZaposleni('2');
+      this.getVrstePosla();
+      this.getEvidencijaMjesecna();
+    }else{
+      this.filter.GODINA = (new Date()).getFullYear();
+      this.filter.MJESEC = new Date().getMonth() + 1;
+      this.OfferedEvidencijaRadVreOj();
+      this.OfferedVrstePosla();
+      this.OfferedZaposleni('1');
+      this.OfferedZaposleni('2');
+      this.getVrstePosla();
+    }
+
+    
   }
 
   public getEvidencijaMjesecna(): void {
@@ -860,5 +885,16 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.filteredVrstePoslaNew = response.debugData.data;
     });
+  }
+
+  public goToDnevnaEvidencija(event: any): void {
+
+    var date=new Date( this.globalFn.formatDateForDateForm2(event.D1));
+
+    let data = { ID_RADNIKA: this.filter.MBR, SIFMJTR: this.filter.SIF_OJ, SIF_VP: event.SIF_VP, DATUM: date.toLocaleString() };
+
+    this.router.navigate(["dnevna-evidencija", data]);
+
+
   }
 }

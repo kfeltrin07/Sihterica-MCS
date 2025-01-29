@@ -27,8 +27,9 @@ import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencij
 import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
 import { DetailsMjesecnaEvidencijaComponent } from '../mjesecna-evidencija/details-mjesecna-evidencija/details-mjesecna-evidencija.component';
 import { CopyDnevnaEvidencijaComponent } from './copy-dnevna-evidencija/copy-dnevna-evidencija.component';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PdfDnevnaEvidencijaComponent } from './pdf-dnevna-evidencija/pdf-dnevna-evidencija.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -198,6 +199,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public filteredOptions!: Observable<VrstePosla[]>;
   public myControl = new FormControl('');
 
+  public selection = new SelectionModel<EvidencijaDnevna>(true, []);
 
   public dataSource = this.evidencijaDnevna;
   public searchParam: string = '';
@@ -223,7 +225,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public router:Router
   ) {
     this.subscription = this.modelChanged
       .pipe(
@@ -247,7 +250,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     console.log(this.IncomingData);
 
     if (this.IncomingData.DATUM) {
-
+      console.log(this.IncomingData.DATUM);
       this.filter.DATUM = this.globalFn.formatDateForDateForm(this.IncomingData.DATUM.toLocaleString());
       this.filter.MBR = this.IncomingData.ID_RADNIKA?this.IncomingData.ID_RADNIKA:"%";
       this.filter.SIF_OJ = this.IncomingData.SIFMJTR?this.IncomingData.SIFMJTR:"%";
@@ -1563,6 +1566,21 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (this.NewOfferedZaposleni.length == 0) {
       this.refreshZaposleniRow(text.MBR, false);
     }
+
+  }
+
+  public goToMjesecnaEvidencija(event: any): void {
+
+    console.log(event);
+
+    let GODINA = this.filter.DATUM.substring(0, 4);
+
+    let MJESEC = +this.filter.DATUM.substring(5, 7);
+
+    let data = { MBR: event.MBR, SIF_OJ: this.filter.SIF_OJ, SIF_VP: event.SIF_VP, GODINA: GODINA, MJESEC: MJESEC };
+
+    this.router.navigate(["mjesecna-evidencija", data]);
+
 
   }
 }
