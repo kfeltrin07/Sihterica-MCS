@@ -46,13 +46,13 @@ export class PdfEvidencijaRadnogVremenaComponent {
   public generatePDF(): void {
 
     this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIReport +  '/hEvRadVr.php',
+      this.globalVar.APIHost + this.globalVar.APIReport +  '/hEvRadVrSviRad.php',
       {
         pSID: this.session.loggedInUser.sessionID,
         pSifVlas: this.session.loggedInUser.ownerID,
         pIdKorisnika: this.session.loggedInUser.ID,
-        pFondSati: this.dialogData.FondSati,
-        pDatum: this.globalFn.formatDate(this.dialogData.datum),
+        pFondSati: this.dialogData.FONDSATI,
+        pDatum: this.dialogData.DATUM,
       },
       {
         headers: new HttpHeaders({

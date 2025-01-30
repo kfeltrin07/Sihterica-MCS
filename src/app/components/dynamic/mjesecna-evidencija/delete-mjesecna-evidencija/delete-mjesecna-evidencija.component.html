@@ -1,0 +1,19 @@
+<div
+cdkDrag
+cdkDragRootElement=".cdk-overlay-pane" 
+cdkDragHandle 
+cdkDragBoundary=".cdk-overlay-container"
+class="dialog-header">
+    {{ 'Delete' | translate }}
+
+    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+
+</div>
+<mat-dialog-content>
+    {{ 'AreYouSureYouWantToDeleteThisRecord' | translate }}?
+</mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="delete();">{{ 'Yes' | translate }}</button>
+  </mat-dialog-actions>

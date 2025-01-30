@@ -55,7 +55,7 @@
             </td>
             <td class="filter-result">
                 <span (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"

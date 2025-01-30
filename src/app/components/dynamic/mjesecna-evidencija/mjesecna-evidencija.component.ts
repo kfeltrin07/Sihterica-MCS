@@ -14,7 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
-import { EvidencijaMjesecna, EvidencijaRadVreOj, EvRadnogVremenaHelpRadnici, Sorting, VrstePosla } from 'src/app/models/models.service';
+import { CRUDAction, EvidencijaMjesecna, EvidencijaRadVreOj, EvRadnogVremenaHelpRadnici, Sorting, VrstePosla } from 'src/app/models/models.service';
 import { DetailsMjesecnaEvidencijaComponent } from './details-mjesecna-evidencija/details-mjesecna-evidencija.component';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,6 +28,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { PdfMjesecnaEvidencijaComponent } from './pdf-mjesecna-evidencija/pdf-mjesecna-evidencija.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DeleteMjesecnaEvidencijaComponent } from './delete-mjesecna-evidencija/delete-mjesecna-evidencija.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-mjesecna-evidencija',
@@ -152,6 +154,8 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public myControl = new FormControl('');
   public filteredVrstePoslaNew: VrstePosla[] = [];
 
+  public selection = new SelectionModel<EvidencijaMjesecna>(true, []);
+  public deleteSelection = new SelectionModel<EvidencijaMjesecna>(true, []);
 
   public dataSource = this.evidencijaMjesecna;
   public searchParam: string = '';
@@ -182,20 +186,20 @@ export class MjesecnaEvidencijaComponent implements OnInit {
 
   public ngOnInit(): void {
     this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
-  
-    if(this.IncomingData.GODINA){
+
+    if (this.IncomingData.GODINA) {
       this.filter.MBR = this.IncomingData.MBR;
       this.filter.SIF_OJ = this.IncomingData.SIF_OJ;
-      this.filter.GODINA= this.IncomingData.GODINA;
-      this.filter.MJESEC= this.IncomingData.MJESEC;
-      this.filter.SIF_VP= this.IncomingData.SIF_VP;
+      this.filter.GODINA = this.IncomingData.GODINA;
+      this.filter.MJESEC = this.IncomingData.MJESEC;
+      this.filter.SIF_VP = this.IncomingData.SIF_VP;
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
       this.OfferedZaposleni('1');
       this.OfferedZaposleni('2');
       this.getVrstePosla();
       this.getEvidencijaMjesecna();
-    }else{
+    } else {
       this.filter.GODINA = (new Date()).getFullYear();
       this.filter.MJESEC = new Date().getMonth() + 1;
       this.OfferedEvidencijaRadVreOj();
@@ -205,7 +209,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.getVrstePosla();
     }
 
-    
+
   }
 
   public getEvidencijaMjesecna(): void {
@@ -219,9 +223,9 @@ export class MjesecnaEvidencijaComponent implements OnInit {
           pIdKorisnika: this.session.loggedInUser.ID,
           pMbr: this.filter.MBR,
           pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
-          pSifMjTr: this.filter.SIF_OJ,
-          pZSifMt: this.filter.SIF_OJ,
-          pZSifVp: this.filter.SIF_VP,
+          pSifMjTr: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifMt: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifVp: this.filter.SIF_VP ? this.filter.SIF_VP : "%",
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [
@@ -269,15 +273,18 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     });
   }
 
+
+*/
+
   public openDeleteDialog(item: any): void {
-    const dialogRef = this.dialog.open(DeleteEvidencijaRadnogVremenaZaglavljeComponent, {
+    const dialogRef = this.dialog.open(DeleteMjesecnaEvidencijaComponent, {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => this.refresh(), 1000);
     });
   }
-*/
+
   public openDetailsDialog(item: any): void {
     const dialogRef = this.dialog.open(DetailsMjesecnaEvidencijaComponent, {
       data: item,
@@ -889,12 +896,75 @@ export class MjesecnaEvidencijaComponent implements OnInit {
 
   public goToDnevnaEvidencija(event: any): void {
 
-    var date=new Date( this.globalFn.formatDateForDateForm2(event.D1));
+    var date = new Date(this.globalFn.formatDateForDateForm2(event.D1));
 
     let data = { ID_RADNIKA: this.filter.MBR, SIFMJTR: this.filter.SIF_OJ, SIF_VP: event.SIF_VP, DATUM: date.toLocaleString() };
 
     this.router.navigate(["dnevna-evidencija", data]);
 
 
+  }
+
+  public saveAll(): void {
+    for (let item of this.selection.selected) {
+      this.Update(item);
+    }
+    this.refresh();
+  }
+
+    public Update(item: any): void {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'upisSihterice',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pAkcija: item.RID? CRUDAction.Update:CRUDAction.Insert,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pDatum: this.globalFn.formatDate(this.filter.DATUM),
+            pMbr: item.MBR,
+            pSifOj: item.SIF_MT,
+            pSifVP: item.SIF_VP,
+            pSati: item.SATI,
+            pOd: item.ODHH,
+            pDo: item.DOHH,
+            pIdOperatera: this.session.loggedInUser.ID,
+            pRid: item.RID
+          }
+        }
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+  
+      });
+    }
+
+  public deleteSelected():void{
+    for (let item of this.deleteSelection.selected) {
+          this.http.post(
+            this.globalVar.APIHost + this.globalVar.APIFile,
+            {
+              action: 'Sihterica',
+              method: 'upisSihterice',
+              sid: this.session.loggedInUser.sessionID,
+              data: {
+                pAkcija: CRUDAction.Delete,
+                pSifVlas: this.session.loggedInUser.ownerID,
+                pDatum: this.globalFn.formatDate(this.filter.DATUM),
+                pMbr: item.MBR,
+                pSifOj: item.SIF_MT,
+                pSifVP: item.SIF_VP,
+                pSati: item.SATI,
+                pOd: item.ODHH,
+                pDo: item.DOHH,
+                pIdOperatera: this.session.loggedInUser.ID,
+                pRid: item.RID
+              }
+            }
+          ).subscribe((response: any) => {
+            this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+            this.refresh();
+          });
+        }
   }
 }

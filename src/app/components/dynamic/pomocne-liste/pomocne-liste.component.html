@@ -55,7 +55,7 @@
             </td>
             <td class="filter-result">
                 <span (click)="refreshZaposleni(filter!.MBR, false);">
-                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);"
@@ -122,7 +122,7 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
@@ -159,7 +159,7 @@
             </td>
             <td class="filter-result2">
                 <span (click)="refreshVrstePosla(filter!.SIF_VP, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"

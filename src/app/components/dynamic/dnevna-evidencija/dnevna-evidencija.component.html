@@ -25,11 +25,11 @@
     <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();" [disabled]="filter.SIF_OJ==''">
         <mat-icon>search</mat-icon>
     </button>
-    
+
     <button *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus" mat-mini-fab color="primary"
-    matTooltip="{{ 'Create' | translate }}" (click)="openCreateDialog();">
-    <mat-icon>add</mat-icon>
-  </button>
+        matTooltip="{{ 'Create' | translate }}" (click)="openCreateDialog();">
+        <mat-icon>add</mat-icon>
+    </button>
 
     <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left"
         (click)="refresh();" [disabled]="filter.SIF_OJ==''">
@@ -186,7 +186,10 @@
             </tr>
         </table>
         <div>
-            <button mat-flat-button color="primary" [disabled]="selection.isEmpty()" (click)="saveAll()">
+            <button mat-flat-button color="primary" [disabled]="deleteSelection.isEmpty()" (click)="deleteSelected()">
+                <mat-icon>delete</mat-icon> {{'ObrisiOdabrano'|translate}}</button>
+            <button mat-flat-button color="primary" style="margin-left: 10px;" [disabled]="selection.isEmpty()"
+                (click)="saveAll()">
                 <mat-icon>save</mat-icon> {{'SpremiSve'|translate}}</button>
             <button mat-flat-button color="primary" style="margin-left: 10px;"
                 [disabled]="filter.MBR=='' || filter.SIF_VP=='' ||filter.SIF_OJ==''" (click)="openCopyDataDialog()">
@@ -415,7 +418,7 @@
                         {{ newVarNames!.NAZMJTR ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT, false);">
-                        <input [class.red-input]="newVarNames!.NAZMJTR && newEvidencijaDnevna!.SIF_MT=='' " type="text"
+                        <input [class.red-input]="newEvidencijaDnevna!.SIF_MT && newVarNames!.NAZMJTR=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.SIF_MT" id="offeredEvidencijaRadVreOjNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
@@ -565,20 +568,36 @@
                         (click)="openDeleteDialog(EvidencijaRadVreZag);"
                         matTooltip="{{ 'Delete' | translate }}">delete</mat-icon>
 
+
+                    <input type="checkbox" style="scale: 1.5;" [checked]="deleteSelection.isSelected(EvidencijaRadVreZag)" (change)="deleteSelection.toggle(EvidencijaRadVreZag)">
+
+
                     <mat-icon id="editButton" *ngIf="selection.isSelected(EvidencijaRadVreZag)"
                         class="cursor-pointer minimum-margin-left-and-right" (click)="Update(EvidencijaRadVreZag);"
                         matTooltip="{{ 'Save' | translate }}">save</mat-icon>
-
-
-
-
                 </div>
             </td>
             @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
-            <td mat-footer-cell *matFooterCellDef>
-                <button mat-flat-button type="button"
-                    [disabled]="!globalFn.checkValidity(newEvidencijaDnevna.MBR) || newEvidencijaDnevna.SATI=='' || newEvidencijaDnevna.ODHH=='' || newEvidencijaDnevna.DOHH=='' || newEvidencijaDnevna.SIF_MT=='' || newEvidencijaDnevna.SIF_VP==''"
-                    (click)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
+            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <div>
+                        <button mat-flat-button type="button"
+                            [disabled]="!globalFn.checkValidity(newEvidencijaDnevna.MBR) || newEvidencijaDnevna.SATI=='' || newEvidencijaDnevna.ODHH=='' || newEvidencijaDnevna.DOHH=='' || newEvidencijaDnevna.SIF_MT=='' || newEvidencijaDnevna.SIF_VP==''"
+                            (click)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="SelectAll" (click)="selectAll()" >{{'SelectAll'|translate}}</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="Deselect" (click)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </td>
             }
         </ng-container>

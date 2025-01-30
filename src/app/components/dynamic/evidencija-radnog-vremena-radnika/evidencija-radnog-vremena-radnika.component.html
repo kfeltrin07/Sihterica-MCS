@@ -55,7 +55,7 @@
             </td>
             <td class="filter-result">
                 <span (click)="refreshZaposleni(filter!.MBR, false);">
-                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);"

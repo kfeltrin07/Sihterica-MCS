@@ -827,6 +827,7 @@ label {
 
 .sidenav-list-subitem:hover {
     background-color: var(--color-gray-light);
+    scale: 1.01;
 }
 
 .sidenav-list-subitem:active {
@@ -2372,4 +2373,19 @@ app-konto .mat-column-charts-of-accounts-name {
 
 .selected:hover {
     background-color: rgb(192, 197, 225) !important;
+}
+
+.SelectAll{
+    font-size: 11px;
+    background-color: var(--color-primary);
+    border: unset;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.Deselect{
+    font-size: 11px;
+    border: unset;
+    border-radius: 4px;
+    padding: 4px;
 }

@@ -56,7 +56,7 @@
             <td class="filter-result">
                 <span
                     (click)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);">
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredFondSatiHelpOJ-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}" (blur)="OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
                         (ngModelChange)="filterFondSatiHelpOJ(filter!.SIF_OJ);"

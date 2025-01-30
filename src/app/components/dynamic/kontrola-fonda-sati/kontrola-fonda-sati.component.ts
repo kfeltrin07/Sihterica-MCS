@@ -281,7 +281,9 @@ export class KontrolaFondaSatiComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredFondSatiHelpOJ = response.debugData.data;
       this.filteredFondSatiHelpOJ = response.debugData.data;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredFondSatiHelpOJ-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredFondSatiHelpOJ-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });

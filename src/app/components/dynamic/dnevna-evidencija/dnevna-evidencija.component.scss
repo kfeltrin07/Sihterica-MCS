@@ -49,7 +49,7 @@
 table {
     tr {
         td {
-            input {
+            input:not([type=checkbox]) {
                 border: 0.5px #d6d6d6 solid;
                 border-radius: 5px;
                 box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
@@ -91,3 +91,4 @@ table {
     min-width: 300px;
     width: 300px;
 }
+

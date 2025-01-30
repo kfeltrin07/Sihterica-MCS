@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule,Location } from '@angular/common';
 import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -43,7 +43,8 @@ export class SidenavComponent implements OnInit,AfterViewInit {
     public router: Router,
     public dialog: MatDialog,
     public sidenavService: SidenavService,
-    public deviceService: DeviceDetectorService
+    public deviceService: DeviceDetectorService,
+    public location:Location
   ) {
     this.sidenavMode();
     router.events.subscribe((url) => this.updateHighlightedLink());
@@ -52,6 +53,8 @@ export class SidenavComponent implements OnInit,AfterViewInit {
   public ngOnInit(): void {
     this.sidebarItemsState = this.globalVar.sidebarItems;
     this.filterSidebarItems();
+    console.log(window.location.pathname.split(';')[0]);
+    this.openSidebarItems(this.sidebarItemsState);
   }
 
   ngAfterViewInit(): void {
@@ -68,6 +71,21 @@ export class SidenavComponent implements OnInit,AfterViewInit {
       // true for mobile device
       // true znači da je u pitanju mobitel
       this.globalVar.VrstaUredaja= true;
+    }
+  }
+
+  private openSidebarItems(items: any[]): void {
+    for (let item of items) {
+      if (item.url === this.location.path() || item.url===window.location.pathname.split(';')[0]) {
+        item.open = true;
+        return;
+      }
+      if (item.children) {
+        this.openSidebarItems(item.children);
+        if (item.children.some((child: any) => child.open)) {
+          item.open = true;
+        }
+      }
     }
   }
 

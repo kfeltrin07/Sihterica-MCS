@@ -86,7 +86,7 @@ export class CreateGrupeComponent {
   public ngOnInit(): void { }
 
   public validateForm(Grupe: Grupe): boolean {
-    if (Grupe.ID_GRUPE != '' && Grupe.NAZ_GRUPE != '') {
+    if (Grupe.SIF_SHEME != '' && Grupe.NAZ_GRUPE != ''&& Grupe.SIF_OJ != '') {
       return false;
     } else {
       return true;
@@ -245,7 +245,7 @@ export class CreateGrupeComponent {
   public setEvidencijaRadVreOjFromDialog(EvidencijaRadVreOj?: EvidencijaRadVreOj): void {
     if (EvidencijaRadVreOj) {
       this.Grupe.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
-      this.Grupe.NAZ_GRUPE = EvidencijaRadVreOj.NAZMJTR;
+      this.Grupe.NAZ_OJ = EvidencijaRadVreOj.NAZMJTR;
 
     }
   }
@@ -253,7 +253,7 @@ export class CreateGrupeComponent {
   public removeEvidencijaRadVreOj(e: Event): void {
     e.preventDefault();
     this.Grupe.SIF_OJ = "";
-    this.Grupe.NAZ_GRUPE = "";
+    this.Grupe.NAZ_OJ = "";
 
   }
 
@@ -313,7 +313,7 @@ export class CreateGrupeComponent {
       this.offeredEvidencijaRadVreOj = response.debugData.data;
       for (let item of this.offeredEvidencijaRadVreOj) {
         if (item.SIF_OJ.toUpperCase() == this.Grupe.SIF_OJ.toUpperCase()) {
-          this.Grupe.NAZ_GRUPE = item.NAZMJTR;
+          this.Grupe.NAZ_OJ = item.NAZMJTR;
           this.Grupe.SIF_OJ = item.SIF_OJ;
         }
       }
@@ -337,7 +337,7 @@ export class CreateGrupeComponent {
 
   public selectEvidencijaRadVreOj(EvidencijaRadVreOj: EvidencijaRadVreOj): void {
     this.Grupe.SIF_OJ = EvidencijaRadVreOj.SIF_OJ;
-    this.Grupe.NAZ_GRUPE = EvidencijaRadVreOj.NAZMJTR;
+    this.Grupe.NAZ_OJ = EvidencijaRadVreOj.NAZMJTR;
 
     document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.EvidencijaRadVreOjDropdownIndex = -1;

@@ -32,6 +32,8 @@ import { PdfDnevnaEvidencijaComponent } from './pdf-dnevna-evidencija/pdf-dnevna
 import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDnevnaEvidencijaComponent } from './delete-dnevna-evidencija/delete-dnevna-evidencija.component';
 import { CreateDnevnaEvidencijaComponent } from './create-dnevna-evidencija/create-dnevna-evidencija.component';
+import { DetailsDnevnaEvidencijaComponent } from './details-dnevna-evidencija/details-dnevna-evidencija.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dnevna-evidencija',
@@ -49,6 +51,7 @@ import { CreateDnevnaEvidencijaComponent } from './create-dnevna-evidencija/crea
     MatToolbarModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
 
     FormsModule,
     CommonModule,
@@ -202,6 +205,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public myControl = new FormControl('');
 
   public selection = new SelectionModel<EvidencijaDnevna>(true, []);
+  public deleteSelection = new SelectionModel<EvidencijaDnevna>(true, []);
 
   public dataSource = this.evidencijaDnevna;
   public searchParam: string = '';
@@ -282,11 +286,11 @@ export class DnevnaEvidencijaComponent implements OnInit {
         data: {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdKorisnika: this.session.loggedInUser.ID,
-          pMbr: this.filter.MBR,
+          pMbr: this.filter.MBR?this.filter.MBR:"%",
           pDatum: this.globalFn.formatDate(this.filter.DATUM),
-          pSifOj: this.filter.SIF_OJ,
-          pZSifMt: this.filter.SIF_OJ,
-          pZSifVp: this.filter.SIF_VP,
+          pSifOj: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifMt: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifVp: this.filter.SIF_VP ? this.filter.SIF_VP : "%",
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [
@@ -314,15 +318,15 @@ export class DnevnaEvidencijaComponent implements OnInit {
     }
   }
 
-    public openCreateDialog(): void {
-  
-      const dialogRef = this.dialog.open(CreateDnevnaEvidencijaComponent, {
-        data: this.filter
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 3000);
-      });
-    }
+  public openCreateDialog(): void {
+
+    const dialogRef = this.dialog.open(CreateDnevnaEvidencijaComponent, {
+      data: this.filter
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.refresh(), 3000);
+    });
+  }
   /*
 
   public openEditDialog(item: any): void {
@@ -346,7 +350,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
   public openDetailsDialog(item: any): void {
-    const dialogRef = this.dialog.open(DetailsMjesecnaEvidencijaComponent, {
+    const dialogRef = this.dialog.open(DetailsDnevnaEvidencijaComponent, {
       data: item,
 
 
@@ -424,7 +428,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public removeEvidencijaRadVreOj(e: Event): void {
     e.preventDefault();
-    this.filter.SIF_OJ = "";
+    this.filter.SIF_OJ = "%";
     this.filter.NAZMJTR = "";
     this.filter.VRSTA = "";
 
@@ -544,7 +548,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public removeZaposleni(e: Event): void {
     e.preventDefault();
-    this.filter.MBR = "";
+    this.filter.MBR = "%";
     this.filter.PREZIME_IME = "";
     this.filter.OSOBA = "";
 
@@ -670,7 +674,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public removeVrstePosla(e: Event): void {
     e.preventDefault();
-    this.filter.SIF_VP = "";
+    this.filter.SIF_VP = "%";
     this.filter.NAZ_VP = "";
   }
 
@@ -1595,6 +1599,40 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.Update(item);
     }
     this.refresh();
+  }
+
+  public deleteSelected(): void {
+    for (let item of this.deleteSelection.selected) {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'upisSihterice',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pAkcija: CRUDAction.Delete,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pDatum: this.globalFn.formatDate(this.filter.DATUM),
+            pMbr: item.MBR,
+            pSifOj: item.SIF_MT,
+            pSifVP: item.SIF_VP,
+            pSati: item.SATI,
+            pOd: item.ODHH,
+            pDo: item.DOHH,
+            pIdOperatera: this.session.loggedInUser.ID,
+            pRid: item.RID
+          }
+        }
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.refresh();
+      });
+    }
+  }
+
+  public selectAll():void{
+    this.deleteSelection.clear();
+    this.dataSource.forEach(row => this.deleteSelection.select(row));
   }
 }
 

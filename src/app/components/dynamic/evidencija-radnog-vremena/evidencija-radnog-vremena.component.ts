@@ -314,7 +314,9 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOj = response.debugData.data;
       this.filteredEvidencijaRadVreOj = response.debugData.data;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredEvidencijaRadVreOj-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredEvidencijaRadVreOj-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });

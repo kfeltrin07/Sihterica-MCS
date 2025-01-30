@@ -1341,32 +1341,13 @@ export class GlobalVariablesService {
 
   public sidebarItems: SidebarItem[] = [
     {
-      namePrefix: '0',
-      name: 'General',
-      icon: null,
+      namePrefix: '',
+      name: 'SelectionScreen',
+      icon: 'menu',
       highlighted: false,
       rightsState: 1,
-      open: true,
-      children: [
-        {
-          namePrefix: '0.1',
-          name: 'Dashboard',
-          icon: 'dashboard',
-          url: '/dashboard',
-          highlighted: false,
-          rightsState: 1,
-          open: false
-        },
-        {
-          namePrefix: '0.2',
-          name: 'SelectionScreen',
-          icon: 'menu',
-          url: '/selection-screen',
-          highlighted: false,
-          rightsState: 1,
-          open: false
-        }
-      ],
+      url:'/selection-screen',
+      open: false,
     },
     {
       namePrefix: '1',
@@ -1374,7 +1355,7 @@ export class GlobalVariablesService {
       icon: null,
       highlighted: false,
       rightsState: 1,
-      open: true,
+      open: false,
       children: [
         {
           namePrefix: '1.1',
@@ -1402,7 +1383,25 @@ export class GlobalVariablesService {
           highlighted: false,
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
-        }
+        },
+        {
+          namePrefix: '1.4',
+          name: 'Sheme',
+          icon: 'schema',
+          url: '/sheme',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
+        {
+          namePrefix: '1.5',
+          name: 'Grupe',
+          icon: 'groups',
+          url: '/grupe',
+          highlighted: false,
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+          open: false
+        },
       ],
     },
     {
@@ -1411,7 +1410,7 @@ export class GlobalVariablesService {
       icon: null,
       highlighted: false,
       rightsState: 1,
-      open: true,
+      open: false,
       children: [
         {
           namePrefix: '2.1',
@@ -1457,7 +1456,7 @@ export class GlobalVariablesService {
       icon: null,
       highlighted: false,
       rightsState: 1,
-      open: true,
+      open: false,
       children: [
         {
           namePrefix: '3.1',
@@ -1495,26 +1494,20 @@ export class GlobalVariablesService {
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
           open: false
         },
+
+      ],
+
+    },
+    {
+      namePrefix: '4',
+      name: 'Evidencija',
+      icon: null,
+      highlighted: false,
+      rightsState: 1,
+      open: false,
+      children: [
         {
-          namePrefix: '3.5',
-          name: 'Sheme',
-          icon: 'schema',
-          url: '/sheme',
-          highlighted: false,
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-          open: false
-        },
-        {
-          namePrefix: '3.6',
-          name: 'Grupe',
-          icon: 'groups',
-          url: '/grupe',
-          highlighted: false,
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-          open: false
-        },
-        {
-          namePrefix: '3.7',
+          namePrefix: '4.1',
           name: 'GrupniUnos',
           icon: 'group_add',
           url: '/grupni-unos',
@@ -1523,7 +1516,7 @@ export class GlobalVariablesService {
           open: false
         },
         {
-          namePrefix: '3.8',
+          namePrefix: '4.2',
           name: 'MjesecnaEvidencija',
           icon: 'calendar_month',
           url: '/mjesecna-evidencija',
@@ -1532,7 +1525,7 @@ export class GlobalVariablesService {
           open: false
         },
         {
-          namePrefix: '3.9',
+          namePrefix: '4.3',
           name: 'DnevnaEvidencija',
           icon: 'view_day',
           url: '/dnevna-evidencija',
@@ -1541,7 +1534,6 @@ export class GlobalVariablesService {
           open: false
         }
       ],
-
     }
   ];
 
@@ -1591,12 +1583,12 @@ export class GlobalVariablesService {
       rowHeight: 2,
       rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
       items: [
-        {
+        /*{
           name: 'Dashboard',
           icon: 'dashboard',
           url: '/dashboard',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        },
+        },*/
         {
           name: 'SelectionScreen',
           icon: 'menu',
@@ -1629,7 +1621,19 @@ export class GlobalVariablesService {
           icon: 'work',
           url: '/oj',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        }
+        },
+        {
+          name: 'Sheme',
+          icon: 'schema',
+          url: '/sheme',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
+        {
+          name: 'Grupe',
+          icon: 'groups',
+          url: '/grupe',
+          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+        },
       ],
       url: ''
     },
@@ -1696,18 +1700,17 @@ export class GlobalVariablesService {
           url: '/evidencija-rad-vrem-zag-veze',
           rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
         },
-        {
-          name: 'Sheme',
-          icon: 'schema',
-          url: '/sheme',
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        },
-        {
-          name: 'Grupe',
-          icon: 'groups',
-          url: '/grupe',
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        },
+
+
+      ],
+      url: ''
+    },
+    {
+      name: 'Evidencija',
+      icon: 'create',
+      rowHeight: 1,
+      rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
+      items: [
         {
           name: 'GrupniUnos',
           icon: 'group_add',

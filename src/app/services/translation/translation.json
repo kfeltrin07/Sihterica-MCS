@@ -8061,6 +8061,18 @@
             "en": "Group insert on day",
             "hr": "Grupni unos na dan",
             "transferred": false
+        },
+        {
+            "ref": "ObrisiOdabrano",
+            "en": "Delete selected",
+            "hr": "Obriši odabrano",
+            "transferred": false
+        },
+        {
+            "ref": "Deselect",
+            "en": "Deselect",
+            "hr": "Poništi odabir",
+            "transferred": false
         }
     ]
 }

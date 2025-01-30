@@ -59,6 +59,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     NAZ_RM: "",
     SIF_OJ: "",
     NAZ_OJ: "",
+    FONDSATI: "",
   }
 
   public pripremaGotova: boolean = false;
@@ -351,7 +352,9 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredZaposleni = response.debugData.data;
       this.filteredZaposleni = response.debugData.data;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredZaposleni-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredZaposleni-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
