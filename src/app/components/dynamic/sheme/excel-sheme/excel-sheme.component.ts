@@ -103,7 +103,7 @@ export class ExcelShemeComponent {
         method: 'getSheme',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: '%' + this.dialogData + '%',
+          pDioNaziva: '%' + this.dialogData.searchParam + '%',
           limit: 1000,
           sort: [
             {

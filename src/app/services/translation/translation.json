@@ -8073,6 +8073,12 @@
             "en": "Deselect",
             "hr": "Poništi odabir",
             "transferred": false
+        },
+        {
+            "ref": "Prvoodabrativaljanogkorisnika",
+            "en": "Select a valid worker in the filter",
+            "hr": "Odaberite valjanog zaposlenika u filteru",
+            "transferred": false
         }
     ]
 }

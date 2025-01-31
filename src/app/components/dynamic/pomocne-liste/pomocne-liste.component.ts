@@ -144,6 +144,8 @@ export class PomocneListeComponent implements OnInit {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
   };
 
   public VrstePoslaDropdownIndex: number = -1;

@@ -1,10 +1,10 @@
-import { CommonModule,Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { SidebarItem, RightsState } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
@@ -14,23 +14,26 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { MainContentComponent } from "../main-content/main-content.component";
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-sidenav',
-  standalone:true,
+  standalone: true,
   imports: [
     MatTooltipModule,
     MatSidenavModule,
     MatIconModule,
+    MatListModule,
+
     FormsModule,
     TranslationPipe,
     CommonModule,
     MainContentComponent
-],
+  ],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit,AfterViewInit {
+export class SidenavComponent implements OnInit, AfterViewInit {
   @ViewChild('snav') public sidenav!: MatSidenav;
   @ViewChild('spanelement') public spanelement!: ElementRef;
 
@@ -44,16 +47,21 @@ export class SidenavComponent implements OnInit,AfterViewInit {
     public dialog: MatDialog,
     public sidenavService: SidenavService,
     public deviceService: DeviceDetectorService,
-    public location:Location
+    public location: Location
   ) {
     this.sidenavMode();
     router.events.subscribe((url) => this.updateHighlightedLink());
+
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.openSidebarItems(this.sidebarItemsState);
+      }
+    });
   }
 
   public ngOnInit(): void {
     this.sidebarItemsState = this.globalVar.sidebarItems;
     this.filterSidebarItems();
-    console.log(window.location.pathname.split(';')[0]);
     this.openSidebarItems(this.sidebarItemsState);
   }
 
@@ -61,29 +69,31 @@ export class SidenavComponent implements OnInit,AfterViewInit {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
-  public sidenavMode(){
-    if(this.deviceService.isDesktop()){
-            // false for computer
+  public sidenavMode() {
+    if (this.deviceService.isDesktop()) {
+      // false for computer
       // false znači da je u pitanju računalo
-      this.globalVar.VrstaUredaja= false;
+      this.globalVar.VrstaUredaja = false;
 
-    }else{
+    } else {
       // true for mobile device
       // true znači da je u pitanju mobitel
-      this.globalVar.VrstaUredaja= true;
+      this.globalVar.VrstaUredaja = true;
     }
   }
 
   private openSidebarItems(items: any[]): void {
     for (let item of items) {
-      if (item.url === this.location.path() || item.url===window.location.pathname.split(';')[0]) {
+      if (item.url === this.location.path() || item.url === window.location.pathname.split(';')[0]) {
         item.open = true;
+        item.highlighted = true;
         return;
       }
       if (item.children) {
         this.openSidebarItems(item.children);
         if (item.children.some((child: any) => child.open)) {
           item.open = true;
+          item.highlighted = true;
         }
       }
     }
@@ -120,7 +130,7 @@ export class SidenavComponent implements OnInit,AfterViewInit {
       if (this.sidebarItemsState[i].children) {
         for (let j = 0; j < this.sidebarItemsState[i].children!.length; j++) {
           this.sidebarItemsState[i].children![j].open = true;
-    
+
           if (this.sidebarItemsState[i].children![j].children) {
             for (let k = 0; k < this.sidebarItemsState[i].children![j].children!.length; k++) {
               this.sidebarItemsState[i].children![j].children![k].open = true;
@@ -136,15 +146,15 @@ export class SidenavComponent implements OnInit,AfterViewInit {
   public goToRoute(sidebarItem: SidebarItem): void {
     if (sidebarItem.url && !(!sidebarItem.open && sidebarItem.children)) {
       if (!sidebarItem.dialogComponent) {
-      this.router.navigate([sidebarItem.url]);
-      if(this.globalVar.VrstaUredaja){
-        this.sidenav.close();
-      }
+        this.router.navigate([sidebarItem.url]);
+        if (this.globalVar.VrstaUredaja) {
+          this.sidenav.close();
+        }
       }
     }
-    else if(sidebarItem.dialogComponent) {
+    else if (sidebarItem.dialogComponent) {
       const dialogRef = this.dialog.open(sidebarItem.dialogComponent, {});
-      dialogRef.afterClosed().subscribe((result: any) => {});
+      dialogRef.afterClosed().subscribe((result: any) => { });
     }
   }
 
@@ -165,18 +175,18 @@ export class SidenavComponent implements OnInit,AfterViewInit {
     }
 
     for (let i = 0; i < this.globalVar.sidebarItems.length; i++) {
-      if (this.globalVar.sidebarItems[i].url == this.router.url) {
+      if (this.globalVar.sidebarItems[i].url == this.router.url  || this.globalVar.sidebarItems[i].url === window.location.pathname.split(';')[0]) {
         this.globalVar.sidebarItems[i].highlighted = true;
       }
       if (this.globalVar.sidebarItems[i].children != null) {
         for (let j = 0; j < this.globalVar.sidebarItems[i].children!.length; j++) {
-          if (this.globalVar.sidebarItems[i].children![j].url == this.router.url) {
+          if (this.globalVar.sidebarItems[i].children![j].url == this.router.url || this.globalVar.sidebarItems[i].children![j].url === window.location.pathname.split(';')[0]) {
             this.globalVar.sidebarItems[i].highlighted = true;
             this.globalVar.sidebarItems[i].children![j].highlighted = true;
           }
           if (this.globalVar.sidebarItems[i].children![j].children != null) {
             for (let k = 0; k < this.globalVar.sidebarItems[i].children![j].children!.length; k++) {
-              if (this.globalVar.sidebarItems[i].children![j].url == this.router.url) {
+              if (this.globalVar.sidebarItems[i].children![j].url == this.router.url || this.globalVar.sidebarItems[i].children![j].url  === window.location.pathname.split(';')[0]) {
                 this.globalVar.sidebarItems[i].highlighted = true;
                 this.globalVar.sidebarItems[i].children![j].highlighted = true;
                 this.globalVar.sidebarItems[i].children![j].children![k].highlighted = true;

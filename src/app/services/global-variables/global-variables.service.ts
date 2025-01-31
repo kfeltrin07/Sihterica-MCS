@@ -280,18 +280,6 @@ export class GlobalVariablesService {
     this.SIFVLASColumn,
     this.SIF_OJColumn,
     this.NAZ_OJColumn,
-    this.REG_BRColumn,
-    this.BOD_PCColumn,
-    this.KOEF_PCColumn,
-    this.VR_BODColumn,
-    this.VR_KOEFColumn,
-    this.PROS_SATColumn,
-    this.PROS_KOEFColumn,
-    this.PROS_BODColumn,
-    this.IND1Column,
-    this.SIF_NADColumn,
-    this.BRO_HZZOColumn,
-    this.RSOPCColumn,
     this.IDKColumn,
     this.SYSDColumn,
   ];
@@ -717,6 +705,8 @@ export class GlobalVariablesService {
   public EvRadnogVremenaHelpRadniciDisplayedColumns: ColumnRef[] = [
     this.MBRColumn,
     this.PREZIME_IMEColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
   ];
 
   public EvRadnogVremenaHelpRadniciColumnsList: ColumnRef[] = [
@@ -724,6 +714,8 @@ export class GlobalVariablesService {
     this.MBRColumn,
     this.PREZIME_IMEColumn,
     this.OSOBAColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
   ];
 
 
@@ -1171,7 +1163,10 @@ export class GlobalVariablesService {
     this.RNColumn,
     this.ID_GRUPEColumn,
     this.NAZ_GRUPEColumn,
-    this.SIF_SHEMEColumn
+    this.SIF_SHEMEColumn,
+    this.NAZ_SHEMEColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn
   ];
 
   public ZaposleniPoGrupiIShemiDisplayedColumns: ColumnRef[] = [
@@ -1342,15 +1337,34 @@ export class GlobalVariablesService {
   public sidebarItems: SidebarItem[] = [
     {
       namePrefix: '',
-      name: 'SelectionScreen',
-      icon: 'menu',
+      name: 'General',
+      icon: null,
       highlighted: false,
       rightsState: 1,
-      url:'/selection-screen',
-      open: false,
+      open: true,
+      children: [
+        /*{
+          namePrefix: '0.1',
+          name: 'Dashboard',
+          icon: 'dashboard',
+          url: '/dashboard',
+          highlighted: false,
+          rightsState: 1,
+          open: false
+        },*/
+        {
+          namePrefix: '',
+          name: 'SelectionScreen',
+          icon: 'menu',
+          url: '/selection-screen',
+          highlighted: false,
+          rightsState: 1,
+          open: false
+        }
+      ],
     },
     {
-      namePrefix: '1',
+      namePrefix: '',
       name: 'Šihterica',
       icon: null,
       highlighted: false,
@@ -1405,7 +1419,7 @@ export class GlobalVariablesService {
       ],
     },
     {
-      namePrefix: '2',
+      namePrefix: '',
       name: 'Liste',
       icon: null,
       highlighted: false,
@@ -1451,7 +1465,7 @@ export class GlobalVariablesService {
       ]
     },
     {
-      namePrefix: '3',
+      namePrefix: '',
       name: 'Administracija',
       icon: null,
       highlighted: false,
@@ -1499,7 +1513,7 @@ export class GlobalVariablesService {
 
     },
     {
-      namePrefix: '4',
+      namePrefix: '',
       name: 'Evidencija',
       icon: null,
       highlighted: false,

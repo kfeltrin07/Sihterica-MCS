@@ -212,7 +212,7 @@
                 @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
 
                 <input style="width: 40px;" type="text" [(ngModel)]="evidencija[item.key]"
-                    (ngModelChange)="selection.select(evidencija)">
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                 }@else {
                 {{evidencija[item.key]}}
                 }
@@ -233,7 +233,7 @@
                 @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
 
                 <input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]"
-                    (ngModelChange)="selection.select(evidencija)">
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                 }@else {
                 {{evidencija[item.key]}}
                 }
@@ -253,7 +253,7 @@
             <td mat-cell *matCellDef="let evidencija">
                 @if(globalVar.cVRS == 2 || !globalVar.useDynamicMenus){
                 <input style="width: 70px;" type="time" [(ngModel)]="evidencija[item.key]"
-                    (ngModelChange)="selection.select(evidencija)">
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                 }@else {
                 {{evidencija[item.key]}}
                 }
@@ -302,7 +302,7 @@
                         <input [class.red-input]="evidencija!.OSOBAX && evidencija!.MBR==''" type="text"
                             [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterZaposleniRow(evidencija);selection.select(evidencija)"
+                            (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshZaposleniRow(evidencija.MBR, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of NewOfferedZaposleni;track oj){
@@ -386,7 +386,7 @@
                         <input [class.red-input]="evidencija!.SIF_MTX && evidencija!.SIF_MT=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.select(evidencija)"
+                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredEvidencijaRadVreOjNew;track oj){
@@ -469,7 +469,7 @@
                         <input [class.red-input]="evidencija!.SIF_VP_N && evidencija!.SIF_VP=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
-                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP);selection.select(evidencija)"
+                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP); selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
                         <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredVrstePosla;track oj){

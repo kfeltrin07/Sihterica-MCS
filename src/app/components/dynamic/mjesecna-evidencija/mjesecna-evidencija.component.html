@@ -32,12 +32,16 @@
         <mat-icon>add</mat-icon>
     </button>
 -->
-    <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left"
-        (click)="refresh();" [disabled]="filter.SIF_OJ=='' || filter.MBR==''">
+    <div [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')? ('Prvoodabrativaljanogkorisnika' | translate):''"
+    matBadge="!" matBadgePosition="after" matbadge [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
+            [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true" matBadgeColor="warn" [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
+    <button mat-mini-fab color="primary"
+        [matTooltip]="'Refresh' | translate "
+        class="small-margin-left" (click)="refresh();" [disabled]="filter.SIF_OJ=='' || filter.MBR==''||(filter.MBR && filter.PREZIME_IME=='')">
         <mat-icon *ngIf="!loading">refresh</mat-icon>
         <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
     </button>
-
+</div>
 </mat-toolbar>
 
 <div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
@@ -199,10 +203,13 @@
                     {{ filter!.PREZIME_IME ? 'done' : 'import_contacts'}}
                 </mat-icon>
             </td>
-            <td class="filter-result2">
-                <span (click)="refreshZaposleni(filter!.MBR, false,'1');">
+            <td class="filter-result2"  [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
+                <span (click)="refreshZaposleni(filter!.MBR, false,'1');" 
+                matBadge="!" matBadgePosition="after" matbadge [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
+            [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true" matBadgeColor="warn"
+                >
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
-                        [class.red-input]="filter.MBR==''" class="minimum-margin-horizontal light-gray-background"
+                        [class.red-input]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')" class="minimum-margin-horizontal light-gray-background"
                         style="width: 50px;" placeholder="{{ 'Code' | translate }}"
                         (blur)="OfferedZaposleni('1');resetZaposleniIndex('1');"
                         (ngModelChange)="filterZaposleni(filter!.MBR,'1');"
@@ -264,8 +271,11 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija"><input style="width: 40px;" type="text"
-                    [(ngModel)]="evidencija[item.key]">
+                    [(ngModel)]="evidencija[item.key]"
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else if (item.key=='D1') {
@@ -276,6 +286,8 @@
             <td mat-cell *matCellDef="let evidencija" (click)="goToDnevnaEvidencija(evidencija)">
                 {{ evidencija[item.key] }}
             </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else if (item.key=='ODHH') {
@@ -284,8 +296,11 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time"
-                    [(ngModel)]="evidencija[item.key]">
+                    [(ngModel)]="evidencija[item.key]"
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else if (item.key=='DOHH') {
@@ -294,8 +309,11 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija"><input style="width: 70px;" type="time"
-                    [(ngModel)]="evidencija[item.key]">
+                    [(ngModel)]="evidencija[item.key]"
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else if(item.key=='SIF_VP'){
@@ -303,12 +321,33 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td style="width: 200px;" mat-cell *matCellDef="let evidencija">
-                <select name="" id="" [(ngModel)]="evidencija[item.key]">
+            <td style="width: 240px;" mat-cell *matCellDef="let evidencija">
+                <select [(ngModel)]="evidencija[item.key]"
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                     @for(option of filteredVrstePoslaNew;track option){
                     <option [value]="option.SIF_VP">{{option.NAZ_VP}}</option>
                     }
                 </select>
+            </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
+        </ng-container>
+        }
+        @else if(item.key=='SIF_MT_N'){
+        <ng-container [matColumnDef]="item.key">
+            <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
+                matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
+                }}</th>
+            <td style="width: 280px;" mat-cell *matCellDef="let evidencija">
+                <select [(ngModel)]="evidencija.SIF_MT"
+                    (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
+                    @for(option of filteredEvidencijaRadVreOjNew;track option){
+                    <option [value]="option.SIF_OJ">{{(option.SIF_OJ!='%'?(option.SIF_OJ +' -                        '):'')+option.NAZMJTR.split(' - ')[0]}}</option>
+                    }
+                </select>
+            </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else if(item.key=='DAN') {
@@ -324,6 +363,8 @@
                 {{ evidencija[item.key] }}
                 }
             </td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+
         </ng-container>
         }
         @else {
@@ -332,6 +373,7 @@
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
             <td mat-cell *matCellDef="let evidencija">{{ evidencija[item.key] }}</td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
         </ng-container>
         }
 
@@ -354,7 +396,9 @@
                         (change)="deleteSelection.toggle(EvidencijaRadVreZag)">
 
                     }
-
+                    <mat-icon id="editButton" *ngIf="selection.isSelected(EvidencijaRadVreZag)"
+                        class="cursor-pointer minimum-margin-left-and-right" (click)="Update(EvidencijaRadVreZag);"
+                        matTooltip="{{ 'Save' | translate }}">save</mat-icon>
                     <!--
 
                     <mat-icon id="editButton" *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus"
@@ -370,10 +414,28 @@
 
                 </div>
             </td>
+            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag">
+                <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="SelectAll" (click)="selectAll()">{{'SelectAll'|translate}}</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="Deselect"
+                                    (click)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
         </ng-container>
 
         <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row style="height: 20px;" *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 
     </table>
 </div>

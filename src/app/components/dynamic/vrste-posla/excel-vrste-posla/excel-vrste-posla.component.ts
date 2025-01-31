@@ -101,7 +101,7 @@ export class ExcelVrstePoslaComponent {
         method: 'getVrstePosla',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: '%' + this.dialogData + '%',
+          pDioNaziva: '%' + this.dialogData.searchParam + '%',
           limit: 1000,
           sort: [
             {

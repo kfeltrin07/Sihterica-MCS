@@ -343,7 +343,11 @@
     <ng-template #customCellTemplate let-day="day" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
         let-tooltipPlacement="tooltipPlacement" let-locale="locale" style="height: 125px;min-height: 125px;">
             <div class="cal-cell-top" style="min-height: 50px;">
-                <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+                @for(zapis of ZapisizaKalendar;track zapis){
+                    @if(zapis.DATUM==day.date.toLocaleDateString().replaceAll(' ','').slice(0,10)){
+                        <label class="cal-day-badge" matTooltipClass="custom-tooltip" [matTooltip]="zapis.NAZ_MT" >{{zapis.BR_UPISA}}</label>
+                    }
+                }
                 <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
             </div>
             <div class="cell-totals" style="margin: 5px;display: flex;justify-content: space-between;">

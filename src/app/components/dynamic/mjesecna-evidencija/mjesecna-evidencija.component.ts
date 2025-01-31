@@ -30,6 +30,7 @@ import { PdfMjesecnaEvidencijaComponent } from './pdf-mjesecna-evidencija/pdf-mj
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteMjesecnaEvidencijaComponent } from './delete-mjesecna-evidencija/delete-mjesecna-evidencija.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-mjesecna-evidencija',
@@ -47,6 +48,7 @@ import { SelectionModel } from '@angular/cdk/collections';
     MatToolbarModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatBadgeModule,
 
     FormsModule,
     CommonModule,
@@ -137,6 +139,8 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -153,6 +157,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public filteredOptions!: Observable<VrstePosla[]>;
   public myControl = new FormControl('');
   public filteredVrstePoslaNew: VrstePosla[] = [];
+  public filteredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
 
   public selection = new SelectionModel<EvidencijaMjesecna>(true, []);
   public deleteSelection = new SelectionModel<EvidencijaMjesecna>(true, []);
@@ -182,7 +187,10 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
 
-  ) { }
+  ) { 
+    this.getVrstePosla();
+    this.getOrganizacijskeJedinice();
+  }
 
   public ngOnInit(): void {
     this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
@@ -197,7 +205,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.OfferedVrstePosla();
       this.OfferedZaposleni('1');
       this.OfferedZaposleni('2');
-      this.getVrstePosla();
+
       this.getEvidencijaMjesecna();
     } else {
       this.filter.GODINA = (new Date()).getFullYear();
@@ -206,7 +214,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.OfferedVrstePosla();
       this.OfferedZaposleni('1');
       this.OfferedZaposleni('2');
-      this.getVrstePosla();
+
     }
 
 
@@ -894,6 +902,43 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     });
   }
 
+  public getOrganizacijskeJedinice(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 1000,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
+      this.filteredEvidencijaRadVreOjNew.forEach( (item, index) => {
+        if(item.SIF_OJ === '%') this.filteredEvidencijaRadVreOjNew.splice(index,1);
+      });
+      this.filteredEvidencijaRadVreOjNew.push({
+        UKUPANBROJSLOGOVA: this.filteredEvidencijaRadVreOjNew[0].UKUPANBROJSLOGOVA,
+        RN: this.filteredEvidencijaRadVreOjNew.length,
+        SIF_OJ: "%",
+        NAZMJTR: "ODABERITE M.T.",
+        VRSTA: "1",
+      })
+      console.log(this.filteredEvidencijaRadVreOjNew);
+    });
+  }
+
   public goToDnevnaEvidencija(event: any): void {
 
     var date = new Date(this.globalFn.formatDateForDateForm2(event.D1));
@@ -910,9 +955,41 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.Update(item);
     }
     this.refresh();
+    if (this.selection.selected.length > 0) {
+      this.selection.clear();
+    }
   }
 
-    public Update(item: any): void {
+  public Update(item: any): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'upisSihterice',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pAkcija: item.RID ? CRUDAction.Update : CRUDAction.Insert,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pDatum: item.D1,
+          pMbr: item.MBR,
+          pSifOj: item.SIF_MT,
+          pSifVP: item.SIF_VP,
+          pSati: item.SATI,
+          pOd: item.ODHH,
+          pDo: item.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: item.RID
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.selection.deselect(item);
+
+    });
+  }
+
+  public deleteSelected(): void {
+    for (let item of this.deleteSelection.selected) {
       this.http.post(
         this.globalVar.APIHost + this.globalVar.APIFile,
         {
@@ -920,7 +997,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
           method: 'upisSihterice',
           sid: this.session.loggedInUser.sessionID,
           data: {
-            pAkcija: item.RID? CRUDAction.Update:CRUDAction.Insert,
+            pAkcija: CRUDAction.Delete,
             pSifVlas: this.session.loggedInUser.ownerID,
             pDatum: this.globalFn.formatDate(this.filter.DATUM),
             pMbr: item.MBR,
@@ -935,36 +1012,13 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       ).subscribe((response: any) => {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-  
+        this.refresh();
       });
     }
+  }
 
-  public deleteSelected():void{
-    for (let item of this.deleteSelection.selected) {
-          this.http.post(
-            this.globalVar.APIHost + this.globalVar.APIFile,
-            {
-              action: 'Sihterica',
-              method: 'upisSihterice',
-              sid: this.session.loggedInUser.sessionID,
-              data: {
-                pAkcija: CRUDAction.Delete,
-                pSifVlas: this.session.loggedInUser.ownerID,
-                pDatum: this.globalFn.formatDate(this.filter.DATUM),
-                pMbr: item.MBR,
-                pSifOj: item.SIF_MT,
-                pSifVP: item.SIF_VP,
-                pSati: item.SATI,
-                pOd: item.ODHH,
-                pDo: item.DOHH,
-                pIdOperatera: this.session.loggedInUser.ID,
-                pRid: item.RID
-              }
-            }
-          ).subscribe((response: any) => {
-            this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-            this.refresh();
-          });
-        }
+  public selectAll(): void {
+    this.deleteSelection.clear();
+    this.dataSource.forEach((row) => {if(row.RID!=null){this.deleteSelection.select(row)}});
   }
 }

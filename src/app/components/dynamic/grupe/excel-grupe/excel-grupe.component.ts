@@ -104,10 +104,12 @@ export class ExcelGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%' + this.dialogData.searchParam + '%',
+          pSifSheme: '',
+          pIdKorisnika:this.session.loggedInUser.ID,
           limit: 1000,
           sort: [
             {
-              property: 'NAZ_SHEME',
+              property: 'ID_GRUPE',
               direction: 'ASC'
             }
           ]

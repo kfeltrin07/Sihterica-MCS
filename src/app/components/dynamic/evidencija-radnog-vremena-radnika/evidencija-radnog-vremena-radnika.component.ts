@@ -116,6 +116,8 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
   };
 
   public dataSource = this.evidencijaRadVreRad;

@@ -181,6 +181,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
+    SIF_OJ: "",
+    NAZ_OJ: "",
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -302,10 +304,11 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      this.loading = false;
+
       this.evidencijaDnevna = response.debugData.data;
       this.dataSource = this.evidencijaDnevna;
       this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
-      this.loading = false;
     });
   }
 
@@ -1263,6 +1266,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.selection.deselect(item);
 
     });
   }
@@ -1599,6 +1603,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.Update(item);
     }
     this.refresh();
+    if (this.selection.selected.length > 0) {
+      this.selection.clear();
+    }
   }
 
   public deleteSelected(): void {

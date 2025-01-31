@@ -32,6 +32,26 @@ import * as XLSX from 'xlsx';
   styleUrl: './excel-organizacijske-jedinice.component.scss'
 })
 export class ExcelOrganizacijskeJediniceComponent {
+
+  public unwantedColumns: string[] = [
+    'UKUPANBROJSLOGOVA',
+    'RN',
+    'REG_BR',
+    'BOD_PC',
+    'KOEF_PC',
+    'VR_BOD',
+    'VR_KOEF',
+    'PROS_SAT',
+    'PROS_KOEF',
+    'PROS_BOD',
+    'IND1',
+    'SIF_NAD',
+    'BRO_HZZO',
+    'RSOPC',
+    'IDK',
+    'SYSD'
+  ];
+
   public organizacijskeJedinice!: OrganizacijskeJedinice[];
   public OrganizacijskeJedinice: OrganizacijskeJedinice = {
     UKUPANBROJSLOGOVA: 0,
@@ -75,7 +95,7 @@ export class ExcelOrganizacijskeJediniceComponent {
     dataAsArray[0].push(this.t.translate('Ordinal'));
 
     for (let key in this.OrganizacijskeJedinice) {
-      if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN') {
+        if (!this.unwantedColumns.includes(key.toString())) {
         if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
           dataAsArray[0].push(this.t.translate(key));
         }
@@ -88,7 +108,7 @@ export class ExcelOrganizacijskeJediniceComponent {
       dataAsArray[i + 1].push(i + 1);
 
       for (let key in this.OrganizacijskeJedinice) {
-        if (key != 'UKUPANBROJSLOGOVA' && key != 'RN') {
+        if (!this.unwantedColumns.includes(key.toString())) {
           if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
             dataAsArray[i + 1].push(data[i][key]);
           }
@@ -117,7 +137,7 @@ export class ExcelOrganizacijskeJediniceComponent {
           limit: 1000,
           sort: [
             {
-              property: 'NAZIV',
+              property: 'SIF_OJ',
               direction: 'ASC'
             }
           ]
@@ -131,7 +151,7 @@ export class ExcelOrganizacijskeJediniceComponent {
       columnsList.push(this.t.translate('Ordinal'));
 
       for (let key in this.OrganizacijskeJedinice) {
-        if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN') {
+        if (!this.unwantedColumns.includes(key.toString())) {
           if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
             columnsList.push(this.t.translate(key));
           }

@@ -5,7 +5,7 @@
 
   <mat-sidenav #snav [mode]="this.globalVar.VrstaUredaja?'over':'side'"
     [opened]="this.globalVar.VrstaUredaja?false:true" class="sidenav-sidenav"
-    *ngIf="session.loggedInUser.sessionID != ''">
+    *ngIf="session.loggedInUser.sessionID != ''" [fixedInViewport]="this.globalVar.VrstaUredaja" fixedTopGap="56">
 
     <div class="display-flex sidenav-headers">
       <div matRipple class="sidenav-right-header" (click)="expandAll();">
@@ -23,7 +23,7 @@
       
       }
       @else{
-        <div matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
+        <mat-list-item matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
 
           <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarItem.highlighted">{{
             sidebarItem.icon ? sidebarItem.icon : (sidebarItem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right')
@@ -44,13 +44,13 @@
             </b>
           </div>
   
-        </div>
+        </mat-list-item>
   
         <div *ngIf="sidebarItem.open">
   
           <div *ngFor="let sidebarSubitem of sidebarItem.children">
   
-            <div *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem"
+            <mat-list-item *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem"
               [class.highlighted-background]="sidebarSubitem.highlighted && !sidebarSubitem.children"
               (click)="toggleSidebarItemOpen(sidebarSubitem); goToRoute(sidebarSubitem);">
   
@@ -74,12 +74,12 @@
                 </b>
               </div>
   
-            </div>
+            </mat-list-item>
   
             <div *ngIf="sidebarSubitem.open">
   
               <div *ngFor="let sidebarSubsubitem of sidebarSubitem.children">
-                <div *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem"
+                <mat-list-item *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem"
                   [class.highlighted-background]="sidebarSubsubitem.highlighted" (click)="goToRoute(sidebarSubsubitem);">
   
                   <mat-icon matListItemIcon class="sidenav-list-item-icon"
@@ -102,7 +102,7 @@
                       {{ sidebarSubsubitem.name | translate }}
                     </b>
                   </div>
-                </div>
+                </mat-list-item>
               </div>
   
             </div>

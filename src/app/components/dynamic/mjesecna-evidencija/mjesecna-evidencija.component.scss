@@ -59,9 +59,9 @@ table {
             };
             select{
                 border: unset;
-                width: 170px;
+                width: 240px;
                 text-indent: 1px;
-                text-overflow: '';
+                text-overflow: hidden;
                 ::-ms-expand{
                     display: none;
                 }
@@ -74,4 +74,16 @@ table {
     max-width: 60px;
     min-width: 60px;
     width: 60px;
+}
+
+.mat-column-D1 {
+    max-width: 120px;
+    min-width: 120px;
+    width: 120px;
+}
+
+.mat-column-DAN {
+    max-width: 80px;
+    min-width: 80px;
+    width: 80px;
 }

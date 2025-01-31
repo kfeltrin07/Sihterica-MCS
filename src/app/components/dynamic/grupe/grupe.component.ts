@@ -188,7 +188,8 @@ export class GrupeComponent implements OnInit {
 
   public openZaposleniciDialog(item: any): void {
     const dialogRef = this.dialog.open(RadniciGrupeComponent, {
-      data: item
+      data: item,
+      width: '1100px'
     });
     dialogRef.afterClosed().subscribe((result) => {
     });

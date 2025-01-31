@@ -62,7 +62,7 @@ export class CreateShemeComponent {
   public ngOnInit(): void { }
 
   public validateForm(Sheme: Sheme): boolean {
-    if (Sheme.SIF_SHEME != '' && Sheme.OPIS != '') {
+    if (Sheme.OPIS != '') {
       return false;
     } else {
       return true;

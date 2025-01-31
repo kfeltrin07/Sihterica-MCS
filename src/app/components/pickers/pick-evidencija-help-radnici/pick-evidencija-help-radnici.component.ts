@@ -48,7 +48,7 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
   styleUrl: './pick-evidencija-help-radnici.component.scss'
 })
 export class PickEvidencijaHelpRadniciComponent implements OnInit {
-  public displayedColumns: string[] = ['MBR', 'PREZIME_IME'];
+  public displayedColumns: string[] = ['MBR', 'PREZIME_IME','SIF_OJ', 'NAZ_OJ'];
   public evRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici[] = [];
   public EvRadnogVremenaHelpRadnici: EvRadnogVremenaHelpRadnici = {
     UKUPANBROJSLOGOVA: 0,
@@ -56,6 +56,8 @@ export class PickEvidencijaHelpRadniciComponent implements OnInit {
     MBR: "",
     PREZIME_IME: "",
     OSOBA: "",
+    SIF_OJ: "",
+    NAZ_OJ: ""
   };
 
   public dataSource = this.evRadnogVremenaHelpRadnici;

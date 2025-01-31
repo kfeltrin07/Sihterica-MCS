@@ -539,3 +539,20 @@ Content-Type: application/json
     "RID" : "AAAE8QAAFAAAGckAAG"
   }
 }
+
+// GET Prikaza Grupni Unos
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "prikazGrupniUnos",
+  "sid": "p2826d80s6qb5jqqpf613qct35",
+  "data" : {
+    "pIdOperatera" : 4,
+    "pZaMjesec" : "01.2025",
+    "limit": 100,
+    "page": 1
+  }
+}

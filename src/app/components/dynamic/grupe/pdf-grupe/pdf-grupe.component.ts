@@ -50,7 +50,7 @@ export class PdfGrupeComponent {
         pSID: this.session.loggedInUser.sessionID,
         pSifVlas: this.session.loggedInUser.ownerID,
         pDioNaziva: this.dialogData,
-        pIdKorisnik: this.session.loggedInUser.ID,
+        pIdKorisnika: this.session.loggedInUser.ID,
       },
       {
         headers: new HttpHeaders({

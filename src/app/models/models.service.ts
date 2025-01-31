@@ -335,6 +335,8 @@ export interface EvRadnogVremenaHelpRadnici {
   MBR: string;
   PREZIME_IME: string;
   OSOBA: string;
+  SIF_OJ:string;
+  NAZ_OJ: string;
 }
 
 export interface VrstePosla {
@@ -724,6 +726,16 @@ export interface EvidencijaDnevna {
   DATUM: string;
 }
 
+export interface ZapisiUKalendaru {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  SIFVLAS: string;
+  DATUM: string;
+  NAZ_MT: string;
+  BR_UPISA: string;
+
+}
+
 
 export enum TodoState {
   Urgent,
@@ -849,6 +861,8 @@ export interface ReadPostRequestBody {
   pUsernameNew?: string;
   pUkupno?: boolean;
   page?: number;
+  pSifSheme?: string;
+  pIdKorisnika?: number;
   sort?: ReadPostRequestPropertyAndDirection[];
 }
 

@@ -30,7 +30,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { CRUDAction, EvidencijaMjesecna, Grupe, EvidencijaRadVreOj, Sheme, VrstePosla, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
+import { CRUDAction, EvidencijaMjesecna, Grupe, EvidencijaRadVreOj, Sheme, VrstePosla, ZaposleniPoGrupiIShemi, ZapisiUKalendaru } from 'src/app/models/models.service';
 import { EventGrupniUnosComponent } from './event-grupni-unos/event-grupni-unos.component';
 import { PickGrupeComponent } from '../../pickers/pick-grupe/pick-grupe.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -182,7 +182,8 @@ export class GrupniUnosComponent implements OnInit {
 
   view: CalendarView = CalendarView.Month;
   locale: string = 'hr-HR';
-
+  public ZapisiUKalendaru: ZapisiUKalendaru[] = [];
+  public ZapisizaKalendar:any;
   public match: boolean = false;
 
   viewDate = new Date();
@@ -211,7 +212,8 @@ export class GrupniUnosComponent implements OnInit {
     this.GetInitialGrupe();
     this.OfferedEvidencijaRadVreOj();
     this.OfferedVrstePosla();
-    this.getEvidencijaMjesecna();
+    //this.getEvidencijaMjesecna();
+    this.getZapisiUKalendaru();
   }
 
   public beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
@@ -1087,7 +1089,7 @@ export class GrupniUnosComponent implements OnInit {
       for (let zaposleni of this.zaposleniPoGrupiIShemi) {
         this.upisSihterice(event, zaposleni);
       }
-
+      this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
 
     });
   }
@@ -1098,6 +1100,7 @@ export class GrupniUnosComponent implements OnInit {
         await this.getZaposleniGrupe(event);
       }
     }
+    this.getZapisiUKalendaru();
   }
 
   public upisSihterice(event: any, zaposleni: ZaposleniPoGrupiIShemi): void {
@@ -1223,4 +1226,41 @@ export class GrupniUnosComponent implements OnInit {
 
 
   }
+
+
+  public getZapisiUKalendaru(): void {
+
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'prikazGrupniUnos',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdOperatera: this.session.loggedInUser.ID,
+          pZaMjesec: this.viewDate.toLocaleDateString().replaceAll(' ','').slice(3, 10),
+          limit: 1000000,
+          page: 1,
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.ZapisiUKalendaru = response.debugData.data;
+      const groupedByDate = this.ZapisiUKalendaru.reduce((acc: { [key: string]: any }, val: any) => {
+        if (!acc[val.DATUM]) {
+          acc[val.DATUM] = { ...val, BR_UPISA: +val.BR_UPISA,NAZ_MT:val.NAZ_MT+' - '+val.BR_UPISA };
+        } else {
+          acc[val.DATUM].BR_UPISA += +val.BR_UPISA;
+          acc[val.DATUM].NAZ_MT += ' \n '+val.NAZ_MT+' - '+val.BR_UPISA;
+
+        }
+        return acc;
+      }, {});
+      this.ZapisizaKalendar = Object.values(groupedByDate);
+
+      console.log(this.ZapisizaKalendar);
+    });
+  }
+
 }
