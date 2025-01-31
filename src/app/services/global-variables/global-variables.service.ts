@@ -1591,27 +1591,7 @@ export class GlobalVariablesService {
   ];
 
   public dashboardItems: DashboardItem[] = [
-    {
-      name: 'General',
-      icon: 'featured_play_list',
-      rowHeight: 2,
-      rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-      items: [
-        /*{
-          name: 'Dashboard',
-          icon: 'dashboard',
-          url: '/dashboard',
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        },*/
-        {
-          name: 'SelectionScreen',
-          icon: 'menu',
-          url: '/selection-screen',
-          rightsState: this.useDynamicMenus ? RightsState.Invisible : RightsState.Editable,
-        },
-      ],
-      url: ''
-    },
+
     {
       name: 'Šihterica',
       icon: 'newspaper',

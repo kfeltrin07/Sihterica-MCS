@@ -66,7 +66,7 @@ export class ExcelEvidencijaRadnogVremenaZaglavljeComponent {
     dataAsArray[0].push(this.t.translate('Ordinal'));
 
     for (let key in this.EvidencijaRadVreZag) {
-      if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN') {
+      if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN' && key !== 'RID') {
         if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
           dataAsArray[0].push(this.t.translate(key));
         }
@@ -79,7 +79,7 @@ export class ExcelEvidencijaRadnogVremenaZaglavljeComponent {
       dataAsArray[i + 1].push(i + 1);
 
       for (let key in this.EvidencijaRadVreZag) {
-        if (key != 'UKUPANBROJSLOGOVA' && key != 'RN') {
+        if (key != 'UKUPANBROJSLOGOVA' && key != 'RN' && key !== 'RID') {
           if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
             dataAsArray[i + 1].push(data[i][key]);
           }
@@ -133,7 +133,7 @@ export class ExcelEvidencijaRadnogVremenaZaglavljeComponent {
       columnsList.push(this.t.translate('Ordinal'));
 
       for (let key in this.EvidencijaRadVreZag) {
-        if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN') {
+        if (key !== 'UKUPANBROJSLOGOVA' && key !== 'RN' && key !== 'RID') {
           if (this.dialogData.headers.includes(key.toString()) || this.allColumns) {
             columnsList.push(this.t.translate(key));
           }

@@ -110,7 +110,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
           pSifStupca: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
           pSifVp: this.EvidencijaRadVreZagVeze.SIF_VP,
           pXFaktor: this.EvidencijaRadVreZagVeze.KNAZIV,
-          pRid: this.EvidencijaRadVreZagVeze.RID
+          pRid: this.EvidencijaRadVreZagVeze.XFAKTOR
         }
       }
     ).subscribe((response: any) => {

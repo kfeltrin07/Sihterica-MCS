@@ -51,6 +51,7 @@ export class DeleteEvidencijaRadnogVremenaZaglavljeComponent {
         data: {
           pAkcija: CRUDAction.Delete,
           pRid: this.recievedEvidencijaRadVreZag.RID,
+          pSifVlas: this.session.loggedInUser.ownerID
         }
       }
     ).subscribe((response: any) => {

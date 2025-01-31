@@ -52,7 +52,7 @@ import { ExcelKontrolaFondaSatiComponent } from './excel-kontrola-fonda-sati/exc
   styleUrl: './kontrola-fonda-sati.component.scss'
 })
 export class KontrolaFondaSatiComponent implements OnInit {
-  public displayedColumns: string[] = ['MBR', 'OSOBA', 'NAZ_OJ', 'SATI', 'DATUM', 'options'];
+  public displayedColumns: string[] = ['MBR', 'OSOBA', 'NAZ_OJ', 'SATI', 'DATUM'];
 
   public filter: any = {
     MBR: "",
@@ -230,7 +230,6 @@ export class KontrolaFondaSatiComponent implements OnInit {
     for (let i = 0; i < this.globalVar.FondSatiDisplayedColumns.length; i++) {
       this.displayedColumns.push(this.globalVar.FondSatiDisplayedColumns[i].name);
     }
-    this.displayedColumns.push('options');
   }
 
   //FondSatiHelpOJ START

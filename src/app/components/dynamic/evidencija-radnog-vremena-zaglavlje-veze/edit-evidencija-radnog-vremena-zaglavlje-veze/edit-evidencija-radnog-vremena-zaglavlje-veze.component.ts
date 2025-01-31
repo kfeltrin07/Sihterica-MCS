@@ -117,7 +117,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
           pSifVlas: this.session.loggedInUser.ownerID,
           pSifStupca: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
           pSifVp: this.EvidencijaRadVreZagVeze.SIF_VP,
-          pXFaktor: this.EvidencijaRadVreZagVeze.KNAZIV,
+          pXFaktor: this.EvidencijaRadVreZagVeze.XFAKTOR,
           pRid: this.EvidencijaRadVreZagVeze.RID
         }
       }
