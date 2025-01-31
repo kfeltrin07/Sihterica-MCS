@@ -118,7 +118,7 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
   }
 
   public validateForm(OvlastenaOsobaMjTr: OvlastenaOsobaMjTr): boolean {
-    if (OvlastenaOsobaMjTr.ID != '' && OvlastenaOsobaMjTr.SIFMJTR != '') {
+    if (OvlastenaOsobaMjTr.ID != '' && OvlastenaOsobaMjTr.SIFMJTR != '' && OvlastenaOsobaMjTr.OD != '' && OvlastenaOsobaMjTr.DO != '' && OvlastenaOsobaMjTr.SATI != '') {
       return false;
     } else {
       return true;

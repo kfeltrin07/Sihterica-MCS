@@ -62,7 +62,7 @@ export class CreateShemeComponent {
   public ngOnInit(): void { }
 
   public validateForm(Sheme: Sheme): boolean {
-    if (Sheme.OPIS != '') {
+    if (Sheme.OPIS != '' && Sheme.OD != '' && Sheme.DO != '' && Sheme.PAUZA_OD != '' && Sheme.PAUZA_DO != '') {
       return false;
     } else {
       return true;

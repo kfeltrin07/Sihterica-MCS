@@ -63,7 +63,7 @@ export class EditShemeComponent implements OnInit {
   }
 
   public validateForm(Sheme: Sheme): boolean {
-    if (Sheme.SIF_SHEME != '' && Sheme.OPIS != '') {
+    if (Sheme.OPIS != '' && Sheme.OD != '' && Sheme.DO != '' && Sheme.PAUZA_OD != '' && Sheme.PAUZA_DO != '') {
       return false;
     } else {
       return true;

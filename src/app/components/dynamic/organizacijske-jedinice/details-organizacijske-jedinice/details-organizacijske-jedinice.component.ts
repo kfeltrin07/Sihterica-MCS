@@ -45,7 +45,22 @@ export class DetailsOrganizacijskeJediniceComponent implements OnInit {
   }
 
   public filterColumn(key: string) {
-    let excluded = ['RN', 'UKUPANBROJSLOGOVA', 'IDKORISNIKA', 'VATBROJVLASNIKA', 'SIFVLAS']; // OVE VRIJEDNOSTI NEBUDU BILE PRIKAZANE 
+    let excluded = [    'UKUPANBROJSLOGOVA',
+      'RN',
+      'REG_BR',
+      'BOD_PC',
+      'KOEF_PC',
+      'VR_BOD',
+      'VR_KOEF',
+      'PROS_SAT',
+      'PROS_KOEF',
+      'PROS_BOD',
+      'IND1',
+      'SIF_NAD',
+      'BRO_HZZO',
+      'RSOPC',
+      'IDK',
+      'SYSD']; // OVE VRIJEDNOSTI NEBUDU BILE PRIKAZANE 
     for (let item of excluded) {
       if (item == key) {
         return false; // AKO HOČEŠ PRIKAZATI SVE PROMIJENI U TRUE
