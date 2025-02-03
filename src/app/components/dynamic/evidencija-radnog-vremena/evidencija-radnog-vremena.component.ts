@@ -182,6 +182,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
+          pSifOj: this.filter.SIF_OJ,
           limit: this.pageSize,
           page: (this.pageIndex + 1),
           sort: [
@@ -213,7 +214,8 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   public openPDFDialog(item: any): void {
     let data = {
       FONDSATI: this.filter.FONDSATI,
-      DATUM: this.filter.MJESEC + '.' + this.filter.GODINA
+      DATUM: this.filter.MJESEC + '.' + this.filter.GODINA,
+      SIF_OJ: this.filter.SIF_OJ
     }
     const dialogRef = this.dialog.open(PdfEvidencijaRadnogVremenaComponent, {
       data: data
