@@ -942,10 +942,14 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public goToDnevnaEvidencija(event: any): void {
 
     var date = new Date(this.globalFn.formatDateForDateForm2(event.D1));
+    this.globalVar.filterZaDnevnaEvidencija={
+      MBR: this.filter.MBR,
+      SIF_OJ: this.filter.SIF_OJ,
+      SIF_VP: event.SIF_VP,
+      DATUM: date
+    }
 
-    let data = { ID_RADNIKA: this.filter.MBR, SIFMJTR: this.filter.SIF_OJ, SIF_VP: event.SIF_VP, DATUM: date.toLocaleString() };
-
-    this.router.navigate(["dnevna-evidencija", data]);
+    this.router.navigate(["dnevna-evidencija"]);
 
 
   }

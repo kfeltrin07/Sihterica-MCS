@@ -736,6 +736,12 @@ export interface ZapisiUKalendaru {
 
 }
 
+export interface filterZaDnevnaEvidencija {
+  DATUM?: Date;
+  MBR?: string;
+  SIF_OJ?: string;
+  SIF_VP?: string;
+}
 
 export enum TodoState {
   Urgent,

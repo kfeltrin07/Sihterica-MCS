@@ -1220,15 +1220,25 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public goToDnevnaEvidencija(event: any): void {
-    let data = { ID_RADNIKA: this.varNames.ID_RADNIKA, SIFMJTR: this.varNames.SIFMJTR, SIF_VP: this.varNames.SIF_VP, DATUM: event.date.toLocaleString() };
+    this.globalVar.filterZaDnevnaEvidencija={
+      MBR: this.varNames.ID_RADNIKA,
+      SIF_OJ: this.varNames.SIF_OJ,
+      SIF_VP: this.varNames.SIF_VP,
+      DATUM: event.date
+    }
 
-    this.router.navigate(["dnevna-evidencija", data]);
+    this.router.navigate(["dnevna-evidencija"]);
 
 
   }
 
 
   public getZapisiUKalendaru(): void {
+    let date: Date = new Date();
+    console.log(this.viewDate.toISOString());
+
+    this.viewDate.setHours(date.getHours()+1);
+    console.log(this.viewDate.toISOString());
 
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
@@ -1238,7 +1248,7 @@ export class GrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdOperatera: this.session.loggedInUser.ID,
-          pZaMjesec: this.viewDate.toLocaleDateString().replaceAll(' ','').slice(3, 10),
+          pZaMjesec: ('0'+(this.viewDate.getMonth()+1)).slice(-2)+'.'+this.viewDate.getFullYear(),
           limit: 1000000,
           page: 1,
         }

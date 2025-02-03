@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookiesService } from '../cookies/cookies.service';
-import { Konekcija, DynamicMenu, RightsState, DashboardItem, DynamicMenuReference, SidebarItem, ColumnRef } from 'src/app/models/models.service';
+import { Konekcija, DynamicMenu, RightsState, DashboardItem, DynamicMenuReference, SidebarItem, ColumnRef, filterZaDnevnaEvidencija } from 'src/app/models/models.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { CalendarEvent } from 'angular-calendar';
 
@@ -99,6 +99,13 @@ export class GlobalVariablesService {
   public useDynamicMenus: boolean = false;
   public cVRS: RightsState | undefined = RightsState.Readonly;
 
+
+  // VARIABLES
+  public datumDnevnaEvidencija?:Date;
+
+  public filterZaDnevnaEvidencija:filterZaDnevnaEvidencija={
+  }
+  //
   //DISPLAYED COLUMNS
 
   public IDKORISNIKAColumn: ColumnRef = {

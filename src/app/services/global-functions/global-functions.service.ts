@@ -348,11 +348,8 @@ export class GlobalFunctionsService {
     return this.conditionalZeroPrefix(day) + '.' + this.conditionalZeroPrefix(month) + '.' + year.toString();
   }
 
-  public formatDateForDateForm(date: string): string {
-    let day: number = +date.substring(0, 2);
-    let month: number = +date.substring(4, 6);
-    let year: number = +date.substring(8,12);
-    return year + '-' + this.conditionalZeroPrefix(month) + '-' + this.conditionalZeroPrefix(day);
+  public formatDateForDateForm(date: Date) {
+    return date.getFullYear() + '-' + ('0'+(date.getMonth()+1)).slice(-2) + '-' + ('0'+(date.getDate())).slice(-2);
   }
 
   public formatDateForDateForm2(date: string): string {

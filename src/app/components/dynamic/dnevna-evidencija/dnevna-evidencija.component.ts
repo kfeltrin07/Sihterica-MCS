@@ -254,22 +254,19 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
-    console.log(this.IncomingData);
 
-    if (this.IncomingData.DATUM) {
-      console.log(this.IncomingData.DATUM);
-      this.filter.DATUM = this.globalFn.formatDateForDateForm(this.IncomingData.DATUM.toLocaleString());
-      this.filter.MBR = this.IncomingData.ID_RADNIKA ? this.IncomingData.ID_RADNIKA : "%";
-      this.filter.SIF_OJ = this.IncomingData.SIFMJTR ? this.IncomingData.SIFMJTR : "%";
-      this.filter.SIF_VP = this.IncomingData.SIF_VP ? this.IncomingData.SIF_VP : "%";
+    if (this.globalVar.filterZaDnevnaEvidencija.DATUM) {
+      this.filter.DATUM = this.globalFn.formatDateForDateForm(this.globalVar.filterZaDnevnaEvidencija.DATUM?this.globalVar.filterZaDnevnaEvidencija.DATUM:new Date());
+      this.filter.MBR = this.globalVar.filterZaDnevnaEvidencija.MBR ? this.globalVar.filterZaDnevnaEvidencija.MBR : "%";
+      this.filter.SIF_OJ = this.globalVar.filterZaDnevnaEvidencija.SIF_OJ ? this.globalVar.filterZaDnevnaEvidencija.SIF_OJ : "%";
+      this.filter.SIF_VP = this.globalVar.filterZaDnevnaEvidencija.SIF_VP ? this.globalVar.filterZaDnevnaEvidencija.SIF_VP : "%";
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
       this.OfferedZaposleni();
       this.getEvidencijaDnevna();
     }
     else {
-      this.filter.DATUM = new Date().toISOString().slice(0, 10);
+      this.filter.DATUM = this.globalFn.formatDateForDateForm(new Date());
       this.getEvidencijaDnevna();
     }
 
