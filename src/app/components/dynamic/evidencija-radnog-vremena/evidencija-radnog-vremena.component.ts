@@ -148,7 +148,6 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   }
 
   public getPripremaEvRadnogVremena(): void {
-    if (!this.pripremaGotova) {
       this.http.post(
         this.globalVar.APIHost + this.globalVar.APIFile,
         {
@@ -158,19 +157,14 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
           data: {
             pIdKorisnika: this.session.loggedInUser.ID,
             pSifVlas: this.session.loggedInUser.ownerID,
-            pSifOj: this.filter.SIFOJ,
+            pSifOj: this.filter.SIF_OJ,
             pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
           }
         }
       ).subscribe((response: any) => {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.pripremaGotova = true;
         this.getEvRadnogVremena();
       });
-    }
-    else {
-      this.getEvRadnogVremena();
-    }
   }
 
   public getEvRadnogVremena(): void {

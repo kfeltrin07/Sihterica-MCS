@@ -148,37 +148,32 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
   }
 
   public getPripremaEvRadnogVremena(): void {
-    if (!this.pripremaGotova) {
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'pripremaGetEvRadnogVremena',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pIdKorisnika: this.session.loggedInUser.ID,
-            pSifVlas: this.session.loggedInUser.ownerID,
-            pSifRad: this.filter.MBR,
-            pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
-            limit: this.pageSize,
-            page: (this.pageIndex + 1),
-            sort: [
-              {
-                property: this.sorting.active,
-                direction: this.sorting.direction
-              }
-            ]
-          }
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'pripremaGetEvRadnogVremena',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pSifRad: this.filter.MBR,
+          pZaMjesec: this.filter.MJESEC + '.' + this.filter.GODINA,
+          limit: this.pageSize,
+          page: (this.pageIndex + 1),
+          sort: [
+            {
+              property: this.sorting.active,
+              direction: this.sorting.direction
+            }
+          ]
         }
-      ).subscribe((response: any) => {
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.pripremaGotova = true;
-        this.getEvRadnogVremena();
-      });
-    }
-    else {
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.pripremaGotova = true;
       this.getEvRadnogVremena();
-    }
+    });
   }
 
   public getEvRadnogVremena(): void {
@@ -282,7 +277,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
 
   public openPDFDialog(item: any): void {
     let data = {
-      searchParam:item,
+      searchParam: item,
       MBR: this.filter.MBR,
       FONDSATI: this.filter.FONDSATI,
       DATUM: this.filter.MJESEC + '.' + this.filter.GODINA
