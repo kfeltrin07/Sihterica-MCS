@@ -23,7 +23,7 @@
       
       }
       @else{
-        <mat-list-item matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
+        <div matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
 
           <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarItem.highlighted">{{
             sidebarItem.icon ? sidebarItem.icon : (sidebarItem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right')
@@ -44,13 +44,13 @@
             </b>
           </div>
   
-        </mat-list-item>
+        </div>
   
         <div *ngIf="sidebarItem.open">
   
           <div *ngFor="let sidebarSubitem of sidebarItem.children">
   
-            <mat-list-item *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem"
+            <div *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem"
               [class.highlighted-background]="sidebarSubitem.highlighted && !sidebarSubitem.children"
               (click)="toggleSidebarItemOpen(sidebarSubitem); goToRoute(sidebarSubitem);">
   
@@ -74,12 +74,12 @@
                 </b>
               </div>
   
-            </mat-list-item>
+            </div>
   
             <div *ngIf="sidebarSubitem.open">
   
               <div *ngFor="let sidebarSubsubitem of sidebarSubitem.children">
-                <mat-list-item *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem"
+                <div *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem"
                   [class.highlighted-background]="sidebarSubsubitem.highlighted" (click)="goToRoute(sidebarSubsubitem);">
   
                   <mat-icon matListItemIcon class="sidenav-list-item-icon"
@@ -102,7 +102,7 @@
                       {{ sidebarSubsubitem.name | translate }}
                     </b>
                   </div>
-                </mat-list-item>
+                </div>
               </div>
   
             </div>
