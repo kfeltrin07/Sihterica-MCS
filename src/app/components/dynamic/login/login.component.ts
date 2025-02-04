@@ -29,7 +29,7 @@ import { MatInputModule } from '@angular/material/input';
     MatTooltipModule,
     MatInputModule,
 
-    
+
     TranslationPipe,
     CommonModule,
     FormsModule
@@ -38,13 +38,15 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  @HostListener('window:keydown.Control.Shift.F11',['$event']) scrollUp(event: KeyboardEvent) {
-    this.show();
+  @HostListener('window:keydown.Control.Shift.F11', ['$event']) scrollUp(event: KeyboardEvent) {
+    if (this.globalVar.env != 'cistoca') {
+      this.show();
+    }
   };
 
-  
+
   public vlasnici: Owner[] = [];
-  public vlasnik: Owner={
+  public vlasnik: Owner = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
     ID_KORISNIKA: "",
@@ -52,12 +54,12 @@ export class LoginComponent implements OnInit {
     NAZIV_VLASNIKA: "",
     USERNAME: ""
   }
-  
-  public selectedValue: string="";
-  public showKonekcije:boolean=false;
-  public selected1:string="";
 
-  public konekcije: Konekcija[]=this.globalVar.konekcije;
+  public selectedValue: string = "";
+  public showKonekcije: boolean = false;
+  public selected1: string = "";
+
+  public konekcije: Konekcija[] = this.globalVar.konekcije[this.globalVar.env];
 
   public obscurePassword: boolean = true;
   /*public userLogin: UserMetadata = {
@@ -80,9 +82,9 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog,
     public cookies: CookiesService,
 
-  ) {}
+  ) { }
 
-  
+
   public ngOnInit(): void {
     this.globalVar.loggingInMessage = 'LoggingIn';
     this.getCookies();
@@ -99,36 +101,36 @@ export class LoginComponent implements OnInit {
     this.session.login(this.userLogin);
   }
 
-  public show():void{
-    if(this.showKonekcije==false){
-      this.showKonekcije=true
+  public show(): void {
+    if (this.showKonekcije == false) {
+      this.showKonekcije = true
     }
-    else{
-      this.showKonekcije=false
+    else {
+      this.showKonekcije = false
     }
   }
 
-  public changeConnection(selected:Konekcija){
+  public changeConnection(selected: Konekcija) {
 
-    this.selected1=selected.value;
+    this.selected1 = selected.value;
 
-    for(var item of this.globalVar.konekcijeAPIFile){
-      if(item.viewValue==selected.viewValue){
-        this.globalVar.APIFile=item.value
+    for (var item of this.globalVar.konekcijeAPIFile[this.globalVar.env]) {
+      if (item.viewValue == selected.viewValue) {
+        this.globalVar.APIFile = item.value
       }
     }
 
-    for(var item of this.globalVar.konekcijeAPIReport){
-      if(item.viewValue==selected.viewValue){
-        this.globalVar.APIReport=item.value
+    for (var item of this.globalVar.konekcijeAPIReport[this.globalVar.env]) {
+      if (item.viewValue == selected.viewValue) {
+        this.globalVar.APIReport = item.value
       }
     }
 
-    this.cookies.setCookie('connected-APIFile',this.globalVar.APIFile);
-    this.cookies.setCookie('connected-APIReport',this.globalVar.APIReport);
-    this.cookies.setCookie('connected-database',this.selected1);
+    this.cookies.setCookie('connected-APIFile', this.globalVar.APIFile);
+    this.cookies.setCookie('connected-APIReport', this.globalVar.APIReport);
+    this.cookies.setCookie('connected-database', this.selected1);
 
-    this.globalVar.APIHost=this.selected1;
+    this.globalVar.APIHost = this.selected1;
     console.log(this.globalVar.APIHost);
   }
 

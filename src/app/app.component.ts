@@ -8,6 +8,7 @@ import { GlobalFunctionsService } from './services/global-functions/global-funct
 import { GlobalVariablesService } from './services/global-variables/global-variables.service';
 import { SessionService } from './services/session/session.service';
 import { SidenavService } from './services/sidenav/sidenav.service';
+import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -30,12 +31,16 @@ export class AppComponent implements OnInit {
     public sidenavService:SidenavService,
 
   ) {
+    if (environment.production) {
+      window.console.log = () => { }
+    }
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
       this.getDynamicMenu();
 
       }
   });
+  console.log(this.globalVar.env)
   }
 
   public ngOnInit(): void {

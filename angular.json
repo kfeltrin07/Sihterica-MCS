@@ -49,6 +49,48 @@
                   "maximumError": "2mb"
                 }
               ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
+            },
+            "cistoca": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.cistoca.ts"
+                }
+              ]
+            },
+            "mcs": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -57,10 +99,16 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "mcs"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -70,6 +118,12 @@
             },
             "development": {
               "buildTarget": "sihterica-projekt:build:development"
+            },
+            "cistoca": {
+              "buildTarget": "sihterica-projekt:build:cistoca"
+            },
+            "mcs": {
+              "buildTarget": "sihterica-projekt:build:mcs"
             }
           },
           "defaultConfiguration": "development"

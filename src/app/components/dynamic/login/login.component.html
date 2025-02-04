@@ -44,13 +44,14 @@
       </button>
     </mat-form-field>
   
-    <mat-form-field id="konekcije" appearance="outline" *ngIf="showKonekcije">
+    @if(showKonekcije && globalVar.env!='cistoca'){
+    <mat-form-field id="konekcije" appearance="outline">
       <mat-label>Konekcije</mat-label>
       <mat-select [(ngModel)]="selectedValue">
           <mat-option (click)="changeConnection(konekcija);" *ngFor="let konekcija of konekcije" [value]="konekcija.value">{{konekcija.viewValue}}</mat-option>
       </mat-select>
     </mat-form-field>
-  
+  }
     <button id="loginbutton" mat-flat-button color="primary" [disabled]="userLogin.pUsername=='' ||userLogin.pPassword==''" (click)="login();">{{ 'Login' | translate }}</button>
   
   </mat-card>

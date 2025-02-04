@@ -3,6 +3,7 @@ import { CookiesService } from '../cookies/cookies.service';
 import { Konekcija, DynamicMenu, RightsState, DashboardItem, DynamicMenuReference, SidebarItem, ColumnRef, filterZaDnevnaEvidencija } from 'src/app/models/models.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { CalendarEvent } from 'angular-calendar';
+import { environment } from './../../../environments/environment';
 
 type AvailableLanguages = 'en' | 'hr';
 
@@ -41,50 +42,120 @@ export class GlobalVariablesService {
 
   public events: CalendarEvent[] = [];
 
+  public env = environment.name;
+
   // END: development helpers
 
   // START: logging in messages
 
   public loggingInMessage: string = 'LoggingIn';
 
-  public konekcije: Konekcija[] = [
-    { value: 'http://192.168.88.169:8080/', viewValue: 'Šihterica' }, //0
-    { value: 'http://194.152.214.238/', viewValue: 'Linux' }, //0
-    { value: 'http://192.168.88.169:8080/', viewValue: 'Razvoj' }, //1
-    { value: 'http://192.168.88.169:8080/', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'http://192.168.88.169:8080/', viewValue: 'Linux iz MCS' }, //3
-    { value: 'http://172.16.91.70:8000/', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
-    { value: 'http://192.168.150.10:8000/', viewValue: 'Čistoća' }, //5
-  ]
+  public konekcije: any = {
+    "production": [
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Šihterica' },
+      { value: 'http://194.152.214.238/', viewValue: 'Linux' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Razvoj' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Linux iz MCS' },
+      { value: 'http://192.168.88.88:8000/', viewValue: 'Čistoća' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'MCS' },
+    ],
+    "development": [
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Šihterica' },
+      { value: 'http://194.152.214.238/', viewValue: 'Linux' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Razvoj' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Linux iz MCS' },
+      { value: 'http://192.168.88.88:8000/', viewValue: 'Čistoća' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'MCS' },
+    ],
+    "mcs": [
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Šihterica' },
+      { value: 'http://194.152.214.238/', viewValue: 'Linux' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Razvoj' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'Linux iz MCS' },
+      { value: 'http://192.168.88.88:8000/', viewValue: 'Čistoća' },
+      { value: 'http://192.168.88.169:8080/', viewValue: 'MCS' },
+    ],
+    "cistoca": [
+      { value: 'http://192.168.88.88:8000/', viewValue: 'Čistoća' },
+    ]
+  }
 
-  public konekcijeAPIFile: Konekcija[] = [
-    { value: 'php_angularAPI_oracle_sihterica/router.php', viewValue: 'Šihterica' }, //0
-    { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux' }, //0
-    { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' }, //1
-    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' }, //3
-    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
-    { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća' }, //5
+  public konekcijeAPIFile: any = {
+    "production": [
+      { value: 'php_angularAPI_oracle_sihterica/router.php', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
+    ],
+    "development": [
+      { value: 'php_angularAPI_oracle_sihterica/router.php', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
+    ],
+    "mcs": [
+      { value: 'php_angularAPI_oracle_sihterica/router.php', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
+    ],
+    "cistoca": [
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća' },
+    ],
+  }
 
-  ]
-  public konekcijeAPIReport: Konekcija[] = [
-    { value: 'php_angularAPI_oracle_sihterica/classes/pdfs', viewValue: 'Šihterica' }, //0
-    { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux' }, //0
-    { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' }, //1
-    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' }, //2
-    { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' }, //3
-    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' }, //4
-    { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća' }, //5
-
-  ]
+  public konekcijeAPIReport: any = {
+    "production": [
+      { value: 'php_angularAPI_oracle_sihterica/classes/pdfs', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
+    ],
+    "development": [
+      { value: 'php_angularAPI_oracle_sihterica/classes/pdfs', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
+    ],
+    "mcs": [
+      { value: 'php_angularAPI_oracle_sihterica/classes/pdfs', viewValue: 'Šihterica' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux' },
+      { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
+      { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
+    ],
+    "cistoca": [
+      { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
+    ],
+  }
 
   private vars1: string = this.cookies.getCookie('connected-database');
   private vars2: string = this.cookies.getCookie('connected-APIFile');
   private vars3: string = this.cookies.getCookie('connected-APIReport');
 
-  public APIHost: string = this.vars1 ? this.vars1 : this.konekcije[0].value;
-  public APIFile: string = this.vars2 ? this.vars2 : this.konekcijeAPIFile[0].value;
-  public APIReport: string = this.vars3 ? this.vars3 : this.konekcijeAPIReport[0].value;
+  public APIHost: string = this.vars1 ? this.vars1 : this.konekcije[this.env][0].value;
+  public APIFile: string = this.vars2 ? this.vars2 : this.konekcijeAPIFile[this.env][0].value;
+  public APIReport: string = this.vars3 ? this.vars3 : this.konekcijeAPIReport[this.env][0].value;
 
   public selectedLanguage: AvailableLanguages = 'hr';
 
@@ -101,9 +172,9 @@ export class GlobalVariablesService {
 
 
   // VARIABLES
-  public datumDnevnaEvidencija?:Date;
+  public datumDnevnaEvidencija?: Date;
 
-  public filterZaDnevnaEvidencija:filterZaDnevnaEvidencija={
+  public filterZaDnevnaEvidencija: filterZaDnevnaEvidencija = {
   }
   //
   //DISPLAYED COLUMNS
