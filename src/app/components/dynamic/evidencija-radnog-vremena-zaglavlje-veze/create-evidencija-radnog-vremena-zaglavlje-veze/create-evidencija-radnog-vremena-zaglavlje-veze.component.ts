@@ -109,8 +109,8 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
           pSifVlas: this.session.loggedInUser.ownerID,
           pSifStupca: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
           pSifVp: this.EvidencijaRadVreZagVeze.SIF_VP,
-          pXFaktor: this.EvidencijaRadVreZagVeze.KNAZIV,
-          pRid: this.EvidencijaRadVreZagVeze.XFAKTOR
+          pXFaktor: this.EvidencijaRadVreZagVeze.XFAKTOR,
+          pRid: this.EvidencijaRadVreZagVeze.RID
         }
       }
     ).subscribe((response: any) => {
