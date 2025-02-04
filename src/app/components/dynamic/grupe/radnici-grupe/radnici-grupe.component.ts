@@ -174,7 +174,7 @@ export class RadniciGrupeComponent {
         (zaposlenik.U_GRUPI == "true") ? this.oldSelection.select(zaposlenik) : ""
 
       }
-      this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
       this.loading = false;
       this.setDisplayedZaposleniGrupe();
     });

@@ -117,7 +117,7 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.ovlastenaOsobaMjTr = response.debugData.data;
       this.dataSource = this.ovlastenaOsobaMjTr;
-      this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
       this.loading = false;
     });
   }

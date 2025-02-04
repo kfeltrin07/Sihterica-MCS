@@ -305,7 +305,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
       this.evidencijaDnevna = response.debugData.data;
       this.dataSource = this.evidencijaDnevna;
-      this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
+
     });
   }
 
@@ -1235,6 +1236,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      this.loading=false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.refresh();
     });
@@ -1262,6 +1264,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      this.loading=false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.selection.deselect(item);
 
@@ -1322,6 +1325,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      this.loading=false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOjNew = response.debugData.data;
       this.filteredEvidencijaRadVreOjNew = response.debugData.data;
@@ -1521,6 +1525,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      this.loading=false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.NewOfferedZaposleni = response.debugData.data;
       this.NewFilteredZaposleni = response.debugData.data;

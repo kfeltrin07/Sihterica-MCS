@@ -115,7 +115,7 @@ export class ShemeComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.sheme = response.debugData.data;
       this.dataSource = this.sheme;
-      this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
       this.loading = false;
     });
   }

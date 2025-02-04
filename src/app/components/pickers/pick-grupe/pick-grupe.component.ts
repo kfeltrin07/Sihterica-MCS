@@ -113,7 +113,7 @@ export class PickGrupeComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.grupe = response.debugData.data;
       this.dataSource = this.grupe;
-      this.length = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
       this.loading = false;
     });
   }

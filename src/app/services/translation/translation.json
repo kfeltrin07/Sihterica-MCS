@@ -8079,6 +8079,12 @@
             "en": "Select a valid worker in the filter",
             "hr": "Odaberite valjanog zaposlenika u filteru",
             "transferred": false
+        },
+        {
+          "ref": "NePostojePodaciPremaPretraženimParametrima",
+          "en": "No data according to the search parameters",
+          "hr": "Ne postoje podaci prema pretraženim parametrima",
+          "transferred": false
         }
     ]
 }

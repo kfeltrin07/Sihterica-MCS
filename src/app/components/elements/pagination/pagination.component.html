@@ -14,11 +14,18 @@
                 <mat-option [value]="size" *ngFor="let size of pageSizeOptions">{{ size }}</mat-option>
             </mat-select>
         </div>
-        <div>
-            {{ 'RecordsBeingDisplayed' | translate }} <b>{{ startingRecord() }} - {{ endingRecord() }}</b> {{ 'of' |
-            translate
-            }} <b>{{ length }}</b>
-        </div>
+        @if(length>0){
+            <div>
+                {{ 'RecordsBeingDisplayed' | translate }} <b>{{ startingRecord() }} - {{ endingRecord() }}</b> {{ 'of' |
+                translate
+                }} <b>{{ length }}</b>
+            </div>
+        }@else{
+            <div style="font-size: 15px;">
+               <b> {{ 'NePostojePodaciPremaPretraženimParametrima' | translate }}</b>
+            </div>
+        }
+
         <div class="display-flex">
             <button mat-icon-button [disabled]="pageIndex == 0" matTooltip="{{ 'FirstPage' | translate }}"
                 (click)="pageFirst();">
