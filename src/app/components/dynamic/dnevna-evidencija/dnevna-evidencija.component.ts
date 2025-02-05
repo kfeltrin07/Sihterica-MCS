@@ -256,7 +256,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public ngOnInit(): void {
 
     if (this.globalVar.filterZaDnevnaEvidencija.DATUM) {
-      this.filter.DATUM = this.globalFn.formatDateForDateForm(this.globalVar.filterZaDnevnaEvidencija.DATUM?this.globalVar.filterZaDnevnaEvidencija.DATUM:new Date());
+      this.filter.DATUM = this.globalFn.formatDateForDateForm(this.globalVar.filterZaDnevnaEvidencija.DATUM ? this.globalVar.filterZaDnevnaEvidencija.DATUM : new Date());
       this.filter.MBR = this.globalVar.filterZaDnevnaEvidencija.MBR ? this.globalVar.filterZaDnevnaEvidencija.MBR : "%";
       this.filter.SIF_OJ = this.globalVar.filterZaDnevnaEvidencija.SIF_OJ ? this.globalVar.filterZaDnevnaEvidencija.SIF_OJ : "%";
       this.filter.SIF_VP = this.globalVar.filterZaDnevnaEvidencija.SIF_VP ? this.globalVar.filterZaDnevnaEvidencija.SIF_VP : "%";
@@ -285,7 +285,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         data: {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdKorisnika: this.session.loggedInUser.ID,
-          pMbr: this.filter.MBR?this.filter.MBR:"%",
+          pMbr: this.filter.MBR ? this.filter.MBR : "%",
           pDatum: this.globalFn.formatDate(this.filter.DATUM),
           pSifOj: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
           pZSifMt: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
@@ -305,7 +305,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
       this.evidencijaDnevna = response.debugData.data;
       this.dataSource = this.evidencijaDnevna;
-      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA ? (+response.debugData.data[0].UKUPANBROJSLOGOVA) : 0;
 
     });
   }
@@ -1236,7 +1236,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.loading=false;
+      this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.refresh();
     });
@@ -1264,7 +1264,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.loading=false;
+      this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.selection.deselect(item);
 
@@ -1325,7 +1325,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.loading=false;
+      this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredEvidencijaRadVreOjNew = response.debugData.data;
       this.filteredEvidencijaRadVreOjNew = response.debugData.data;
@@ -1525,7 +1525,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.loading=false;
+      this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.NewOfferedZaposleni = response.debugData.data;
       this.NewFilteredZaposleni = response.debugData.data;
@@ -1639,9 +1639,26 @@ export class DnevnaEvidencijaComponent implements OnInit {
     }
   }
 
-  public selectAll():void{
+  public selectAll(): void {
     this.deleteSelection.clear();
     this.dataSource.forEach(row => this.deleteSelection.select(row));
   }
+
+  public validateForm(EvidencijaDnevna: EvidencijaDnevna): boolean {
+    if (EvidencijaDnevna.MBR==''||EvidencijaDnevna.SIF_VP==''||EvidencijaDnevna.SIF_MT==''||(EvidencijaDnevna.MBR && EvidencijaDnevna.OSOBAX == '') ||(EvidencijaDnevna.SIF_VP && EvidencijaDnevna.SIF_VP_N == '') || (EvidencijaDnevna.SIF_MT && EvidencijaDnevna.SIF_MTX == '') || EvidencijaDnevna.SATI == '' || EvidencijaDnevna.ODHH == '' ||EvidencijaDnevna.DOHH == '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public validateNewForm(EvidencijaDnevna: EvidencijaDnevna): boolean {
+    if (EvidencijaDnevna.MBR==''||EvidencijaDnevna.SIF_VP==''||EvidencijaDnevna.SIF_MT==''||(EvidencijaDnevna.MBR && this.newVarNames.PREZIME_IME == '') ||(EvidencijaDnevna.SIF_VP && this.newVarNames.NAZ_VP == '') || (EvidencijaDnevna.SIF_MT && this.newVarNames.NAZMJTR == '') || EvidencijaDnevna.SATI == '' || EvidencijaDnevna.ODHH == '' ||EvidencijaDnevna.DOHH == '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 }
 

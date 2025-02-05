@@ -55,7 +55,8 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.production.ts"
                 }
-              ]
+              ],
+              "baseHref": "./"
             },
             "cistoca": {
               "budgets": [
@@ -76,7 +77,8 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.cistoca.ts"
                 }
-              ]
+              ],
+              "baseHref": "/AngularAppSih/"
             },
             "mcs": {
               "budgets": [
@@ -91,7 +93,8 @@
                   "maximumError": "2mb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/AngularAppSih/"
             },
             "development": {
               "buildOptimizer": false,

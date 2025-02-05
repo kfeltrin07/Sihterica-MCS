@@ -299,10 +299,11 @@
                         {{ evidencija!.OSOBAX ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshZaposleniRow(evidencija.MBR, false);">
-                        <input [class.red-input]="evidencija!.OSOBAX && evidencija!.MBR==''" type="text"
+                        <input [class.red-input]="evidencija!.MBR && evidencija!.OSOBAX==''" type="text"
+                            (blur)="OfferedZaposleniRow(evidencija);"
                             [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
+                            (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.OSOBAX=''"
                             (focus)="refreshZaposleniRow(evidencija.MBR, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of NewOfferedZaposleni;track oj){
@@ -335,12 +336,12 @@
                         {{ newVarNames!.OSOBA ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshNewZaposleni(newEvidencijaDnevna!.MBR, false);">
-                        <input [class.red-input]="newVarNames!.OSOBA && newEvidencijaDnevna!.MBR=='' " type="text"
+                        <input [class.red-input]="newEvidencijaDnevna!.MBR && newVarNames!.PREZIME_IME=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.MBR" id="NewOfferedZaposleni-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
                             (blur)="OfferedNewZaposleni();resetNewZaposleniIndex();"
-                            (ngModelChange)="filterNewZaposleni(newEvidencijaDnevna!.MBR);"
+                            (ngModelChange)="filterNewZaposleni(newEvidencijaDnevna!.MBR);newVarNames!.PREZIME_IME=''"
                             (focus)="refreshNewZaposleni(newEvidencijaDnevna!.MBR, false);"
                             (keyup.enter)="selectNewZaposleni(NewOfferedZaposleni[NewZaposleniDropdownIndex]);"
                             (keyup.escape)="resetNewZaposleniIndex();"
@@ -359,7 +360,7 @@
                             </div>
                         </div>
                     </span>
-                    <span matTooltip="{{ varNames!.PREZIME_IME }}" matTooltipShowDelay="1000"
+                    <span matTooltip="{{ newVarNames!.PREZIME_IME }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.PREZIME_IME}}</span>
                 </div>
             </td>
@@ -383,10 +384,10 @@
                         {{ evidencija!.SIF_MTX ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshEvidencijaRadVreOjRow(evidencija, false);">
-                        <input [class.red-input]="evidencija!.SIF_MTX && evidencija!.SIF_MT=='' " type="text"
+                        <input [class.red-input]="evidencija!.SIF_MT && evidencija!.SIF_MTX=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
+                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.SIF_MTX=''"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredEvidencijaRadVreOjNew;track oj){
@@ -423,7 +424,7 @@
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
                             (blur)="OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
-                            (ngModelChange)="filterEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT);"
+                            (ngModelChange)="filterEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT);newVarNames!.NAZMJTR=''"
                             (focus)="refreshEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT, false);"
                             (keyup.enter)="selectEvidencijaRadVreOjNew(offeredEvidencijaRadVreOjNew[EvidencijaRadVreOjDropdownIndexNew]);"
                             (keyup.escape)="resetEvidencijaRadVreOjNewIndex();"
@@ -442,7 +443,7 @@
                             </div>
                         </div>
                     </span>
-                    <span matTooltip="{{ varNames!.NAZMJTR }}" matTooltipShowDelay="1000"
+                    <span matTooltip="{{ newVarNames!.NAZMJTR }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZMJTR}}</span>
                 </div>
             </td>
@@ -466,10 +467,10 @@
                         {{ evidencija!.SIF_VP_N ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshVrstePoslaRow(evidencija, false);">
-                        <input [class.red-input]="evidencija!.SIF_VP_N && evidencija!.SIF_VP=='' " type="text"
+                        <input [class.red-input]="evidencija!.SIF_VP && evidencija!.SIF_VP_N=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
-                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP); selection.isSelected(evidencija)?'':selection.select(evidencija)"
+                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP); selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.SIF_VP_N=''"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
                         <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">
                             @for(oj of offeredVrstePosla;track oj){
@@ -501,12 +502,12 @@
                         {{ newVarNames!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span (click)="refreshVrstePoslaNew(newEvidencijaDnevna!.SIF_VP, false);">
-                        <input [class.red-input]="newVarNames!.NAZ_VP && newEvidencijaDnevna!.SIF_VP=='' " type="text"
+                        <input [class.red-input]="newEvidencijaDnevna!.SIF_VP && newVarNames!.NAZ_VP=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.SIF_VP" id="offeredVrstePoslaNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
                             (blur)="OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
-                            (ngModelChange)="filterVrstePoslaNew(newEvidencijaDnevna!.SIF_VP);"
+                            (ngModelChange)="filterVrstePoslaNew(newEvidencijaDnevna!.SIF_VP);newVarNames!.NAZ_VP=''"
                             (focus)="refreshVrstePoslaNew(newEvidencijaDnevna!.SIF_VP, false);"
                             (keyup.enter)="selectVrstePoslaNew(offeredVrstePoslaNew[VrstePoslaDropdownIndexNew]);"
                             (keyup.escape)="resetVrstePoslaNewIndex();"
@@ -525,7 +526,7 @@
                             </div>
                         </div>
                     </span>
-                    <span matTooltip="{{ varNames!.NAZ_VP }}" matTooltipShowDelay="1000"
+                    <span matTooltip="{{ newVarNames!.NAZ_VP }}" matTooltipShowDelay="1000"
                         style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZ_VP}}</span>
                 </div>
             </td>
@@ -572,7 +573,7 @@
                     <input type="checkbox" style="scale: 1.5;" [checked]="deleteSelection.isSelected(EvidencijaRadVreZag)" (change)="deleteSelection.toggle(EvidencijaRadVreZag)">
 
 
-                    <mat-icon id="editButton" *ngIf="selection.isSelected(EvidencijaRadVreZag)"
+                    <mat-icon id="editButton" *ngIf="selection.isSelected(EvidencijaRadVreZag)&&validateForm(EvidencijaRadVreZag);"
                         class="cursor-pointer minimum-margin-left-and-right" (click)="Update(EvidencijaRadVreZag);"
                         matTooltip="{{ 'Save' | translate }}">save</mat-icon>
                 </div>
@@ -582,7 +583,7 @@
                 <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
                     <div>
                         <button mat-flat-button type="button"
-                            [disabled]="!globalFn.checkValidity(newEvidencijaDnevna.MBR) || newEvidencijaDnevna.SATI=='' || newEvidencijaDnevna.ODHH=='' || newEvidencijaDnevna.DOHH=='' || newEvidencijaDnevna.SIF_MT=='' || newEvidencijaDnevna.SIF_VP==''"
+                            [disabled]="!validateNewForm(newEvidencijaDnevna)"
                             (click)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
                     </div>
                     <table>
