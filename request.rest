@@ -548,10 +548,28 @@ Content-Type: application/json
 {
   "action" : "Sihterica",
   "method" : "prikazGrupniUnos",
-  "sid": "p2826d80s6qb5jqqpf613qct35",
+  "sid": "gcv4lh82skictbgmq5s4k6nrv2",
   "data" : {
     "pIdOperatera" : 4,
     "pZaMjesec" : "01.2025",
+    "limit": 100,
+    "page": 1
+  }
+}
+
+
+// GET Prikaza Grupni Unos
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getSheme",
+  "sid": "gcv4lh82skictbgmq5s4k6nrv2",
+  "data" : {
+    "pDioNaziva": "%%",
+    "pSifSheme" : "",
     "limit": 100,
     "page": 1
   }

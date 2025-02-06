@@ -195,6 +195,8 @@ export class GrupniUnosComponent implements OnInit {
 
   refresh = new Subject<void>();
 
+  public ArrayPodatakaZaUnos: any = [];
+
   constructor(
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
@@ -202,18 +204,21 @@ export class GrupniUnosComponent implements OnInit {
     public session: SessionService,
     public dialog: MatDialog,
     public router: Router,
-  ) { }
+  ) { 
+    this.getZapisiUKalendaru();
+    this.getGrupeEvents();
+    this.getHolidays();
+
+  }
 
 
   public ngOnInit(): void {
+
     //this.getSheme();
-    this.getGrupeEvents();
-    this.getHolidays();
     this.GetInitialGrupe();
     this.OfferedEvidencijaRadVreOj();
     this.OfferedVrstePosla();
     //this.getEvidencijaMjesecna();
-    this.getZapisiUKalendaru();
   }
 
   public beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
@@ -1086,8 +1091,27 @@ export class GrupniUnosComponent implements OnInit {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.zaposleniPoGrupiIShemi = response.debugData.data;
+      const firstDate: Date = new Date(event.start);
+      const secondDate: Date = new Date(event.end)
+      let milliDiff: number = firstDate.getTime()
+        - secondDate.getTime();
+      milliDiff = Math.abs(milliDiff);
+      const totalSeconds = Math.floor(milliDiff / 1000);
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const totalHours = Math.floor(totalMinutes / 60);
       for (let zaposleni of this.zaposleniPoGrupiIShemi) {
-        this.upisSihterice(event, zaposleni);
+        this.ArrayPodatakaZaUnos.push({
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pMbr: zaposleni.ID_RADNIKA,
+          pSifOj: event.meta.SIF_OJ,
+          pSifVP: this.varNames.SIF_VP,
+          pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
+          pSati: totalHours,
+          pOd: event.start.toISOString().slice(11, 16),
+          pDo: event.end.toISOString().slice(11, 16),
+          pIdOperatera: this.session.loggedInUser.ID,
+
+        });
       }
       this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
 
@@ -1100,9 +1124,11 @@ export class GrupniUnosComponent implements OnInit {
         await this.getZaposleniGrupe(event);
       }
     }
+    this.upisSihterice();
     this.getZapisiUKalendaru();
   }
 
+  /*
   public upisSihterice(event: any, zaposleni: ZaposleniPoGrupiIShemi): void {
     const firstDate: Date = new Date(event.start);
     const secondDate: Date = new Date(event.end)
@@ -1134,6 +1160,24 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+    });
+  }*/
+
+  public upisSihterice(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'upisSihtericeGrupni',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pPodaci:this.ArrayPodatakaZaUnos
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.ArrayPodatakaZaUnos=[];
+      this.getZapisiUKalendaru();
     });
   }
 

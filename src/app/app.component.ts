@@ -16,7 +16,7 @@ import { environment } from './../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('snav') public sidenav!:MatSidenav;
+  @ViewChild('snav') public sidenav!: MatSidenav;
 
   public translationLoaded: boolean = true;
 
@@ -28,19 +28,19 @@ export class AppComponent implements OnInit {
     private cookies: CookiesService,
     private router: Router,
     private http: HttpClient,
-    public sidenavService:SidenavService,
+    public sidenavService: SidenavService,
 
   ) {
     if (environment.production) {
       window.console.log = () => { }
     }
     router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd){
-      this.getDynamicMenu();
+      if (val instanceof NavigationEnd) {
+        this.getDynamicMenu();
 
       }
-  });
-  console.log(this.globalVar.env)
+    });
+    console.log(this.globalVar.env)
   }
 
   public ngOnInit(): void {
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     this.session.loggedInUser.username = this.cookies.getCookie('logged-in-user-username');
     this.session.loggedInUser.sessionID = this.cookies.getCookie('logged-in-user-session-id');
     this.session.loggedInUser.owner = this.cookies.getCookie('logged-in-user-owner');
-    this.session.loggedInUser.ownerID = +this.cookies.getCookie('logged-in-user-owner-id');
+    this.session.loggedInUser.ownerID = this.cookies.getCookie('logged-in-user-owner-id');
     this.session.loggedInUser.ULOGA = this.cookies.getCookie('ULOGA');
     this.session.loggedInUser.ULOGA_NAZIV = this.cookies.getCookie('ULOGA_NAZIV');
 
@@ -103,15 +103,15 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public checkRole(){
-    for(let sidebar of this.globalVar.sidebarItems){
-      for(let dashboard of this.globalVar.dashboardItems){
-        for(let sidebarsubitem of sidebar.children!){
-          for(let dasboardsubitem of dashboard.items){
-            if(dasboardsubitem.name==sidebarsubitem.name && dasboardsubitem.url==sidebarsubitem.url)
-            dasboardsubitem.rightsState=sidebarsubitem.rightsState;
-            if(dasboardsubitem.rightsState!=0){
-              dashboard.rightsState=dasboardsubitem.rightsState;
+  public checkRole() {
+    for (let sidebar of this.globalVar.sidebarItems) {
+      for (let dashboard of this.globalVar.dashboardItems) {
+        for (let sidebarsubitem of sidebar.children!) {
+          for (let dasboardsubitem of dashboard.items) {
+            if (dasboardsubitem.name == sidebarsubitem.name && dasboardsubitem.url == sidebarsubitem.url)
+              dasboardsubitem.rightsState = sidebarsubitem.rightsState;
+            if (dasboardsubitem.rightsState != 0) {
+              dashboard.rightsState = dasboardsubitem.rightsState;
             }
           }
         }

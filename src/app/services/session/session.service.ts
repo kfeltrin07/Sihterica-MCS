@@ -37,7 +37,7 @@ export class SessionService {
   loggedInUser: SessionUser = { // prijavljeni korisnik
     ID: 0,
     owner: '',
-    ownerID: 0,
+    ownerID: '',
     displayedUsername: '',
     username: '',
     password: '',
@@ -109,6 +109,7 @@ export class SessionService {
   }
 
   public logout(): void {
+    this.dialog.closeAll();
     this.openLoggingOutDialog();
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
@@ -132,7 +133,7 @@ export class SessionService {
         sessionID: "",
         roleID: 0,
         owner: "",
-        ownerID: 0,
+        ownerID: '',
         IDVlasnika: 0,
         ULOGA: "",
         ULOGA_NAZIV: ""
@@ -171,7 +172,7 @@ export class SessionService {
           username: response.debugData.data['0'].USERNAME,
           sessionID: response.debugData.data['0'].SID,
           owner: response.debugData.data['0'].IMEVLASNIKA,
-          ownerID: +response.debugData.data['0'].IDVLASNIKA,
+          ownerID: response.debugData.data['0'].IDVLASNIKA,
           ULOGA: response.debugData.data['0'].ULOGA,
           ULOGA_NAZIV: response.debugData.data['0'].ULOGA_NAZIV,
         }

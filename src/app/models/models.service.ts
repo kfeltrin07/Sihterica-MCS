@@ -33,7 +33,7 @@ export interface SessionUser {
   sessionID: string;
   roleID?: number;
   owner?: string;
-  ownerID?: number;
+  ownerID?: string;
   IDVlasnika?: number;
   ULOGA?: string;
   ULOGA_NAZIV: string;

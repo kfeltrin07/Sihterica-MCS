@@ -1,21 +1,21 @@
 <mat-card class="login-card">
 
-    <img src="assets/images/png/mcs_logo.png" alt="">
-  
-    <div class="login-title">
-      <p class="margin-auto" id="loginnaslov">MCS Šihterica</p>
-    </div>
-  
-    <span class="login-parameter-header">{{ 'Username' | translate }}:</span>
-  
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'InsertUsername' | translate }}</mat-label>
-      <input matInput type="text" [(ngModel)]="userLogin.pUsername" (keyup.enter)="login();">
-      <!-- <input matInput type="text" (keyup.enter)="login();"> -->
-      <mat-icon matSuffix>person</mat-icon>
-    </mat-form-field>
-  
-  
+  <img src="assets/images/png/mcs_logo.png" alt="">
+
+  <div class="login-title">
+    <p class="margin-auto" id="loginnaslov">MCS Šihterica</p>
+  </div>
+
+  <span class="login-parameter-header">{{ 'Username' | translate }}:</span>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'InsertUsername' | translate }}</mat-label>
+    <input matInput type="text" [(ngModel)]="userLogin.pUsername" (keyup.enter)="login();">
+    <!-- <input matInput type="text" (keyup.enter)="login();"> -->
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field>
+
+
   <!---
     <span class="login-parameter-header">{{ 'Owner' | translate }}:</span>
   
@@ -29,30 +29,32 @@
           <mat-option [value]="vlasnk" >{{vlasnk.NAZIV_VLASNIKA}}</mat-option>
         }
       </mat-select>-->
-      <!-- <input matInput type="text" (keyup.enter)="login();"> 
+  <!-- <input matInput type="text" (keyup.enter)="login();"> 
       <mat-icon matSuffix>location_city</mat-icon>
     </mat-form-field>
 -->
-    <span class="login-parameter-header">{{ 'Password' | translate }}:</span>
-  
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'InsertPassword' | translate }}</mat-label>
-      <input matInput [type]="obscurePassword ? 'password' : 'text'" [(ngModel)]="userLogin.pPassword" (keyup.enter)="login();">
-      <!-- <input matInput [type]="obscurePassword ? 'password' : 'text'" (keyup.enter)="login();"> -->
-      <button matSuffix mat-icon-button (click)="toggleObscurity();" [matTooltip]="t.translate('ShowHidePassword')">
-        <mat-icon>visibility</mat-icon>
-      </button>
-    </mat-form-field>
-  
-    @if(showKonekcije && globalVar.env!='cistoca'){
-    <mat-form-field id="konekcije" appearance="outline">
-      <mat-label>Konekcije</mat-label>
-      <mat-select [(ngModel)]="selectedValue">
-          <mat-option (click)="changeConnection(konekcija);" *ngFor="let konekcija of konekcije" [value]="konekcija.value">{{konekcija.viewValue}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <span class="login-parameter-header">{{ 'Password' | translate }}:</span>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'InsertPassword' | translate }}</mat-label>
+    <input matInput [type]="obscurePassword ? 'password' : 'text'" [(ngModel)]="userLogin.pPassword"
+      (keyup.enter)="login();">
+    <!-- <input matInput [type]="obscurePassword ? 'password' : 'text'" (keyup.enter)="login();"> -->
+    <button matSuffix mat-icon-button (click)="toggleObscurity();" [matTooltip]="t.translate('ShowHidePassword')">
+      <mat-icon>visibility</mat-icon>
+    </button>
+  </mat-form-field>
+
+  @if(showKonekcije && globalVar.env!='cistoca'){
+  <mat-form-field id="konekcije" appearance="outline">
+    <mat-label>Konekcije</mat-label>
+    <mat-select [(ngModel)]="selectedValue">
+      <mat-option (click)="changeConnection(konekcija);" *ngFor="let konekcija of konekcije"
+        [value]="konekcija.value">{{konekcija.viewValue}}</mat-option>
+    </mat-select>
+  </mat-form-field>
   }
-    <button id="loginbutton" mat-flat-button color="primary" [disabled]="userLogin.pUsername=='' ||userLogin.pPassword==''" (click)="login();">{{ 'Login' | translate }}</button>
-  
-  </mat-card>
-  
+  <button id="loginbutton" mat-flat-button color="primary"
+    [disabled]="userLogin.pUsername=='' ||userLogin.pPassword==''" (click)="login();">{{ 'Login' | translate }}</button>
+
+</mat-card>

@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { RouterOutlet } from '@angular/router';
-import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({

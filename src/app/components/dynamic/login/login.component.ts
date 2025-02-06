@@ -39,7 +39,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class LoginComponent implements OnInit {
   @HostListener('window:keydown.Control.Shift.F11', ['$event']) scrollUp(event: KeyboardEvent) {
-    if (this.globalVar.env != 'cistoca') {
+    if (this.globalVar.env == 'mcs'||'production'||'development') {
       this.show();
     }
   };
@@ -78,7 +78,6 @@ export class LoginComponent implements OnInit {
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
     public session: SessionService,
-    private elementRef: ElementRef,
     public dialog: MatDialog,
     public cookies: CookiesService,
 
@@ -139,7 +138,7 @@ export class LoginComponent implements OnInit {
     this.session.loggedInUser.username = this.cookies.getCookie('logged-in-user-username');
     this.session.loggedInUser.sessionID = this.cookies.getCookie('logged-in-user-session-id');
     this.session.loggedInUser.owner = this.cookies.getCookie('logged-in-user-owner');
-    this.session.loggedInUser.ownerID = +this.cookies.getCookie('logged-in-user-owner-id');
+    this.session.loggedInUser.ownerID = this.cookies.getCookie('logged-in-user-owner-id');
     this.session.loggedInUser.IDVlasnika = +this.cookies.getCookie('logged-in-user-id-vlasnika');
     this.session.loggedInUser.displayedUsername = this.cookies.getCookie('logged-in-user-displayed-username');
     this.session.loggedInUser.password = this.cookies.getCookie('logged-in-user-password');
