@@ -314,7 +314,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public externalDropGrupe(event: CalendarEvent) {
-    if (this.globalVar.externalShemeEvents.indexOf(event) === -1) {
+    if (this.globalVar.externalGrupeEvents.indexOf(event) === -1) {
       this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
     }
   }
@@ -1119,13 +1119,13 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public async save() {
-    for (let event of this.globalVar.events) {
+    this.ArrayPodatakaZaUnos.length = 0;
+    for await (let event of this.globalVar.events) {
       if (event.meta?.type != 'holiday') {
         await this.getZaposleniGrupe(event);
       }
     }
     this.upisSihterice();
-    this.getZapisiUKalendaru();
   }
 
   /*
@@ -1176,7 +1176,7 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.ArrayPodatakaZaUnos=[];
+      this.ArrayPodatakaZaUnos.length = 0;
       this.getZapisiUKalendaru();
     });
   }
