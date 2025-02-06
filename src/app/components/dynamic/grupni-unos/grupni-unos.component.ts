@@ -1,48 +1,40 @@
-import { Component, ChangeDetectionStrategy, OnChanges, SimpleChanges, Injectable, OnInit, Inject, LOCALE_ID } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import {
-  CalendarCommonModule,
   CalendarDateFormatter,
   CalendarDayModule,
   CalendarEvent,
-  CalendarEventAction,
   CalendarEventTimesChangedEvent,
-  CalendarEventTitleFormatter,
   CalendarModule,
   CalendarMonthModule,
   CalendarMonthViewDay,
-  CalendarNativeDateFormatter,
   CalendarView,
   CalendarWeekModule,
-  DateFormatterParams,
-  DAYS_OF_WEEK,
+  DAYS_OF_WEEK
 } from 'angular-calendar';
+import { Subject } from 'rxjs';
 
-import { FormsModule } from '@angular/forms';
-import { formatDate, CommonModule } from '@angular/common';
-import { colors, colorsHoliday, HeaderGrupniUnosComponent } from './header-grupni-unos/header-grupni-unos.component';
-import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
-import { MatButtonModule } from '@angular/material/button';
-import { addDays, getDate, getYear, startOfDay } from 'date-fns';
-import { CustomEventTitleFormatter } from './custom-event-formatter.provider';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { addDays } from 'date-fns';
+import { EvidencijaMjesecna, EvidencijaRadVreOj, Grupe, Sheme, VrstePosla, ZapisiUKalendaru, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
+import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { CRUDAction, EvidencijaMjesecna, Grupe, EvidencijaRadVreOj, Sheme, VrstePosla, ZaposleniPoGrupiIShemi, ZapisiUKalendaru } from 'src/app/models/models.service';
-import { EventGrupniUnosComponent } from './event-grupni-unos/event-grupni-unos.component';
-import { PickGrupeComponent } from '../../pickers/pick-grupe/pick-grupe.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
-import { PickPopisRadnikaGrupeComponent } from '../../pickers/pick-popis-radnika-grupe/pick-popis-radnika-grupe.component';
-import { PickOrgJediniceComponent } from '../../pickers/pick-org-jedinice/pick-org-jedinice.component';
-import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { Router } from '@angular/router';
-import { DnevnaEvidencijaComponent } from '../dnevna-evidencija/dnevna-evidencija.component';
 import { PickEvidencijaHelpOjComponent } from '../../pickers/pick-evidencija-help-oj/pick-evidencija-help-oj.component';
+import { PickGrupeComponent } from '../../pickers/pick-grupe/pick-grupe.component';
+import { PickPopisRadnikaGrupeComponent } from '../../pickers/pick-popis-radnika-grupe/pick-popis-radnika-grupe.component';
+import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrsta-posla.component';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { EventGrupniUnosComponent } from './event-grupni-unos/event-grupni-unos.component';
+import { colors, colorsHoliday, HeaderGrupniUnosComponent } from './header-grupni-unos/header-grupni-unos.component';
 
 
 
@@ -183,7 +175,7 @@ export class GrupniUnosComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   locale: string = 'hr-HR';
   public ZapisiUKalendaru: ZapisiUKalendaru[] = [];
-  public ZapisizaKalendar:any;
+  public ZapisizaKalendar: any;
   public match: boolean = false;
 
   viewDate = new Date();
@@ -204,7 +196,7 @@ export class GrupniUnosComponent implements OnInit {
     public session: SessionService,
     public dialog: MatDialog,
     public router: Router,
-  ) { 
+  ) {
     this.getZapisiUKalendaru();
     this.getGrupeEvents();
     this.getHolidays();
@@ -248,7 +240,7 @@ export class GrupniUnosComponent implements OnInit {
     newStart.setHours(event.meta.OD.substring(0, 2), event.meta.OD.substring(3, 4));
     console.log(newStart);
 
-    if(!newEnd){
+    if (!newEnd) {
       newEnd = new Date(newStart);
       console.log(newEnd);
     }
@@ -757,7 +749,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public OfferedVrstePosla(): void {
-    this.varNames.NAZ_VP="";
+    this.varNames.NAZ_VP = "";
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1073,97 +1065,78 @@ export class GrupniUnosComponent implements OnInit {
   }
   //EvidencijaRadVreOj END
 
-  public getZaposleniGrupe(event: any): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getPopisRadnikaGrupe',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pIdOperatera: this.session.loggedInUser.ID,
-          pIdGrupe: event.meta.ID_GRUPE,
-          limit: 1000000,
-          page: 1,
-        }
-      }
-    ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.zaposleniPoGrupiIShemi = response.debugData.data;
-      const firstDate: Date = new Date(event.start);
-      const secondDate: Date = new Date(event.end)
-      let milliDiff: number = firstDate.getTime()
-        - secondDate.getTime();
-      milliDiff = Math.abs(milliDiff);
-      const totalSeconds = Math.floor(milliDiff / 1000);
-      const totalMinutes = Math.floor(totalSeconds / 60);
-      const totalHours = Math.floor(totalMinutes / 60);
-      for (let zaposleni of this.zaposleniPoGrupiIShemi) {
-        this.ArrayPodatakaZaUnos.push({
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pMbr: zaposleni.ID_RADNIKA,
-          pSifOj: event.meta.SIF_OJ,
-          pSifVP: this.varNames.SIF_VP,
-          pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
-          pSati: totalHours,
-          pOd: event.start.toISOString().slice(11, 16),
-          pDo: event.end.toISOString().slice(11, 16),
-          pIdOperatera: this.session.loggedInUser.ID,
-
-        });
-      }
-      this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
-
-    });
-  }
-
   public async save() {
     this.ArrayPodatakaZaUnos.length = 0;
-    for await (let event of this.globalVar.events) {
-      if (event.meta?.type != 'holiday') {
-        await this.getZaposleniGrupe(event);
-      }
-    }
-    this.upisSihterice();
+
+    (async () => {
+      const promises = this.globalVar.events.map(async (event) => {
+        if (event.meta?.type != 'holiday') {
+          await this.getZaposleniGrupe(event);
+        }
+      });
+
+      await Promise.all(promises);
+      console.log(this.ArrayPodatakaZaUnos);
+      this.upisSihterice();
+    })();
   }
 
-  /*
-  public upisSihterice(event: any, zaposleni: ZaposleniPoGrupiIShemi): void {
-    const firstDate: Date = new Date(event.start);
-    const secondDate: Date = new Date(event.end)
-    let milliDiff: number = firstDate.getTime()
-      - secondDate.getTime();
-    milliDiff = Math.abs(milliDiff);
-    const totalSeconds = Math.floor(milliDiff / 1000);
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const totalHours = Math.floor(totalMinutes / 60);
-
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'upisSihterice',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pAkcija: CRUDAction.Insert,
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
-          pMbr: zaposleni.ID_RADNIKA,
-          pSifOj: event.meta.SIF_OJ,
-          pSifVP: this.varNames.SIF_VP,
-          pSati: totalHours,
-          pOd: event.start.toISOString().slice(11, 16),
-          pDo: event.end.toISOString().slice(11, 16),
-          pIdOperatera: this.session.loggedInUser.ID,
+  public getZaposleniGrupe(event: any): Promise<void>{
+    return new Promise((resolve, reject) => {
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'getPopisRadnikaGrupe',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pIdOperatera: this.session.loggedInUser.ID,
+            pIdGrupe: event.meta.ID_GRUPE,
+            limit: 1000000,
+            page: 1,
+          }
         }
-      }
-    ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      ).subscribe((response: any) => {
+        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.zaposleniPoGrupiIShemi = response.debugData.data;
+        const firstDate: Date = new Date(event.start);
+        const secondDate: Date = new Date(event.end)
+        let milliDiff: number = firstDate.getTime()
+          - secondDate.getTime();
+        milliDiff = Math.abs(milliDiff);
+        const totalSeconds = Math.floor(milliDiff / 1000);
+        const totalMinutes = Math.floor(totalSeconds / 60);
+        const totalHours = Math.floor(totalMinutes / 60);
+        for (let zaposleni of this.zaposleniPoGrupiIShemi) {
+          this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+            pMbr: zaposleni.ID_RADNIKA,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pSifOj: event.meta.SIF_OJ,
+            pSifVP: this.varNames.SIF_VP,
+            pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
+            pSati: totalHours,
+            pOd: event.start.toISOString().slice(11, 16),
+            pDo: event.end.toISOString().slice(11, 16),
+            pIdOperatera: this.session.loggedInUser.ID
+          }];
+        }
+        this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
+        resolve();
+      },
+        (error: any) => {
+          // Handle the error
+          reject(error);
+        }
+      );
     });
-  }*/
+  }
+
+
 
   public upisSihterice(): void {
+    console.log(this.ArrayPodatakaZaUnos);
+    console.log(JSON.stringify(this.ArrayPodatakaZaUnos));
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1171,7 +1144,7 @@ export class GrupniUnosComponent implements OnInit {
         method: 'upisSihtericeGrupni',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pPodaci:this.ArrayPodatakaZaUnos
+          pPodaci: JSON.stringify(this.ArrayPodatakaZaUnos)
         }
       }
     ).subscribe((response: any) => {
@@ -1264,7 +1237,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public goToDnevnaEvidencija(event: any): void {
-    this.globalVar.filterZaDnevnaEvidencija={
+    this.globalVar.filterZaDnevnaEvidencija = {
       MBR: this.varNames.ID_RADNIKA,
       SIF_OJ: this.varNames.SIF_OJ,
       SIF_VP: this.varNames.SIF_VP,
@@ -1281,7 +1254,7 @@ export class GrupniUnosComponent implements OnInit {
     let date: Date = new Date();
     console.log(this.viewDate.toISOString());
 
-    this.viewDate.setHours(date.getHours()+1);
+    this.viewDate.setHours(date.getHours() + 1);
     console.log(this.viewDate.toISOString());
 
     this.http.post(
@@ -1292,7 +1265,7 @@ export class GrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdOperatera: this.session.loggedInUser.ID,
-          pZaMjesec: ('0'+(this.viewDate.getMonth()+1)).slice(-2)+'.'+this.viewDate.getFullYear(),
+          pZaMjesec: ('0' + (this.viewDate.getMonth() + 1)).slice(-2) + '.' + this.viewDate.getFullYear(),
           limit: 1000000,
           page: 1,
         }
@@ -1303,10 +1276,10 @@ export class GrupniUnosComponent implements OnInit {
       this.ZapisiUKalendaru = response.debugData.data;
       const groupedByDate = this.ZapisiUKalendaru.reduce((acc: { [key: string]: any }, val: any) => {
         if (!acc[val.DATUM]) {
-          acc[val.DATUM] = { ...val, BR_UPISA: +val.BR_UPISA,NAZ_MT:val.NAZ_MT+' - '+val.BR_UPISA };
+          acc[val.DATUM] = { ...val, BR_UPISA: +val.BR_UPISA, NAZ_MT: val.NAZ_MT + ' - ' + val.BR_UPISA };
         } else {
           acc[val.DATUM].BR_UPISA += +val.BR_UPISA;
-          acc[val.DATUM].NAZ_MT += ' \n '+val.NAZ_MT+' - '+val.BR_UPISA;
+          acc[val.DATUM].NAZ_MT += ' \n ' + val.NAZ_MT + ' - ' + val.BR_UPISA;
 
         }
         return acc;
