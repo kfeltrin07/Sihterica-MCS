@@ -90,7 +90,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
     ],
     "development": [
@@ -99,7 +99,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
     ],
     "mcs": [
@@ -108,7 +108,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/router.php', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/router.php', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/router.php', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/router.php', viewValue: 'MCS' },
     ],
     "cistoca": [
@@ -123,7 +123,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
     ],
     "development": [
@@ -132,7 +132,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
     ],
     "mcs": [
@@ -141,7 +141,7 @@ export class GlobalVariablesService {
       { value: 'php_angularAPI_oracle_razvoj/classes/pdfs', viewValue: 'Razvoj' },
       { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.169)' },
       { value: 'php_angularAPI_oracle_linux/classes/pdfs', viewValue: 'Linux iz MCS' },
-      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (172.16.91.70)' },
+      { value: 'php_angularAPI_oracle_cistoca/classes/pdfs', viewValue: 'Čistoća iz MCS (192.168.88.88)' },
       { value: 'php_angularAPI_oracle_mcs/classes/pdfs', viewValue: 'MCS' },
     ],
     "cistoca": [

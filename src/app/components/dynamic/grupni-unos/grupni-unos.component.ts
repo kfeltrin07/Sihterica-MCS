@@ -1098,7 +1098,6 @@ export class GrupniUnosComponent implements OnInit {
           }
         }
       ).subscribe((response: any) => {
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
         this.zaposleniPoGrupiIShemi = response.debugData.data;
         const firstDate: Date = new Date(event.start);
         const secondDate: Date = new Date(event.end)
@@ -1148,12 +1147,30 @@ export class GrupniUnosComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.ArrayPodatakaZaUnos.length = 0;
       this.getZapisiUKalendaru();
+      this.getPorukeUpisaSihterica();
     });
   }
 
+  public getPorukeUpisaSihterica(): void {
+
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getPorukeUpisaSihterica',
+        sid: this.session.loggedInUser.sessionID,
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      let poruke=[];
+      for (let text of response.debugData.data) {
+        poruke.push(text.PORUKA);
+      }
+      this.globalFn.showSnackbarError(poruke.join('\n'));
+    });
+  }
 
   public getEvidencijaMjesecna(): void {
     this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent.meta.type === "holiday");
@@ -1182,7 +1199,6 @@ export class GrupniUnosComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.evidencijaMjesecna = response.debugData.data;
       let index = 0;
       let colorindex = 0;
