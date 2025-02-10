@@ -15,6 +15,7 @@ import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { MainContentComponent } from "../main-content/main-content.component";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-sidenav',
@@ -24,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatRippleModule,
 
     FormsModule,
     TranslationPipe,
