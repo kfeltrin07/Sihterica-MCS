@@ -114,6 +114,8 @@ export class CreateDnevnaEvidencijaComponent {
     SI: "",
   };
 
+  public ArrayPodatakaZaUnos: any = [];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedData: any,
     private dialogRef: MatDialogRef<CreateGrupeComponent>,
@@ -135,31 +137,20 @@ export class CreateDnevnaEvidencijaComponent {
     }
   }
 
-  public Unos(zaposleni: ZaposleniPoGrupiIShemi): void {
-    let SATI=(parseInt(this.Sheme.DO))-(parseInt(this.Sheme.OD));
+  public Unos(): void {
 
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
         action: 'Sihterica',
-        method: 'upisSihterice',
+        method: 'upisSihtericeGrupni',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pAkcija: CRUDAction.Insert,
-          pSifVlas: this.session.loggedInUser.ownerID,
-          pDatum: this.globalFn.formatDate(this.receivedData.DATUM),
-          pMbr: zaposleni.ID_RADNIKA,
-          pSifOj: this.varNames.SIF_OJ,
-          pSifVP: this.varNames.SIF_VP,
-          pSati: SATI,
-          pOd: this.Sheme.OD,
-          pDo: this.Sheme.DO,
-          pIdOperatera: this.session.loggedInUser.ID,
-          pRid: ""
+          pPodaci: JSON.stringify(this.ArrayPodatakaZaUnos)
         }
       }
     ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.getPorukeUpisaSihterica();    
     });
 
     this.dialogRef.close();
@@ -182,7 +173,6 @@ export class CreateDnevnaEvidencijaComponent {
         }
       }
     ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.zaposleniPoGrupiIShemi = response.debugData.data;
 
       this.http.post(
@@ -205,17 +195,57 @@ export class CreateDnevnaEvidencijaComponent {
           }
         }
       ).subscribe((response: any) => {
-        this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
         this.Sheme = response.debugData.data[0];
 
 
 
+        let SATI = Math.abs((parseInt(this.Sheme.DO)) - (parseInt(this.Sheme.OD)));
 
         for (let zaposleni of this.zaposleniPoGrupiIShemi) {
-          this.Unos(zaposleni);
+          this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+            pAkcija: CRUDAction.Insert,
+            pMbr: zaposleni.ID_RADNIKA,
+            pSifVlas: this.session.loggedInUser.ownerID,
+            pSifOj: this.varNames.SIF_OJ,
+            pSifVP: this.varNames.SIF_VP,
+            pDatum: this.globalFn.formatDate(this.receivedData.DATUM),
+            pSati: SATI,
+            pOd: this.Sheme.OD,
+            pDo: this.Sheme.DO,
+            pIdOperatera: this.session.loggedInUser.ID
+          }];
         }
+
+        this.Unos();
       });
 
+    });
+
+  }
+
+
+  public async save() {
+    this.ArrayPodatakaZaUnos.length = 0;
+    this.getZaposleniGrupe();
+  }
+
+  public getPorukeUpisaSihterica(): void {
+
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getPorukeUpisaSihterica',
+        sid: this.session.loggedInUser.sessionID,
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      let poruke=[];
+      for (let text of response.debugData.data) {
+        poruke.push(text.PORUKA);
+      }
+      this.globalFn.showSnackbarError(poruke.join('\n'));
+      poruke=[];
     });
   }
 

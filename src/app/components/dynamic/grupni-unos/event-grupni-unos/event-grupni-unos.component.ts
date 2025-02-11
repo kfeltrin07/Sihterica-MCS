@@ -52,8 +52,7 @@ import { RadniciGrupeComponent } from '../../grupe/radnici-grupe/radnici-grupe.c
   styleUrl: './event-grupni-unos.component.scss'
 })
 export class EventGrupniUnosComponent implements OnInit {
-  public displayedColumns1: string[] = ['ID_GRUPE', 'NAZ_GRUPE'];
-  public displayedColumns2: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA','SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];
+  public displayedColumns: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA','SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];
 
   public grupe: Grupe[] = [];
   public Grupe: Grupe = {
@@ -92,30 +91,22 @@ export class EventGrupniUnosComponent implements OnInit {
     DO: ""
   }
 
-  public dataSource1 = this.grupe;
-  public dataSource2 = this.zaposleniPoGrupiIShemi;
+  public dataSource = this.zaposleniPoGrupiIShemi;
 
   public selection: SelectionModel<Grupe> = new SelectionModel<Grupe>(false, []);
 
   public searchParam: string = '';
   public loading: boolean = true;
-  public sorting1: Sorting = {
-    active: 'SIF_SHEME',
-    direction: 'ASC'
-  };
-  public sorting2: Sorting = {
+  public sorting: Sorting = {
     active: 'NAZIV_RADNIKA',
     direction: 'ASC'
   };
   public isPaginatorShown: boolean = true;
-  public pageIndex1: number = 0;
-  public pageSize1 = 10;
-  public pageSizeOptions1: number[] = [5, 10, 15, 20];
-  public length1 = 0;
-  public pageIndex2: number = 0;
-  public pageSize2 = 10;
-  public pageSizeOptions2: number[] = [5, 10, 15, 20];
-  public length2 = 0;
+
+  public pageIndex: number = 0;
+  public pageSize = 10;
+  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public length = 0;
 
   selected = new FormControl(0);
 
@@ -138,49 +129,6 @@ export class EventGrupniUnosComponent implements OnInit {
     this.getZaposleniGrupe();
   }
 
-  public getGrupe(): void {
-    this.http.post(
-      this.globalVar.APIHost + this.globalVar.APIFile,
-      {
-        action: 'Sihterica',
-        method: 'getGrupe',
-        sid: this.session.loggedInUser.sessionID,
-        data: {
-          pDioNaziva: '%' + this.searchParam + '%',
-          pSifSheme: this.receivedSheme.meta.SIF_SHEME,
-          pIdKorisnika: this.session.loggedInUser.ID,
-          limit: this.pageSize1,
-          page: (this.pageIndex1 + 1),
-          sort: [
-            {
-              property: this.sorting1.active,
-              direction: this.sorting1.direction
-            }
-          ]
-        }
-      }
-    ).subscribe((response: any) => {
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.grupe = response.debugData.data;
-      this.dataSource1 = this.grupe;
-      this.length1 = +response.debugData.data[0]?.UKUPANBROJSLOGOVA;
-      console.log(this.length1);
-      if (!this.length1) {
-        this.dataSource1.push({
-          UKUPANBROJSLOGOVA: 0,
-          RN: 0,
-          ID_GRUPE: "0",
-          NAZ_GRUPE: "NEMA GRUPA NA OVOJ SHEMI",
-          SIF_SHEME: "",
-          SIF_OJ: "",
-          NAZ_OJ: "",
-          NAZ_SHEME: ""
-        });
-      }
-      this.loading = false;
-    });
-  }
-
   public getZaposleniGrupe(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
@@ -192,28 +140,23 @@ export class EventGrupniUnosComponent implements OnInit {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
           pIdGrupe: this.receivedSheme.meta.ID_GRUPE,
-          limit: this.pageSize2,
-          page: (this.pageIndex2 + 1),
+          limit: this.pageSize,
+          page: (this.pageIndex + 1),
         }
       }
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.zaposleniPoGrupiIShemi = response.debugData.data;
-      this.dataSource2 = this.zaposleniPoGrupiIShemi;
-      this.length2 = +response.debugData.data[0].UKUPANBROJSLOGOVA;
+      this.dataSource = this.zaposleniPoGrupiIShemi;
+      this.length = +response.debugData.data[0]?.UKUPANBROJSLOGOVA?+response.debugData.data[0]?.UKUPANBROJSLOGOVA:0;
       this.loading = false;
     });
   }
 
   public receiveMessage($event: any): void {
-    if ($event.description == 'PageEvent' && this.selected.value == 0) {
-      this.pageIndex1 = $event.value.pageIndex;
-      this.pageSize1 = $event.value.pageSize;
-      this.refresh();
-    }
-    if ($event.description == 'PageEvent' && this.selected.value == 1) {
-      this.pageIndex2 = $event.value.pageIndex;
-      this.pageSize2 = $event.value.pageSize;
+    if ($event.description == 'PageEvent') {
+      this.pageIndex = $event.value.pageIndex;
+      this.pageSize = $event.value.pageSize;
       this.refresh();
     }
   }
@@ -221,41 +164,25 @@ export class EventGrupniUnosComponent implements OnInit {
 
   public refresh(): void {
     this.loading = true;
-    if (this.selected.value == 0) {
-      this.getGrupe();
-    } else {
-      this.getZaposleniGrupe();
-    }
+    this.getZaposleniGrupe();
   }
 
   public sort(event: any): void {
-    if (this.selected.value == 0) {
-      this.sorting1 = {
+      this.sorting = {
         active: event.active,
         direction: event.direction.toUpperCase()
       }
-    } else {
-      this.sorting2 = {
-        active: event.active,
-        direction: event.direction.toUpperCase()
-      }
-    }
     setTimeout(() => this.refresh(), 1000);
   }
 
 
   public setVisibleColumnsFromEvent(): void {
-    if (this.selected.value == 0) {
-      this.displayedColumns1 = [];
-      for (let i = 0; i < this.globalVar.GrupeDisplayedColumns.length; i++) {
-        this.displayedColumns1.push(this.globalVar.GrupeDisplayedColumns[i].name);
-      }
-    } else {
-      this.displayedColumns2 = [];
+
+      this.displayedColumns = [];
       for (let i = 0; i < this.globalVar.ZaposleniPoGrupiIShemiDisplayedColumns.length; i++) {
-        this.displayedColumns2.push(this.globalVar.ZaposleniPoGrupiIShemiDisplayedColumns[i].name);
+        this.displayedColumns.push(this.globalVar.ZaposleniPoGrupiIShemiDisplayedColumns[i].name);
       }
-    }
+    
   }
 
   public openZaposleniciDialog(): void {
@@ -263,6 +190,7 @@ export class EventGrupniUnosComponent implements OnInit {
       data: this.receivedSheme.meta
     });
     dialogRef.afterClosed().subscribe((result) => {
+      this.refresh();
     });
   }
 

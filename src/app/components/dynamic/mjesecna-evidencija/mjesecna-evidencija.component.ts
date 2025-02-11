@@ -30,7 +30,7 @@ import { PdfMjesecnaEvidencijaComponent } from './pdf-mjesecna-evidencija/pdf-mj
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteMjesecnaEvidencijaComponent } from './delete-mjesecna-evidencija/delete-mjesecna-evidencija.component';
 import { SelectionModel } from '@angular/cdk/collections';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-mjesecna-evidencija',
@@ -112,6 +112,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   };
 
   public pripremaGotova: boolean = false;
+  public ArrayPodatakaZaUnos: any = [];
 
   public EvidencijaRadVreOjDropdownIndex: number = -1;
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
@@ -187,7 +188,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
 
-  ) { 
+  ) {
     this.getVrstePosla();
     this.getOrganizacijskeJedinice();
   }
@@ -248,7 +249,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.evidencijaMjesecna = response.debugData.data;
       this.dataSource = this.evidencijaMjesecna;
-      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA ? (+response.debugData.data[0].UKUPANBROJSLOGOVA) : 0;
       this.loading = false;
     });
   }
@@ -925,8 +926,8 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.filteredEvidencijaRadVreOjNew = response.debugData.data;
-      this.filteredEvidencijaRadVreOjNew.forEach( (item, index) => {
-        if(item.SIF_OJ === '%') this.filteredEvidencijaRadVreOjNew.splice(index,1);
+      this.filteredEvidencijaRadVreOjNew.forEach((item, index) => {
+        if (item.SIF_OJ === '%') this.filteredEvidencijaRadVreOjNew.splice(index, 1);
       });
       this.filteredEvidencijaRadVreOjNew.push({
         UKUPANBROJSLOGOVA: this.filteredEvidencijaRadVreOjNew[0].UKUPANBROJSLOGOVA,
@@ -942,7 +943,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public goToDnevnaEvidencija(event: any): void {
 
     var date = new Date(this.globalFn.formatDateForDateForm2(event.D1));
-    this.globalVar.filterZaDnevnaEvidencija={
+    this.globalVar.filterZaDnevnaEvidencija = {
       MBR: this.filter.MBR,
       SIF_OJ: this.filter.SIF_OJ,
       SIF_VP: event.SIF_VP,
@@ -993,7 +994,42 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   }
 
   public deleteSelected(): void {
-    for (let item of this.deleteSelection.selected) {
+    if (this.deleteSelection.selected.length > 1) {
+      this.ArrayPodatakaZaUnos.length = 0;
+      for (let zaposleni of this.deleteSelection.selected) {
+        this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+          pAkcija: CRUDAction.Delete,
+          pMbr: zaposleni.MBR,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pSifOj: zaposleni.SIF_MT,
+          pSifVP: zaposleni.SIF_VP,
+          pDatum: zaposleni.D1,
+          pSati: zaposleni.SATI,
+          pOd: zaposleni.ODHH,
+          pDo: zaposleni.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: zaposleni.RID
+        }];
+      }
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'upisSihtericeGrupni',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pPodaci: JSON.stringify(this.ArrayPodatakaZaUnos)
+          }
+        }
+      ).subscribe((response: any) => {
+        this.ArrayPodatakaZaUnos.length = 0;
+        this.deleteSelection.clear();
+        this.refresh();
+        this.getPorukeUpisaSihterica();
+
+      });
+
+    } else {
       this.http.post(
         this.globalVar.APIHost + this.globalVar.APIFile,
         {
@@ -1003,26 +1039,48 @@ export class MjesecnaEvidencijaComponent implements OnInit {
           data: {
             pAkcija: CRUDAction.Delete,
             pSifVlas: this.session.loggedInUser.ownerID,
-            pDatum: this.globalFn.formatDate(this.filter.DATUM),
-            pMbr: item.MBR,
-            pSifOj: item.SIF_MT,
-            pSifVP: item.SIF_VP,
-            pSati: item.SATI,
-            pOd: item.ODHH,
-            pDo: item.DOHH,
+            pDatum: this.deleteSelection.selected[0].D1,
+            pMbr: this.deleteSelection.selected[0].MBR,
+            pSifOj: this.deleteSelection.selected[0].SIF_MT,
+            pSifVP: this.deleteSelection.selected[0].SIF_VP,
+            pSati: this.deleteSelection.selected[0].SATI,
+            pOd: this.deleteSelection.selected[0].ODHH,
+            pDo: this.deleteSelection.selected[0].DOHH,
             pIdOperatera: this.session.loggedInUser.ID,
-            pRid: item.RID
+            pRid: this.deleteSelection.selected[0].RID
           }
         }
       ).subscribe((response: any) => {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.deleteSelection.clear();
         this.refresh();
+        this.getPorukeUpisaSihterica();
       });
     }
   }
 
+  public getPorukeUpisaSihterica(): void {
+
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getPorukeUpisaSihterica',
+        sid: this.session.loggedInUser.sessionID,
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      let poruke = [];
+      for (let text of response.debugData.data) {
+        poruke.push(text.PORUKA);
+      }
+      this.globalFn.showSnackbarError(poruke.join('\r\n'));
+      poruke=[];
+    });
+  }
+
   public selectAll(): void {
     this.deleteSelection.clear();
-    this.dataSource.forEach((row) => {if(row.RID!=null){this.deleteSelection.select(row)}});
+    this.dataSource.forEach((row) => { if (row.RID != null) { this.deleteSelection.select(row) } });
   }
 }

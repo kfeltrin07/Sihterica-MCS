@@ -246,7 +246,7 @@
             <button style="margin: 15px;" color="primary" mat-flat-button
                 [disabled]="varNames.ID_RADNIKA==''||varNames.NAZ_GRUPE==''||varNames.SIF_VP==''||varNames.SIFMJTR==''"
                 (click)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>-->
-            <button style="margin: 15px;" color="primary" mat-flat-button [disabled]="varNames!.SIF_VP && varNames.NAZ_VP == ''"
+            <button style="margin: 15px;" color="primary" mat-flat-button [disabled]="varNames!.SIF_VP && varNames.NAZ_VP == ''&& globalVar.events.length==0"
                 (click)="save()"><mat-icon>add_alarm</mat-icon>{{'Unos'|translate}}</button>
             <button style="margin: 15px;" color="primary" mat-flat-button
                 (click)="clearCalendar()"><mat-icon>cancel</mat-icon>{{'OcistiKalendar'|translate}}</button>

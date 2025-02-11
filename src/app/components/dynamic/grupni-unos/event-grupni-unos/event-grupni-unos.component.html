@@ -105,7 +105,7 @@
     </mat-toolbar>
 
     <div class="tablediv">
-      <table matSort (matSortChange)="sort($event);" mat-table [dataSource]="dataSource2">
+      <table matSort (matSortChange)="sort($event);" mat-table [dataSource]="dataSource">
 
         @for(item of ZaposleniPoGrupiIShemi |keyvalue;track item){
 
@@ -117,14 +117,14 @@
         </ng-container>
         }
 
-        <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row class="highlighted-on-hover" style="height: 20px;"
-          *matRowDef="let row; columns: displayedColumns2;"></tr>
+          *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
 
-      <app-pagination [length]="length2" [pageIndex]="pageIndex2" [pageSizeOptions]="pageSizeOptions2"
-        [length]="length2" [pageSize]="pageSize2" (messageEvent)="receiveMessage($event);"></app-pagination>
+      <app-pagination [length]="length" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+        [length]="length" [pageSize]="pageSize" (messageEvent)="receiveMessage($event);"></app-pagination>
     </div>
   </mat-tab>
   

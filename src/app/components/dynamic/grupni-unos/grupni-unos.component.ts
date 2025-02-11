@@ -23,7 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { addDays } from 'date-fns';
-import { EvidencijaMjesecna, EvidencijaRadVreOj, Grupe, Sheme, VrstePosla, ZapisiUKalendaru, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
+import { CRUDAction, EvidencijaMjesecna, EvidencijaRadVreOj, Grupe, Sheme, VrstePosla, ZapisiUKalendaru, ZaposleniPoGrupiIShemi } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -1081,7 +1081,7 @@ export class GrupniUnosComponent implements OnInit {
     })();
   }
 
-  public getZaposleniGrupe(event: any): Promise<void>{
+  public getZaposleniGrupe(event: any): Promise<void> {
     return new Promise((resolve, reject) => {
       this.http.post(
         this.globalVar.APIHost + this.globalVar.APIFile,
@@ -1109,6 +1109,7 @@ export class GrupniUnosComponent implements OnInit {
         const totalHours = Math.floor(totalMinutes / 60);
         for (let zaposleni of this.zaposleniPoGrupiIShemi) {
           this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+            pAkcija: CRUDAction.Insert,
             pMbr: zaposleni.ID_RADNIKA,
             pSifVlas: this.session.loggedInUser.ownerID,
             pSifOj: event.meta.SIF_OJ,
@@ -1117,7 +1118,8 @@ export class GrupniUnosComponent implements OnInit {
             pSati: totalHours,
             pOd: event.start.toISOString().slice(11, 16),
             pDo: event.end.toISOString().slice(11, 16),
-            pIdOperatera: this.session.loggedInUser.ID
+            pIdOperatera: this.session.loggedInUser.ID,
+            pRid: ''
           }];
         }
         this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
@@ -1164,11 +1166,17 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       console.log(response);
-      let poruke=[];
-      for (let text of response.debugData.data) {
-        poruke.push(text.PORUKA);
+      let poruke = [];
+      if (response.debugData.data.length != 0) {
+        for (let text of response.debugData.data) {
+          poruke.push(text.PORUKA);
+        }
+        this.globalFn.showSnackbarError(poruke.join('\n'));
+        poruke = [];
       }
-      this.globalFn.showSnackbarError(poruke.join('\n'));
+      else{
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
     });
   }
 
@@ -1288,7 +1296,6 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       console.log(response);
-      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.ZapisiUKalendaru = response.debugData.data;
       const groupedByDate = this.ZapisiUKalendaru.reduce((acc: { [key: string]: any }, val: any) => {
         if (!acc[val.DATUM]) {

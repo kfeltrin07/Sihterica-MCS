@@ -184,6 +184,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
   };
+  public ArrayPodatakaZaUnos: any = [];
 
   public VrstePoslaDropdownIndex: number = -1;
   public VrstePoslaDropdownIndexNew: number = -1;
@@ -1611,7 +1612,42 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
   public deleteSelected(): void {
-    for (let item of this.deleteSelection.selected) {
+    if (this.deleteSelection.selected.length > 1) {
+      this.ArrayPodatakaZaUnos.length = 0;
+      for (let zaposleni of this.deleteSelection.selected) {
+        this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+          pAkcija: CRUDAction.Delete,
+          pMbr: zaposleni.MBR,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pSifOj: zaposleni.SIF_MT,
+          pSifVP: zaposleni.SIF_VP,
+          pDatum: zaposleni.DATUM,
+          pSati: zaposleni.SATI,
+          pOd: zaposleni.ODHH,
+          pDo: zaposleni.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: zaposleni.RID
+        }];
+      }
+      this.http.post(
+        this.globalVar.APIHost + this.globalVar.APIFile,
+        {
+          action: 'Sihterica',
+          method: 'upisSihtericeGrupni',
+          sid: this.session.loggedInUser.sessionID,
+          data: {
+            pPodaci: JSON.stringify(this.ArrayPodatakaZaUnos)
+          }
+        }
+      ).subscribe((response: any) => {
+        this.ArrayPodatakaZaUnos.length = 0;
+        this.deleteSelection.clear();
+        this.refresh();
+        this.getPorukeUpisaSihterica();
+
+      });
+
+    } else {
       this.http.post(
         this.globalVar.APIHost + this.globalVar.APIFile,
         {
@@ -1621,22 +1657,44 @@ export class DnevnaEvidencijaComponent implements OnInit {
           data: {
             pAkcija: CRUDAction.Delete,
             pSifVlas: this.session.loggedInUser.ownerID,
-            pDatum: this.globalFn.formatDate(this.filter.DATUM),
-            pMbr: item.MBR,
-            pSifOj: item.SIF_MT,
-            pSifVP: item.SIF_VP,
-            pSati: item.SATI,
-            pOd: item.ODHH,
-            pDo: item.DOHH,
+            pDatum: this.deleteSelection.selected[0].DATUM,
+            pMbr: this.deleteSelection.selected[0].MBR,
+            pSifOj: this.deleteSelection.selected[0].SIF_MT,
+            pSifVP: this.deleteSelection.selected[0].SIF_VP,
+            pSati: this.deleteSelection.selected[0].SATI,
+            pOd: this.deleteSelection.selected[0].ODHH,
+            pDo: this.deleteSelection.selected[0].DOHH,
             pIdOperatera: this.session.loggedInUser.ID,
-            pRid: item.RID
+            pRid: this.deleteSelection.selected[0].RID
           }
         }
       ).subscribe((response: any) => {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+        this.deleteSelection.clear();
         this.refresh();
+        this.getPorukeUpisaSihterica();
       });
     }
+  }
+
+  public getPorukeUpisaSihterica(): void {
+
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getPorukeUpisaSihterica',
+        sid: this.session.loggedInUser.sessionID,
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      let poruke = [];
+      for (let text of response.debugData.data) {
+        poruke.push(text.PORUKA);
+      }
+      this.globalFn.showSnackbarError(poruke.join('\r\n'));
+      poruke=[];
+    });
   }
 
   public selectAll(): void {
