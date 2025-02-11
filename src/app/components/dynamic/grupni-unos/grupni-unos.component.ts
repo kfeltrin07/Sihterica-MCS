@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   CalendarDateFormatter,
   CalendarDayModule,
@@ -173,6 +173,8 @@ export class GrupniUnosComponent implements OnInit {
   public ZapisizaKalendar: any;
   public match: boolean = false;
 
+  public PostojiEvent: boolean = false;
+
   viewDate = new Date();
   activeDayIsOpen = false;
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
@@ -277,6 +279,7 @@ export class GrupniUnosComponent implements OnInit {
     if (match == false) {
       this.globalVar.events = [...this.globalVar.events, newEvent];
     }
+    this.PostojiEvent = true;
   }
 
   public eventTimesChanged({
@@ -292,6 +295,9 @@ export class GrupniUnosComponent implements OnInit {
 
   public deleteEvent(eventToDelete: CalendarEvent) {
     this.globalVar.events = this.globalVar.events.filter((event) => event !== eventToDelete);
+    if(this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
+      this.PostojiEvent=false;
+    }
   }
 
   public externalDropSheme(event: CalendarEvent) {
@@ -303,6 +309,9 @@ export class GrupniUnosComponent implements OnInit {
   public externalDropGrupe(event: CalendarEvent) {
     if (this.globalVar.externalGrupeEvents.indexOf(event) === -1) {
       this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
+    }
+    if(this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
+      this.PostojiEvent=false;
     }
   }
 
@@ -1118,6 +1127,7 @@ export class GrupniUnosComponent implements OnInit {
           }];
         }
         this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
+
         resolve();
       },
         (error: any) => {
@@ -1145,6 +1155,7 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.ArrayPodatakaZaUnos.length = 0;
+      this.PostojiEvent=false;
       this.getZapisiUKalendaru();
       this.getPorukeUpisaSihterica();
     });
@@ -1312,4 +1323,16 @@ export class GrupniUnosComponent implements OnInit {
     });
   }
 
+
+  public validateForm(): boolean {
+    console.log("provjera");
+    console.log(this.globalVar.events);
+    if (this.globalVar.events.find(u => u.meta?.type != 'holiday')) {
+      console.log(false);
+      return false;
+    } else {
+      console.log(true);
+      return true;
+    }
+  }
 }
