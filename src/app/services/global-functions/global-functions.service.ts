@@ -50,7 +50,7 @@ export class GlobalFunctionsService {
       var duration=3000;
     }
     else{
-      var duration = message.length * 1000
+      var duration = message.length * 100000
     }
     this.snackBar.open(message, action, {
       duration: duration,

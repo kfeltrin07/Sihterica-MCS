@@ -241,11 +241,20 @@ export class CreateDnevnaEvidencijaComponent {
     ).subscribe((response: any) => {
       console.log(response);
       let poruke=[];
-      for (let text of response.debugData.data) {
-        poruke.push(text.PORUKA);
+      if (response.debugData.data.length != 0) {
+        for (let text of response.debugData.data) {
+          if(text.PORUKA =='Takav podatak već postoji!'){
+            poruke.push(text.PORUKA+': '+text.MBR+' - '+text.SIFRA_RAD+' - '+text.DATUM);
+          }else{
+            poruke.push(text.PORUKA);
+          }
+        }
+        this.globalFn.showSnackbarError(poruke.join('\n'));
+        poruke = [];
       }
-      this.globalFn.showSnackbarError(poruke.join('\n'));
-      poruke=[];
+      else{
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
     });
   }
 

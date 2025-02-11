@@ -291,7 +291,7 @@ export class RadniciGrupeComponent {
   }
 
   public save(): void {
-    for (let zaposlenik of this.dataSource.data) {
+    for (let zaposlenik of this.zaposleniGrupe) {
       if (this.selection.isSelected(zaposlenik) && !(this.oldSelection.isSelected(zaposlenik))) {
         console.log("Upis");
         console.log(zaposlenik);

@@ -1074,7 +1074,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       for (let text of response.debugData.data) {
         poruke.push(text.PORUKA);
       }
-      this.globalFn.showSnackbarError(poruke.join('\r\n'));
+      this.globalFn.showSnackbarError(poruke.join('\n'));
       poruke=[];
     });
   }

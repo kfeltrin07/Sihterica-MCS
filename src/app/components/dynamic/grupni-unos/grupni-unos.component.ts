@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   CalendarDateFormatter,
   CalendarDayModule,
@@ -63,11 +63,6 @@ import { colors, colorsHoliday, HeaderGrupniUnosComponent } from './header-grupn
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
     },
-    /*
-        {
-          provide: CalendarEventTitleFormatter,
-          useClass: CustomEventTitleFormatter
-        }*/
   ],
 })
 export class GrupniUnosComponent implements OnInit {
@@ -1169,7 +1164,11 @@ export class GrupniUnosComponent implements OnInit {
       let poruke = [];
       if (response.debugData.data.length != 0) {
         for (let text of response.debugData.data) {
-          poruke.push(text.PORUKA);
+          if(text.PORUKA =='Takav podatak već postoji!'){
+            poruke.push(text.PORUKA+': '+text.MBR+' - '+text.SIFRA_RAD+' - '+text.DATUM);
+          }else{
+            poruke.push(text.PORUKA);
+          }
         }
         this.globalFn.showSnackbarError(poruke.join('\n'));
         poruke = [];

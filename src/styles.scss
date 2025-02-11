@@ -2414,3 +2414,15 @@ app-konto .mat-column-charts-of-accounts-name {
     z-index: 1000;
     bottom: 50% !important;
 }
+
+.mat-mdc-snack-bar-container{
+    max-width: 800px !important;
+    max-height: 300px !important;
+}
+
+.mat-mdc-snack-bar-label{
+    overflow-y: auto !important;
+    max-width: 800px !important;
+    max-height: 300px !important;
+    white-space: pre-line !important;
+}
