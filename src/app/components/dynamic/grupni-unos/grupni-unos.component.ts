@@ -35,6 +35,9 @@ import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrs
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { EventGrupniUnosComponent } from './event-grupni-unos/event-grupni-unos.component';
 import { colors, colorsHoliday, HeaderGrupniUnosComponent } from './header-grupni-unos/header-grupni-unos.component';
+import { CreateGrupeComponent } from '../grupe/create-grupe/create-grupe.component';
+import { EditGrupeComponent } from '../grupe/edit-grupe/edit-grupe.component';
+import { EditEventGrupniUnosComponent } from './edit-event-grupni-unos/edit-event-grupni-unos.component';
 
 
 
@@ -226,7 +229,7 @@ export class GrupniUnosComponent implements OnInit {
   public clearCalendar(): void {
     this.globalVar.events = [];
     this.getHolidays();
-    this.PostojiEvent=false;
+    this.PostojiEvent = false;
   }
 
   public eventDropped({
@@ -255,10 +258,6 @@ export class GrupniUnosComponent implements OnInit {
       color: event.color,
       draggable: event.draggable,
       meta: event.meta,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
     }
     this.globalVar.events = this.globalVar.events.map((iEvent) => {
       if (iEvent === event) {
@@ -296,8 +295,8 @@ export class GrupniUnosComponent implements OnInit {
 
   public deleteEvent(eventToDelete: CalendarEvent) {
     this.globalVar.events = this.globalVar.events.filter((event) => event !== eventToDelete);
-    if(this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
-      this.PostojiEvent=false;
+    if (this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
+      this.PostojiEvent = false;
     }
   }
 
@@ -311,8 +310,8 @@ export class GrupniUnosComponent implements OnInit {
     if (this.globalVar.externalGrupeEvents.indexOf(event) === -1) {
       this.globalVar.events = this.globalVar.events.filter((iEvent) => iEvent !== event);
     }
-    if(this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
-      this.PostojiEvent=false;
+    if (this.globalVar.events.find((event) => event.meta?.type !== 'holiday')) {
+      this.PostojiEvent = false;
     }
   }
 
@@ -371,10 +370,6 @@ export class GrupniUnosComponent implements OnInit {
             incrementsBadgeTotal: true,
 
           },
-          resizable: {
-            beforeStart: true,
-            afterEnd: true,
-          },
         }];
         index++;
         colorindex++;
@@ -385,6 +380,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public getGrupeEvents(): void {
+    this.globalVar.externalGrupeEvents.length = 0;
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -476,10 +472,6 @@ export class GrupniUnosComponent implements OnInit {
                 incrementsBadgeTotal: true,
 
               },
-              resizable: {
-                beforeStart: true,
-                afterEnd: true,
-              },
             }];
           };
 
@@ -509,7 +501,6 @@ export class GrupniUnosComponent implements OnInit {
                 color: result.color,
                 meta: result.meta,
                 draggable: result.draggable,
-                resizable: result.resizable,
               };
             }
             return iEvent;
@@ -1156,7 +1147,7 @@ export class GrupniUnosComponent implements OnInit {
       }
     ).subscribe((response: any) => {
       this.ArrayPodatakaZaUnos.length = 0;
-      this.PostojiEvent=false;
+      this.PostojiEvent = false;
       this.getZapisiUKalendaru();
       this.getPorukeUpisaSihterica();
     });
@@ -1170,17 +1161,17 @@ export class GrupniUnosComponent implements OnInit {
         action: 'Sihterica',
         method: 'getPorukeUpisaSihterica',
         sid: this.session.loggedInUser.sessionID,
-        data:{
+        data: {
           limit: 1000000,
         }
       }
     ).subscribe((response: any) => {
       console.log(response);
       if (response.debugData.data.length != 0) {
-        this.globalVar.snackBarTableData=response.debugData.data;
+        this.globalVar.snackBarTableData = response.debugData.data;
         this.globalFn.showSnackbarCostum(response.debugData.data.length);
       }
-      else{
+      else {
         this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
       }
     });
@@ -1249,10 +1240,6 @@ export class GrupniUnosComponent implements OnInit {
               NAZIV: satnica?.NAZIV,
               incrementsBadgeTotal: true,
               SIF_VP_N: satnica?.SIF_VP_N,
-            },
-            resizable: {
-              beforeStart: true,
-              afterEnd: true,
             },
 
           }
@@ -1330,5 +1317,26 @@ export class GrupniUnosComponent implements OnInit {
       console.log(true);
       return true;
     }
+  }
+
+  public getAllDayEvents(): void {}
+
+  public openCreateDialog(): void {
+
+    const dialogRef = this.dialog.open(CreateGrupeComponent, {
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.getGrupeEvents(), 1000);
+    });
+  }
+
+  public openEditDialog(item: any): void {
+
+    const dialogRef = this.dialog.open(EditEventGrupniUnosComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => this.getGrupeEvents(), 1000);
+    });
   }
 }

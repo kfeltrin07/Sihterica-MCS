@@ -15,7 +15,7 @@
                 [locale]="locale" [hourSegments]="1" [hourSegmentHeight]="26" [snapDraggedEvents]="false"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
-                [eventTemplate]="customEventTemplate">
+                [eventTemplate]="customEventTemplate" [headerTemplate]="customHeaderTemplate">
             </mwl-calendar-week-view>
             <!--
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
@@ -48,13 +48,18 @@
             <div class="grupe-card" mwlDroppable (drop)="externalDropGrupe($event.dropData.event)"
                 dragOverClass="drag-over">
                 <div class="card-body">
-                    <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
+                    <div style="display: flex;justify-content: space-between;">
+                        <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
+                        <button style="margin-right: 20px; scale: 0.8;" mat-mini-fab color="primary"
+                            matTooltip="{{ 'Create' | translate }}"
+                            (click)="openCreateDialog();"><mat-icon>add</mat-icon></button>
+                    </div>
                     <p *ngIf="globalVar.externalGrupeEvents.length === 0"><em>No events added</em></p>
                     <div class="listEvents">
                         <div *ngFor="let event of globalVar.externalGrupeEvents" mwlDraggable
                             [dropData]="{event: event}" [touchStartLongPress]="{ delay: 300, delta: 30 }"
                             dragActiveClass="drag-active">
-                            <button mat-flat-button style="margin: 5px 0px;"
+                            <button mat-flat-button style="margin: 5px 0px;" (dblclick)="openEditDialog(event.meta);"
                                 [style.background-color]="event.color!.secondary">
                                 {{ event.title }}
                             </button>
@@ -359,9 +364,10 @@
         </div>
         <div class="cell-totals" style="margin: 5px;display: flex;justify-content: space-between;">
             <div>
-                <div class="cal-event" *ngFor="let event of day.events" [style.backgroundColor]="event.color.primary"
-                    [ngClass]="event?.cssClass" (mouseenter)="highlightDay.emit({event: event})"
-                    (mouseleave)="unhighlightDay.emit({event: event})" (click)="eventClicked(event)"
+                <div class="cal-event" style="scale: 1.7;" *ngFor="let event of day.events"
+                    [style.backgroundColor]="event.color.primary" [ngClass]="event?.cssClass"
+                    (mouseenter)="highlightDay.emit({event: event})" (mouseleave)="unhighlightDay.emit({event: event})"
+                    (click)="eventClicked(event)"
                     [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
                     [tooltipPlacement]="tooltipPlacement">
                 </div>
@@ -369,5 +375,43 @@
             <button class="cell-button cal-day-number" color="primary" style="scale:0.7;" mat-mini-fab
                 (click)="goToDnevnaEvidencija(day)"
                 [matTooltip]="'DnevnaEvidencija'|translate"><mat-icon>view_day</mat-icon></button>
+        </div>
+    </ng-template>
+
+
+
+    <ng-template #customHeaderTemplate let-days="days" let-locale="locale" let-dayHeaderClicked="dayHeaderClicked"
+        let-eventDropped="eventDropped">
+        <div class="cal-day-headers">
+            <div class="cal-header" *ngFor="let day of days" [class.cal-past]="day.isPast"
+                [class.cal-today]="day.isToday" [class.cal-future]="day.isFuture" [class.cal-weekend]="day.isWeekend"
+                [ngClass]="day.cssClass" (mwlClick)="dayHeaderClicked.emit({day: day})" mwlDroppable
+                dragOverClass="cal-drag-over"
+                (drop)="eventDropped.emit({event: $event.dropData.event, newStart: day.date})">
+                <b>{{ day.date | calendarDate:'weekViewColumnHeader':locale }}</b><br>
+                <span>{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</span>
+
+                <div class="badge badge-danger"> @for(zapis of ZapisizaKalendar;track zapis){
+                    @if(zapis.DATUM==('0'+(day.date.getDate())).slice(-2)+'.'+('0'+(day.date.getMonth()+1)).slice(-2)+'.'+day.date.getFullYear()){
+                    <label style="
+                    background-color: #b94a48;
+                    color: #fff;
+                    display: inline-block;
+                    min-width: 10px;
+                    padding: 3px 7px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    border-radius: 10px;
+                    float: left;"
+                    matTooltipClass="custom-tooltip" [matTooltip]="zapis.NAZ_MT">{{zapis.BR_UPISA}}</label>
+                    }
+                    }
+                </div>
+
+            </div>
         </div>
     </ng-template>

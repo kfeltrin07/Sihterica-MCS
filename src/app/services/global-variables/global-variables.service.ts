@@ -1253,7 +1253,8 @@ export class GlobalVariablesService {
   public ZaposleniPoGrupiIShemiDisplayedColumns: ColumnRef[] = [
     this.ID_RADNIKAColumn,
     this.NAZIV_RADNIKAColumn,
-    this.NAZ_RMColumn,
+    this.SIF_OJColumn,
+    this.NAZ_OJColumn,
     this.ODColumn,
     this.DOColumn,
     this.SATIColumn,
@@ -1272,9 +1273,8 @@ export class GlobalVariablesService {
     this.SIF_OJColumn,
     this.NAZ_OJColumn,
     this.ID_GRUPEColumn,
-    this.NAZ_GRUPEColumn,
     this.SIF_SHEMEColumn,
-    this.SIF_VLASColumn
+    this.SIFVLASColumn
   ];
 
   public DANColumn: ColumnRef = {

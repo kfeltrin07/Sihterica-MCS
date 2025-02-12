@@ -123,10 +123,14 @@ export class EventGrupniUnosComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.varNames.OD = new Date(this.receivedSheme.start).toISOString().slice(0, 16);
-    this.varNames.DO = new Date(this.receivedSheme.end).toISOString().slice(0, 16);
+    const Od= new Date(this.receivedSheme.start);
+    const Do= new Date(this.receivedSheme.end)
+    this.varNames.OD = this.globalFn.formatDateForDateTimeForm(Od);
+    console.log(this.varNames.OD);
+    this.varNames.DO = this.globalFn.formatDateForDateTimeForm(Do);
 
     this.getZaposleniGrupe();
+    this.setVisibleColumnsFromEvent();
   }
 
   public getZaposleniGrupe(): void {
@@ -140,6 +144,7 @@ export class EventGrupniUnosComponent implements OnInit {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
           pIdGrupe: this.receivedSheme.meta.ID_GRUPE,
+          pDioNaziva: this.searchParam,
           limit: this.pageSize,
           page: (this.pageIndex + 1),
         }

@@ -1,3 +1,13 @@
+<div 
+cdkDrag
+cdkDragRootElement=".cdk-overlay-pane" 
+cdkDragHandle 
+cdkDragBoundary=".cdk-overlay-container"
+class="colored-header text-align-center">
+	{{ receivedSheme.title }}
+    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+
+</div>
 <mat-tab-group [selectedIndex]="selected.value"
   (selectedIndexChange)="selected.setValue($event);selection.isEmpty()?'':getZaposleniGrupe();">
   <!--
@@ -129,7 +139,7 @@
   </mat-tab>
   
   <mat-tab label="{{'Edit'|translate}}">
-    <div style="min-width: 720px; min-height: 160px;display: flex;justify-content: space-around;">
+    <div style="width: 720px; height: 160px;display: flex;justify-content: space-around;">
       <table style="margin-left: 20px;">
         <tr>
           <td>
