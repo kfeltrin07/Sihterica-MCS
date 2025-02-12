@@ -228,7 +228,6 @@ export class CreateDnevnaEvidencijaComponent {
     this.ArrayPodatakaZaUnos.length = 0;
     this.getZaposleniGrupe();
   }
-
   public getPorukeUpisaSihterica(): void {
 
     this.http.post(
@@ -237,22 +236,17 @@ export class CreateDnevnaEvidencijaComponent {
         action: 'Sihterica',
         method: 'getPorukeUpisaSihterica',
         sid: this.session.loggedInUser.sessionID,
+        data: {
+          limit: 1000000,
+        }
       }
     ).subscribe((response: any) => {
       console.log(response);
-      let poruke=[];
       if (response.debugData.data.length != 0) {
-        for (let text of response.debugData.data) {
-          if(text.PORUKA =='Takav podatak već postoji!'){
-            poruke.push(text.PORUKA+': '+text.MBR+' - '+text.SIFRA_RAD+' - '+text.DATUM);
-          }else{
-            poruke.push(text.PORUKA);
-          }
-        }
-        this.globalFn.showSnackbarError(poruke.join('\n'));
-        poruke = [];
+        this.globalVar.snackBarTableData = response.debugData.data;
+        this.globalFn.showSnackbarCostum(response.debugData.data.length);
       }
-      else{
+      else {
         this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
       }
     });

@@ -495,12 +495,9 @@ export class GrupniUnosComponent implements OnInit {
             if (iEvent === event) {
               return {
                 ...event,
-                title: result.title,
                 start: result.start,
                 end: result.end,
-                color: result.color,
                 meta: result.meta,
-                draggable: result.draggable,
               };
             }
             return iEvent;
@@ -1089,6 +1086,7 @@ export class GrupniUnosComponent implements OnInit {
             pSifVlas: this.session.loggedInUser.ownerID,
             pIdOperatera: this.session.loggedInUser.ID,
             pIdGrupe: event.meta.ID_GRUPE,
+            pDioNaziva: '',
             limit: 1000000,
             page: 1,
           }
@@ -1318,8 +1316,6 @@ export class GrupniUnosComponent implements OnInit {
       return true;
     }
   }
-
-  public getAllDayEvents(): void {}
 
   public openCreateDialog(): void {
 

@@ -202,6 +202,7 @@ export class EventGrupniUnosComponent implements OnInit {
   public save(): void {
     this.receivedSheme.start = new Date(this.varNames.OD);
     this.receivedSheme.end = new Date(this.varNames.DO);
+    console.log(this.receivedSheme);
     this.dialogRef.close(this.receivedSheme);
   }
 }

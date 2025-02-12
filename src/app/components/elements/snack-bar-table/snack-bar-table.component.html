@@ -1,5 +1,5 @@
 <div style="display: flex;flex-direction: row;">
-    <div style="overflow: auto;height: 270px;width: 550px;">
+    <div style="overflow: auto;max-height: 270px;max-width: 550px;">
         <table mat-table [dataSource]="globalVar.snackBarTableData">
             @for(item of porukeZaGrupno|keyvalue;track item){
             <ng-container [matColumnDef]="item.key">

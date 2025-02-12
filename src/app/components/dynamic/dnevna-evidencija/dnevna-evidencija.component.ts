@@ -1704,15 +1704,19 @@ export class DnevnaEvidencijaComponent implements OnInit {
         action: 'Sihterica',
         method: 'getPorukeUpisaSihterica',
         sid: this.session.loggedInUser.sessionID,
+        data: {
+          limit: 1000000,
+        }
       }
     ).subscribe((response: any) => {
       console.log(response);
-      let poruke = [];
-      for (let text of response.debugData.data) {
-        poruke.push(text.PORUKA);
+      if (response.debugData.data.length != 0) {
+        this.globalVar.snackBarTableData = response.debugData.data;
+        this.globalFn.showSnackbarCostum(response.debugData.data.length);
       }
-      this.globalFn.showSnackbarError(poruke.join('\n'));
-      poruke=[];
+      else {
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
     });
   }
 
