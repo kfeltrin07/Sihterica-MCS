@@ -8085,6 +8085,18 @@
           "en": "No data according to the search parameters",
           "hr": "Ne postoje podaci prema pretraženim parametrima",
           "transferred": false
+        },
+        {
+          "ref": "SIFRA_RAD",
+          "en": "WW",
+          "hr": "VP",
+          "transferred": false
+        },
+        {
+          "ref": "PORUKA",
+          "en": "Message",
+          "hr": "Poruka",
+          "transferred": false
         }
     ]
 }

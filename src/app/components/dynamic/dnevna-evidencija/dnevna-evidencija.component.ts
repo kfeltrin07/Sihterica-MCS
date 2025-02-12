@@ -149,9 +149,11 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
   public offeredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
+  public offeredEvidencijaRadVreOjRow: EvidencijaRadVreOj[] = [];
 
   public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
   public filteredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOjRow: EvidencijaRadVreOj[] = [];
   public listEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
 
   public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
@@ -169,11 +171,14 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public offeredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public offeredZaposleniKopija: EvRadnogVremenaHelpRadnici[] = [];
   public NewOfferedZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public offeredZaposleniRow: EvRadnogVremenaHelpRadnici[] = [];
+
 
   public filteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public filteredZaposleniKopija: EvRadnogVremenaHelpRadnici[] = [];
   public NewFilteredZaposleni: EvRadnogVremenaHelpRadnici[] = [];
   public listZaposleni: EvRadnogVremenaHelpRadnici[] = [];
+  public filteredZaposleniRow: EvRadnogVremenaHelpRadnici[] = [];
 
   public selectedZaposleni: EvRadnogVremenaHelpRadnici = {
     UKUPANBROJSLOGOVA: 0,
@@ -191,9 +196,12 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public offeredVrstePosla: VrstePosla[] = [];
   public offeredVrstePoslaNew: VrstePosla[] = [];
+  public offeredVrstePoslaRow: VrstePosla[] = [];
 
   public filteredVrstePosla: VrstePosla[] = [];
   public filteredVrstePoslaNew: VrstePosla[] = [];
+  public filteredVrstePoslaRow: VrstePosla[] = [];
+
   public listVrstePosla: VrstePosla[] = [];
 
   public selectedVrstePosla: VrstePosla = {
@@ -1328,8 +1336,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
-      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
+      this.offeredEvidencijaRadVreOjRow = response.debugData.data;
+      this.filteredEvidencijaRadVreOjRow = response.debugData.data;
     });
   }
 
@@ -1354,8 +1362,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
       }
     ).subscribe((response: any) => {
 
-      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
-      for (let item of this.offeredEvidencijaRadVreOjNew) {
+      this.offeredEvidencijaRadVreOjRow = response.debugData.data;
+      for (let item of this.offeredEvidencijaRadVreOjRow) {
         if (item.SIF_OJ.toUpperCase() == row.SIF_MT.toUpperCase()) {
           row.SIF_MT = item.SIF_OJ;
           row.SIF_MTX = item.NAZMJTR;
@@ -1365,16 +1373,18 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
   public filterEvidencijaRadVreOjRow(row: EvidencijaDnevna): void {
-    if (!row.SIF_MT) {
+    if (row.SIF_MT==''||!row.SIF_MT) {
+      row.SIF_MTX='';
       this.refreshEvidencijaRadVreOjRow("", false);
       return;
     }
 
-    this.offeredEvidencijaRadVreOjNew = this.filteredEvidencijaRadVreOjNew.filter(
+    this.offeredEvidencijaRadVreOjRow = this.filteredEvidencijaRadVreOjRow.filter(
       item => item?.SIF_OJ.toLowerCase().includes(row.SIF_MT.toLowerCase())
     );
 
-    if (this.offeredEvidencijaRadVreOjNew.length == 0) {
+    if (this.offeredEvidencijaRadVreOjRow.length == 0) {
+      row.SIF_MTX='';
       this.refreshEvidencijaRadVreOjRow(row.SIF_MT, false);
     }
   }
@@ -1428,8 +1438,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
         }
       ).subscribe((response: any) => {
         this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-        this.offeredVrstePosla = response.debugData.data;
-        this.filteredVrstePosla = response.debugData.data;
+        this.offeredVrstePoslaRow = response.debugData.data;
+        this.filteredVrstePoslaRow = response.debugData.data;
 
       });
     }
@@ -1458,9 +1468,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
       const { metadata, data } = response.debugData;
       this.globalFn.showSnackbarError(metadata.OPIS);
-      this.offeredVrstePosla = data;
+      this.offeredVrstePoslaRow = data;
 
-      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === row.SIF_VP.toUpperCase());
+      const matchedItem = this.offeredVrstePoslaRow.find(item => item.SIF_VP.toUpperCase() === row.SIF_VP.toUpperCase());
       if (matchedItem) {
         row.SIF_VP = matchedItem.SIF_VP;
         row.SIF_VP_N = matchedItem.NAZ_VP;
@@ -1468,17 +1478,19 @@ export class DnevnaEvidencijaComponent implements OnInit {
     });
   }
 
-  public filterVrstePoslaRow(text: string): void {
-    if (!text) {
+  public filterVrstePoslaRow(text: string,row:EvidencijaDnevna): void {
+    if (text==''||!text) {
+      row.SIF_VP_N='';
       this.refreshVrstePoslaRow("", false);
       return;
     }
 
-    this.offeredVrstePosla = this.filteredVrstePosla.filter(
+    this.offeredVrstePoslaRow = this.filteredVrstePoslaRow.filter(
       item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
     );
 
-    if (this.offeredVrstePosla.length == 0) {
+    if (this.offeredVrstePoslaRow.length == 0) {
+      row.SIF_VP_N='';
       this.refreshVrstePoslaRow(text, false);
     }
   }
@@ -1528,8 +1540,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.NewOfferedZaposleni = response.debugData.data;
-      this.NewFilteredZaposleni = response.debugData.data;
+      this.offeredZaposleniRow = response.debugData.data;
+      this.filteredZaposleniRow = response.debugData.data;
 
 
     });
@@ -1558,9 +1570,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       const { metadata, data } = response.debugData;
       this.globalFn.showSnackbarError(metadata.OPIS);
-      this.NewOfferedZaposleni = data;
+      this.offeredZaposleniRow = data;
 
-      const matchedItem = this.NewOfferedZaposleni.find(item => item.MBR.toUpperCase() === row.MBR.toUpperCase());
+      const matchedItem = this.offeredZaposleniRow.find(item => item.MBR.toUpperCase() === row.MBR.toUpperCase());
       if (matchedItem) {
         row.MBR = matchedItem.MBR;
         row.OSOBAX = matchedItem.PREZIME_IME;
@@ -1575,11 +1587,11 @@ export class DnevnaEvidencijaComponent implements OnInit {
       return;
     }
 
-    this.NewOfferedZaposleni = this.NewFilteredZaposleni.filter(
+    this.offeredZaposleniRow = this.filteredZaposleniRow.filter(
       item => item?.MBR.toLowerCase().includes(text.MBR.toLowerCase())
     );
 
-    if (this.NewOfferedZaposleni.length == 0) {
+    if (this.offeredZaposleniRow.length == 0) {
       this.refreshZaposleniRow(text.MBR, false);
     }
 

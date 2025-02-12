@@ -302,13 +302,13 @@
                         <input [class.red-input]="evidencija!.MBR && evidencija!.OSOBAX==''" type="text"
                             (blur)="OfferedZaposleniRow(evidencija);"
                             [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
-                            style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.OSOBAX=''"
+                            style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="MBR"
+                            (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshZaposleniRow(evidencija.MBR, false);">
-                        <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
-                            @for(oj of NewOfferedZaposleni;track oj){
+                        <mat-autocomplete #MBR="matAutocomplete" [panelWidth]="400">
+                            @for(oj of offeredZaposleniRow;track oj){
                             <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.MBR"
-                                (onSelectionChange)="evidencija.OSOBAX=oj.PREZIME_IME">
+                                (onSelectionChange)="evidencija.OSOBAX=oj.PREZIME_IME" (mousedown)="evidencija.MBR=oj.MBR;evidencija.OSOBAX=oj.PREZIME_IME;">
                                 <span
                                     style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.MBR+'
                                     - '+oj.PREZIME_IME}}</span>
@@ -387,12 +387,13 @@
                         <input [class.red-input]="evidencija!.SIF_MT && evidencija!.SIF_MTX=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.SIF_MTX=''"
+                            (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
-                            @for(oj of offeredEvidencijaRadVreOjNew;track oj){
+                            @for(oj of offeredEvidencijaRadVreOjRow;track oj){
                             <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_OJ"
-                                (onSelectionChange)="evidencija.SIF_MTX=oj.NAZMJTR">
+                            (onSelectionChange)="evidencija.SIF_MTX=oj.NAZMJTR"
+                                (mousedown)="evidencija.SIF_MT=oj.SIF_OJ;evidencija.SIF_MTX=oj.NAZMJTR;">
                                 <span
                                     style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_OJ+'
                                     - '+oj.NAZMJTR}}</span>
@@ -470,12 +471,13 @@
                         <input [class.red-input]="evidencija!.SIF_VP && evidencija!.SIF_VP_N=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
-                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP); selection.isSelected(evidencija)?'':selection.select(evidencija);evidencija.SIF_VP_N=''"
+                            (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP,evidencija); selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
                         <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">
-                            @for(oj of offeredVrstePosla;track oj){
+                            @for(oj of offeredVrstePoslaRow;track oj){
                             <mat-option style="max-height: 28px;min-height: 28px;font-size: 12px;" [value]="oj!.SIF_VP"
-                                (onSelectionChange)="evidencija.SIF_VP_N=oj.NAZ_VP">
+                                (onSelectionChange)="evidencija.SIF_VP_N=oj.NAZ_VP.substring(7,100);"
+                                (mousedown)="evidencija.SIF_VP=oj.SIF_VP;evidencija.SIF_VP_N=oj.NAZ_VP.substring(7,100);">
                                 <span
                                     style="max-width: 100%;max-height: 100%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{oj.SIF_VP+'
                                     - '+oj.NAZ_VP.substring(7,100)}}</span>
@@ -485,7 +487,7 @@
                     </span>
 
                     <span matTooltip="{{ evidencija!.SIF_VP_N }}" matTooltipShowDelay="1000"
-                        style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{evidencija.SIF_VP_N.substring(7,100)}}</span>
+                        style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{evidencija.SIF_VP_N}}</span>
                 </div>
                 }
                 @else {

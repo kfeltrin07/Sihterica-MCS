@@ -743,6 +743,18 @@ export interface filterZaDnevnaEvidencija {
   SIF_VP?: string;
 }
 
+export interface porukeZaGrupno {
+  RN: number;
+  UKUPANBROJSLOGOVA: number;
+  DATUM: string;
+  IDK: string;
+  INDIKATOR: string;
+  MBR: string;
+  PORUKA: string;
+  SIFRA_RAD: string;
+  SIFVLAS: string;
+}
+
 export enum TodoState {
   Urgent,
   InProgress,

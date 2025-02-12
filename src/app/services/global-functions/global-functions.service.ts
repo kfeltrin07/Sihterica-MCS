@@ -6,6 +6,7 @@ import { GlobalVariablesService } from '../global-variables/global-variables.ser
 import { TranslationService } from '../translation/translation.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarTableComponent } from 'src/app/components/elements/snack-bar-table/snack-bar-table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,15 @@ export class GlobalFunctionsService {
   public showSnackbarError(errorDesc: string) {
     if (errorDesc != 'SQL:OK') {
       this.openSnackBar(errorDesc, this.t.translate('Okay'));
+    }
+  }
+
+  public showSnackbarCostum(errorDesc: string) {
+    var duration = errorDesc.length * 100000
+    if (errorDesc != 'SQL:OK') {
+      this.snackBar.openFromComponent(SnackBarTableComponent,{
+        duration: duration,
+      });
     }
   }
 
