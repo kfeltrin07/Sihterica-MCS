@@ -303,6 +303,7 @@
                             (blur)="OfferedZaposleniRow(evidencija);"
                             [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="MBR"
+                            (blur)="OfferedZaposleniRow(evidencija);"
                             (ngModelChange)="filterZaposleniRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshZaposleniRow(evidencija.MBR, false);">
                         <mat-autocomplete #MBR="matAutocomplete" [panelWidth]="400">
@@ -387,6 +388,7 @@
                         <input [class.red-input]="evidencija!.SIF_MT && evidencija!.SIF_MTX=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
+                            (blur)="OfferedEvidencijaRadVreOjRow(evidencija);"
                             (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
@@ -471,6 +473,7 @@
                         <input [class.red-input]="evidencija!.SIF_VP && evidencija!.SIF_VP_N=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
+                            (blur)="OfferedVrstePoslaRow(evidencija);"
                             (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP,evidencija); selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
                         <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">

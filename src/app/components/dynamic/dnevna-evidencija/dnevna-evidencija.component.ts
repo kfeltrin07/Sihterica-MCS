@@ -1303,6 +1303,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (EvidencijaRadVreOj) {
       row.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
       row.SIF_MTX = EvidencijaRadVreOj.NAZMJTR;
+      this.selection.select(row);
     }
     return "";
   }
@@ -1311,6 +1312,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     e.preventDefault();
     row.SIF_MT = "";
     row.SIF_MTX = "";
+    this.selection.select(row);
 
   }
 
@@ -1405,7 +1407,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (VrstePosla) {
       row.SIF_VP = VrstePosla.SIF_VP;
       row.SIF_VP_N = VrstePosla.NAZ_VP;
-
+      this.selection.select(row);
     }
   }
 
@@ -1413,6 +1415,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     e.preventDefault();
     row.SIF_VP = "";
     row.SIF_VP_N = "";
+    this.selection.select(row);
+
   }
 
   public refreshVrstePoslaRow(searchParam: string, isSelected: boolean): void {
@@ -1508,6 +1512,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     if (EvRadnogVremenaHelpRadnici) {
       row.MBR = EvRadnogVremenaHelpRadnici.MBR;
       row.OSOBAX = EvRadnogVremenaHelpRadnici.PREZIME_IME;
+      this.selection.select(row);
+
     }
   }
 
@@ -1515,6 +1521,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     e.preventDefault();
     row.MBR = "";
     row.OSOBAX = "";
+    this.selection.select(row);
   }
 
   public refreshZaposleniRow(searchParam: string, isSelected: boolean,): void {
