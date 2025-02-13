@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarTableComponent } from 'src/app/components/elements/snack-bar-table/snack-bar-table.component';
 import { SnackBarGrupniUnosRadnikaComponent } from 'src/app/components/elements/snack-bar-grupni-unos-radnika/snack-bar-grupni-unos-radnika.component';
+import { SnackBarRekapitulacijaMjesecnaComponent } from 'src/app/components/elements/snack-bar-rekapitulacija-mjesecna/snack-bar-rekapitulacija-mjesecna.component';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,15 @@ export class GlobalFunctionsService {
     var duration = errorDesc.length * 100000
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarGrupniUnosRadnikaComponent,{
+        duration: duration,
+      });
+    }
+  }
+
+  public showSnackbarRekapitulacijaMjesecna(errorDesc: string) {
+    var duration = errorDesc.length * 100000
+    if (errorDesc != 'SQL:OK') {
+      this.snackBar.openFromComponent(SnackBarRekapitulacijaMjesecnaComponent,{
         duration: duration,
       });
     }

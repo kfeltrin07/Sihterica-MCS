@@ -8097,6 +8097,18 @@
           "en": "Message",
           "hr": "Poruka",
           "transferred": false
+        },
+        {
+          "ref": "NAZ_MT",
+          "en": "Place of expense",
+          "hr": "Mjesto troška",
+          "transferred": false
+        },
+        {
+          "ref": "Rekapitulacija",
+          "en": "Recapitulation",
+          "hr": "Rekapitulacija",
+          "transferred": false
         }
     ]
 }

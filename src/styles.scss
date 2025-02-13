@@ -2416,11 +2416,16 @@ app-konto .mat-column-charts-of-accounts-name {
 }
 
 .mat-mdc-snack-bar-container{
-    max-width: 850px !important;
+    max-width: 950px !important;
     max-height: 300px !important;
 }
 
 .mat-mdc-snack-bar-label{
-    max-width: 850px !important;
+    max-width: 950px !important;
+    max-height: 300px !important;
+}
+
+.mdc-snackbar__surface{
+    max-width: 950px !important;
     max-height: 300px !important;
 }

@@ -768,6 +768,18 @@ export interface porukeZaGrupniUnosRadnika {
   SYSDATETIME: string;
 }
 
+export interface rekapitulacijaMjesecna {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  VRSTA: string;
+  SIF_MT: string;
+  NAZ_MT: string;
+  SIF_VP: string;
+  SIF_VP_N: string;
+  SATI: string;
+}
+
+
 export enum TodoState {
   Urgent,
   InProgress,

@@ -1089,6 +1089,34 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     });
   }
 
+  public getRekapitulacija():void{
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getRekapitulacijaSatiMjesecna',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          pMbr: this.filter.MBR,
+          pZaMjesec: this.filter.MJESEC+"."+this.filter.GODINA,
+          pSifMjTr: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifMt: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
+          pZSifVp: this.filter.SIF_VP ? this.filter.SIF_VP : "%"
+        }
+      }
+    ).subscribe((response: any) => {
+      this.globalVar.snackBarRekaitulacijaMjesecna=[];
+      console.log(response);
+      if (response.debugData.data.length != 0) {
+        this.globalVar.snackBarRekaitulacijaMjesecna = response.debugData.data;
+        this.globalFn.showSnackbarRekapitulacijaMjesecna(response.debugData.data.length);
+      }
+      else {
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
+    });
+  }
   public selectAll(): void {
     this.deleteSelection.clear();
     this.dataSource.forEach((row) => { if (row.RID != null) { this.deleteSelection.select(row) } });

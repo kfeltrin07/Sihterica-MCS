@@ -242,12 +242,14 @@
                 <td>
                     <label for="" style="font-size: 14px;">{{'Ispis'|translate}}</label>
                 </td>
-                <td>
+                <td style="display: flex;align-items: center;">
                     <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
                         (click)="openPDFDialog();">
                         <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
                             matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
                     </button>
+                    <button mat-flat-button color="primary" (click)="getRekapitulacija()">
+                        {{'Rekapitulacija'|translate}}</button>
                 </td>
             </tr>
         </table>
