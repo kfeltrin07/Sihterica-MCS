@@ -150,7 +150,13 @@ export class CreateDnevnaEvidencijaComponent {
         }
       }
     ).subscribe((response: any) => {
-      this.getPorukeUpisaSihterica();    
+      if (response.debugData.data.length != 0) {
+        this.globalVar.snackBarTableData = response.debugData.data;
+        this.globalFn.showSnackbarCostum(response.debugData.data.length);
+      }
+      else {
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }  
     });
 
     this.dialogRef.close();

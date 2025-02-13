@@ -1662,7 +1662,13 @@ export class DnevnaEvidencijaComponent implements OnInit {
         this.ArrayPodatakaZaUnos.length = 0;
         this.deleteSelection.clear();
         this.refresh();
-        this.getPorukeUpisaSihterica();
+        if (response.debugData.data.length != 0) {
+          this.globalVar.snackBarTableData = response.debugData.data;
+          this.globalFn.showSnackbarCostum(response.debugData.data.length);
+        }
+        else {
+          this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+        }
 
       });
 

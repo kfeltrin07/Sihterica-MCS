@@ -14,8 +14,8 @@
             <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="globalVar.events"
                 [locale]="locale" [hourSegments]="1" [hourSegmentHeight]="26" [snapDraggedEvents]="false"
                 [refresh]="refresh" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
-                (dayHeaderClicked)="changeDay($event.day.date)" (eventTimesChanged)="eventDropped($event)"
-                [eventTemplate]="customEventTemplate" [headerTemplate]="customHeaderTemplate">
+                (eventTimesChanged)="eventDropped($event)" [eventTemplate]="customEventTemplate"
+                [headerTemplate]="customHeaderTemplate">
             </mwl-calendar-week-view>
             <!--
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="globalVar.events" [locale]="locale"
@@ -390,10 +390,15 @@
                 (drop)="eventDropped.emit({event: $event.dropData.event, newStart: day.date})">
                 <b>{{ day.date | calendarDate:'weekViewColumnHeader':locale }}</b><br>
                 <span>{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</span>
-
-                <div class="badge badge-danger"> @for(zapis of ZapisizaKalendar;track zapis){
-                    @if(zapis.DATUM==('0'+(day.date.getDate())).slice(-2)+'.'+('0'+(day.date.getMonth()+1)).slice(-2)+'.'+day.date.getFullYear()){
-                    <label style="
+                <div style="display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: space-between;">
+                    <div>
+                        @for(zapis of ZapisizaKalendar;track zapis){
+                        @if(zapis.DATUM==('0'+(day.date.getDate())).slice(-2)+'.'+('0'+(day.date.getMonth()+1)).slice(-2)+'.'+day.date.getFullYear()){
+                        <label style="
                     background-color: #b94a48;
                     color: #fff;
                     min-width: 10px;
@@ -405,12 +410,18 @@
                     white-space: nowrap;
                     vertical-align: middle;
                     border-radius: 10px;
-                    float: left;"
-                    matTooltipClass="custom-tooltip" [matTooltip]="zapis.NAZ_MT">{{zapis.BR_UPISA}}</label>
-                    }
-                    }
-                </div>
+                    float: left;" matTooltipClass="custom-tooltip"
+                            [matTooltip]="zapis.NAZ_MT">{{zapis.BR_UPISA}}</label>
+                        }
+                        }
 
+                    </div>
+                    <div>
+                        <button style="float:right;" class="cell-button cal-day-number" color="primary"
+                            style="scale:0.7;" mat-mini-fab (click)="goToDnevnaEvidencija(day)"
+                            [matTooltip]="'DnevnaEvidencija'|translate"><mat-icon>view_day</mat-icon></button>
+                    </div>
+                </div>
             </div>
         </div>
     </ng-template>

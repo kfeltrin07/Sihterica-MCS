@@ -1144,10 +1144,17 @@ export class GrupniUnosComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+      console.log(response);
       this.ArrayPodatakaZaUnos.length = 0;
       this.PostojiEvent = false;
       this.getZapisiUKalendaru();
-      this.getPorukeUpisaSihterica();
+      if (response.debugData.data.length != 0) {
+        this.globalVar.snackBarTableData = response.debugData.data;
+        this.globalFn.showSnackbarCostum(response.debugData.data.length);
+      }
+      else {
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
     });
   }
 
@@ -1327,7 +1334,7 @@ export class GrupniUnosComponent implements OnInit {
   }
 
   public openEditDialog(item: any): void {
-
+    console.log(item);
     const dialogRef = this.dialog.open(EditEventGrupniUnosComponent, {
       data: item
     });

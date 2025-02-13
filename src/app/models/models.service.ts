@@ -755,6 +755,19 @@ export interface porukeZaGrupno {
   SIFVLAS: string;
 }
 
+export interface porukeZaGrupniUnosRadnika {
+  RN: number;
+  UKUPANBROJSLOGOVA: number;
+  SIFVLAS: string;
+  MBR: string;
+  SIF_SHEME: string;
+  SIF_GRUPE: string;
+  PORUKA: string;
+  INDIKATOR: string;
+  IDK: string;
+  SYSDATETIME: string;
+}
+
 export enum TodoState {
   Urgent,
   InProgress,

@@ -161,11 +161,6 @@ export class EditEventGrupniUnosComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const Od = new Date(this.receivedSheme.start);
-    const Do = new Date(this.receivedSheme.end)
-    this.varNames.OD = this.globalFn.formatDateForDateTimeForm(Od);
-    console.log(this.varNames.OD);
-    this.varNames.DO = this.globalFn.formatDateForDateTimeForm(Do);
 
     this.getZaposleniGrupe();
     this.setVisibleColumnsFromEvent();
@@ -241,7 +236,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
 
   public openZaposleniciDialog(): void {
     const dialogRef = this.dialog.open(RadniciGrupeComponent, {
-      data: this.receivedSheme.meta
+      data: this.receivedSheme
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.refresh();

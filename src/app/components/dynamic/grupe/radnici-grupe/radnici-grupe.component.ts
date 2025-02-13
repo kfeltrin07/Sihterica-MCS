@@ -17,7 +17,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PaginationComponent } from 'src/app/components/elements/pagination/pagination.component';
-import { ZaposleniGrupe, Sorting, Grupe, OrganizacijskeJedinice, Sheme } from 'src/app/models/models.service';
+import { ZaposleniGrupe, Sorting, Grupe, OrganizacijskeJedinice, Sheme, CRUDAction } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
@@ -55,7 +55,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   styleUrl: './radnici-grupe.component.scss'
 })
 export class RadniciGrupeComponent {
-  public displayedColumns: string[] = ['yes-no', 'MBR', 'PREZIME_IME','SIF_OJ', 'NAZ_OJ', 'NAZ_RM'];
+  public displayedColumns: string[] = ['yes-no', 'MBR', 'PREZIME_IME', 'SIF_OJ', 'NAZ_OJ', 'NAZ_RM'];
   public zaposleniGrupe: ZaposleniGrupe[] = [];
   public ZaposleniGrupe: ZaposleniGrupe = {
     UKUPANBROJSLOGOVA: 0,
@@ -113,6 +113,7 @@ export class RadniciGrupeComponent {
     PAUZA_DO: "",
   };
 
+  public ArrayPodatakaZaUnos: any = [];
   public displayedZaposleniGrupe: ZaposleniGrupe[] = [];
 
   public selection = new SelectionModel<ZaposleniGrupe>(true, []);
@@ -174,7 +175,7 @@ export class RadniciGrupeComponent {
         (zaposlenik.U_GRUPI == "true") ? this.oldSelection.select(zaposlenik) : ""
 
       }
-      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA ? (+response.debugData.data[0].UKUPANBROJSLOGOVA) : 0;
       this.loading = false;
       this.setDisplayedZaposleniGrupe();
     });
@@ -293,59 +294,55 @@ export class RadniciGrupeComponent {
   public save(): void {
     for (let zaposlenik of this.zaposleniGrupe) {
       if (this.selection.isSelected(zaposlenik) && !(this.oldSelection.isSelected(zaposlenik))) {
-        console.log("Upis");
-        console.log(zaposlenik);
-        console.log(this.oldSelection);
-        console.log(this.selection);
-        this.http.post(
-          this.globalVar.APIHost + this.globalVar.APIFile,
-          {
-            action: 'Sihterica',
-            method: 'dodajRadnikeUGrupu',
-            sid: this.session.loggedInUser.sessionID,
-            data: {
-              pAkcija: 1,
-              pSifVlas: this.session.loggedInUser.ownerID,
-              pIdOperatera: this.session.loggedInUser.ID,
-              pSifSheme: this.receivedGrupa.SIF_SHEME,
-              pIdRadnika: zaposlenik.MBR,
-              pIdGrupe: this.receivedGrupa.ID_GRUPE
-            }
-          }
-        ).subscribe((response: any) => {
-          this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-
-        });
+        this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+          pAkcija: CRUDAction.Insert,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pSifSheme: this.receivedGrupa.SIF_SHEME,
+          pIdRadnika: zaposlenik.MBR,
+          pIdGrupe: this.receivedGrupa.ID_GRUPE,
+        }];
       }
       else if (!(this.selection.isSelected(zaposlenik)) && this.oldSelection.isSelected(zaposlenik)) {
-        console.log("Brišem");
-        console.log(zaposlenik);
-
-        this.http.post(
-          this.globalVar.APIHost + this.globalVar.APIFile,
-          {
-            action: 'Sihterica',
-            method: 'dodajRadnikeUGrupu',
-            sid: this.session.loggedInUser.sessionID,
-            data: {
-              pAkcija: 0,
-              pSifVlas: this.session.loggedInUser.ownerID,
-              pIdOperatera: this.session.loggedInUser.ID,
-              pSifSheme: this.receivedGrupa.SIF_SHEME,
-              pIdRadnika: zaposlenik.MBR,
-              pIdGrupe: this.receivedGrupa.ID_GRUPE
-            }
-          }
-        ).subscribe((response: any) => {
-          this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-
-        });
+        this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+          pAkcija: CRUDAction.Delete,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pSifSheme: this.receivedGrupa.SIF_SHEME,
+          pIdRadnika: zaposlenik.MBR,
+          pIdGrupe: this.receivedGrupa.ID_GRUPE,
+        }];
       }
     }
-
+    this.grupnoDodavanjeRadnikaUGrupu();
   }
 
 
+  public grupnoDodavanjeRadnikaUGrupu(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'grupnoDodajRadnikeUGrupu',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pPodaci: JSON.stringify(this.ArrayPodatakaZaUnos)
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.ArrayPodatakaZaUnos.length = 0;
+      if (response.debugData.data.length != 0) {
+        this.globalVar.snackBarGrupniUnosRadnikaData = response.debugData.data;
+        this.globalFn.showSnackbarGrupniUnosRadnika(response.debugData.data.length);
+      }
+      else {
+        this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
+      }
+
+    });
+
+  }
 
 
   //Organizacijska jedinica START

@@ -7,6 +7,7 @@ import { TranslationService } from '../translation/translation.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarTableComponent } from 'src/app/components/elements/snack-bar-table/snack-bar-table.component';
+import { SnackBarGrupniUnosRadnikaComponent } from 'src/app/components/elements/snack-bar-grupni-unos-radnika/snack-bar-grupni-unos-radnika.component';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,15 @@ export class GlobalFunctionsService {
     var duration = errorDesc.length * 100000
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarTableComponent,{
+        duration: duration,
+      });
+    }
+  }
+
+  public showSnackbarGrupniUnosRadnika(errorDesc: string) {
+    var duration = errorDesc.length * 100000
+    if (errorDesc != 'SQL:OK') {
+      this.snackBar.openFromComponent(SnackBarGrupniUnosRadnikaComponent,{
         duration: duration,
       });
     }
