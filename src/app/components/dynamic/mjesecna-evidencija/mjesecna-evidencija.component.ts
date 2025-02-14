@@ -1117,6 +1117,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       }
     });
   }
+  
   public selectAll(): void {
     this.deleteSelection.clear();
     this.dataSource.forEach((row) => { if (row.RID != null) { this.deleteSelection.select(row) } });

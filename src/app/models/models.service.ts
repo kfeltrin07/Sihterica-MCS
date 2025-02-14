@@ -779,6 +779,17 @@ export interface rekapitulacijaMjesecna {
   SATI: string;
 }
 
+export interface rekapitulacijaDnevna {
+  UKUPANBROJSLOGOVA: number;
+  RN: number;
+  VRSTA: string;
+  SIF_MT: string;
+  NAZ_MT: string;
+  SIF_VP: string;
+  NAZ_VP: string;
+  BROJ_LJUDI: string;
+  SATI: string;
+}
 
 export enum TodoState {
   Urgent,

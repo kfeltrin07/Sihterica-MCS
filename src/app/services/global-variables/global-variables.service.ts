@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CookiesService } from '../cookies/cookies.service';
-import { Konekcija, DynamicMenu, RightsState, DashboardItem, DynamicMenuReference, SidebarItem, ColumnRef, filterZaDnevnaEvidencija, porukeZaGrupno, porukeZaGrupniUnosRadnika, rekapitulacijaMjesecna } from 'src/app/models/models.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { CalendarEvent } from 'angular-calendar';
+import { ColumnRef, DashboardItem, DynamicMenu, DynamicMenuReference, filterZaDnevnaEvidencija, porukeZaGrupniUnosRadnika, porukeZaGrupno, rekapitulacijaDnevna, rekapitulacijaMjesecna, RightsState, SidebarItem } from 'src/app/models/models.service';
+import { CookiesService } from '../cookies/cookies.service';
 import { environment } from './../../../environments/environment';
 
 type AvailableLanguages = 'en' | 'hr';
@@ -37,6 +37,7 @@ export class GlobalVariablesService {
   public snackBarTableData: porukeZaGrupno[] = [];
   public snackBarGrupniUnosRadnikaData: porukeZaGrupniUnosRadnika[] = [];
   public snackBarRekaitulacijaMjesecna: rekapitulacijaMjesecna[] = [];
+  public snackBarRekaitulacijaDnevna: rekapitulacijaDnevna[] = [];
 
   public sideNav!: MatSidenav;
 

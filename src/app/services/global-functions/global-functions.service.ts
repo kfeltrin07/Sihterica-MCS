@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarTableComponent } from 'src/app/components/elements/snack-bar-table/snack-bar-table.component';
 import { SnackBarGrupniUnosRadnikaComponent } from 'src/app/components/elements/snack-bar-grupni-unos-radnika/snack-bar-grupni-unos-radnika.component';
 import { SnackBarRekapitulacijaMjesecnaComponent } from 'src/app/components/elements/snack-bar-rekapitulacija-mjesecna/snack-bar-rekapitulacija-mjesecna.component';
+import { SnackBarRekapitulacijaDnevnaComponent } from 'src/app/components/elements/snack-bar-rekapitulacija-dnevna/snack-bar-rekapitulacija-dnevna.component';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,15 @@ export class GlobalFunctionsService {
     var duration = errorDesc.length * 100000
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarRekapitulacijaMjesecnaComponent,{
+        duration: duration,
+      });
+    }
+  }
+
+  public showSnackbarRekapitulacijaDenavna(errorDesc: string) {
+    var duration = errorDesc.length * 100000
+    if (errorDesc != 'SQL:OK') {
+      this.snackBar.openFromComponent(SnackBarRekapitulacijaDnevnaComponent,{
         duration: duration,
       });
     }

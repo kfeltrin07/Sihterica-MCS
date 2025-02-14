@@ -594,3 +594,23 @@ Content-Type: application/json
     "pZSifVp": "%"
   }
 }
+
+//get rekapitulacija sati dnevna
+###
+POST http://192.168.88.169:8080/php_angularAPI_oracle_sihterica/router.php
+Content-Type: application/json
+
+{
+  "action" : "Sihterica",
+  "method" : "getRekapitulacijaSatiDnevna",
+  "sid": "busmeh9ti014pd8fjobmvgb183",
+  "data" : {
+    "pSifVlas" : 144,
+    "pIdKorisnika" : 4,
+    "pMbr" : "%",
+    "pDatum": "13.02.2025",
+    "pZSifMt": "%",
+    "pZSifVp": "%",
+    "pSifOj": "%"
+  }
+}
