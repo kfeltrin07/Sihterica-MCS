@@ -162,7 +162,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -192,7 +192,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -275,7 +275,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -305,7 +305,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.EvidencijaRadVreZagVeze.SIF_STUPCA,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

@@ -1382,14 +1382,12 @@ export class GlobalVariablesService {
   };
 
   public EvidencijaDnevnaDisplayedColumns: ColumnRef[] = [
-    this.MBRColumn,
     this.OSOBAColumn,
     this.SIF_MT_NColumn,
     this.SIF_VP_NColumn,
     this.SATIColumn,
     this.ODHHColumn,
     this.DOHHColumn,
-    this.IDK_NColumn
   ];
 
   public EvidencijaDnevnaColumnsList: ColumnRef[] = [
@@ -1398,12 +1396,13 @@ export class GlobalVariablesService {
     this.MBRColumn,
     this.MBRXColumn,
     this.OSOBAColumn,
-    this.SIF_VPColumn,
+    this.SIF_MT_NColumn,
     this.SIF_VP_NColumn,
+    this.SATIColumn,
     this.ODHHColumn,
     this.DOHHColumn,
+    this.SIF_VPColumn,
     this.RIDColumn,
-    this.SATIColumn,
     this.IDKColumn,
     this.SYSDColumn,
     this.ODColumn,
@@ -1413,7 +1412,6 @@ export class GlobalVariablesService {
     this.IODHHColumn,
     this.IDOHHColumn,
     this.SIF_MTColumn,
-    this.SIF_MT_NColumn,
     this.DATUMColumn
   ];
 

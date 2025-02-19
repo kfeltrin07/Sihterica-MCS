@@ -105,7 +105,7 @@ export class EventGrupniUnosComponent implements OnInit {
 
   public pageIndex: number = 0;
   public pageSize = 10;
-  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200];
   public length = 0;
 
   selected = new FormControl(0);

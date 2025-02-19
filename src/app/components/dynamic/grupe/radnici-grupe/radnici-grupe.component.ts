@@ -161,7 +161,7 @@ export class RadniciGrupeComponent {
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
           pIdOperatera: this.session.loggedInUser.ID,
           pSifOj: this.varNames.SIFMJTR,
-          limit: 100000,
+          limit: 10,
           page: 1,
         }
       }
@@ -238,7 +238,7 @@ export class RadniciGrupeComponent {
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
-          limit: 10000,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -379,7 +379,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -409,7 +409,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.varNames.SIFMJTR,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -495,7 +495,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -525,7 +525,7 @@ export class RadniciGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.receivedGrupa.SIF_SHEME,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

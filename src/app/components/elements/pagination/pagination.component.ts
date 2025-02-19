@@ -31,7 +31,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 export class PaginationComponent implements AfterViewInit{
 
   @Input('pageIndex') pageIndex:number=0;
-  @Input('pageSizeOptions') pageSizeOptions:number[]=[5, 10, 15, 20];
+  @Input('pageSizeOptions') pageSizeOptions:number[]=[5, 10, 15, 20, 50, 100, 200];
   @Input('pageSize') pageSize:number=10;
   @Input('length') length:number=0;
   @ViewChild('paginator') paginator!: MatPaginator;

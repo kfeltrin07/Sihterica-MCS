@@ -192,7 +192,6 @@ export class SessionService {
         if (this.router.url == '/login') {
           this.router.navigate(['/selection-screen']);
         }
-        this.getDynamicMenu();
       }
     });
 
@@ -212,7 +211,7 @@ export class SessionService {
         method: 'getDynamicMenu',
         sid: this.loggedInUser.sessionID,
         data: {
-          limit: 1000,
+          limit: 100,
           page: 1,
           pKorisnikId: this.loggedInUser.ID,
           pSid: this.loggedInUser.sessionID,

@@ -150,7 +150,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -180,7 +180,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.EvidencijaRadVreZag.VRSTA_SLOGA,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

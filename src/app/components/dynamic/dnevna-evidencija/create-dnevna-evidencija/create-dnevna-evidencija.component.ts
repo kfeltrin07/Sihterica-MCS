@@ -138,7 +138,7 @@ export class CreateDnevnaEvidencijaComponent {
   }
 
   public Unos(): void {
-
+    console.log(this.ArrayPodatakaZaUnos);
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -171,10 +171,11 @@ export class CreateDnevnaEvidencijaComponent {
         method: 'getPopisRadnikaGrupe',
         sid: this.session.loggedInUser.sessionID,
         data: {
+          pDioNaziva: '%%',
           pSifVlas: this.session.loggedInUser.ownerID,
           pIdOperatera: this.session.loggedInUser.ID,
           pIdGrupe: this.varNames.ID_GRUPE,
-          limit: 1000000,
+          limit: 100000,
           page: 1,
         }
       }
@@ -190,7 +191,7 @@ export class CreateDnevnaEvidencijaComponent {
           data: {
             pDioNaziva: '%%',
             pSifSheme: this.varNames.SIF_SHEME,
-            limit: 1000000,
+            limit: 100000,
             page: 1,
             sort: [
               {
@@ -243,7 +244,7 @@ export class CreateDnevnaEvidencijaComponent {
         method: 'getPorukeUpisaSihterica',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          limit: 1000000,
+          limit: 100000,
         }
       }
     ).subscribe((response: any) => {
@@ -297,7 +298,7 @@ export class CreateDnevnaEvidencijaComponent {
           pDioNaziva: '%' + searchParam + '%',
           pSifSheme: '',
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -331,7 +332,7 @@ export class CreateDnevnaEvidencijaComponent {
           pDioNaziva: this.varNames.ID_GRUPE,
           pSifSheme: '',
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -419,7 +420,7 @@ export class CreateDnevnaEvidencijaComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%' + searchParam + '%',
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -451,7 +452,7 @@ export class CreateDnevnaEvidencijaComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.varNames.SIF_VP,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

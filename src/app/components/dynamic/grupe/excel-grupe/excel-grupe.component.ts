@@ -106,7 +106,7 @@ export class ExcelGrupeComponent {
           pDioNaziva: '%' + this.dialogData.searchParam + '%',
           pSifSheme: '',
           pIdKorisnika:this.session.loggedInUser.ID,
-          limit: 1000,
+          limit: 100,
           sort: [
             {
               property: 'ID_GRUPE',

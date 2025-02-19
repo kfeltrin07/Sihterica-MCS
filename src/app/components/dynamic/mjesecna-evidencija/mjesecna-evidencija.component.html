@@ -153,45 +153,7 @@
                 </span>
                 <span *ngIf="filter.NAZ_VP!=''" class="small-margin-left margin-right">{{ filter.NAZ_VP }}</span>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="MBR">{{ 'KopirajPodatkeOd' | translate }}:</label>
-            </td>
-            <td>
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                    (click)="pickZaposleni('2');" (contextmenu)="removeZaposleni($event,'2')"
-                    matTooltip="{{ (!filter.MBR2 ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                    [class.color-valid]="filter!.PREZIME_IME2">
-                    {{ filter!.PREZIME_IME2 ? 'done' : 'import_contacts'}}
-                </mat-icon>
-            </td>
-            <td class="filter-result2">
-                <span (click)="refreshZaposleni(filter!.MBR2, false,'2');">
-                    <input type="text" [(ngModel)]="filter!.MBR2" maxlength="22" id="offeredZaposleniKopija-help-span"
-                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni('2');resetZaposleniIndex('2');"
-                        (ngModelChange)="filterZaposleni(filter!.MBR2,'2');"
-                        (focus)="refreshZaposleni(filter!.MBR2, false,'2');"
-                        (keyup.enter)="selectZaposleni(offeredZaposleniKopija[ZaposleniKopijaDropdownIndex],'2');"
-                        (keyup.escape)="resetZaposleniIndex('2');"
-                        (keyup.arrowdown)="ZaposleniKopijaDropdownIndex = (ZaposleniKopijaDropdownIndex + 1) % offeredZaposleniKopija.length;globalFn.scroll('offeredZaposleniKopija-dropdown-' + ZaposleniKopijaDropdownIndex);"
-                        (keyup.arrowup)="ZaposleniKopijaDropdownIndex = (ZaposleniKopijaDropdownIndex - 1 + offeredZaposleniKopija.length) % offeredZaposleniKopija.length;globalFn.scroll('offeredZaposleniKopija-dropdown-' + ZaposleniKopijaDropdownIndex);">
-                    <div id="offeredZaposleniKopija-dropdown" class="select-dropdown-content max-height-300px"
-                        style="z-index: 500;">
-                        <div [id]="'offeredZaposleniKopija-dropdown-' + i"
-                            *ngFor="let zaposleni of offeredZaposleniKopija; index as i" matRipple
-                            class="dropdown-content-item display-flex align-items-center space-between"
-                            [class.gray-background]="i == ZaposleniKopijaDropdownIndex"
-                            (mousedown)="selectZaposleni(zaposleni,'2');">
-                            <span>
-                                <b>{{zaposleni.MBR}}</b> - {{ zaposleni.OSOBA }}
-                            </span>
-                        </div>
-                    </div>
-                </span>
-                <span *ngIf="filter.OSOBA2!=''" class="small-margin-left margin-right">{{ filter.OSOBA2 }}</span>
-            </td>
+
             <td>
                 <label for="MBR">{{ 'Zaposleni' | translate }}:</label>
             </td>
@@ -276,8 +238,9 @@
                     [(ngModel)]="evidencija[item.key]"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
-
+            <td mat-footer-cell *matFooterCellDef style="max-width: 90px;min-width: 90px;">
+                <input style="width: 40px;" type="text" [(ngModel)]="newEvidencijaMjesecna[item.key]">
+            </td>
         </ng-container>
         }
         @else if (item.key=='D1') {
@@ -288,7 +251,9 @@
             <td mat-cell *matCellDef="let evidencija" style="cursor: pointer;" (click)="goToDnevnaEvidencija(evidencija)">
                 {{ evidencija[item.key] }}
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+            <td mat-footer-cell *matFooterCellDef="let evidencija">
+                <input type="date" [(ngModel)]="newEvidencijaMjesecna[item.key]">
+            </td>
 
         </ng-container>
         }
@@ -301,8 +266,9 @@
                     [(ngModel)]="evidencija[item.key]"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
-
+            <td mat-footer-cell *matFooterCellDef style="max-width: 120px;min-width: 120px;">
+                <input style="width: 70px;" type="time" [(ngModel)]="newEvidencijaMjesecna[item.key]">
+            </td>
         </ng-container>
         }
         @else if (item.key=='DOHH') {
@@ -314,8 +280,9 @@
                     [(ngModel)]="evidencija[item.key]"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
-
+            <td mat-footer-cell *matFooterCellDef style="max-width: 120px;min-width: 120px;">
+                <input style="width: 70px;" type="time" [(ngModel)]="newEvidencijaMjesecna[item.key]">
+            </td>
         </ng-container>
         }
         @else if(item.key=='SIF_VP'){
@@ -326,12 +293,48 @@
             <td style="width: 260px;" mat-cell *matCellDef="let evidencija">
                 <select [(ngModel)]="evidencija[item.key]"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
-                    @for(option of filteredVrstePoslaNew;track option){
+                    @for(option of VrstePoslaTableList;track option){
                     <option [value]="option.SIF_VP">{{option.NAZ_VP}}</option>
                     }
                 </select>
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+            <td mat-footer-cell *matFooterCellDef>
+                <div style="display: flex;align-content: center;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickVrstePoslaNew();" (contextmenu)="removeVrstePoslaNew($event)"
+                        matTooltip="{{ (!newEvidencijaMjesecna.SIF_VP ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="newVarNames.NAZ_VP">
+                        {{ newVarNames!.NAZ_VP ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (click)="refreshVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP, false);">
+                        <input [class.red-input]="newEvidencijaMjesecna!.SIF_VP && newVarNames!.NAZ_VP=='' " type="text"
+                            [(ngModel)]="newEvidencijaMjesecna!.SIF_VP" id="offeredVrstePoslaNew-help-span"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (blur)="OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
+                            (ngModelChange)="filterVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP);newVarNames!.NAZ_VP=''"
+                            (focus)="refreshVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP, false);"
+                            (keyup.enter)="selectVrstePoslaNew(offeredVrstePoslaNew[VrstePoslaDropdownIndexNew]);"
+                            (keyup.escape)="resetVrstePoslaNewIndex();"
+                            (keyup.arrowdown)="VrstePoslaDropdownIndexNew = (VrstePoslaDropdownIndexNew + 1) % offeredVrstePoslaNew.length;globalFn.scroll('offeredVrstePoslaNew-dropdown-'+VrstePoslaDropdownIndexNew);"
+                            (keyup.arrowup)="VrstePoslaDropdownIndexNew = (VrstePoslaDropdownIndexNew - 1 + offeredVrstePoslaNew.length) % offeredVrstePoslaNew.length;globalFn.scroll('offeredVrstePoslaNew-dropdown-'+VrstePoslaDropdownIndexNew);">
+                        <div id="offeredVrstePoslaNew-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredVrstePoslaNew-dropdown-' + i"
+                                *ngFor="let Cjenik of offeredVrstePoslaNew; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == VrstePoslaDropdownIndexNew"
+                                (mousedown)="selectVrstePoslaNew(Cjenik);">
+                                <span>
+                                    ({{ Cjenik.SIF_VP }}) <b>{{ Cjenik.NAZ_VP }}</b>
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span matTooltip="{{ newVarNames!.NAZ_VP }}" matTooltipShowDelay="1000"
+                        style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZ_VP}}</span>
+                </div>
+            </td>
 
         </ng-container>
         }
@@ -343,12 +346,48 @@
             <td style="width: 300px;" mat-cell *matCellDef="let evidencija">
                 <select [(ngModel)]="evidencija.SIF_MT"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
-                    @for(option of filteredEvidencijaRadVreOjNew;track option){
+                    @for(option of RadVreOjTableList;track option){
                     <option [value]="option.SIF_OJ">{{(option.SIF_OJ!='%'?(option.SIF_OJ +' -                        '):'')+option.NAZMJTR.split(' - ')[0]}}</option>
                     }
                 </select>
             </td>
-            <td mat-footer-cell *matFooterCellDef="let evidencija"></td>
+            <td mat-footer-cell *matFooterCellDef>
+                <div style="display: flex;align-content: center;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                        (click)="pickEvidencijaRadVreOjNew();" (contextmenu)="removeEvidencijaRadVreOjNew($event)"
+                        matTooltip="{{ (!newEvidencijaMjesecna.SIF_MT ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="newVarNames.NAZMJTR">
+                        {{ newVarNames!.NAZMJTR ? 'done' : 'import_contacts'}}
+                    </mat-icon>
+                    <span (click)="refreshEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT, false);">
+                        <input [class.red-input]="newEvidencijaMjesecna!.SIF_MT && newVarNames!.NAZMJTR=='' " type="text"
+                            [(ngModel)]="newEvidencijaMjesecna!.SIF_MT" id="offeredEvidencijaRadVreOjNew-help-span"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}"
+                            (blur)="OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
+                            (ngModelChange)="filterEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT);newVarNames!.NAZMJTR=''"
+                            (focus)="refreshEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT, false);"
+                            (keyup.enter)="selectEvidencijaRadVreOjNew(offeredEvidencijaRadVreOjNew[EvidencijaRadVreOjDropdownIndexNew]);"
+                            (keyup.escape)="resetEvidencijaRadVreOjNewIndex();"
+                            (keyup.arrowdown)="EvidencijaRadVreOjDropdownIndexNew = (EvidencijaRadVreOjDropdownIndexNew + 1) % offeredEvidencijaRadVreOjNew.length;globalFn.scroll('offeredEvidencijaRadVreOjNew-dropdown-'+EvidencijaRadVreOjDropdownIndexNew);"
+                            (keyup.arrowup)="EvidencijaRadVreOjDropdownIndexNew = (EvidencijaRadVreOjDropdownIndexNew - 1 + offeredEvidencijaRadVreOjNew.length) % offeredEvidencijaRadVreOjNew.length;globalFn.scroll('offeredEvidencijaRadVreOjNew-dropdown-'+EvidencijaRadVreOjDropdownIndexNew);">
+                        <div id="offeredEvidencijaRadVreOjNew-dropdown" class="select-dropdown-content max-height-300px"
+                            style="z-index: 500;">
+                            <div [id]="'offeredEvidencijaRadVreOjNew-dropdown-' + i"
+                                *ngFor="let Cjenik of offeredEvidencijaRadVreOjNew; index as i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == EvidencijaRadVreOjDropdownIndexNew"
+                                (mousedown)="selectEvidencijaRadVreOjNew(Cjenik);">
+                                <span>
+                                    ({{ Cjenik.SIF_OJ }}) <b>{{ Cjenik.NAZMJTR }}</b>
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <span matTooltip="{{ newVarNames!.NAZMJTR }}" matTooltipShowDelay="1000"
+                        style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{newVarNames.NAZMJTR}}</span>
+                </div>
+            </td>
 
         </ng-container>
         }
@@ -416,18 +455,22 @@
 
                 </div>
             </td>
-            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag">
+            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag" style="background-color: aliceblue !important;">
                 <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    <div>
+                        <button mat-flat-button type="button" color="primary"
+                            [disabled]="!validateNewForm(newEvidencijaMjesecna)"
+                            (click)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
+                    </div>
                     <table>
                         <tr>
                             <td>
-                                <button class="SelectAll" (click)="selectAll()">{{'SelectAll'|translate}}</button>
+                                <button class="SelectAll" (click)="selectAll()" >{{'SelectAll'|translate}}</button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button class="Deselect"
-                                    (click)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
+                                <button class="Deselect" (click)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
                             </td>
                         </tr>
                     </table>
@@ -437,7 +480,7 @@
 
         <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row style="height: 20px;" *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns" style="background-color: aliceblue;"></tr>
 
     </table>
 </div>

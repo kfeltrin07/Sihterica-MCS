@@ -1,22 +1,23 @@
-<div
-cdkDrag
-cdkDragRootElement=".cdk-overlay-pane" 
-cdkDragHandle 
-cdkDragBoundary=".cdk-overlay-container"
-class="dialog-header">
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
+    class="dialog-header">
     {{ 'Kopiranje' | translate }}
 
-    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+    <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
 
 </div>
 <mat-dialog-content>
+    @if(recievedData.SIF_OJ=='%'||recievedData.SIF_OJ==''){
+    <h2>{{'NijeMoguceKopiratiOdaberitePrvoSIFOJ'|translate}}</h2>
+    }
+    @else {
     <table>
         <tr>
             <td>
                 <label for="">{{'KopiranjeZa'|translate}}</label>
             </td>
             <td>
-                <label for="">{{recievedData.MBR+' - '+recievedData.PREZIME_IME+' - ' + recievedData.SIF_OJ+' - '+recievedData.SIF_VP}}</label>
+                <label for="">{{recievedData.MBR+' - '+recievedData.PREZIME_IME+' - ' + recievedData.SIF_OJ
+                +" - "+recievedData.SIF_VP}}</label>
             </td>
         </tr>
         <tr>
@@ -36,9 +37,15 @@ class="dialog-header">
             </td>
         </tr>
     </table>
+    }
 </mat-dialog-content>
-  
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{ 'Cancel' | translate }}</button>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="copy();">{{ 'Copy' | translate }}</button>
-  </mat-dialog-actions>
+
+<mat-dialog-actions align="end">
+    @if(recievedData.SIF_OJ=='%'||recievedData.SIF_OJ==''){
+        <button mat-button mat-dialog-close>{{ 'Cancel' | translate }}</button>
+    }
+    @else {
+        <button mat-button mat-dialog-close>{{ 'Cancel' | translate }}</button>
+        <button mat-raised-button color="primary" mat-dialog-close (click)="copy();">{{ 'Copy' | translate }}</button>
+    }
+</mat-dialog-actions>

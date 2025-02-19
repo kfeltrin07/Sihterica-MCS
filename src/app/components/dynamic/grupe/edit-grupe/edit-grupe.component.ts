@@ -154,7 +154,7 @@ export class EditGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -184,7 +184,7 @@ export class EditGrupeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.Grupe.SIF_SHEME,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -268,7 +268,7 @@ export class EditGrupeComponent {
           sid: this.session.loggedInUser.sessionID,
           data: {
             pIdKorisnika: this.session.loggedInUser.ID,
-            limit: 100,
+            limit: 10,
             page: 1,
             sort: [
               {
@@ -300,7 +300,7 @@ export class EditGrupeComponent {
           sid: this.session.loggedInUser.sessionID,
           data: {
             pIdKorisnika: this.session.loggedInUser.ID,
-            limit: 100,
+            limit: 10,
             page: 1,
             sort: [
               {

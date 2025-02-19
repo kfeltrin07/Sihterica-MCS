@@ -34,12 +34,6 @@ export class AppComponent implements OnInit {
     if (environment.production) {
       window.console.log = () => { }
     }
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        this.getDynamicMenu();
-
-      }
-    });
     console.log(this.globalVar.env)
   }
 
@@ -79,7 +73,7 @@ export class AppComponent implements OnInit {
         method: 'getDynamicMenu',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          limit: 1000,
+          limit: 100,
           page: 1,
           pKorisnikId: this.session.loggedInUser.ID,
           pSid: this.session.loggedInUser.sessionID,

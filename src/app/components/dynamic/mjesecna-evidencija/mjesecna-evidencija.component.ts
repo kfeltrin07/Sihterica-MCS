@@ -59,7 +59,7 @@ import { MatBadgeModule } from '@angular/material/badge';
   styleUrl: './mjesecna-evidencija.component.scss'
 })
 export class MjesecnaEvidencijaComponent implements OnInit {
-  public displayedColumns: string[] = ['D1', 'DAN', 'SIF_MT_N', 'SIF_VP', 'SATI', 'ODHH', 'DOHH', 'IDK_N', 'options'];
+  public displayedColumns: string[] = ['D1', 'DAN', 'SIF_MT_N', 'SIF_VP', 'SATI', 'ODHH', 'DOHH', 'options'];
 
   public filter: any = {
     MBR: "",
@@ -77,6 +77,39 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     NAZ_VP: "",
   }
 
+  public newEvidencijaMjesecna: EvidencijaMjesecna = {
+    UKUPANBROJSLOGOVA: 0,
+    RN: 0,
+    SATI2: "",
+    ISATI2: "",
+    IODHH: "",
+    IDOHH: "",
+    DAN: "",
+    IDK_N: "",
+    ODHH: '06:00',
+    DOHH: '14:00',
+    D1: "",
+    RID: "",
+    SIFVLAS: "",
+    DATUM: "",
+    MBR: "",
+    SIF_MT: "",
+    SIF_VP: "",
+    SATI: "",
+    IDK: "",
+    SYSD: "",
+    OD: "",
+    DO: "",
+    RNALOG: "",
+    DATUM_DAN: "",
+    SATI_DAN: "",
+    OPIS_DAN: "",
+    SIF_VP_N: "",
+    SIF_MT_N: "",
+    NAZIV: "",
+  }
+
+  public newVarNames: any = {};
 
   public evidencijaMjesecna: EvidencijaMjesecna[] = [];
   public EvidencijaMjesecna: EvidencijaMjesecna = {
@@ -115,8 +148,11 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public ArrayPodatakaZaUnos: any = [];
 
   public EvidencijaRadVreOjDropdownIndex: number = -1;
+  public EvidencijaRadVreOjDropdownIndexNew: number = -1;
   public offeredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public offeredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
   public filteredEvidencijaRadVreOj: EvidencijaRadVreOj[] = [];
+  public filteredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
   public selectedEvidencijaRadVreOj: EvidencijaRadVreOj = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -145,8 +181,11 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   };
 
   public VrstePoslaDropdownIndex: number = -1;
+  public VrstePoslaDropdownIndexNew: number = -1;
   public offeredVrstePosla: VrstePosla[] = [];
+  public offeredVrstePoslaNew: VrstePosla[] = [];
   public filteredVrstePosla: VrstePosla[] = [];
+  public filteredVrstePoslaNew: VrstePosla[] = [];
   public selectedVrstePosla: VrstePosla = {
     UKUPANBROJSLOGOVA: 0,
     RN: 0,
@@ -157,8 +196,8 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   };
   public filteredOptions!: Observable<VrstePosla[]>;
   public myControl = new FormControl('');
-  public filteredVrstePoslaNew: VrstePosla[] = [];
-  public filteredEvidencijaRadVreOjNew: EvidencijaRadVreOj[] = [];
+  public VrstePoslaTableList: VrstePosla[] = [];
+  public RadVreOjTableList: EvidencijaRadVreOj[] = [];
 
   public selection = new SelectionModel<EvidencijaMjesecna>(true, []);
   public deleteSelection = new SelectionModel<EvidencijaMjesecna>(true, []);
@@ -176,7 +215,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   public isPaginatorShown: boolean = true;
   public pageIndex: number = 0;
   public pageSize = 20;
-  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200];
   public length = 0;
 
   constructor(
@@ -204,7 +243,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.filter.SIF_VP = this.IncomingData.SIF_VP;
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
-      this.OfferedZaposleni('1');
       this.OfferedZaposleni('2');
 
       this.getEvidencijaMjesecna();
@@ -213,7 +251,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.filter.MJESEC = new Date().getMonth() + 1;
       this.OfferedEvidencijaRadVreOj();
       this.OfferedVrstePosla();
-      this.OfferedZaposleni('1');
       this.OfferedZaposleni('2');
 
     }
@@ -761,27 +798,27 @@ export class MjesecnaEvidencijaComponent implements OnInit {
 
 
 
-  //VrstaPosla START
+  //VrstaPosla NEW START
   public pickVrstePoslaNew(): void {
     const dialogRef = this.dialog.open(PickVrstaPoslaComponent, {});
 
     dialogRef.afterClosed().subscribe((VrstePosla?: VrstePosla) => {
-      this.setVrstePoslaFromDialog(VrstePosla);
+      this.setVrstePoslaNewDialog(VrstePosla);
     });
   }
 
-  public setVrstePoslaFromDialogNew(VrstePosla?: VrstePosla): void {
+  public setVrstePoslaNewDialog(VrstePosla?: VrstePosla): void {
     if (VrstePosla) {
-      this.filter.SIF_VP = VrstePosla.SIF_VP;
-      this.varNames.NAZ_VP = VrstePosla.NAZ_VP;
+      this.newEvidencijaMjesecna.SIF_VP = VrstePosla.SIF_VP;
+      this.newVarNames.NAZ_VP = VrstePosla.NAZ_VP;
 
     }
   }
 
   public removeVrstePoslaNew(e: Event): void {
     e.preventDefault();
-    this.filter.SIF_VP = "";
-    this.varNames.NAZ_VP = "";
+    this.newEvidencijaMjesecna.SIF_VP = "";
+    this.newVarNames.NAZ_VP = "";
   }
 
   public refreshVrstePoslaNew(searchParam: string, isSelected: boolean): void {
@@ -793,7 +830,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -806,12 +843,12 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.offeredVrstePosla = response.debugData.data;
-      this.filteredVrstePosla = response.debugData.data;
-      var dummyEl = document.getElementById('offeredVrstePosla-help-span');
+      this.offeredVrstePoslaNew = response.debugData.data;
+      this.filteredVrstePoslaNew = response.debugData.data;
+      var dummyEl = document.getElementById('offeredVrstePoslaNew-help-span');
       var isFocused = (document.activeElement === dummyEl);
       if (!isSelected && isFocused) {
-        document.getElementById("offeredVrstePosla-dropdown")?.classList.add("select-dropdown-content-visible");
+        document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });
   }
@@ -824,8 +861,8 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         method: 'getVrstePosla',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          pDioNaziva: this.filter.SIF_VP,
-          limit: 100,
+          pDioNaziva: this.newEvidencijaMjesecna.SIF_VP,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -836,14 +873,15 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
+
       const { metadata, data } = response.debugData;
       this.globalFn.showSnackbarError(metadata.OPIS);
-      this.offeredVrstePosla = data;
+      this.offeredVrstePoslaNew = data;
 
-      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
+      const matchedItem = this.offeredVrstePoslaNew.find(item => item.SIF_VP.toUpperCase() === this.newEvidencijaMjesecna.SIF_VP.toUpperCase());
       if (matchedItem) {
-        this.filter.NAZ_VP = matchedItem.NAZ_VP;
-        this.filter.SIF_VP = matchedItem.SIF_VP;
+        this.newEvidencijaMjesecna.SIF_VP = matchedItem.SIF_VP;
+        this.newVarNames.NAZ_VP = matchedItem.NAZ_VP;
       }
     });
   }
@@ -854,27 +892,27 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       return;
     }
 
-    this.offeredVrstePosla = this.filteredVrstePosla.filter(
+    this.offeredVrstePoslaNew = this.filteredVrstePoslaNew.filter(
       item => item?.SIF_VP.toLowerCase().includes(text.toLowerCase())
     );
 
-    if (this.offeredVrstePosla.length == 0) {
+    if (this.offeredVrstePoslaNew.length == 0) {
       this.refreshVrstePoslaNew(text, false);
     }
   }
 
   public selectVrstePoslaNew(VrstePosla: VrstePosla): void {
-    this.filter.SIF_VP = VrstePosla.SIF_VP;
-    this.varNames.NAZ_VP = VrstePosla.NAZ_VP;
+    this.newEvidencijaMjesecna.SIF_VP = VrstePosla.SIF_VP;
+    this.newVarNames.NAZ_VP = VrstePosla.NAZ_VP;
     document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
-    this.VrstePoslaDropdownIndex = -1;
+    this.VrstePoslaDropdownIndexNew = -1;
   }
 
   public resetVrstePoslaNewIndex(): void {
-    this.VrstePoslaDropdownIndex = -1;
+    this.VrstePoslaDropdownIndexNew = -1;
     document.getElementById("offeredVrstePoslaNew-dropdown")?.classList.remove("select-dropdown-content-visible");
   }
-  //VrstaPosla END
+  //VrstaPosla NEW END
 
 
   public getVrstePosla(): void {
@@ -899,7 +937,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.filteredVrstePoslaNew = response.debugData.data;
+      this.VrstePoslaTableList = response.debugData.data;
     });
   }
 
@@ -925,18 +963,18 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
-      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
-      this.filteredEvidencijaRadVreOjNew.forEach((item, index) => {
-        if (item.SIF_OJ === '%') this.filteredEvidencijaRadVreOjNew.splice(index, 1);
+      this.RadVreOjTableList = response.debugData.data;
+      this.RadVreOjTableList.forEach((item, index) => {
+        if (item.SIF_OJ === '%') this.RadVreOjTableList.splice(index, 1);
       });
-      this.filteredEvidencijaRadVreOjNew.push({
-        UKUPANBROJSLOGOVA: this.filteredEvidencijaRadVreOjNew[0].UKUPANBROJSLOGOVA,
-        RN: this.filteredEvidencijaRadVreOjNew.length,
+      this.RadVreOjTableList.push({
+        UKUPANBROJSLOGOVA: this.RadVreOjTableList[0].UKUPANBROJSLOGOVA,
+        RN: this.RadVreOjTableList.length,
         SIF_OJ: "%",
         NAZMJTR: "ODABERITE M.T.",
         VRSTA: "1",
       })
-      console.log(this.filteredEvidencijaRadVreOjNew);
+      console.log(this.RadVreOjTableList);
     });
   }
 
@@ -1031,7 +1069,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
         else {
           this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
-        } 
+        }
 
       });
 
@@ -1089,7 +1127,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     });
   }
 
-  public getRekapitulacija():void{
+  public getRekapitulacija(): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1099,14 +1137,14 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
           pMbr: this.filter.MBR,
-          pZaMjesec: this.filter.MJESEC+"."+this.filter.GODINA,
+          pZaMjesec: this.filter.MJESEC + "." + this.filter.GODINA,
           pSifMjTr: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
           pZSifMt: this.filter.SIF_OJ ? this.filter.SIF_OJ : "%",
           pZSifVp: this.filter.SIF_VP ? this.filter.SIF_VP : "%"
         }
       }
     ).subscribe((response: any) => {
-      this.globalVar.snackBarRekaitulacijaMjesecna=[];
+      this.globalVar.snackBarRekaitulacijaMjesecna = [];
       console.log(response);
       if (response.debugData.data.length != 0) {
         this.globalVar.snackBarRekaitulacijaMjesecna = response.debugData.data;
@@ -1117,9 +1155,166 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       }
     });
   }
-  
+
   public selectAll(): void {
     this.deleteSelection.clear();
     this.dataSource.forEach((row) => { if (row.RID != null) { this.deleteSelection.select(row) } });
   }
+
+
+
+  //EvidencijaRadVreOj START
+  public pickEvidencijaRadVreOjNew(): void {
+    const dialogRef = this.dialog.open(PickEvidencijaHelpOjComponent, {});
+
+    dialogRef.afterClosed().subscribe((EvidencijaRadVreOj?: EvidencijaRadVreOj) => {
+      this.setEvidencijaRadVreNewOjFromDialog(EvidencijaRadVreOj);
+    });
+  }
+
+  public setEvidencijaRadVreNewOjFromDialog(EvidencijaRadVreOj?: EvidencijaRadVreOj): void {
+    if (EvidencijaRadVreOj) {
+      this.newEvidencijaMjesecna.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
+      this.newVarNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+
+    }
+  }
+
+  public removeEvidencijaRadVreOjNew(e: Event): void {
+    e.preventDefault();
+    this.newEvidencijaMjesecna.SIF_MT = "";
+    this.newVarNames.NAZMJTR = "";
+
+  }
+
+  public refreshEvidencijaRadVreOjNew(searchParam: string, isSelected: boolean): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 10,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      this.filteredEvidencijaRadVreOjNew = response.debugData.data;
+      var dummyEl = document.getElementById('offeredEvidencijaRadVreOjNew-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
+        document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.add("select-dropdown-content-visible");
+      }
+    });
+  }
+
+  public OfferedEvidencijaRadVreOjNew(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'getEvRadnogVremenaSviRadniciHelpOj',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pIdKorisnika: this.session.loggedInUser.ID,
+          limit: 10,
+          page: 1,
+          sort: [
+            {
+              property: "SIF_OJ",
+              direction: "ASC"
+            }
+          ]
+        }
+      }
+    ).subscribe((response: any) => {
+
+      this.offeredEvidencijaRadVreOjNew = response.debugData.data;
+      for (let item of this.offeredEvidencijaRadVreOjNew) {
+        if (item.SIF_OJ.toUpperCase() == this.newEvidencijaMjesecna.SIF_MT.toUpperCase()) {
+          this.newEvidencijaMjesecna.SIF_MT = item.SIF_OJ;
+          this.newVarNames.NAZMJTR = item.NAZMJTR;
+        }
+      }
+    });
+  }
+
+  public filterEvidencijaRadVreOjNew(text: string): void {
+    if (!text) {
+      this.refreshEvidencijaRadVreOjNew("", false);
+      return;
+    }
+
+    this.offeredEvidencijaRadVreOjNew = this.filteredEvidencijaRadVreOjNew.filter(
+      item => item?.SIF_OJ.toLowerCase().includes(text.toLowerCase())
+    );
+
+    if (this.offeredEvidencijaRadVreOjNew.length == 0) {
+      this.refreshEvidencijaRadVreOjNew(text, false);
+    }
+  }
+
+  public selectEvidencijaRadVreOjNew(EvidencijaRadVreOj: EvidencijaRadVreOj): void {
+    this.newEvidencijaMjesecna.SIF_MT = EvidencijaRadVreOj.SIF_OJ;
+    this.newVarNames.NAZMJTR = EvidencijaRadVreOj.NAZMJTR;
+
+    document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+    this.EvidencijaRadVreOjDropdownIndexNew = -1;
+  }
+
+  public resetEvidencijaRadVreOjNewIndex(): void {
+    this.EvidencijaRadVreOjDropdownIndexNew = -1;
+    document.getElementById("offeredEvidencijaRadVreOjNew-dropdown")?.classList.remove("select-dropdown-content-visible");
+  }
+  //EvidencijaRadVreOj END
+
+
+  public validateNewForm(EvidencijaMjesecna: EvidencijaMjesecna): boolean {
+    if (EvidencijaMjesecna.SIF_VP==''||EvidencijaMjesecna.SIF_MT==''||(this.filter.MBR && this.filter.PREZIME_IME == '') ||(EvidencijaMjesecna.SIF_VP && this.newVarNames.NAZ_VP == '') || (EvidencijaMjesecna.SIF_MT && this.newVarNames.NAZMJTR == '') || EvidencijaMjesecna.SATI == '' || EvidencijaMjesecna.ODHH == '' ||EvidencijaMjesecna.DOHH == '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public Save(): void {
+    this.http.post(
+      this.globalVar.APIHost + this.globalVar.APIFile,
+      {
+        action: 'Sihterica',
+        method: 'upisSihterice',
+        sid: this.session.loggedInUser.sessionID,
+        data: {
+          pAkcija: CRUDAction.Insert,
+          pSifVlas: this.session.loggedInUser.ownerID,
+          pDatum: this.globalFn.formatDate(this.newEvidencijaMjesecna.D1),
+          pMbr: this.filter.MBR,
+          pSifOj: this.newEvidencijaMjesecna.SIF_MT,
+          pSifVP: this.newEvidencijaMjesecna.SIF_VP,
+          pSati: this.newEvidencijaMjesecna.SATI,
+          pOd: this.newEvidencijaMjesecna.ODHH,
+          pDo: this.newEvidencijaMjesecna.DOHH,
+          pIdOperatera: this.session.loggedInUser.ID,
+          pRid: ""
+        }
+      }
+    ).subscribe((response: any) => {
+      this.loading = false;
+      this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.newEvidencijaMjesecna.SATI='';
+      this.refresh();
+    });
+  }
+
 }

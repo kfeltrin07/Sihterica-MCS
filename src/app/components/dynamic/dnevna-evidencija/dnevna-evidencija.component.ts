@@ -62,7 +62,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrl: './dnevna-evidencija.component.scss'
 })
 export class DnevnaEvidencijaComponent implements OnInit {
-  public displayedColumns: string[] = ['MBR', 'OSOBA', 'SIF_MT_N', 'SIF_VP_N', 'SATI', 'ODHH', 'DOHH', 'IDK_N', 'options'];
+  public displayedColumns: string[] = ['OSOBA', 'SIF_MT_N', 'SIF_VP_N', 'SATI', 'ODHH', 'DOHH', 'options'];
 
   public filter: any = {
     MBR: "%",
@@ -120,8 +120,8 @@ export class DnevnaEvidencijaComponent implements OnInit {
     OSOBA: '',
     SIF_VP: '',
     SIF_VP_N: '',
-    ODHH: '',
-    DOHH: '',
+    ODHH: '06:00',
+    DOHH: '14:00',
     RID: '',
     SATI: '',
     IDK: '',
@@ -228,7 +228,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   public isPaginatorShown: boolean = true;
   public pageIndex: number = 0;
   public pageSize = 20;
-  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200];
   public length = 0;
 
   public IncomingData: any = {};
@@ -269,19 +269,12 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.filter.MBR = this.globalVar.filterZaDnevnaEvidencija.MBR ? this.globalVar.filterZaDnevnaEvidencija.MBR : "%";
       this.filter.SIF_OJ = this.globalVar.filterZaDnevnaEvidencija.SIF_OJ ? this.globalVar.filterZaDnevnaEvidencija.SIF_OJ : "%";
       this.filter.SIF_VP = this.globalVar.filterZaDnevnaEvidencija.SIF_VP ? this.globalVar.filterZaDnevnaEvidencija.SIF_VP : "%";
-      this.OfferedEvidencijaRadVreOj();
-      this.OfferedVrstePosla();
-      this.OfferedZaposleni();
       this.getEvidencijaDnevna();
     }
     else {
       this.filter.DATUM = this.globalFn.formatDateForDateForm(new Date());
       this.getEvidencijaDnevna();
     }
-
-    this.getVrstePosla();
-    this.getZaposleni();
-    this.getOJ();
   }
 
   public getEvidencijaDnevna(): void {
@@ -453,7 +446,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -485,7 +478,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -573,7 +566,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -607,7 +600,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.filter.MBR,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -697,7 +690,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -729,7 +722,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.filter.SIF_VP,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -793,7 +786,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%',
-          limit: 1000,
+          limit: 100,
           page: 1,
           sort: [
             {
@@ -819,7 +812,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%',
-          limit: 1000,
+          limit: 100,
           page: 1,
           sort: [
             {
@@ -845,7 +838,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 1000,
+          limit: 100,
           page: 1,
           sort: [
             {
@@ -898,7 +891,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -932,7 +925,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.newEvidencijaDnevna.MBR,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1023,7 +1016,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1055,7 +1048,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.newEvidencijaDnevna.SIF_VP,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1140,7 +1133,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1172,7 +1165,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1247,6 +1240,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
+      this.newEvidencijaDnevna.SATI='';
       this.refresh();
     });
   }
@@ -1325,7 +1319,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1352,7 +1346,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1430,7 +1424,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
           sid: this.session.loggedInUser.sessionID,
           data: {
             pDioNaziva: searchParam,
-            limit: 100,
+            limit: 10,
             page: 1,
             sort: [
               {
@@ -1458,7 +1452,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: row.SIF_VP,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1534,7 +1528,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1564,7 +1558,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: row.MBR,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -1711,7 +1705,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
         method: 'getPorukeUpisaSihterica',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          limit: 1000000,
+          limit: 100000,
         }
       }
     ).subscribe((response: any) => {

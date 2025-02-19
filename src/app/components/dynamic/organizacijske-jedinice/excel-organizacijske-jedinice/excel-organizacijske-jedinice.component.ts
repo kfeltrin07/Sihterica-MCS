@@ -134,7 +134,7 @@ export class ExcelOrganizacijskeJediniceComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: '%' + this.dialogData.searchParam + '%',
-          limit: 1000,
+          limit: 100,
           sort: [
             {
               property: 'SIF_OJ',

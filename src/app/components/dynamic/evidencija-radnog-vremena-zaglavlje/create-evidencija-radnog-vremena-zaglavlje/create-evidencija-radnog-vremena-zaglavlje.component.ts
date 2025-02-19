@@ -139,7 +139,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -169,7 +169,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.EvidencijaRadVreZag.VRSTA_SLOGA,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

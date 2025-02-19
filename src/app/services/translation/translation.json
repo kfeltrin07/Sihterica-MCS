@@ -8109,6 +8109,18 @@
           "en": "Recapitulation",
           "hr": "Rekapitulacija",
           "transferred": false
+        },
+        {
+          "ref": "Open/CloseSidenav",
+          "en": "Open/Close Sidenav",
+          "hr": "Otvori/Zatvori bočnu navigaciju",
+          "transferred": false
+        },
+        {
+          "ref": "NijeMoguceKopiratiOdaberitePrvoSIFOJ",
+          "en": "It is not possible to copy. Select the organizational unit first",
+          "hr": "Nije moguće kopirati. Odaberite prvo organizacijsku jedinicu",
+          "transferred": false
         }
     ]
 }

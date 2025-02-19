@@ -143,7 +143,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
 
   public pageIndex: number = 0;
   public pageSize = 10;
-  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200];
   public length = 0;
 
   selected = new FormControl(0);
@@ -309,7 +309,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -339,7 +339,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.Grupe.SIF_SHEME,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -423,7 +423,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -455,7 +455,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pIdKorisnika: this.session.loggedInUser.ID,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {

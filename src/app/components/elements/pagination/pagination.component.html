@@ -10,7 +10,7 @@
     <div class="paginator-container" *ngIf="globalVar.isPaginatorShown">
         <div class="paginator-center-text paginator-page-select">
             {{ 'NumberOfRecordsPerPage' | translate }}
-            <mat-select [(ngModel)]="pageSize" (ngModelChange)="pageFirst();">
+            <mat-select [(ngModel)]="pageSize" (ngModelChange)="pageFirst();" [panelWidth]="100">
                 <mat-option [value]="size" *ngFor="let size of pageSizeOptions">{{ size }}</mat-option>
             </mat-select>
         </div>

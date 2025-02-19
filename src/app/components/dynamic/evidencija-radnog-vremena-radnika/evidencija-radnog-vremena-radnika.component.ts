@@ -130,7 +130,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
   public isPaginatorShown: boolean = true;
   public pageIndex: number = 0;
   public pageSize = 20;
-  public pageSizeOptions: number[] = [5, 10, 15, 20];
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100, 200];
   public length = 0;
 
   constructor(
@@ -334,7 +334,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: searchParam,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
@@ -366,7 +366,7 @@ export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
         sid: this.session.loggedInUser.sessionID,
         data: {
           pDioNaziva: this.filter.MBR,
-          limit: 100,
+          limit: 10,
           page: 1,
           sort: [
             {
