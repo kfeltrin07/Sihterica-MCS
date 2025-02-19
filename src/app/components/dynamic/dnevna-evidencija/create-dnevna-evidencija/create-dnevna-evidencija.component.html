@@ -10,7 +10,8 @@
     <h2 mat-dialog-title class="text-align-center">
         <mat-icon class="dialog-title-icon">person</mat-icon>
         <mat-icon class="dialog-title-icon">add</mat-icon>
-        <span class="dialog-title">{{ 'GrupniUnosNaDan' | translate }}: {{ globalFn.formatDate(receivedData.DATUM) }}</span>
+        <span class="dialog-title">{{ 'GrupniUnosNaDan' | translate }}: {{ globalFn.formatDate(receivedData.DATUM)
+            }}</span>
     </h2>
 
     <div class="form-container">
@@ -20,39 +21,39 @@
                     <label for="SIF_SHEME" class="minimum-margin-top">{{ 'Grupa' | translate }}:</label>
                 </td>
                 <td
-                style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
-                    (click)="pickGrupe();" (contextmenu)="removeGrupe($event)"
-                    matTooltip="{{ (!varNames.ID_GRUPE ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                    [class.color-valid]="varNames!.NAZ_GRUPE">
-                    {{ varNames!.NAZ_GRUPE ? 'done' : 'import_contacts'}}
-                </mat-icon>
+                    style="display: flex;max-width: 278px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                    <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickGrupe();"
+                        (contextmenu)="removeGrupe($event)"
+                        matTooltip="{{ (!varNames.ID_GRUPE ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
+                        [class.color-valid]="varNames!.NAZ_GRUPE">
+                        {{ varNames!.NAZ_GRUPE ? 'done' : 'import_contacts'}}
+                    </mat-icon>
 
-                <span (click)="refreshGrupe(varNames!.ID_GRUPE, false);">
-                    <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22" id="offeredGrupe1-help-span"
-                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe();resetGrupeIndex();"
-                        (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
-                        (focus)="refreshGrupe(varNames!.ID_GRUPE, false);"
-                        (keyup.enter)="selectGrupe(offeredGrupe[GrupeDropdownIndex]);"
-                        (keyup.escape)="resetGrupeIndex();"
-                        (keyup.arrowdown)="GrupeDropdownIndex = (GrupeDropdownIndex + 1) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);"
-                        (keyup.arrowup)="GrupeDropdownIndex = (GrupeDropdownIndex - 1 + offeredGrupe.length) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);">
-                    <div id="offeredGrupe1-dropdown" class="select-dropdown-content ">
-                        @for(grupe of offeredGrupe;track grupe;let i=$index){
-                        <div [id]="'offeredGrupe1-dropdown-' + i" matRipple
-                            class="dropdown-content-item display-flex align-items-center space-between"
-                            [class.gray-background]="i == GrupeDropdownIndex" (mousedown)="selectGrupe(grupe);">
-                            <span>
-                                <b>{{grupe.ID_GRUPE}}</b> - {{ grupe.NAZ_GRUPE}}
-                            </span>
+                    <span (click)="refreshGrupe(varNames!.ID_GRUPE, false);">
+                        <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22" id="offeredGrupe1-help-span"
+                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe();resetGrupeIndex();"
+                            (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
+                            (focus)="refreshGrupe(varNames!.ID_GRUPE, false);"
+                            (keyup.enter)="selectGrupe(offeredGrupe[GrupeDropdownIndex]);"
+                            (keyup.escape)="resetGrupeIndex();"
+                            (keyup.arrowdown)="GrupeDropdownIndex = (GrupeDropdownIndex + 1) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);"
+                            (keyup.arrowup)="GrupeDropdownIndex = (GrupeDropdownIndex - 1 + offeredGrupe.length) % offeredGrupe.length;globalFn.scroll('offeredGrupe1-dropdown-' + GrupeDropdownIndex);">
+                        <div id="offeredGrupe1-dropdown" class="select-dropdown-content ">
+                            @for(grupe of offeredGrupe;track grupe;let i=$index){
+                            <div [id]="'offeredGrupe1-dropdown-' + i" matRipple
+                                class="dropdown-content-item display-flex align-items-center space-between"
+                                [class.gray-background]="i == GrupeDropdownIndex" (mousedown)="selectGrupe(grupe);">
+                                <span>
+                                    <b>{{grupe.ID_GRUPE}}</b> - {{ grupe.NAZ_GRUPE}}
+                                </span>
+                            </div>
+                            }
                         </div>
-                        }
-                    </div>
-                </span>
-                <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
-                    class="small-margin-left margin-right">{{ varNames!.NAZ_GRUPE }}</span>
-            </td>
+                    </span>
+                    <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        class="small-margin-left margin-right">{{ varNames!.NAZ_GRUPE }}</span>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -67,9 +68,9 @@
                     </mat-icon>
 
                     <span (click)="refreshVrstePosla(varNames!.SIF_VP, false);">
-                        <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22" id="offeredVrstePosla1-help-span"
-                            class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}"
+                        <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
+                            id="offeredVrstePosla1-help-span" class="minimum-margin-horizontal light-gray-background"
+                            style="width: 50px;" placeholder="{{ 'Code' | translate }}"
                             (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
                             (ngModelChange)="filterVrstePosla(varNames!.SIF_VP);"
                             (focus)="refreshVrstePosla(varNames!.SIF_VP, false);"
@@ -93,6 +94,22 @@
                     </span>
                     <span style="width: 155px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
                         class="small-margin-left margin-right">{{ varNames!.NAZ_VP }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">{{'Od'|translate}}</label>
+                </td>
+                <td>
+                    <input type="time" [(ngModel)]="varNames!.OD">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">{{'Do'|translate}}</label>
+                </td>
+                <td>
+                    <input type="time" [(ngModel)]="varNames!.DO">
                 </td>
             </tr>
         </table>

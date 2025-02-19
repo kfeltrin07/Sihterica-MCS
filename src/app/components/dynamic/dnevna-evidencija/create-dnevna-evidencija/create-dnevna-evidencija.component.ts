@@ -16,6 +16,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 import { CreateGrupeComponent } from '../../grupe/create-grupe/create-grupe.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-create-dnevna-evidencija',
@@ -25,6 +26,7 @@ import { CreateGrupeComponent } from '../../grupe/create-grupe/create-grupe.comp
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatBadgeModule,
 
     CdkDrag,
     CdkDragHandle,
@@ -40,7 +42,9 @@ export class CreateDnevnaEvidencijaComponent {
     ID_GRUPE: '',
     NAZ_GRUPE: '',
     SIF_VP: '',
-    NAZ_VP: ''
+    NAZ_VP: '',
+    OD: '',
+    DO: '',
   };
 
   public sheme: Sheme[] = [];
@@ -156,7 +160,7 @@ export class CreateDnevnaEvidencijaComponent {
       }
       else {
         this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
-      }  
+      }
     });
 
     this.dialogRef.close();
@@ -182,31 +186,52 @@ export class CreateDnevnaEvidencijaComponent {
     ).subscribe((response: any) => {
       this.zaposleniPoGrupiIShemi = response.debugData.data;
 
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'getSheme',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pDioNaziva: '%%',
-            pSifSheme: this.varNames.SIF_SHEME,
-            limit: 100000,
-            page: 1,
-            sort: [
-              {
-                property: 'SIF_SHEME',
-                direction: 'ASC'
-              }
-            ]
+      if (this.varNames.OD == '' || this.varNames.DO == ''||this.varNames.OD == '--:--' || this.varNames.DO == '--:--') {
+        this.http.post(
+          this.globalVar.APIHost + this.globalVar.APIFile,
+          {
+            action: 'Sihterica',
+            method: 'getSheme',
+            sid: this.session.loggedInUser.sessionID,
+            data: {
+              pDioNaziva: '%%',
+              pSifSheme: this.varNames.SIF_SHEME,
+              limit: 100000,
+              page: 1,
+              sort: [
+                {
+                  property: 'SIF_SHEME',
+                  direction: 'ASC'
+                }
+              ]
+            }
           }
-        }
-      ).subscribe((response: any) => {
-        this.Sheme = response.debugData.data[0];
+        ).subscribe((response: any) => {
+          this.Sheme = response.debugData.data[0];
 
 
 
-        let SATI = Math.abs((parseInt(this.Sheme.DO)) - (parseInt(this.Sheme.OD)));
+          let SATI = Math.abs((parseInt(this.Sheme.DO)) - (parseInt(this.Sheme.OD)));
+
+          for (let zaposleni of this.zaposleniPoGrupiIShemi) {
+            this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
+              pAkcija: CRUDAction.Insert,
+              pMbr: zaposleni.ID_RADNIKA,
+              pSifVlas: this.session.loggedInUser.ownerID,
+              pSifOj: this.varNames.SIF_OJ,
+              pSifVP: this.varNames.SIF_VP,
+              pDatum: this.globalFn.formatDate(this.receivedData.DATUM),
+              pSati: SATI,
+              pOd: this.Sheme.OD,
+              pDo: this.Sheme.DO,
+              pIdOperatera: this.session.loggedInUser.ID
+            }];
+          }
+
+          this.Unos();
+        });
+      } else {
+        let SATI = Math.abs((parseInt(this.varNames.DO)) - (parseInt(this.varNames.OD)));
 
         for (let zaposleni of this.zaposleniPoGrupiIShemi) {
           this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
@@ -217,15 +242,12 @@ export class CreateDnevnaEvidencijaComponent {
             pSifVP: this.varNames.SIF_VP,
             pDatum: this.globalFn.formatDate(this.receivedData.DATUM),
             pSati: SATI,
-            pOd: this.Sheme.OD,
-            pDo: this.Sheme.DO,
+            pOd: this.varNames.OD,
+            pDo: this.varNames.DO,
             pIdOperatera: this.session.loggedInUser.ID
           }];
         }
-
-        this.Unos();
-      });
-
+      }
     });
 
   }

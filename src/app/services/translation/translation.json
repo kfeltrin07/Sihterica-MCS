@@ -8121,6 +8121,18 @@
           "en": "It is not possible to copy. Select the organizational unit first",
           "hr": "Nije moguće kopirati. Odaberite prvo organizacijsku jedinicu",
           "transferred": false
+        },
+        {
+          "ref": "BROJ_LJUDI",
+          "en": "Number of inputs",
+          "hr": "Broj zapisa",
+          "transferred": false
+        },
+        {
+          "ref": "Optional",
+          "en": "Optional",
+          "hr": "Opcionalno",
+          "transferred": false
         }
     ]
 }

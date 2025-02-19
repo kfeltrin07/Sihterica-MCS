@@ -1281,7 +1281,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
 
 
   public validateNewForm(EvidencijaMjesecna: EvidencijaMjesecna): boolean {
-    if (EvidencijaMjesecna.SIF_VP==''||EvidencijaMjesecna.SIF_MT==''||(this.filter.MBR && this.filter.PREZIME_IME == '') ||(EvidencijaMjesecna.SIF_VP && this.newVarNames.NAZ_VP == '') || (EvidencijaMjesecna.SIF_MT && this.newVarNames.NAZMJTR == '') || EvidencijaMjesecna.SATI == '' || EvidencijaMjesecna.ODHH == '' ||EvidencijaMjesecna.DOHH == '') {
+    if (EvidencijaMjesecna.SIF_VP==''||EvidencijaMjesecna.SIF_MT=='' ||(EvidencijaMjesecna.SIF_VP && this.newVarNames.NAZ_VP == '') || (EvidencijaMjesecna.SIF_MT && this.newVarNames.NAZMJTR == '') || EvidencijaMjesecna.SATI == '' || EvidencijaMjesecna.ODHH == '' ||EvidencijaMjesecna.DOHH == '') {
       return false;
     } else {
       return true;

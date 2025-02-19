@@ -68,7 +68,7 @@ export class GlobalFunctionsService {
   }
 
   public showSnackbarCostum(errorDesc: string) {
-    var duration = errorDesc.length * 100000
+    var duration = errorDesc.length * 100
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarTableComponent,{
         duration: duration,
@@ -77,7 +77,7 @@ export class GlobalFunctionsService {
   }
 
   public showSnackbarGrupniUnosRadnika(errorDesc: string) {
-    var duration = errorDesc.length * 100000
+    var duration = errorDesc.length * 100
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarGrupniUnosRadnikaComponent,{
         duration: duration,
@@ -86,7 +86,7 @@ export class GlobalFunctionsService {
   }
 
   public showSnackbarRekapitulacijaMjesecna(errorDesc: string) {
-    var duration = errorDesc.length * 100000
+    var duration = errorDesc.length * 100
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarRekapitulacijaMjesecnaComponent,{
         duration: duration,
@@ -95,7 +95,7 @@ export class GlobalFunctionsService {
   }
 
   public showSnackbarRekapitulacijaDenavna(errorDesc: string) {
-    var duration = errorDesc.length * 100000
+    var duration = errorDesc.length * 100
     if (errorDesc != 'SQL:OK') {
       this.snackBar.openFromComponent(SnackBarRekapitulacijaDnevnaComponent,{
         duration: duration,

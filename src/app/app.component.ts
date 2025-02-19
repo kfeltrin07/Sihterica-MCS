@@ -9,6 +9,7 @@ import { GlobalVariablesService } from './services/global-variables/global-varia
 import { SessionService } from './services/session/session.service';
 import { SidenavService } from './services/sidenav/sidenav.service';
 import { environment } from './../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -29,11 +30,18 @@ export class AppComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     public sidenavService: SidenavService,
+    private snackBar: MatSnackBar,
 
   ) {
     if (environment.production) {
       window.console.log = () => { }
     }
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.snackBar.dismiss();
+
+      }
+    });
     console.log(this.globalVar.env)
   }
 
@@ -73,7 +81,7 @@ export class AppComponent implements OnInit {
         method: 'getDynamicMenu',
         sid: this.session.loggedInUser.sessionID,
         data: {
-          limit: 100,
+          limit: 1000,
           page: 1,
           pKorisnikId: this.session.loggedInUser.ID,
           pSid: this.session.loggedInUser.sessionID,
