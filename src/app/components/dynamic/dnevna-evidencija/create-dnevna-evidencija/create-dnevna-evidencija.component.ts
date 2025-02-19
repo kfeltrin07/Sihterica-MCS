@@ -103,7 +103,9 @@ export class CreateDnevnaEvidencijaComponent {
     SIF_SHEME: "",
     SIF_OJ: "",
     NAZ_OJ: "",
-    NAZ_SHEME: ""
+    NAZ_SHEME: "",
+    OD:"",
+    DO:"",
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -296,7 +298,8 @@ export class CreateDnevnaEvidencijaComponent {
       this.varNames.NAZ_GRUPE = Grupe.NAZ_GRUPE;
       this.varNames.SIF_SHEME = Grupe.SIF_SHEME;
       this.varNames.SIF_OJ = Grupe.SIF_OJ;
-      this.varNames.SATI = Grupe;
+      this.varNames.OD=Grupe.OD;
+      this.varNames.DO=Grupe.DO;
     }
   }
 
@@ -306,7 +309,8 @@ export class CreateDnevnaEvidencijaComponent {
     this.varNames.NAZ_GRUPE = "";
     this.varNames.SIF_SHEME = "";
     this.varNames.SIF_OJ = "";
-
+    this.varNames.OD = "";
+    this.varNames.DO = "";
   }
 
   public refreshGrupe(searchParam: string, isSelected: boolean): void {
@@ -374,6 +378,8 @@ export class CreateDnevnaEvidencijaComponent {
           this.varNames.ID_GRUPE = item.ID_GRUPE;
           this.varNames.SIF_SHEME = item.SIF_SHEME;
           this.varNames.SIF_OJ = item.SIF_OJ;
+          this.varNames.OD = item.OD;
+          this.varNames.DO = item.DO;
         }
       }
     });
@@ -399,6 +405,8 @@ export class CreateDnevnaEvidencijaComponent {
     this.varNames.NAZ_GRUPE = Grupe.NAZ_GRUPE;
     this.varNames.SIF_SHEME = Grupe.SIF_SHEME;
     this.varNames.SIF_OJ = Grupe.SIF_OJ;
+    this.varNames.OD = Grupe.OD;
+    this.varNames.DO = Grupe.DO;
     document.getElementById("offeredGrupe1-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.GrupeDropdownIndex = -1;
   }

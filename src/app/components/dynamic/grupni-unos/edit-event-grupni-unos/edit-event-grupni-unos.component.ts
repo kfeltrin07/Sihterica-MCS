@@ -66,7 +66,9 @@ export class EditEventGrupniUnosComponent implements OnInit {
     SIF_SHEME: "",
     SIF_OJ: "",
     NAZ_OJ: "",
-    NAZ_SHEME: ""
+    NAZ_SHEME: "",
+    OD:"",
+    DO:"",
   };
   public GrupaToSend: Grupe = {
     UKUPANBROJSLOGOVA: 0,
@@ -76,7 +78,9 @@ export class EditEventGrupniUnosComponent implements OnInit {
     SIF_SHEME: "",
     SIF_OJ: "",
     NAZ_OJ: "",
-    NAZ_SHEME: ""
+    NAZ_SHEME: "",
+    OD:"",
+    DO:"",
   };
 
   public zaposleniPoGrupiIShemi: ZaposleniPoGrupiIShemi[] = [];
@@ -173,7 +177,9 @@ export class EditEventGrupniUnosComponent implements OnInit {
       SIF_SHEME: this.receivedSheme.SIF_SHEME,
       SIF_OJ: this.receivedSheme.SIF_OJ,
       NAZ_OJ: this.receivedSheme.NAZ_OJ,
-      NAZ_SHEME: this.receivedSheme.NAZ_SHEME
+      NAZ_SHEME: this.receivedSheme.NAZ_SHEME,
+      OD: this.receivedSheme.OD,
+      DO: this.receivedSheme.DO
     }
   }
 

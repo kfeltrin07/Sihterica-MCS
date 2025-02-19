@@ -64,7 +64,9 @@ export class GrupeComponent implements OnInit {
     SIF_SHEME: "",
     SIF_OJ: "",
     NAZ_OJ: "",
-    NAZ_SHEME: ""
+    NAZ_SHEME: "",
+    OD:"",
+    DO:"",
   };
 
 

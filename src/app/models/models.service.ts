@@ -630,6 +630,8 @@ export interface Grupe {
   SIF_OJ: string;
   NAZ_OJ: string;
   NAZ_SHEME: string;
+  OD:string;
+  DO:string;
 }
 
 
