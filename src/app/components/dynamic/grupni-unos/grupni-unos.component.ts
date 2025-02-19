@@ -207,9 +207,9 @@ export class GrupniUnosComponent implements OnInit {
   public ngOnInit(): void {
 
     //this.getSheme();
-    this.GetInitialGrupe();
-    this.OfferedEvidencijaRadVreOj();
-    this.OfferedVrstePosla();
+    //this.GetInitialGrupe();
+    //this.OfferedEvidencijaRadVreOj();
+    //this.OfferedVrstePosla();
     //this.getEvidencijaMjesecna();
   }
 
