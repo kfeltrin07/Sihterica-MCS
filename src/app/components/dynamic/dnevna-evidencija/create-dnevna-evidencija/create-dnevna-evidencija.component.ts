@@ -249,6 +249,8 @@ export class CreateDnevnaEvidencijaComponent {
             pIdOperatera: this.session.loggedInUser.ID
           }];
         }
+        this.Unos();
+
       }
     });
 
