@@ -113,6 +113,6 @@
 
 <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
-    <button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+    <button mat-raised-button type="button" color="primary" (click)="save();dialogRef.close(true);"
         [disabled]="validateForm(EvidencijaRadVreZagVeze!)">{{ 'Create' | translate }}</button>
 </mat-dialog-actions>

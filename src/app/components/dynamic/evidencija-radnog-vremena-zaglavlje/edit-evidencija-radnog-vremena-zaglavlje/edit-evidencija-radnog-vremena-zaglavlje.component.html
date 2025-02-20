@@ -98,6 +98,6 @@ class="colored-header text-align-center">
 
 <mat-dialog-actions align="end">
 	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
-	<button mat-raised-button type="button" color="primary" [mat-dialog-close]="true" (click)="save();"
+	<button mat-raised-button type="button" color="primary" (click)="save();dialogRef.close(true);"
 		[disabled]="validateForm(EvidencijaRadVreZag!)">{{ 'Edit' | translate }}</button>
 </mat-dialog-actions>

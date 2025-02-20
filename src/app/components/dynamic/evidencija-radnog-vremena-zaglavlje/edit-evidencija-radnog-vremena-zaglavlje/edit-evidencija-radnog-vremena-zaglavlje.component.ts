@@ -63,7 +63,7 @@ export class EditEvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedEvidencijaRadVreZag: EvidencijaRadVreZag,
-    private dialogRef: MatDialogRef<EditEvidencijaRadnogVremenaZaglavljeComponent>,
+    public dialogRef: MatDialogRef<EditEvidencijaRadnogVremenaZaglavljeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

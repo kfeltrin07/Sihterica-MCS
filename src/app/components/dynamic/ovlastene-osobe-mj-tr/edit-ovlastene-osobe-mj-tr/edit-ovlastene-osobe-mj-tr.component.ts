@@ -96,7 +96,7 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
   
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedOvlastenaOsobaMjTr: OvlastenaOsobaMjTr,
-    private dialogRef: MatDialogRef<EditOvlasteneOsobeMjTrComponent>,
+    public dialogRef: MatDialogRef<EditOvlasteneOsobeMjTrComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

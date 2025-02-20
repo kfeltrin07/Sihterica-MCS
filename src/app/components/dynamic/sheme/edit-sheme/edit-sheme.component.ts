@@ -49,7 +49,7 @@ export class EditShemeComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedSheme: Sheme,
-    private dialogRef: MatDialogRef<EditShemeComponent>,
+    public dialogRef: MatDialogRef<EditShemeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

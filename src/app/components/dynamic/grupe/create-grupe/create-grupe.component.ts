@@ -76,7 +76,7 @@ export class CreateGrupeComponent {
   };
 
   constructor(
-    private dialogRef: MatDialogRef<CreateGrupeComponent>,
+    public dialogRef: MatDialogRef<CreateGrupeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

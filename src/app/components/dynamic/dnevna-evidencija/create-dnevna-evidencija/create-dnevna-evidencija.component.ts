@@ -124,7 +124,7 @@ export class CreateDnevnaEvidencijaComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedData: any,
-    private dialogRef: MatDialogRef<CreateGrupeComponent>,
+    public dialogRef: MatDialogRef<CreateGrupeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

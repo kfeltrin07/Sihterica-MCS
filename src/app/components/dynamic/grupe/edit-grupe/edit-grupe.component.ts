@@ -75,7 +75,7 @@ export class EditGrupeComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public receivedGrupe: Grupe,
-    private dialogRef: MatDialogRef<EditGrupeComponent>,
+    public dialogRef: MatDialogRef<EditGrupeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

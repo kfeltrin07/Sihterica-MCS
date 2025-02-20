@@ -62,7 +62,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
   };
 
   constructor(
-    private dialogRef: MatDialogRef<CreateEvidencijaRadnogVremenaZaglavljeComponent>,
+    public dialogRef: MatDialogRef<CreateEvidencijaRadnogVremenaZaglavljeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

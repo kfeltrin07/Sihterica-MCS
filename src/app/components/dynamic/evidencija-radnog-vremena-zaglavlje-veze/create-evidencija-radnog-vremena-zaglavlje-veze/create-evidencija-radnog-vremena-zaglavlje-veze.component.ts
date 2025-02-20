@@ -77,7 +77,7 @@ export class CreateEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnIn
   };
 
   constructor(
-    private dialogRef: MatDialogRef<CreateEvidencijaRadnogVremenaZaglavljeVezeComponent>,
+    public dialogRef: MatDialogRef<CreateEvidencijaRadnogVremenaZaglavljeVezeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

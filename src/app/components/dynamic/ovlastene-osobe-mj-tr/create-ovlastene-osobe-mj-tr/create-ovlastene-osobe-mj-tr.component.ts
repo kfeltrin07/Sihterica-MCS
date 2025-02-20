@@ -95,7 +95,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
   };
 
   constructor(
-    private dialogRef: MatDialogRef<CreateOvlasteneOsobeMjTrComponent>,
+    public dialogRef: MatDialogRef<CreateOvlasteneOsobeMjTrComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

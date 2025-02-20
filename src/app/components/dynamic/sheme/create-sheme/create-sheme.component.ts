@@ -50,7 +50,7 @@ export class CreateShemeComponent {
 
 
   constructor(
-    private dialogRef: MatDialogRef<CreateShemeComponent>,
+    public dialogRef: MatDialogRef<CreateShemeComponent>,
     private http: HttpClient,
     public globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

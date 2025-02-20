@@ -327,7 +327,9 @@ export class DnevnaEvidencijaComponent implements OnInit {
       data: this.filter
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 3000);
+      if(result==true){
+        setTimeout(() => this.refresh(), 3000);
+      }
     });
   }
   /*

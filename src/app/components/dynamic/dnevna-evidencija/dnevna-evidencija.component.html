@@ -26,7 +26,12 @@
         <mat-icon>search</mat-icon>
     </button>
 
-    <button *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus" mat-mini-fab color="primary"
+    <button mat-mini-fab color="accent" class="small-margin-left"
+        matTooltip="{{ 'GrupniUnos' | translate }}" (click)="router.navigateByUrl('grupni-unos');">
+        <mat-icon >group_add</mat-icon>
+    </button>
+
+    <button *ngIf="globalVar.cVRS == 2 || !globalVar.useDynamicMenus" mat-mini-fab color="primary" class="small-margin-left"
         matTooltip="{{ 'GrupniUnos' | translate }}" (click)="openCreateDialog();">
         <mat-icon>group_add</mat-icon>
     </button>
