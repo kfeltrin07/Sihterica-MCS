@@ -93,8 +93,6 @@ export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit
   }
 
   public ngOnInit(): void {
-    this.OfferedEvidVezeSifra();
-    this.OfferedEvidVezeIzracuna();
   }
 
   public validateForm(EvidencijaRadVreZagVeze: EvidencijaRadVreZagVeze): boolean {

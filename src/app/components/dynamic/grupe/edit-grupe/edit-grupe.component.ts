@@ -86,8 +86,6 @@ export class EditGrupeComponent {
 
   public ngOnInit(): void { 
     this.Grupe = this.receivedGrupe;
-    this.OfferedSheme();
-    this.OfferedEvidencijaRadVreOj();
   }
 
   public validateForm(Grupe: Grupe): boolean {

@@ -54,11 +54,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span
-                    (mousedown)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredFondSatiHelpOJ-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter.SIF_OJ==''?'':OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
                         (ngModelChange)="filterFondSatiHelpOJ(filter!.SIF_OJ);"
                         (focus)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectFondSatiHelpOJ(offeredFondSatiHelpOJ[FondSatiHelpOJDropdownIndex]);"

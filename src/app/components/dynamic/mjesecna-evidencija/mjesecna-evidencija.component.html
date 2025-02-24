@@ -26,20 +26,22 @@
         [disabled]="filter.SIF_OJ==''|| filter.MBR==''">
         <mat-icon>search</mat-icon>
     </button>
-    <button mat-mini-fab color="accent" class="small-margin-left"
-        matTooltip="{{ 'GrupniUnos' | translate }}" (mousedown)="router.navigateByUrl('grupni-unos');">
-        <mat-icon >group_add</mat-icon>
+    <button mat-mini-fab color="accent" class="small-margin-left" matTooltip="{{ 'GrupniUnos' | translate }}"
+        (mousedown)="router.navigateByUrl('grupni-unos');">
+        <mat-icon>group_add</mat-icon>
     </button>
     <div [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')? ('Prvoodabrativaljanogkorisnika' | translate):''"
-    matBadge="!" matBadgePosition="after" matbadge [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
-            [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true" matBadgeColor="warn" [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
-    <button mat-mini-fab color="primary"
-        [matTooltip]="'Refresh' | translate "
-        class="small-margin-left" (mousedown)="refresh();" [disabled]="filter.SIF_OJ=='' || filter.MBR==''||(filter.MBR && filter.PREZIME_IME=='')">
-        <mat-icon *ngIf="!loading">refresh</mat-icon>
-        <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
-    </button>
-</div>
+        matBadge="!" matBadgePosition="after" matbadge
+        [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
+        [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true" matBadgeColor="warn"
+        [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
+        <button mat-mini-fab color="primary" [matTooltip]="'Refresh' | translate " class="small-margin-left"
+            (mousedown)="refresh();"
+            [disabled]="filter.SIF_OJ=='' || filter.MBR==''||(filter.MBR && filter.PREZIME_IME=='')">
+            <mat-icon *ngIf="!loading">refresh</mat-icon>
+            <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
+        </button>
+    </div>
 </mat-toolbar>
 
 <div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
@@ -88,11 +90,11 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
                         id="offeredEvidencijaRadVreOj-help-span" class="minimum-margin-horizontal light-gray-background"
                         style="width: 50px;" placeholder="{{ 'Code' | translate }}"
-                        (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                        (blur)="filter.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
@@ -126,10 +128,11 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshVrstePosla(filter!.SIF_VP, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
@@ -163,15 +166,17 @@
                     {{ filter!.PREZIME_IME ? 'done' : 'import_contacts'}}
                 </mat-icon>
             </td>
-            <td class="filter-result2"  [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
-                <span (mousedown)="refreshZaposleni(filter!.MBR, false,'1');" 
-                matBadge="!" matBadgePosition="after" matbadge [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
-            [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true" matBadgeColor="warn"
-                >
+            <td class="filter-result2"
+                [matTooltip]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?('Prvoodabrativaljanogkorisnika' | translate):''">
+                <span matBadge="!" matBadgePosition="after" matbadge
+                    [matBadgeDescription]="'Prvoodabrativaljanogkorisnika' | translate"
+                    [matBadgeHidden]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')?false:true"
+                    matBadgeColor="warn">
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
-                        [class.red-input]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')" class="minimum-margin-horizontal light-gray-background"
-                        style="width: 50px;" placeholder="{{ 'Code' | translate }}"
-                        (blur)="OfferedZaposleni('1');resetZaposleniIndex('1');"
+                        [class.red-input]="(filter.MBR=='')||(filter.MBR && filter.PREZIME_IME=='')"
+                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter.MBR==''?'':OfferedZaposleni('1');resetZaposleniIndex('1');"
                         (ngModelChange)="filterZaposleni(filter!.MBR,'1');"
                         (focus)="refreshZaposleni(filter!.MBR, false,'1');"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex],'1');"
@@ -191,7 +196,8 @@
                         </div>
                     </div>
                 </span>
-                <span *ngIf="filter.OSOBA!=''" class="small-margin-left margin-right">{{ filter.OSOBA }}</span>
+                <span *ngIf="filter.PREZIME_IME!=''" class="small-margin-left margin-right">{{ filter.PREZIME_IME
+                    }}</span>
             </td>
         </tr>
 
@@ -214,7 +220,8 @@
             </tr>
         </table>
         <div>
-            <button mat-flat-button color="primary" [disabled]="deleteSelection.isEmpty()" (mousedown)="deleteSelected()">
+            <button mat-flat-button color="primary" [disabled]="deleteSelection.isEmpty()"
+                (mousedown)="deleteSelected()">
                 <mat-icon>delete</mat-icon> {{'ObrisiOdabrano'|translate}}</button>
             <button mat-flat-button color="primary" style="margin-left: 10px;" [disabled]="selection.isEmpty()"
                 (mousedown)="saveAll()">
@@ -246,7 +253,8 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td mat-cell *matCellDef="let evidencija" style="cursor: pointer;" (mousedown)="goToDnevnaEvidencija(evidencija)">
+            <td mat-cell *matCellDef="let evidencija" style="cursor: pointer;"
+                (mousedown)="goToDnevnaEvidencija(evidencija)">
                 {{ evidencija[item.key] }}
             </td>
             <td mat-footer-cell *matFooterCellDef="let evidencija">
@@ -288,13 +296,20 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td style="width: 260px;" mat-cell *matCellDef="let evidencija">
+            <td style="width: 260px;" mat-cell *matCellDef="let evidencija" (mousedown)="VrstePoslaTableList.length==0?getVrstePosla():''">
+                @if(VrstePoslaTableList.length>0){
                 <select [(ngModel)]="evidencija[item.key]"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                     @for(option of VrstePoslaTableList;track option){
-                    <option [value]="option.SIF_VP">{{option.NAZ_VP}}</option>
+                    <option [value]="option.SIF_VP">
+                        {{option.NAZ_VP}}
+                    </option>
                     }
                 </select>
+                }
+                @else {
+                {{evidencija.SIF_VP_N}}
+                }
             </td>
             <td mat-footer-cell *matFooterCellDef>
                 <div style="display: flex;align-content: center;">
@@ -304,12 +319,12 @@
                         [class.color-valid]="newVarNames.NAZ_VP">
                         {{ newVarNames!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP, false);">
+                    <span>
                         <input [class.red-input]="newEvidencijaMjesecna!.SIF_VP && newVarNames!.NAZ_VP=='' " type="text"
                             [(ngModel)]="newEvidencijaMjesecna!.SIF_VP" id="offeredVrstePoslaNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
+                            (blur)="newEvidencijaMjesecna.SIF_VP==''?'':OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
                             (ngModelChange)="filterVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP);newVarNames!.NAZ_VP=''"
                             (focus)="refreshVrstePoslaNew(newEvidencijaMjesecna!.SIF_VP, false);"
                             (keyup.enter)="selectVrstePoslaNew(offeredVrstePoslaNew[VrstePoslaDropdownIndexNew]);"
@@ -341,13 +356,22 @@
             <th mat-header-cell [mat-sort-header]="item.key" *matHeaderCellDef
                 matTooltip="{{ 'SortByThisAttribute' | translate }}" matTooltipPosition="above">{{ item.key | translate
                 }}</th>
-            <td style="width: 300px;" mat-cell *matCellDef="let evidencija">
+            <td style="width: 300px;" mat-cell *matCellDef="let evidencija"
+                (mousedown)="RadVreOjTableList.length==0?getOrganizacijskeJedinice():''">
+                @if(RadVreOjTableList.length>0){
+
                 <select [(ngModel)]="evidencija.SIF_MT"
                     (ngModelChange)="selection.isSelected(evidencija)?'':selection.select(evidencija)">
                     @for(option of RadVreOjTableList;track option){
-                    <option [value]="option.SIF_OJ">{{(option.SIF_OJ!='%'?(option.SIF_OJ +' -                        '):'')+option.NAZMJTR.split(' - ')[0]}}</option>
+                    <option [value]="option.SIF_OJ">
+                        {{(option.SIF_OJ!='%'?(option.SIF_OJ +' - '):'')+option.NAZMJTR.split(' - ')[0]}}
+                    </option>
                     }
                 </select>
+                }
+                @else {
+                {{evidencija.SIF_MT_N}}
+                }
             </td>
             <td mat-footer-cell *matFooterCellDef>
                 <div style="display: flex;align-content: center;">
@@ -357,12 +381,13 @@
                         [class.color-valid]="newVarNames.NAZMJTR">
                         {{ newVarNames!.NAZMJTR ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT, false);">
-                        <input [class.red-input]="newEvidencijaMjesecna!.SIF_MT && newVarNames!.NAZMJTR=='' " type="text"
-                            [(ngModel)]="newEvidencijaMjesecna!.SIF_MT" id="offeredEvidencijaRadVreOjNew-help-span"
+                    <span>
+                        <input [class.red-input]="newEvidencijaMjesecna!.SIF_MT && newVarNames!.NAZMJTR=='' "
+                            type="text" [(ngModel)]="newEvidencijaMjesecna!.SIF_MT"
+                            id="offeredEvidencijaRadVreOjNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
+                            (blur)="newEvidencijaMjesecna.SIF_MT==''?'':OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
                             (ngModelChange)="filterEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT);newVarNames!.NAZMJTR=''"
                             (focus)="refreshEvidencijaRadVreOjNew(newEvidencijaMjesecna!.SIF_MT, false);"
                             (keyup.enter)="selectEvidencijaRadVreOjNew(offeredEvidencijaRadVreOjNew[EvidencijaRadVreOjDropdownIndexNew]);"
@@ -453,22 +478,24 @@
 
                 </div>
             </td>
-            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag" style="background-color: aliceblue !important;">
+            <td mat-footer-cell *matFooterCellDef="let EvidencijaRadVreZag"
+                style="background-color: aliceblue !important;">
                 <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                     <div>
                         <button mat-flat-button type="button" color="primary"
-                            [disabled]="!validateNewForm(newEvidencijaMjesecna)"
-                            (mousedown)="Save()"><mat-icon style="margin: unset;">add</mat-icon></button>
+                            [disabled]="!validateNewForm(newEvidencijaMjesecna)" (mousedown)="Save()"><mat-icon
+                                style="margin: unset;">add</mat-icon></button>
                     </div>
                     <table>
                         <tr>
                             <td>
-                                <button class="SelectAll" (mousedown)="selectAll()" >{{'SelectAll'|translate}}</button>
+                                <button class="SelectAll" (mousedown)="selectAll()">{{'SelectAll'|translate}}</button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button class="Deselect" (mousedown)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
+                                <button class="Deselect"
+                                    (mousedown)="deleteSelection.clear()">{{'Deselect'|translate}}</button>
                             </td>
                         </tr>
                     </table>

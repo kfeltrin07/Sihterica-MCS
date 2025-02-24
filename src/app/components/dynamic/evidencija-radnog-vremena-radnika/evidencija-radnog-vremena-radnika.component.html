@@ -54,10 +54,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mousedown)="refreshZaposleni(filter!.MBR, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);"
                         (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);refresh();"

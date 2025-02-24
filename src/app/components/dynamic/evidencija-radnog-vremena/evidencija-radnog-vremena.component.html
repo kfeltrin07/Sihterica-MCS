@@ -54,10 +54,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mousedown)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"

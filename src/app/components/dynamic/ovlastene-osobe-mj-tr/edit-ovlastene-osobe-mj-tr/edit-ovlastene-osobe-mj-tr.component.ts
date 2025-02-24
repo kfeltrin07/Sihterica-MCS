@@ -113,8 +113,6 @@ public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
   }
 
   public ngOnInit(): void { 
-    this.OfferedOrganizationalUnits();
-    this.OfferedOperateri();
   }
 
   public validateForm(OvlastenaOsobaMjTr: OvlastenaOsobaMjTr): boolean {

@@ -69,11 +69,11 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                         placeholder="{{ 'Code' | translate }}"
-                        (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                        (blur)="filter.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
@@ -108,10 +108,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshVrstePosla(filter!.SIF_VP, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
@@ -147,10 +147,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshZaposleni(filter!.MBR, false);">
+                <span >
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);" (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
                         (keyup.escape)="resetZaposleniIndex();"
@@ -304,9 +304,9 @@
                         [class.color-valid]="evidencija.OSOBAX">
                         {{ evidencija!.OSOBAX ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshZaposleniRow(evidencija.MBR, false);">
+                    <span>
                         <input [class.red-input]="evidencija!.MBR && evidencija!.OSOBAX==''" type="text"
-                            (blur)="OfferedZaposleniRow(evidencija);"
+                            (blur)="evidencija.MBR==''?'':OfferedZaposleniRow(evidencija);"
                             [(ngModel)]="evidencija!.MBR" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="MBR"
                             (blur)="OfferedZaposleniRow(evidencija);"
@@ -342,12 +342,12 @@
                         [class.color-valid]="newVarNames.OSOBA">
                         {{ newVarNames!.OSOBA ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshNewZaposleni(newEvidencijaDnevna!.MBR, false);">
+                    <span>
                         <input [class.red-input]="newEvidencijaDnevna!.MBR && newVarNames!.PREZIME_IME=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.MBR" id="NewOfferedZaposleni-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedNewZaposleni();resetNewZaposleniIndex();"
+                            (blur)="newEvidencijaDnevna.MBR==''?'':OfferedNewZaposleni();resetNewZaposleniIndex();"
                             (ngModelChange)="filterNewZaposleni(newEvidencijaDnevna!.MBR);newVarNames!.PREZIME_IME=''"
                             (focus)="refreshNewZaposleni(newEvidencijaDnevna!.MBR, false);"
                             (keyup.enter)="selectNewZaposleni(NewOfferedZaposleni[NewZaposleniDropdownIndex]);"
@@ -390,11 +390,11 @@
                         [class.color-valid]="evidencija.SIF_MTX">
                         {{ evidencija!.SIF_MTX ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshEvidencijaRadVreOjRow(evidencija, false);">
+                    <span>
                         <input [class.red-input]="evidencija!.SIF_MT && evidencija!.SIF_MTX=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_MT" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="oj"
-                            (blur)="OfferedEvidencijaRadVreOjRow(evidencija);"
+                            (blur)="evidencija.SIF_MT==''?'':OfferedEvidencijaRadVreOjRow(evidencija);"
                             (ngModelChange)="filterEvidencijaRadVreOjRow(evidencija);selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshEvidencijaRadVreOjRow(evidencija, false);">
                         <mat-autocomplete #oj="matAutocomplete" [panelWidth]="400">
@@ -427,12 +427,12 @@
                         [class.color-valid]="newVarNames.NAZMJTR">
                         {{ newVarNames!.NAZMJTR ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT, false);">
+                    <span>
                         <input [class.red-input]="newEvidencijaDnevna!.SIF_MT && newVarNames!.NAZMJTR=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.SIF_MT" id="offeredEvidencijaRadVreOjNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
+                            (blur)="newEvidencijaDnevna.SIF_MT==''?'':OfferedEvidencijaRadVreOjNew();resetEvidencijaRadVreOjNewIndex();"
                             (ngModelChange)="filterEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT);newVarNames!.NAZMJTR=''"
                             (focus)="refreshEvidencijaRadVreOjNew(newEvidencijaDnevna!.SIF_MT, false);"
                             (keyup.enter)="selectEvidencijaRadVreOjNew(offeredEvidencijaRadVreOjNew[EvidencijaRadVreOjDropdownIndexNew]);"
@@ -475,11 +475,11 @@
                         [class.color-valid]="evidencija.SIF_VP_N">
                         {{ evidencija!.SIF_VP_N ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshVrstePoslaRow(evidencija, false);">
+                    <span>
                         <input [class.red-input]="evidencija!.SIF_VP && evidencija!.SIF_VP_N=='' " type="text"
                             [(ngModel)]="evidencija!.SIF_VP" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}" [matAutocomplete]="vp"
-                            (blur)="OfferedVrstePoslaRow(evidencija);"
+                            (blur)="evidencija.SIF_VP==''?'':OfferedVrstePoslaRow(evidencija);"
                             (ngModelChange)="filterVrstePoslaRow(evidencija.SIF_VP,evidencija); selection.isSelected(evidencija)?'':selection.select(evidencija)"
                             (focus)="refreshVrstePoslaRow(evidencija.SIF_VP, false);">
                         <mat-autocomplete #vp="matAutocomplete" [panelWidth]="400">
@@ -512,12 +512,12 @@
                         [class.color-valid]="newVarNames.NAZ_VP">
                         {{ newVarNames!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (mousedown)="refreshVrstePoslaNew(newEvidencijaDnevna!.SIF_VP, false);">
+                    <span>
                         <input [class.red-input]="newEvidencijaDnevna!.SIF_VP && newVarNames!.NAZ_VP=='' " type="text"
                             [(ngModel)]="newEvidencijaDnevna!.SIF_VP" id="offeredVrstePoslaNew-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
+                            (blur)="newEvidencijaDnevna.SIF_VP==''?'':OfferedVrstePoslaNew();resetVrstePoslaNewIndex();"
                             (ngModelChange)="filterVrstePoslaNew(newEvidencijaDnevna!.SIF_VP);newVarNames!.NAZ_VP=''"
                             (focus)="refreshVrstePoslaNew(newEvidencijaDnevna!.SIF_VP, false);"
                             (keyup.enter)="selectVrstePoslaNew(offeredVrstePoslaNew[VrstePoslaDropdownIndexNew]);"

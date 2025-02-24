@@ -27,15 +27,14 @@ class="colored-header text-align-center">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickOperateri();" (contextmenu)="removeOperateri($event)"
                         matTooltip="{{ (!OvlastenaOsobaMjTr.ID ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.NAZIV">
-                        {{ varNames!.NAZIV ? 'done' : 'import_contacts'}}
+                        [class.color-valid]="OvlastenaOsobaMjTr.NAZIV">
+                        {{ OvlastenaOsobaMjTr!.NAZIV ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span
-                        (mousedown)="refreshOperateri(OvlastenaOsobaMjTr!.ID, false);">
+                    <span>
                         <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.ID" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedOperateri();resetOperateri();"
+                            (blur)="OvlastenaOsobaMjTr.ID==''?'':OfferedOperateri();resetOperateri();"
                             (ngModelChange)="filterOperateri(OvlastenaOsobaMjTr!.ID);"
                             (focus)="refreshOperateri(OvlastenaOsobaMjTr!.ID, false);"
                             (keyup.enter)="selectOperateri(offeredOperateri[OperateriDropdownIndex]);"
@@ -55,9 +54,9 @@ class="colored-header text-align-center">
                             </div>
                         </div>
                     </span>
-                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZIV }}"
+                    <span class="small-margin-left margin-right" matTooltip="{{ OvlastenaOsobaMjTr!.NAZIV }}"
                         matTooltipShowDelay="1000">{{
-                        varNames!.NAZIV }}</span>
+                        OvlastenaOsobaMjTr!.NAZIV }}</span>
                 </td>
 			</tr>
 			<tr>
@@ -68,15 +67,14 @@ class="colored-header text-align-center">
                     <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
                         (click)="pickOrganizationalUnits();" (contextmenu)="removeOrganizationalUnits($event)"
                         matTooltip="{{ (!OvlastenaOsobaMjTr.SIFMJTR ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
-                        [class.color-valid]="varNames.NAZ_OJ">
-                        {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
+                        [class.color-valid]="OvlastenaOsobaMjTr.NAZMJTR">
+                        {{ OvlastenaOsobaMjTr!.NAZMJTR ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span
-                        (mousedown)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);">
+                    <span>
                         <input type="text" [(ngModel)]="OvlastenaOsobaMjTr.SIFMJTR" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
+                            (blur)="OvlastenaOsobaMjTr.SIFMJTR==''?'':OfferedOrganizationalUnits();resetOrganizationalUnits();"
                             (ngModelChange)="filterOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR);"
                             (focus)="refreshOrganizationalUnits(OvlastenaOsobaMjTr!.SIFMJTR, false);"
                             (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
@@ -96,9 +94,9 @@ class="colored-header text-align-center">
                             </div>
                         </div>
                     </span>
-                    <span class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
+                    <span class="small-margin-left margin-right" matTooltip="{{ OvlastenaOsobaMjTr!.NAZMJTR }}"
                         matTooltipShowDelay="1000">{{
-                        varNames!.NAZ_OJ }}</span>
+                        OvlastenaOsobaMjTr!.NAZMJTR }}</span>
                 </td>
 			</tr>
 			<tr>

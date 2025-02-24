@@ -29,10 +29,10 @@
                         {{ varNames!.NAZ_GRUPE ? 'done' : 'import_contacts'}}
                     </mat-icon>
 
-                    <span (mousedown)="refreshGrupe(varNames!.ID_GRUPE, false);">
+                    <span>
                         <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22" id="offeredGrupe1-help-span"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                            placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe();resetGrupeIndex();"
+                            placeholder="{{ 'Code' | translate }}" (blur)="varNames.ID_GRUPE==''?'':OfferedGrupe();resetGrupeIndex();"
                             (ngModelChange)="filterGrupe(varNames!.ID_GRUPE);"
                             (focus)="refreshGrupe(varNames!.ID_GRUPE, false);"
                             (keyup.enter)="selectGrupe(offeredGrupe[GrupeDropdownIndex]);"
@@ -67,11 +67,11 @@
                         {{ varNames!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
 
-                    <span (mousedown)="refreshVrstePosla(varNames!.SIF_VP, false);">
+                    <span>
                         <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
                             id="offeredVrstePosla1-help-span" class="minimum-margin-horizontal light-gray-background"
                             style="width: 50px;" placeholder="{{ 'Code' | translate }}"
-                            (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                            (blur)="varNames.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
                             (ngModelChange)="filterVrstePosla(varNames!.SIF_VP);"
                             (focus)="refreshVrstePosla(varNames!.SIF_VP, false);"
                             (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"

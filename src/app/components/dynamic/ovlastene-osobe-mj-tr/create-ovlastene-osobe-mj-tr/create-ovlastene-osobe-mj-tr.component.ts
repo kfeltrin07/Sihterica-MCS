@@ -50,10 +50,6 @@ export class CreateOvlasteneOsobeMjTrComponent {
     SATI: "",
   };
 
-  public varNames: any = {
-    NAZ_OJ: ""
-  }
-
   public OrganizacijskeJediniceDropdownIndex: number = -1;
   public offeredOrganizacijskeJedinice: OrganizacijskeJedinice[] = [];
   public filteredEvidVezeIzracuna: OrganizacijskeJedinice[] = [];
@@ -151,14 +147,14 @@ export class CreateOvlasteneOsobeMjTrComponent {
   public setOrganizationalUnitsFromDialog(OrganizacijskeJedinice?: OrganizacijskeJedinice): void {
     if (OrganizacijskeJedinice) {
       this.OvlastenaOsobaMjTr.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
-      this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
+      this.OvlastenaOsobaMjTr.NAZMJTR = OrganizacijskeJedinice.NAZ_OJ;
     }
   }
 
   public removeOrganizationalUnits(e: Event): void {
     e.preventDefault();
     this.OvlastenaOsobaMjTr.SIFMJTR = "";
-    this.varNames.NAZ_OJ = "";
+    this.OvlastenaOsobaMjTr.NAZMJTR = "";
 
   }
 
@@ -217,7 +213,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
       this.offeredOrganizacijskeJedinice = response.debugData.data;
       for (let item of this.offeredOrganizacijskeJedinice) {
         if (item.SIF_OJ.toUpperCase() == this.OvlastenaOsobaMjTr.SIFMJTR.toUpperCase()) {
-          this.varNames.NAZ_OJ = item.NAZ_OJ;
+          this.OvlastenaOsobaMjTr.NAZMJTR = item.NAZ_OJ;
           this.OvlastenaOsobaMjTr.SIFMJTR = item.SIF_OJ;
         }
       }
@@ -241,7 +237,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
 
   public selectOrganizationalUnits(OrganizacijskeJedinice: OrganizacijskeJedinice): void {
     this.OvlastenaOsobaMjTr.SIFMJTR = OrganizacijskeJedinice.SIF_OJ;
-    this.varNames.NAZ_OJ = OrganizacijskeJedinice.NAZ_OJ;
+    this.OvlastenaOsobaMjTr.NAZMJTR = OrganizacijskeJedinice.NAZ_OJ;
     document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.OrganizacijskeJediniceDropdownIndex = -1;
   }
@@ -264,14 +260,14 @@ export class CreateOvlasteneOsobeMjTrComponent {
   public setOperateriFromDialog(Operateri?: Operateri): void {
     if (Operateri) {
       this.OvlastenaOsobaMjTr.ID = Operateri.ID;
-      this.varNames.NAZIV = Operateri.NAZIV;
+      this.OvlastenaOsobaMjTr.NAZIV = Operateri.NAZIV;
     }
   }
 
   public removeOperateri(e: Event): void {
     e.preventDefault();
     this.OvlastenaOsobaMjTr.ID = "";
-    this.varNames.NAZIV = "";
+    this.OvlastenaOsobaMjTr.NAZIV = "";
 
   }
 
@@ -330,7 +326,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
       this.offeredOperateri = response.debugData.data;
       for (let item of this.offeredOperateri) {
         if (item.ID.toUpperCase() == this.OvlastenaOsobaMjTr.ID.toUpperCase()) {
-          this.varNames.NAZIV = item.NAZIV;
+          this.OvlastenaOsobaMjTr.NAZIV = item.NAZIV;
           this.OvlastenaOsobaMjTr.ID = item.ID;
         }
       }
@@ -354,7 +350,7 @@ export class CreateOvlasteneOsobeMjTrComponent {
 
   public selectOperateri(Operateri: Operateri): void {
     this.OvlastenaOsobaMjTr.ID = Operateri.ID;
-    this.varNames.NAZIV = Operateri.NAZIV;
+    this.OvlastenaOsobaMjTr.NAZIV = Operateri.NAZIV;
     document.getElementById("offeredOperateri-dropdown")?.classList.remove("select-dropdown-content-visible");
     this.OperateriDropdownIndex = -1;
   }

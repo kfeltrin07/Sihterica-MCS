@@ -54,10 +54,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result">
-                <span (mousedown)="refreshZaposleni(filter!.MBR, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedZaposleni();resetZaposleniIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
                         (ngModelChange)="filterZaposleni(filter!.MBR);"
                         (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
@@ -121,10 +121,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
@@ -158,10 +158,10 @@
                 </mat-icon>
             </td>
             <td class="filter-result2">
-                <span (mousedown)="refreshVrstePosla(filter!.SIF_VP, false);">
+                <span>
                     <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="OfferedVrstePosla();resetVrstePoslaIndex();"
+                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"

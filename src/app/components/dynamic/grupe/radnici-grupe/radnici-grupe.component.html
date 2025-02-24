@@ -27,12 +27,11 @@
                             [class.color-valid]="varNames.NAZ_OJ">
                             {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span 
-                            (mousedown)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
+                        <span>
                             <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
-                                (blur)="OfferedOrganizationalUnits();resetOrganizationalUnits();"
+                                (blur)="varNames.SIFMJTR==''?'':OfferedOrganizationalUnits();resetOrganizationalUnits();"
                                 (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
                                 (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
                                 (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"

@@ -228,8 +228,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     public router: Router,
 
   ) {
-    this.getVrstePosla();
-    this.getOrganizacijskeJedinice();
   }
 
   public ngOnInit(): void {
@@ -241,6 +239,10 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.filter.GODINA = this.IncomingData.GODINA;
       this.filter.MJESEC = this.IncomingData.MJESEC;
       this.filter.SIF_VP = this.IncomingData.SIF_VP;
+      this.filter.NAZMJTR = this.IncomingData.NAZ_OJ;
+      this.filter.PREZIME_IME = this.IncomingData.PREZIME_IME;
+      this.filter.NAZ_VP = this.IncomingData.NAZ_VP;
+
       this.getEvidencijaMjesecna();
     } else {
       this.filter.GODINA = (new Date()).getFullYear();
@@ -930,13 +932,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.VrstePoslaTableList = response.debugData.data;
-      this.offeredVrstePosla = response.debugData.data;
-
-      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
-      if (matchedItem) {
-        this.filter.NAZ_VP = matchedItem.NAZ_VP;
-        this.filter.SIF_VP = matchedItem.SIF_VP;
-      }
     });
   }
 
@@ -962,14 +957,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.RadVreOjTableList = response.debugData.data;
-      this.offeredEvidencijaRadVreOj = response.debugData.data;
-
-      const matchedItem = this.offeredEvidencijaRadVreOj.find(item => item.SIF_OJ.toUpperCase().trim() === this.filter.SIF_OJ.toUpperCase().trim());
-      if (matchedItem) {
-        this.filter.NAZMJTR = matchedItem.NAZMJTR;
-        this.filter.VRSTA = matchedItem.VRSTA;
-        this.filter.SIF_OJ = matchedItem.SIF_OJ;
-      }
 
       this.RadVreOjTableList.forEach((item, index) => {
         if (item.SIF_OJ === '%') this.RadVreOjTableList.splice(index, 1);

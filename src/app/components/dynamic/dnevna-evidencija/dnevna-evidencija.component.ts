@@ -1608,7 +1608,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
     let MJESEC = +this.filter.DATUM.substring(5, 7);
 
-    let data = { MBR: event.MBR, SIF_OJ: this.filter.SIF_OJ, SIF_VP: event.SIF_VP, GODINA: GODINA, MJESEC: MJESEC };
+    let data = { MBR: event.MBR, PREZIME_IME: event.OSOBAX, SIF_OJ: event.SIF_MT, NAZ_OJ: event.SIF_MTX, SIF_VP: event.SIF_VP, NAZ_VP: event.SIF_VP_N, GODINA: GODINA, MJESEC: MJESEC };
 
     this.router.navigate(["mjesecna-evidencija", data]);
 

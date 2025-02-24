@@ -106,12 +106,11 @@
                             [class.color-valid]="Grupe.NAZ_SHEME">
                             {{ Grupe!.NAZ_SHEME ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span
-                            (mousedown)="refreshSheme(Grupe!.SIF_SHEME, false);">
+                        <span>
                             <input type="text" [(ngModel)]="Grupe.SIF_SHEME" maxlength="22"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
-                                (blur)="OfferedSheme();resetSheme();"
+                                (blur)="Grupe.SIF_SHEME==''?'':OfferedSheme();resetSheme();"
                                 (ngModelChange)="filterSheme(Grupe!.SIF_SHEME);"
                                 (focus)="refreshSheme(Grupe!.SIF_SHEME, false);"
                                 (keyup.enter)="selectSheme(offeredSheme[ShemeDropdownIndex]);"
@@ -147,11 +146,11 @@
                             [class.color-valid]="Grupe!.NAZ_OJ">
                             {{ Grupe!.NAZ_OJ ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span (mousedown)="refreshEvidencijaRadVreOj(Grupe!.SIF_OJ, false);">
+                        <span>
                             <input type="text" [(ngModel)]="Grupe!.SIF_OJ" maxlength="22"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
-                                (blur)="OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                                (blur)="Grupe.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                                 (ngModelChange)="filterEvidencijaRadVreOj(Grupe!.SIF_OJ);"
                                 (focus)="refreshEvidencijaRadVreOj(Grupe!.SIF_OJ, false);"
                                 (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"

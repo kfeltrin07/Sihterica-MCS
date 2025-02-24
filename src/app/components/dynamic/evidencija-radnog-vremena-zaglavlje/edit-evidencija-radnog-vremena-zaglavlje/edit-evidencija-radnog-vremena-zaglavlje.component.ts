@@ -80,7 +80,6 @@ export class EditEvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.OfferedOpisVrste();
   }
 
   public validateForm(EvidencijaRadVreZag: EvidencijaRadVreZag): boolean {
