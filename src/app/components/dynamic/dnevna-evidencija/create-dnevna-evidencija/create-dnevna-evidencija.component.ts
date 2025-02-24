@@ -135,11 +135,11 @@ export class CreateDnevnaEvidencijaComponent {
 
   public ngOnInit(): void { }
 
-  public validateForm(Grupe: Grupe): boolean {
-    if (Grupe.ID_GRUPE != '' && Grupe.NAZ_GRUPE != '') {
-      return false;
-    } else {
+  public validateForm(): boolean {
+    if (this.globalFn.validateHelp(this.varNames.ID_GRUPE,this.varNames.NAZ_GRUPE)&& this.globalFn.validateHelp(this.varNames.SIF_VP,this.varNames.NAZ_VP) && this.globalFn.validateTime(this.varNames.OD) && this.globalFn.validateTime(this.varNames.DO)) {
       return true;
+    } else {
+      return false;
     }
   }
 
@@ -340,7 +340,6 @@ export class CreateDnevnaEvidencijaComponent {
       console.log(response);
       this.offeredGrupe = response.debugData.data;
       this.filteredGrupe = this.offeredGrupe;
-      console.log(isSelected);
       var dummyEl = document.getElementById('offeredGrupe1-help-span');
       var isFocused = (document.activeElement === dummyEl);
       if (!isSelected && isFocused) {

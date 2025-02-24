@@ -10,7 +10,7 @@
               @for(link of item.items;track link){
                 @if(link.rightsState!=0|| !globalVar.useDynamicMenus){
                 
-                  <tr (click)="router.navigate([link.url])">
+                  <tr (mousedown)="router.navigate([link.url])">
                     <td class="hover-div">
                       <mat-icon >{{link.icon}}</mat-icon>
                     </td>

@@ -4,11 +4,11 @@
       <mat-icon>menu</mat-icon>
     </button>
   
-    <button mat-icon-button class="example-icon" matTooltip="{{ 'Open/CloseSidenav' | translate }}" (click)="sidenavService.toggle()">
+    <button mat-icon-button class="example-icon" matTooltip="{{ 'Open/CloseSidenav' | translate }}" (mousedown)="sidenavService.toggle()">
       <mat-icon>view_sidebar</mat-icon>
     </button>
   
-    <button mat-flat-button class="example-icon" style="margin-right: 20px;" (click)="router.navigateByUrl('selection-screen')">
+    <button mat-flat-button class="example-icon" style="margin-right: 20px;" (mousedown)="router.navigateByUrl('selection-screen')">
       {{'SelectionScreen'|translate}}
       <mat-icon>view_list</mat-icon>
     </button>
@@ -21,7 +21,7 @@
   
     <span>{{ session.loggedInUser.username }}</span>
   
-    <button mat-icon-button class="example-icon favorite-icon" matTooltip="{{ 'Logout' | translate }}" (click)="openLogoutPrompt();">
+    <button mat-icon-button class="example-icon favorite-icon" matTooltip="{{ 'Logout' | translate }}" (mousedown)="openLogoutPrompt();">
       <mat-icon>logout</mat-icon>
     </button>
   
@@ -39,7 +39,7 @@
       <mat-icon>language</mat-icon>
     </button>
   
-    <button mat-menu-item *ngIf="session.loggedInUser.sessionID != ''" (click)="openLogoutPrompt();">
+    <button mat-menu-item *ngIf="session.loggedInUser.sessionID != ''" (mousedown)="openLogoutPrompt();">
       {{ 'Logout' | translate }}
       <mat-icon>logout</mat-icon>
     </button>
@@ -48,7 +48,7 @@
   
   <mat-menu #submenuLanguage="matMenu">
   
-    <button mat-menu-item (click)="globalFn.changeLanguage('hr');">
+    <button mat-menu-item (mousedown)="globalFn.changeLanguage('hr');">
       <mat-icon color="primary">{{ globalVar.selectedLanguage == 'hr' ? 'done' : '' }}</mat-icon>
       <mat-icon>
         <img src="assets/icons/png/language-hr.png" alt="" height="20">
@@ -56,7 +56,7 @@
       {{ 'Croatian' | translate }}
     </button>
   
-    <button mat-menu-item (click)="globalFn.changeLanguage('en');">
+    <button mat-menu-item (mousedown)="globalFn.changeLanguage('en');">
       <mat-icon color="primary">{{ globalVar.selectedLanguage == 'en' ? 'done' : '' }}</mat-icon>
       <mat-icon>
         <img src="assets/icons/png/language-en.png" alt="" height="20">

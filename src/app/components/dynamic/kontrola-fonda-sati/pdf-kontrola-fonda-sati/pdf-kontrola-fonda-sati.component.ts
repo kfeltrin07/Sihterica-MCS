@@ -3,20 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import moment from 'moment';
-import { FondSati } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalFunctionsService } from 'src/app/services/global-functions/global-functions.service';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
-import { HttpService } from 'src/app/services/http/http.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { TranslationService } from 'src/app/services/translation/translation.service';
-import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
   selector: 'app-pdf-kontrola-fonda-sati',
@@ -37,6 +30,7 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 export class PdfKontrolaFondaSatiComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<PdfKontrolaFondaSatiComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

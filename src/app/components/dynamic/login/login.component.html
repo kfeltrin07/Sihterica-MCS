@@ -40,7 +40,7 @@
     <input matInput [type]="obscurePassword ? 'password' : 'text'" [(ngModel)]="userLogin.pPassword"
       (keyup.enter)="login();">
     <!-- <input matInput [type]="obscurePassword ? 'password' : 'text'" (keyup.enter)="login();"> -->
-    <button matSuffix mat-icon-button (click)="toggleObscurity();" [matTooltip]="t.translate('ShowHidePassword')">
+    <button matSuffix mat-icon-button (mousedown)="toggleObscurity();" [matTooltip]="t.translate('ShowHidePassword')">
       <mat-icon>visibility</mat-icon>
     </button>
   </mat-form-field>
@@ -49,12 +49,12 @@
   <mat-form-field id="konekcije" appearance="outline">
     <mat-label>Konekcije</mat-label>
     <mat-select [(ngModel)]="selectedValue">
-      <mat-option (click)="changeConnection(konekcija);" *ngFor="let konekcija of konekcije"
+      <mat-option (mousedown)="changeConnection(konekcija);" *ngFor="let konekcija of konekcije"
         [value]="konekcija.value">{{konekcija.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>
   }
   <button id="loginbutton" mat-flat-button color="primary"
-    [disabled]="userLogin.pUsername=='' ||userLogin.pPassword==''" (click)="login();">{{ 'Login' | translate }}</button>
+    [disabled]="userLogin.pUsername=='' ||userLogin.pPassword==''" (mousedown)="login();">{{ 'Login' | translate }}</button>
 
 </mat-card>

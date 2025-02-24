@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
@@ -31,6 +31,7 @@ export class PdfDnevnaEvidencijaComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<PdfDnevnaEvidencijaComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     public globalFn: GlobalFunctionsService,

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { GlobalVariablesService } from '../global-variables/global-variables.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidenavService {
+  public sideNavToggleSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
     public globalVar: GlobalVariablesService,
@@ -28,6 +30,7 @@ export class SidenavService {
   }
 
   public toggle(): void {
-    this.globalVar.sideNav.toggle();
+    return this.sideNavToggleSubject.next(null);
   }
+
 }

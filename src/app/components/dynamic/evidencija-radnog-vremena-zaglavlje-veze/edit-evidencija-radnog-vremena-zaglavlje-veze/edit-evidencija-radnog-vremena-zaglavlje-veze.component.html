@@ -5,7 +5,7 @@ cdkDragHandle
 cdkDragBoundary=".cdk-overlay-container"
 class="colored-header text-align-center">
 	{{ 'Editing' | translate }}
-    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+    <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()" >close</mat-icon>
 
 </div>
 
@@ -31,7 +31,7 @@ class="colored-header text-align-center">
                         {{ EvidencijaRadVreZagVeze!.KNAZIV ? 'done' : 'import_contacts'}}
                     </mat-icon>
                     <span
-                        (click)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
+                        (mousedown)="refreshEvidVezeSifra(EvidencijaRadVreZagVeze!.SIF_STUPCA, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_STUPCA" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
@@ -69,7 +69,7 @@ class="colored-header text-align-center">
                         [class.color-valid]="EvidencijaRadVreZagVeze.NAZ_VP">
                         {{ EvidencijaRadVreZagVeze!.NAZ_VP ? 'done' : 'import_contacts'}}
                     </mat-icon>
-                    <span (click)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
+                    <span (mousedown)="refreshEvidVezeIzracuna(EvidencijaRadVreZagVeze!.SIF_VP, false);">
                         <input type="text" [(ngModel)]="EvidencijaRadVreZagVeze.SIF_VP" maxlength="22"
                             class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                             placeholder="{{ 'Code' | translate }}"
@@ -113,7 +113,7 @@ class="colored-header text-align-center">
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-	<button mat-button [mat-dialog-close]="true">{{ 'Cancel' | translate }}</button>
-	<button mat-raised-button type="button" color="primary" (click)="save();dialogRef.close(true);"
+	<button mat-button (mousedown)="dialogRef.close()">{{ 'Cancel' | translate }}</button>
+	<button mat-raised-button type="button" color="primary" (mousedown)="save();dialogRef.close(true);"
 		[disabled]="validateForm(EvidencijaRadVreZagVeze!)">{{ 'Edit' | translate }}</button>
 </mat-dialog-actions>

@@ -22,11 +22,11 @@ class="toolbar">
       <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'OpisVrste' | translate }}">
     </mat-form-field>
   
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
       <mat-icon>search</mat-icon>
     </button>
   
-    <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left" (click)="refresh();">
+    <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left" (mousedown)="refresh();">
       <mat-icon *ngIf="!loading">refresh</mat-icon>
       <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
     </button>

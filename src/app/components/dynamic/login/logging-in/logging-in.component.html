@@ -7,6 +7,6 @@
   </mat-dialog-content>
   
   <mat-dialog-actions align="end" *ngIf="globalVar.loggingInMessage == 'LoginFailed'">
-    <button mat-raised-button color="primary" mat-dialog-close>{{ 'Okay' | translate }}</button>
+    <button mat-raised-button color="primary" (mousedown)="dialogRef.close()">{{ 'Okay' | translate }}</button>
   </mat-dialog-actions>
   

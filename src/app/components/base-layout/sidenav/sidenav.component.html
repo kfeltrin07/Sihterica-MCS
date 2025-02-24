@@ -3,16 +3,16 @@
     'sidenav-logged-in': session.loggedInUser.sessionID != ''
   }">
 
-  <mat-sidenav #snav [mode]="this.globalVar.VrstaUredaja?'over':'side'"
+  <mat-sidenav #sidenav [mode]="this.globalVar.VrstaUredaja?'over':'side'"
     [opened]="this.globalVar.VrstaUredaja?false:true" class="sidenav-sidenav"
     *ngIf="session.loggedInUser.sessionID != ''" [fixedInViewport]="this.globalVar.VrstaUredaja" fixedTopGap="56">
 
     <div class="display-flex sidenav-headers">
-      <div matRipple class="sidenav-right-header" (click)="expandAll();">
+      <div matRipple class="sidenav-right-header" (mousedown)="expandAll();">
         <mat-icon>arrow_drop_down</mat-icon>
         <span>{{ 'ExpandAll' | translate }}</span>
       </div>
-      <div matRipple class="sidenav-left-header" (click)="collapseAll();">
+      <div matRipple class="sidenav-left-header" (mousedown)="collapseAll();">
         <mat-icon>arrow_right</mat-icon>
         <span>{{ 'CollapseAll' | translate }}</span>
       </div>
@@ -23,7 +23,7 @@
       
       }
       @else{
-        <div matRipple class="sidenav-list-item" (click)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
+        <div matRipple class="sidenav-list-item" (mousedown)="toggleSidebarItemOpen(sidebarItem); goToRoute(sidebarItem);">
 
           <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarItem.highlighted">{{
             sidebarItem.icon ? sidebarItem.icon : (sidebarItem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right')
@@ -52,7 +52,7 @@
   
             <div *ngIf="sidebarSubitem.rightsState > 0" matRipple class="sidenav-list-subitem"
               [class.highlighted-background]="sidebarSubitem.highlighted && !sidebarSubitem.children"
-              (click)="toggleSidebarItemOpen(sidebarSubitem); goToRoute(sidebarSubitem);">
+              (mousedown)="toggleSidebarItemOpen(sidebarSubitem); goToRoute(sidebarSubitem);">
   
               <mat-icon matListItemIcon class="sidenav-list-item-icon" [class.highlight]="sidebarSubitem.highlighted">{{
                 sidebarSubitem.children ? (sidebarSubitem.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right') :
@@ -80,7 +80,7 @@
   
               <div *ngFor="let sidebarSubsubitem of sidebarSubitem.children">
                 <div *ngIf="sidebarSubsubitem.rightsState > 0" matRipple class="sidenav-list-subsubitem"
-                  [class.highlighted-background]="sidebarSubsubitem.highlighted" (click)="goToRoute(sidebarSubsubitem);">
+                  [class.highlighted-background]="sidebarSubsubitem.highlighted" (mousedown)="goToRoute(sidebarSubsubitem);">
   
                   <mat-icon matListItemIcon class="sidenav-list-item-icon"
                     [class.highlight]="sidebarSubsubitem.highlighted">{{ sidebarSubsubitem.icon ? sidebarSubsubitem.icon :

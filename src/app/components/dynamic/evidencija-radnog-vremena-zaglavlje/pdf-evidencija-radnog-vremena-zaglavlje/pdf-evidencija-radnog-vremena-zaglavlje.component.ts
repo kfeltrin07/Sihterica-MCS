@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import jsPDF from 'jspdf';
@@ -37,6 +37,7 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 export class PdfEvidencijaRadnogVremenaZaglavljeComponent {
 constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<PdfEvidencijaRadnogVremenaZaglavljeComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     private session: SessionService,

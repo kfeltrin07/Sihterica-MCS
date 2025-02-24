@@ -5,7 +5,7 @@ cdkDragHandle
 cdkDragBoundary=".cdk-overlay-container"
 class="colored-header text-align-center">
 	{{ receivedSheme.title }}
-    <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+    <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()" >close</mat-icon>
 
 </div>
 <mat-tab-group [selectedIndex]="selected.value"
@@ -36,12 +36,12 @@ class="colored-header text-align-center">
         <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Grupe' | translate }}">
       </mat-form-field>
 
-      <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();">
+      <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
         <mat-icon>search</mat-icon>
       </button>
 
       <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left"
-        (click)="refresh();">
+        (mousedown)="refresh();">
         <mat-icon *ngIf="!loading">refresh</mat-icon>
         <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
       </button>
@@ -63,7 +63,7 @@ class="colored-header text-align-center">
 
         <tr mat-header-row style="height: 40px;" *matHeaderRowDef="displayedColumns1"></tr>
         <tr mat-row class="highlighted-on-hover" style="height: 20px;" *matRowDef="let row; columns: displayedColumns1;"
-          (click)="selection.toggle(row);" [class.selected]="selection.isSelected(row)"></tr>
+          (mousedown)="selection.toggle(row);" [class.selected]="selection.isSelected(row)"></tr>
 
       </table>
 
@@ -98,17 +98,17 @@ class="colored-header text-align-center">
         <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Grupe' | translate }}">
       </mat-form-field>
 
-      <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (click)="refresh();">
+      <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
         <mat-icon>search</mat-icon>
       </button>
 
       <button mat-mini-fab color="primary" matTooltip="{{ 'Refresh' | translate }}" class="small-margin-left"
-        (click)="refresh();">
+        (mousedown)="refresh();">
         <mat-icon *ngIf="!loading">refresh</mat-icon>
         <mat-spinner [diameter]="30" color="accent" style="height: 25px;" *ngIf="loading"></mat-spinner>
       </button>
 
-      <button mat-mini-fab color="primary" matTooltip="{{ 'Dodaj' | translate }}"  class="small-margin-left" (click)="openZaposleniciDialog();">
+      <button mat-mini-fab color="primary" matTooltip="{{ 'Dodaj' | translate }}"  class="small-margin-left" (mousedown)="openZaposleniciDialog();">
         <mat-icon>add</mat-icon>
       </button>
 
@@ -180,7 +180,7 @@ class="colored-header text-align-center">
       </table>
     </div>
     <div style="margin: 20px;">
-      <button mat-flat-button color="primary" (click)="save()">{{'Save'|translate}}</button>
+      <button mat-flat-button color="primary" (mousedown)="save()">{{'Save'|translate}}</button>
     </div>
   </mat-tab>
 

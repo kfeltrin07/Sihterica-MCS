@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CRUDAction, Grupe } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
@@ -31,8 +31,9 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
   styleUrl: './delete-grupe.component.scss'
 })
 export class DeleteGrupeComponent {
-constructor(
+  constructor(
     @Inject(MAT_DIALOG_DATA) public recievedGrupe: Grupe,
+    public dialogRef: MatDialogRef<DeleteGrupeComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     private globalFn: GlobalFunctionsService,

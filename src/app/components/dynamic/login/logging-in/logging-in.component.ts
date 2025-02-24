@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogActions, MatDialogContent } from '@angular/material/dialog';
-import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
+import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
-import { CommonModule } from '@angular/common';
+import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 
 @Component({
   selector: 'app-logging-in',
@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoggingInComponent {
   constructor(
+    public dialogRef: MatDialogRef<LoggingInComponent>,
     public globalVar: GlobalVariablesService
   ) {}
 

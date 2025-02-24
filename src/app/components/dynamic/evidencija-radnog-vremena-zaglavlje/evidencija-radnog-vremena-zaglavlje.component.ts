@@ -135,7 +135,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateEvidencijaRadnogVremenaZaglavljeComponent, {
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if(result) setTimeout(() => this.refresh(), 1000);
     });
   }
 
@@ -144,7 +144,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if(result) setTimeout(() => this.refresh(), 1000);
     });
   }
 
@@ -153,7 +153,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if(result) setTimeout(() => this.refresh(), 1000);
     });
   }
 

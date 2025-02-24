@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CRUDAction, Sheme } from 'src/app/models/models.service';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
@@ -33,6 +33,7 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 export class DeleteShemeComponent {
 constructor(
     @Inject(MAT_DIALOG_DATA) public recievedSheme: Sheme,
+    public dialogRef: MatDialogRef<DeleteShemeComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     private globalFn: GlobalFunctionsService,

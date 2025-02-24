@@ -241,18 +241,10 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       this.filter.GODINA = this.IncomingData.GODINA;
       this.filter.MJESEC = this.IncomingData.MJESEC;
       this.filter.SIF_VP = this.IncomingData.SIF_VP;
-      this.OfferedEvidencijaRadVreOj();
-      this.OfferedVrstePosla();
-      this.OfferedZaposleni('2');
-
       this.getEvidencijaMjesecna();
     } else {
       this.filter.GODINA = (new Date()).getFullYear();
       this.filter.MJESEC = new Date().getMonth() + 1;
-      this.OfferedEvidencijaRadVreOj();
-      this.OfferedVrstePosla();
-      this.OfferedZaposleni('2');
-
     }
 
 
@@ -938,6 +930,13 @@ export class MjesecnaEvidencijaComponent implements OnInit {
       console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.VrstePoslaTableList = response.debugData.data;
+      this.offeredVrstePosla = response.debugData.data;
+
+      const matchedItem = this.offeredVrstePosla.find(item => item.SIF_VP.toUpperCase() === this.filter.SIF_VP.toUpperCase());
+      if (matchedItem) {
+        this.filter.NAZ_VP = matchedItem.NAZ_VP;
+        this.filter.SIF_VP = matchedItem.SIF_VP;
+      }
     });
   }
 
@@ -961,9 +960,17 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         }
       }
     ).subscribe((response: any) => {
-      console.log(response);
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.RadVreOjTableList = response.debugData.data;
+      this.offeredEvidencijaRadVreOj = response.debugData.data;
+
+      const matchedItem = this.offeredEvidencijaRadVreOj.find(item => item.SIF_OJ.toUpperCase().trim() === this.filter.SIF_OJ.toUpperCase().trim());
+      if (matchedItem) {
+        this.filter.NAZMJTR = matchedItem.NAZMJTR;
+        this.filter.VRSTA = matchedItem.VRSTA;
+        this.filter.SIF_OJ = matchedItem.SIF_OJ;
+      }
+
       this.RadVreOjTableList.forEach((item, index) => {
         if (item.SIF_OJ === '%') this.RadVreOjTableList.splice(index, 1);
       });
@@ -974,7 +981,6 @@ export class MjesecnaEvidencijaComponent implements OnInit {
         NAZMJTR: "ODABERITE M.T.",
         VRSTA: "1",
       })
-      console.log(this.RadVreOjTableList);
     });
   }
 

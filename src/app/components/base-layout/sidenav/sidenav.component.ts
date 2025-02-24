@@ -36,7 +36,7 @@ import { MatRippleModule } from '@angular/material/core';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
-  @ViewChild('snav') public sidenav!: MatSidenav;
+  @ViewChild('sidenav') public sidenav!: MatSidenav;
   @ViewChild('spanelement') public spanelement!: ElementRef;
 
   public sidebarItemsState: SidebarItem[] = [];
@@ -51,11 +51,13 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     public deviceService: DeviceDetectorService,
     public location: Location
   ) {
+
     this.sidenavMode();
     router.events.subscribe((url) => this.updateHighlightedLink());
 
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
+
         this.openSidebarItems(this.sidebarItemsState);
       }
     });
@@ -65,10 +67,14 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     this.sidebarItemsState = this.globalVar.sidebarItems;
     this.filterSidebarItems();
     this.openSidebarItems(this.sidebarItemsState);
+    this.sidenavService.sideNavToggleSubject.subscribe(()=> {
+      if(this.sidenav!=undefined){
+        this.sidenav.toggle();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
   }
 
   public sidenavMode() {

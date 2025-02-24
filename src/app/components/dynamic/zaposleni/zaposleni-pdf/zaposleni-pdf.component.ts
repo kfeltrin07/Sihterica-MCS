@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Zaposleni } from 'src/app/models/models.service';
 import RobotoFont from 'src/assets/fonts/roboto.json';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { CommonModule } from '@angular/common';
@@ -38,6 +38,7 @@ export class ZaposleniPdfComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<ZaposleniPdfComponent>,
     private http: HttpClient,
     private globalVar: GlobalVariablesService,
     private session: SessionService,

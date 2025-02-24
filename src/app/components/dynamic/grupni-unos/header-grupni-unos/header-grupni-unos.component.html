@@ -36,7 +36,7 @@
       <div class="btn-group">
         <button mat-flat-button color="primary"
           class="btn btn-primary"
-          (click)="viewChange.emit(CalendarView.Month)"
+          (mousedown)="viewChange.emit(CalendarView.Month)"
           [class.active]="view === CalendarView.Month"
         >
         <mat-icon>calendar_view_month</mat-icon>
@@ -45,7 +45,7 @@
 
         <button mat-flat-button color="primary"
           class="btn btn-primary"
-          (click)="viewChange.emit(CalendarView.Week)"
+          (mousedown)="viewChange.emit(CalendarView.Week)"
           [class.active]="view === CalendarView.Week"
         >
         <mat-icon>calendar_view_week</mat-icon>
@@ -54,7 +54,7 @@
                 <!--
         <button mat-flat-button color="primary"
           class="btn btn-primary"
-          (click)="viewChange.emit(CalendarView.Day)"
+          (mousedown)="viewChange.emit(CalendarView.Day)"
           [class.active]="view === CalendarView.Day"
         >
         <mat-icon>calendar_view_day</mat-icon>

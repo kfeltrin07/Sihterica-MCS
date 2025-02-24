@@ -1191,7 +1191,9 @@ export class GrupniUnosComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateGrupeComponent, {
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.getGrupeEvents(), 1000);
+      if(result==true){
+        setTimeout(() => this.getGrupeEvents(), 1000);
+      }
     });
   }
 

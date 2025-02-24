@@ -52,7 +52,7 @@
                         <label style="font-size: 14px;" for="">{{'Grupe'|translate}}</label>
                         <button style="margin-right: 20px; scale: 0.8;" mat-mini-fab color="primary"
                             matTooltip="{{ 'Create' | translate }}"
-                            (click)="openCreateDialog();"><mat-icon>add</mat-icon></button>
+                            (mousedown)="openCreateDialog();"><mat-icon>add</mat-icon></button>
                     </div>
                     <p *ngIf="globalVar.externalGrupeEvents.length === 0"><em>No events added</em></p>
                     <div class="listEvents">
@@ -86,7 +86,7 @@
                             {{ varNames!.NAZ_GRUPE ? 'done' : 'import_contacts'}}
                         </mat-icon>
 
-                        <span (click)="refreshGrupe(varNames!.ID_GRUPE, false);">
+                        <span (mousedown)="refreshGrupe(varNames!.ID_GRUPE, false);">
                             <input type="text" [(ngModel)]="varNames!.ID_GRUPE" maxlength="22" id="offeredGrupe1-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}" (blur)="OfferedGrupe();resetGrupeIndex();"
@@ -127,7 +127,7 @@
                             [class.color-valid]="varNames.NAZMJTR">
                             {{ varNames!.NAZMJTR ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span (click)="refreshEvidencijaRadVreOj(varNames!.SIFMJTR, false);">
+                        <span (mousedown)="refreshEvidencijaRadVreOj(varNames!.SIFMJTR, false);">
                             <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
@@ -171,7 +171,7 @@
                             [class.color-valid]="varNames!.NAZIV_RADNIKA">
                             {{ varNames!.NAZIV_RADNIKA ? 'done' : 'import_contacts'}}
                         </mat-icon>
-                        <span (click)="refreshZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA, false);">
+                        <span (mousedown)="refreshZaposleniPoGrupiIShemi(varNames!.ID_RADNIKA, false);">
                             <input type="text" [(ngModel)]="varNames!.ID_RADNIKA" maxlength="22" id="offeredZaposleniPoGrupiIShemi-help-span"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
@@ -216,7 +216,7 @@
                             {{ varNames!.NAZ_VP ? 'done' : 'import_contacts'}}
                         </mat-icon>
 
-                        <span (click)="refreshVrstePosla(varNames!.SIF_VP, false);">
+                        <span (mousedown)="refreshVrstePosla(varNames!.SIF_VP, false);">
                             <input type="text" [(ngModel)]="varNames!.SIF_VP" maxlength="22"
                                 id="offeredVrstePosla-help-span"
                                 [class.red-input]="varNames!.SIF_VP && varNames.NAZ_VP == ''"
@@ -253,14 +253,14 @@
             <!--
             <button style="margin: 15px;" color="primary" mat-flat-button
                 [disabled]="varNames.ID_RADNIKA==''||varNames.NAZ_GRUPE==''||varNames.SIF_VP==''||varNames.SIFMJTR==''"
-                (click)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>-->
+                (mousedown)="getEvidencijaMjesecna()"> <mat-icon>refresh</mat-icon> {{'DohvatPodataka'|translate}}</button>-->
             <button style="margin: 15px;" color="primary" mat-flat-button
                 [disabled]="( !PostojiEvent||(varNames!.SIF_VP && varNames.NAZ_VP == ''))"
-                (click)="save()"><mat-icon>add_alarm</mat-icon>{{'Unos'|translate}}</button>
+                (mousedown)="save()"><mat-icon>add_alarm</mat-icon>{{'Unos'|translate}}</button>
             <button style="margin: 15px;" color="primary" mat-flat-button
-                (click)="clearCalendar()"><mat-icon>cancel</mat-icon>{{'OcistiKalendar'|translate}}</button>
+                (mousedown)="clearCalendar()"><mat-icon>cancel</mat-icon>{{'OcistiKalendar'|translate}}</button>
             <button style="margin: 15px;" color="primary" mat-flat-button
-                (click)="getZapisiUKalendaru()"><mat-icon>refresh</mat-icon>{{'Refresh'|translate}}</button>
+                (mousedown)="getZapisiUKalendaru()"><mat-icon>refresh</mat-icon>{{'Refresh'|translate}}</button>
         </div>
     </div>
 
@@ -343,9 +343,9 @@
             </div>
             <div style="display: flex; justify-content: flex-end;">
                 <button mat-mini-fab style="scale: 0.7;"
-                    (click)="eventClicked(weekEvent.event)"><mat-icon>edit</mat-icon></button>
+                    (mousedown)="eventClicked(weekEvent.event)"><mat-icon>edit</mat-icon></button>
                 <button color="primary" mat-mini-fab style="scale: 0.7;"
-                    (click)="deleteEvent(weekEvent.event)"><mat-icon>delete</mat-icon></button>
+                    (mousedown)="deleteEvent(weekEvent.event)"><mat-icon>delete</mat-icon></button>
             </div>
         </div>
     </ng-template>
@@ -367,13 +367,13 @@
                 <div class="cal-event" style="scale: 1.7;" *ngFor="let event of day.events"
                     [style.backgroundColor]="event.color.primary" [ngClass]="event?.cssClass"
                     (mouseenter)="highlightDay.emit({event: event})" (mouseleave)="unhighlightDay.emit({event: event})"
-                    (click)="eventClicked(event)"
+                    (mousedown)="eventClicked(event)"
                     [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
                     [tooltipPlacement]="tooltipPlacement">
                 </div>
             </div>
             <button class="cell-button cal-day-number" color="primary" style="scale:0.7;" mat-mini-fab
-                (click)="goToDnevnaEvidencija(day)"
+                (mousedown)="goToDnevnaEvidencija(day)"
                 [matTooltip]="'DnevnaEvidencija'|translate"><mat-icon>view_day</mat-icon></button>
         </div>
     </ng-template>
@@ -418,7 +418,7 @@
                     </div>
                     <div>
                         <button style="float:right;" class="cell-button cal-day-number" color="primary"
-                            style="scale:0.7;" mat-mini-fab (click)="goToDnevnaEvidencija(day)"
+                            style="scale:0.7;" mat-mini-fab (mousedown)="goToDnevnaEvidencija(day)"
                             [matTooltip]="'DnevnaEvidencija'|translate"><mat-icon>view_day</mat-icon></button>
                     </div>
                 </div>

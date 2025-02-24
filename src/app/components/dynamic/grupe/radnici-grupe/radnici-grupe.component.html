@@ -3,7 +3,7 @@
         class="dialog-toolbar">
         {{ 'ZaposlenizaGrupu' | translate }}: <b>{{ receivedGrupa.NAZ_GRUPE }}</b>, {{ 'ID' | translate }}: <b>{{
             receivedGrupa.ID_GRUPE }}</b>, {{ 'Shema' | translate }}: <b>{{ receivedGrupa.SIF_SHEME }}</b> - <b>{{ varNames.NAZ_SHEME }}</b>
-                <mat-icon class="dialog-close-button" mat-dialog-close >close</mat-icon>
+                <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()" >close</mat-icon>
 
     </div>
 
@@ -28,7 +28,7 @@
                             {{ varNames!.NAZ_OJ ? 'done' : 'import_contacts'}}
                         </mat-icon>
                         <span 
-                            (click)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
+                            (mousedown)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);">
                             <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
                                 placeholder="{{ 'Code' | translate }}"
@@ -60,23 +60,23 @@
 
             <div >
                 <button class="small-horizontal-margins" mat-mini-fab color="primary" 
-                    matTooltip="{{ 'Refresh' | translate }}" (click)="refresh();">
+                    matTooltip="{{ 'Refresh' | translate }}" (mousedown)="refresh();">
                     <mat-icon>refresh</mat-icon>
                 </button>
-                <button class="small-horizontal-margins" mat-mini-fab [mat-dialog-close]="true"
+                <button class="small-horizontal-margins" mat-mini-fab (mousedown)="dialogRef.close()"
                     matTooltip="{{ 'Cancel' | translate }}">
                     <mat-icon>close</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab matTooltip="{{ 'SelectAll' | translate }}"
-                    color="primary" (click)="selectAll();">
+                    color="primary" (mousedown)="selectAll();">
                     <mat-icon>check_box</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab matTooltip="{{ 'DeselectAll' | translate }}"
-                    color="primary" (click)="deselectAll();">
+                    color="primary" (mousedown)="deselectAll();">
                     <mat-icon>check_box_outline_blank</mat-icon>
                 </button>
                 <button class="small-horizontal-margins" mat-mini-fab
-                    matTooltip="{{ 'SaveChanges' | translate }}"  color="primary" (click)="save();">
+                    matTooltip="{{ 'SaveChanges' | translate }}"  color="primary" (mousedown)="save();">
                     <mat-icon>save</mat-icon>
                 </button>
             </div>
@@ -119,22 +119,22 @@
             </div>
             <div class="display-flex">
                 <button mat-icon-button [disabled]="pageIndex == 0" matTooltip="{{ 'FirstPage' | translate }}"
-                    (click)="pageFirst();">
+                    (mousedown)="pageFirst();">
                     <mat-icon>first_page</mat-icon>
                 </button>
                 <button mat-icon-button [disabled]="pageIndex == 0" matTooltip="{{ 'PreviousPage' | translate }}"
-                    (click)="pageDown();">
+                    (mousedown)="pageDown();">
                     <mat-icon>navigate_before</mat-icon>
                 </button>
                 <div class="paginator-center-text">
                     {{ 'Page' | translate }} {{ pageIndex + 1 }} {{ 'of' | translate }} {{ numberOfPages() }}
                 </div>
                 <button mat-icon-button [disabled]="pageIndex == numberOfPages() - 1"
-                    matTooltip="{{ 'NextPage' | translate }}" (click)="pageUp();">
+                    matTooltip="{{ 'NextPage' | translate }}" (mousedown)="pageUp();">
                     <mat-icon>navigate_next</mat-icon>
                 </button>
                 <button mat-icon-button [disabled]="pageIndex == numberOfPages() - 1"
-                    matTooltip="{{ 'LastPage' | translate }}" (click)="pageLast();">
+                    matTooltip="{{ 'LastPage' | translate }}" (mousedown)="pageLast();">
                     <mat-icon>last_page</mat-icon>
                 </button>
             </div>

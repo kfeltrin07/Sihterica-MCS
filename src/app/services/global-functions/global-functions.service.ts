@@ -414,4 +414,22 @@ export class GlobalFunctionsService {
       inline: 'center'
     });
   }
+
+  public validateTime(time: string): boolean {
+    const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+    if (timeReg.test(time)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public validateHelp(sifValue:string, nazValue:string):boolean{
+    if(sifValue=='' && nazValue==''){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
 }

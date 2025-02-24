@@ -52,7 +52,7 @@ import { ExcelOvlasteneOsobeMjTrComponent } from './excel-ovlastene-osobe-mj-tr/
   styleUrl: './ovlastene-osobe-mj-tr.component.scss'
 })
 export class OvlasteneOsobeMjTrComponent implements OnInit {
-public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJTR','options'];
+  public displayedColumns: string[] = ['ID', 'NAZIV', 'USERNAME', 'SIFMJTR', 'NAZMJTR', 'options'];
 
   public ovlastenaOsobaMjTr: OvlastenaOsobaMjTr[] = [];
   public OvlastenaOsobaMjTr: OvlastenaOsobaMjTr = {
@@ -63,9 +63,9 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     USERNAME: "",
     SIFMJTR: "",
     NAZMJTR: "",
-    OD:"",
-    DO:"",
-    SATI:"",
+    OD: "",
+    DO: "",
+    SATI: "",
   };
 
 
@@ -117,7 +117,7 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.ovlastenaOsobaMjTr = response.debugData.data;
       this.dataSource = this.ovlastenaOsobaMjTr;
-      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA?(+response.debugData.data[0].UKUPANBROJSLOGOVA):0;
+      this.length = +response.debugData?.data[0]?.UKUPANBROJSLOGOVA ? (+response.debugData.data[0].UKUPANBROJSLOGOVA) : 0;
       this.loading = false;
     });
   }
@@ -136,7 +136,9 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
     const dialogRef = this.dialog.open(CreateOvlasteneOsobeMjTrComponent, {
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if (result) {
+        setTimeout(() => this.refresh(), 1000);
+      }
     });
   }
 
@@ -152,7 +154,9 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if (result) {
+        setTimeout(() => this.refresh(), 1000);
+      }
     });
   }
 
@@ -161,7 +165,9 @@ public displayedColumns: string[] = ['ID', 'NAZIV','USERNAME','SIFMJTR', 'NAZMJT
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.refresh(), 1000);
+      if (result) {
+        setTimeout(() => this.refresh(), 1000);
+      }
     });
   }
 

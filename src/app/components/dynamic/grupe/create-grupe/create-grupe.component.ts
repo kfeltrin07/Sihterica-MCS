@@ -168,7 +168,9 @@ export class CreateGrupeComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredSheme = response.debugData.data;
       this.filteredSheme = this.offeredSheme;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredSheme-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredSheme-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });

@@ -2,7 +2,7 @@
   class="dialog-header">
   {{ 'Excel' | translate }}?
 
-  <mat-icon class="dialog-close-button" mat-dialog-close>close</mat-icon>
+  <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()">close</mat-icon>
 
 </div>
 
@@ -13,8 +13,8 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{ 'No' | translate }}</button>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="getData();">{{
+    <button mat-button (mousedown)="dialogRef.close()">{{ 'No' | translate }}</button>
+    <button mat-raised-button color="primary" (mousedown)="dialogRef.close()" (mousedown)="getData();">{{
       'Yes' | translate }}</button>
   </mat-dialog-actions>
 

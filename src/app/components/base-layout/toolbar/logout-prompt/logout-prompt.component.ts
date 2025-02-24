@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { SessionService } from 'src/app/services/session/session.service';
 
@@ -18,6 +18,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 })
 export class LogoutPromptComponent {
   constructor(
+    public dialogRef: MatDialogRef<LogoutPromptComponent>,
     public session: SessionService
   ) {}
 

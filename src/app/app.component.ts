@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd } from '@angular/router';
 import { Language } from './models/models.service';
@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('snav') public sidenav!: MatSidenav;
+  @ViewChild('sidenav') public sidenav!: MatSidenav;
 
   public translationLoaded: boolean = true;
 
@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
     if (this.globalVar.autoLogin) {
       /*this.session.login({
         pUsername: 'dejan',
