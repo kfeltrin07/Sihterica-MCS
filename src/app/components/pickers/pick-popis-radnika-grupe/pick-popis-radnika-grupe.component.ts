@@ -93,6 +93,7 @@ export class PickPopisRadnikaGrupeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getPopisRadnikaGrupe();
   }
 

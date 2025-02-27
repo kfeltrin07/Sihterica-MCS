@@ -46,6 +46,6 @@
     }
     @else {
         <button mat-button (mousedown)="dialogRef.close()">{{ 'Cancel' | translate }}</button>
-        <button mat-raised-button color="primary" (mousedown)="dialogRef.close()" (mousedown)="copy();">{{ 'Copy' | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="!varNames.NADATUM ||varNames.NADATUM==varNames.SADATUM" (mousedown)="dialogRef.close();copy();">{{ 'Copy' | translate }}</button>
     }
 </mat-dialog-actions>

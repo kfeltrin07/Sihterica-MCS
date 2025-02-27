@@ -112,6 +112,7 @@ export class KontrolaFondaSatiComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.filter.DATUM = new Date().toISOString().slice(0, 10);
   }
 

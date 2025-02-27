@@ -388,6 +388,11 @@ export class GlobalFunctionsService {
     return this.conditionalZeroPrefix(day) + '.' + this.conditionalZeroPrefix(month) + '.' + year.toString();
   }
 
+  public formatDateForRequest(date: Date) {
+    return ('0'+(date.getDate())).slice(-2) + '.' + ('0'+(date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
+  }
+
+
   public formatDateForDateForm(date: Date) {
     return date.getFullYear() + '-' + ('0'+(date.getMonth()+1)).slice(-2) + '-' + ('0'+(date.getDate())).slice(-2);
   }

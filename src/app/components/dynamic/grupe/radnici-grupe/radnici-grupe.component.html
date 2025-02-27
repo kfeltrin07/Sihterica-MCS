@@ -2,16 +2,19 @@
     <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle cdkDragBoundary=".cdk-overlay-container"
         class="dialog-toolbar">
         {{ 'ZaposlenizaGrupu' | translate }}: <b>{{ receivedGrupa.NAZ_GRUPE }}</b>, {{ 'ID' | translate }}: <b>{{
-            receivedGrupa.ID_GRUPE }}</b>, {{ 'Shema' | translate }}: <b>{{ receivedGrupa.SIF_SHEME }}</b> - <b>{{ varNames.NAZ_SHEME }}</b>
-                <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()" >close</mat-icon>
+            receivedGrupa.ID_GRUPE }}</b>, {{ 'Shema' | translate }}: <b>{{ receivedGrupa.SIF_SHEME }}</b> - <b>{{
+            varNames.NAZ_SHEME }}</b>
+        <mat-icon class="dialog-close-button" (mousedown)="dialogRef.close()">close</mat-icon>
 
     </div>
 
     <mat-dialog-content>
         <div>
-            <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left" matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
+            <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+                matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+                (keyup.enter)="refresh();">
                 <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-              </mat-form-field>
+            </mat-form-field>
         </div>
         <div class="display-flex small-margin-bottom button-bar" style="justify-content: space-between;">
             <table class="small-margin-left">
@@ -30,16 +33,19 @@
                         <span>
                             <input type="text" [(ngModel)]="varNames.SIFMJTR" maxlength="22"
                                 class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                                placeholder="{{ 'Code' | translate }}"
+                                placeholder="{{ 'Code' | translate }}" id="offeredOrganizacijskeJedinice-help-span"
                                 (blur)="varNames.SIFMJTR==''?'':OfferedOrganizationalUnits();resetOrganizationalUnits();"
                                 (ngModelChange)="filterOrganizationalUnits(varNames!.SIFMJTR);"
                                 (focus)="refreshOrganizationalUnits(varNames!.SIFMJTR, false);"
                                 (keyup.enter)="selectOrganizationalUnits(offeredOrganizacijskeJedinice[OrganizacijskeJediniceDropdownIndex]);"
-                                (keyup.escape)="resetOrganizationalUnits();">
+                                (keyup.escape)="resetOrganizationalUnits();"
+                                (keyup.arrowdown)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex + 1) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-'+OrganizacijskeJediniceDropdownIndex);"
+                                (keyup.arrowup)="OrganizacijskeJediniceDropdownIndex = (OrganizacijskeJediniceDropdownIndex - 1 + offeredOrganizacijskeJedinice.length) % offeredOrganizacijskeJedinice.length;globalFn.scroll('offeredOrganizacijskeJedinice-dropdown-'+OrganizacijskeJediniceDropdownIndex);">
                             <div id="offeredOrganizacijskeJedinice-dropdown"
                                 class="select-dropdown-content max-height-300px" style="z-index: 500;">
                                 <div [id]="'offeredOrganizacijskeJedinice-dropdown-' + i"
-                                    *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i" matRipple
+                                    *ngFor="let organizationalUnits of offeredOrganizacijskeJedinice; index as i"
+                                    matRipple
                                     class="dropdown-content-item display-flex align-items-center space-between"
                                     [class.gray-background]="i == OrganizacijskeJediniceDropdownIndex"
                                     (mousedown)="selectOrganizationalUnits(organizationalUnits);">
@@ -49,7 +55,8 @@
                                 </div>
                             </div>
                         </span>
-                        <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
+                        <span style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                            class="small-margin-left margin-right" matTooltip="{{ varNames!.NAZ_OJ }}"
                             matTooltipShowDelay="1000">{{
                             varNames!.NAZ_OJ }}</span>
                     </td>
@@ -57,8 +64,8 @@
             </table>
 
 
-            <div >
-                <button class="small-horizontal-margins" mat-mini-fab color="primary" 
+            <div>
+                <button class="small-horizontal-margins" mat-mini-fab color="primary"
                     matTooltip="{{ 'Refresh' | translate }}" (mousedown)="refresh();">
                     <mat-icon>refresh</mat-icon>
                 </button>
@@ -74,8 +81,8 @@
                     color="primary" (mousedown)="deselectAll();">
                     <mat-icon>check_box_outline_blank</mat-icon>
                 </button>
-                <button class="small-horizontal-margins" mat-mini-fab
-                    matTooltip="{{ 'SaveChanges' | translate }}"  color="primary" (mousedown)="save();">
+                <button class="small-horizontal-margins" mat-mini-fab matTooltip="{{ 'SaveChanges' | translate }}"
+                    color="primary" (mousedown)="save();">
                     <mat-icon>save</mat-icon>
                 </button>
             </div>
@@ -87,8 +94,8 @@
                 <ng-container matColumnDef="yes-no">
                     <th mat-header-cell *matHeaderCellDef>{{ 'YesNo' | translate }}</th>
                     <td mat-cell *matCellDef="let owner">
-                        <mat-checkbox ngDefaultControl [checked]="selection.isSelected(owner)" (change)="selection.toggle(owner)"
-                            color="primary"></mat-checkbox>
+                        <mat-checkbox ngDefaultControl [checked]="selection.isSelected(owner)"
+                            (change)="selection.toggle(owner)" color="primary"></mat-checkbox>
                     </td>
                 </ng-container>
                 @for(item of ZaposleniGrupe |keyvalue;track item){
@@ -105,8 +112,7 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row style="height: 20px;" *matRowDef="let row; columns: displayedColumns;"
-                    [class.selected]="selection.isSelected(row)"
-                    [class.select]="selection.isSelected(row)"></tr>
+                    [class.selected]="selection.isSelected(row)" [class.select]="selection.isSelected(row)"></tr>
 
             </table>
         </div>

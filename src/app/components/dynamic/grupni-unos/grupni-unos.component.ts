@@ -1007,7 +1007,6 @@ export class GrupniUnosComponent implements OnInit {
       });
 
       await Promise.all(promises);
-      console.log(this.ArrayPodatakaZaUnos);
       this.upisSihterice();
     })();
   }
@@ -1046,10 +1045,10 @@ export class GrupniUnosComponent implements OnInit {
             pSifVlas: this.session.loggedInUser.ownerID,
             pSifOj: event.meta.SIF_OJ,
             pSifVP: this.varNames.SIF_VP,
-            pDatum: this.globalFn.formatDate(event.start.toISOString().slice(0, 10)),
+            pDatum: this.globalFn.formatDateForRequest(event.start),
             pSati: totalHours,
-            pOd: event.start.toISOString().slice(11, 16),
-            pDo: event.end.toISOString().slice(11, 16),
+            pOd: ('0'+event.start.getHours()).slice(-2) + ':' + ('0'+event.start.getMinutes()).slice(-2),
+            pDo: ('0'+event.end.getHours()).slice(-2) + ':' + ('0'+event.end.getMinutes()).slice(-2),
             pIdOperatera: this.session.loggedInUser.ID,
             pRid: ''
           }];
@@ -1069,8 +1068,6 @@ export class GrupniUnosComponent implements OnInit {
 
 
   public upisSihterice(): void {
-    console.log(this.ArrayPodatakaZaUnos);
-    console.log(JSON.stringify(this.ArrayPodatakaZaUnos));
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {

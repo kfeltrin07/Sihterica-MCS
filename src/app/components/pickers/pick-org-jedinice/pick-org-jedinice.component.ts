@@ -96,6 +96,7 @@ export class PickOrgJediniceComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getOJ();
   }
 

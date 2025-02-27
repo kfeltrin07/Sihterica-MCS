@@ -86,6 +86,7 @@ export class PickOvlasteneOsobeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getPregledOperatera();
   }
 

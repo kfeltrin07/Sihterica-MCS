@@ -83,6 +83,7 @@ export class PickEvidencijaVezeIzracunaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getEvRadnogVremenaZagVrIzracuna();
   }
 

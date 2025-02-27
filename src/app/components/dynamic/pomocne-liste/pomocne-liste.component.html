@@ -17,9 +17,9 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'PomocneListe' | translate }}">
+    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+        matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
+        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
     </mat-form-field>
 
     <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();" [disabled]="filter.SIF_OJ==''">

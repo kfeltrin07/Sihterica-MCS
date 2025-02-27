@@ -89,6 +89,7 @@ export class ShemeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getSheme();
   }
 
@@ -135,7 +136,7 @@ export class ShemeComponent implements OnInit {
       const dialogRef = this.dialog.open(CreateShemeComponent, {
       });
       dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
+        if(result)setTimeout(() => this.refresh(), 1000);
       });
     }
   
@@ -144,7 +145,7 @@ export class ShemeComponent implements OnInit {
         data: item
       });
       dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
+        if(result)setTimeout(() => this.refresh(), 1000);
       });
     }
   
@@ -153,7 +154,7 @@ export class ShemeComponent implements OnInit {
         data: item
       });
       dialogRef.afterClosed().subscribe((result) => {
-        setTimeout(() => this.refresh(), 1000);
+        if(result)setTimeout(() => this.refresh(), 1000);
       });
     }
 

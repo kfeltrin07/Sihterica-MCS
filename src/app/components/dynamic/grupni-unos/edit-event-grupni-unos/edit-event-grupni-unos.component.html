@@ -22,10 +22,10 @@
 
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'Search' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Zaposleni' | translate }}">
-      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+      matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
+      <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+  </mat-form-field>
 
       <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
         <mat-icon>search</mat-icon>
@@ -71,8 +71,8 @@
     <div class="small-margin-and-center-title" style="margin:30px">
 
         <h2 mat-dialog-title class="text-align-center">
-            <mat-icon class="dialog-title-icon">person</mat-icon>
-            <mat-icon class="dialog-title-icon">add</mat-icon>
+            
+            
             <span class="dialog-title">{{ 'GrupeEditing' | translate }}</span>
           </h2>
     

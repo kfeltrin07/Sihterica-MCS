@@ -217,6 +217,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
   public selection = new SelectionModel<EvidencijaDnevna>(true, []);
   public deleteSelection = new SelectionModel<EvidencijaDnevna>(true, []);
+  public editSelection = new SelectionModel<EvidencijaDnevna>(true, []);
 
   public dataSource = this.evidencijaDnevna;
   public searchParam: string = '';
@@ -263,7 +264,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
+    this.setVisibleColumnsFromEvent();
     if (this.globalVar.filterZaDnevnaEvidencija.DATUM) {
       this.filter.DATUM = this.globalFn.formatDateForDateForm(this.globalVar.filterZaDnevnaEvidencija.DATUM ? this.globalVar.filterZaDnevnaEvidencija.DATUM : new Date());
       this.filter.MBR = this.globalVar.filterZaDnevnaEvidencija.MBR ? this.globalVar.filterZaDnevnaEvidencija.MBR : "%";
@@ -365,12 +366,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
 
 
   public openCopyDataDialog(): void {
-    let data = {
-      SIF_OJ: this.filter.SIF_OJ,
-      SIF_VP: this.filter.SIF_VP,
-      MBR: this.filter.MBR,
-      PREZIME_IME: this.filter.PREZIME_IME,
-    }
+    let data = this.filter
     const dialogRef = this.dialog.open(CopyDnevnaEvidencijaComponent, {
       data: data
     });
@@ -1272,6 +1268,7 @@ export class DnevnaEvidencijaComponent implements OnInit {
       this.loading = false;
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.selection.deselect(item);
+      this.editSelection.deselect(item);
 
     });
   }

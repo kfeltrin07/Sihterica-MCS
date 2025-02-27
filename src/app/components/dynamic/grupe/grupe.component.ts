@@ -92,6 +92,7 @@ export class GrupeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getGrupe();
   }
 

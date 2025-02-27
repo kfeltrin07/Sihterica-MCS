@@ -6,15 +6,14 @@
 $backgroundColor: #eceff1;
 
 $my-app-primary: mat.define-palette(mat.$blue-palette, 200);
-$my-app-accent: mat.define-palette(mat.$yellow-palette, 200);
-$my-app-warn: mat.define-palette(mat.$red-palette,200);
+$my-app-accent: mat.define-palette(mat.$yellow-palette, 600);
+$my-app-warn: mat.define-palette(mat.$red-palette, 200);
 
 $my-app-theme: mat.define-light-theme((color: (primary: $my-app-primary,
                 accent: $my-app-accent,
                 warn: $my-app-warn,
             ),
-            typography: mat.define-typography-config(
-                $font-family: 'Verdana'
+            typography: mat.define-typography-config($font-family: 'Verdana'
             ),
             density: 0,
         ));
@@ -31,8 +30,15 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-*{
+* {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    --mdc-radio-selected-focus-icon-color: #1fda19;
+    --mdc-radio-selected-hover-icon-color: #1fda19;
+    --mdc-radio-selected-icon-color: #1fda19;
+    --mdc-radio-selected-pressed-icon-color: #1fda19;
+    --mat-radio-ripple-color: black;
+    --mat-radio-checked-ripple-color: #1fda19;
 }
 
 :root {
@@ -833,7 +839,7 @@ label {
     display: flex !important;
     align-items: center !important;
     padding: 0 0 0 25px !important;
-    border-top: 1px solid rgb(128, 128, 128,40%) !important;
+    border-top: 1px solid rgb(128, 128, 128, 40%) !important;
 
 }
 
@@ -1726,9 +1732,8 @@ input[type=datetime-local] {
     height: 20px;
 }
 
-.mat-mdc-dialog-container input:not([type=file], [type=checkbox]) {
+.mat-mdc-dialog-container input:not([type=file], [type=checkbox], [matInput]) {
     border: 0.5px #d6d6d6 solid;
-    ;
     border-radius: 5px;
     box-shadow: rgba(255, 255, 255, 0.8) 0 0 5px, rgba(0, 0, 0, 0.2) 0 0 5px !important;
     height: 20px;
@@ -2387,7 +2392,7 @@ app-konto .mat-column-charts-of-accounts-name {
     background-color: rgb(192, 197, 225) !important;
 }
 
-.SelectAll{
+.SelectAll {
     font-size: 11px;
     background-color: var(--color-primary);
     border: unset;
@@ -2395,7 +2400,7 @@ app-konto .mat-column-charts-of-accounts-name {
     padding: 4px;
 }
 
-.Deselect{
+.Deselect {
     font-size: 11px;
     border: unset;
     border-radius: 4px;
@@ -2405,7 +2410,8 @@ app-konto .mat-column-charts-of-accounts-name {
 .custom-tooltip {
     white-space: pre-line !important;
     width: 500px !important;
-    .mdc-tooltip__surface{
+
+    .mdc-tooltip__surface {
         max-width: unset !important;
     }
 }
@@ -2415,17 +2421,35 @@ app-konto .mat-column-charts-of-accounts-name {
     bottom: 50% !important;
 }
 
-.mat-mdc-snack-bar-container{
+.mat-mdc-snack-bar-container {
     max-width: 950px !important;
     max-height: 300px !important;
 }
 
-.mat-mdc-snack-bar-label{
+.mat-mdc-snack-bar-label {
     max-width: 950px !important;
     max-height: 300px !important;
 }
 
-.mdc-snackbar__surface{
+.mdc-snackbar__surface {
     max-width: 950px !important;
     max-height: 300px !important;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: rgb(240, 240, 240) !important;
+}
+
+
+.mat-mdc-radio-button.mat-accent.mat-radio-checked .mdc-radio__outer-circle {
+    border-color: rgb(66, 134, 244) !important;
+}
+
+.mat-mdc-radio-button.mat-accent .mdc-radio__inner-circle {
+    color: rgb(66, 134, 244) !important;
+    background-color: rgb(66, 134, 244) !important;
+}
+
+.mat-mdc-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: rgb(255, 37, 37, .26) !important;
 }

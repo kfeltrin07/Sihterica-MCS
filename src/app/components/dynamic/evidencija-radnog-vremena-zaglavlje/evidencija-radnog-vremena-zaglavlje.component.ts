@@ -90,6 +90,7 @@ export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getEvRadnogVremenaZag();
   }
 

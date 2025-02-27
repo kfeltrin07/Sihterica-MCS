@@ -83,6 +83,7 @@ export class PickOpisVrsteComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getOpisVrste();
   }
 

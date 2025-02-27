@@ -201,6 +201,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
 
   public selection = new SelectionModel<EvidencijaMjesecna>(true, []);
   public deleteSelection = new SelectionModel<EvidencijaMjesecna>(true, []);
+  public editSelection = new SelectionModel<EvidencijaMjesecna>(true, []);
 
   public dataSource = this.evidencijaMjesecna;
   public searchParam: string = '';
@@ -231,6 +232,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.route.params.subscribe((params: Params) => { this.IncomingData = params; });
 
     if (this.IncomingData.GODINA) {
@@ -996,7 +998,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     }
   }
 
-  public Update(item: any): void {
+  public Update(item: EvidencijaMjesecna): void {
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {
@@ -1020,6 +1022,7 @@ export class MjesecnaEvidencijaComponent implements OnInit {
     ).subscribe((response: any) => {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.selection.deselect(item);
+      this.editSelection.deselect(item);
 
     });
   }

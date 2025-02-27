@@ -88,6 +88,7 @@ export class PickZaposleniComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getZaposleni();
   }
 

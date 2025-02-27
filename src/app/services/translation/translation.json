@@ -8133,6 +8133,24 @@
           "en": "Optional",
           "hr": "Opcionalno",
           "transferred": false
+        },
+        {
+          "ref": "SaDatuma",
+          "en": "From date",
+          "hr": "Sa datuma",
+          "transferred": false
+        },
+        {
+          "ref": "NaDatum",
+          "en": "To date",
+          "hr": "Na datum",
+          "transferred": false
+        },
+        {
+          "ref": "UpisiteTekstZaPretrazivanje",
+          "en": "Enter text to search",
+          "hr": "Upišite tekst za pretraživanje",
+          "transferred": false
         }
     ]
 }

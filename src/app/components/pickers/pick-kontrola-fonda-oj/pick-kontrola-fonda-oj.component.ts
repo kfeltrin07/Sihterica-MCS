@@ -82,6 +82,7 @@ export class PickKontrolaFondaOjComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getKontrolaFondaSatiHelpOj();
   }
 

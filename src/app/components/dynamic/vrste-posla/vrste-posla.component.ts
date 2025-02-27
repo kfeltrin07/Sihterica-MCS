@@ -84,6 +84,7 @@ export class VrstePoslaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getVrstePosla();
   }
 

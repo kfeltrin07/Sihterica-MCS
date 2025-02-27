@@ -91,6 +91,7 @@ export class OvlasteneOsobeMjTrComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getOvlOsobeMjTr();
   }
 

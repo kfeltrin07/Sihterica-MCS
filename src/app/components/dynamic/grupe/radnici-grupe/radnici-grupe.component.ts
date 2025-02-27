@@ -71,7 +71,8 @@ export class RadniciGrupeComponent {
     U_GRUPI: ""
   };
   public varNames: any = {
-    NAZ_OJ: ""
+    NAZ_OJ: "",
+    SIFMJTR: "",
   }
 
   public OrganizacijskeJediniceDropdownIndex: number = -1;
@@ -137,7 +138,7 @@ export class RadniciGrupeComponent {
     @Inject(MAT_DIALOG_DATA) public receivedGrupa: Grupe,
     public http: HttpClient,
     public globalVar: GlobalVariablesService,
-    private globalFn: GlobalFunctionsService,
+    public globalFn: GlobalFunctionsService,
     public session: SessionService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<RadniciGrupeComponent>
@@ -161,7 +162,7 @@ export class RadniciGrupeComponent {
           pIdGrupe: this.receivedGrupa.ID_GRUPE,
           pIdOperatera: this.session.loggedInUser.ID,
           pSifOj: this.varNames.SIFMJTR,
-          limit: 10,
+          limit: 10000,
           page: 1,
         }
       }
@@ -335,6 +336,7 @@ export class RadniciGrupeComponent {
       if (response.debugData.data.length != 0) {
         this.globalVar.snackBarGrupniUnosRadnikaData = response.debugData.data;
         this.globalFn.showSnackbarGrupniUnosRadnika(response.debugData.data.length);
+        this.refresh();
       }
       else {
         this.globalFn.showSnackbarError("Dogodila se neka greška kod unosa");
@@ -394,7 +396,9 @@ export class RadniciGrupeComponent {
       this.globalFn.showSnackbarError(response.debugData.metadata.OPIS);
       this.offeredOrganizacijskeJedinice = response.debugData.data;
       this.filteredOrganizacijskeJedinice = this.offeredOrganizacijskeJedinice;
-      if (!isSelected) {
+      var dummyEl = document.getElementById('offeredOrganizacijskeJedinice-help-span');
+      var isFocused = (document.activeElement === dummyEl);
+      if (!isSelected && isFocused) {
         document.getElementById("offeredOrganizacijskeJedinice-dropdown")?.classList.add("select-dropdown-content-visible");
       }
     });

@@ -56,13 +56,17 @@ table {
                 height: 20px;
                 padding-left: 10px;
                 text-overflow: ellipsis;
-            };
-            select{
+            }
+
+            ;
+
+            select {
                 border: unset;
-                width: 235px;
+                width: 360px;
                 text-indent: 1px;
                 text-overflow: hidden;
-                ::-ms-expand{
+
+                ::-ms-expand {
                     display: none;
                 }
             }
@@ -71,19 +75,47 @@ table {
 }
 
 .mat-column-MBR {
-    max-width: 60px;
-    min-width: 60px;
+
     width: 60px;
 }
 
 .mat-column-D1 {
-    max-width: 165px;
-    min-width: 165px;
     width: 160px;
+    max-width: 160px;
+    text-overflow: unset;
 }
 
 .mat-column-DAN {
-    max-width: 80px;
-    min-width: 80px;
     width: 80px;
+}
+
+.mat-column-SATI {
+    width: 80px;
+    max-width: 80px;
+
+}
+
+.mat-column-ODHH {
+    width: 120px;
+    max-width: 120px;
+}
+
+.mat-column-DOHH {
+    width: 120px;
+    max-width: 120px;
+
+}
+
+.mat-column-options {
+    width: 200px;
+}
+
+.mat-column-SIF_VP {
+    width: 370px;
+    max-width: 370px;
+}
+
+.mat-column-SIF_MT_N {
+    width: 370px;
+    max-width: 370px;
 }

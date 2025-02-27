@@ -142,6 +142,7 @@ export class EvidencijaRadnogVremenaComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.filter.GODINA = (new Date()).getFullYear();
     this.filter.MJESEC = new Date().getMonth() + 1;
 

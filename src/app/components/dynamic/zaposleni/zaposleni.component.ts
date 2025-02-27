@@ -91,6 +91,7 @@ export class ZaposleniComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getZaposleni();
   }
 

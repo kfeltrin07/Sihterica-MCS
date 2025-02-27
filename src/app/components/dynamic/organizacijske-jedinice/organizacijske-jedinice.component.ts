@@ -97,6 +97,7 @@ export class OrganizacijskeJediniceComponent {
   ) { }
 
   public ngOnInit(): void {
+    this.setVisibleColumnsFromEvent();
     this.getOJ();
   }
 

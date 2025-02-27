@@ -4,6 +4,7 @@ import { CalendarEvent } from 'angular-calendar';
 import { ColumnRef, DashboardItem, DynamicMenu, DynamicMenuReference, filterZaDnevnaEvidencija, porukeZaGrupniUnosRadnika, porukeZaGrupno, rekapitulacijaDnevna, rekapitulacijaMjesecna, RightsState, SidebarItem } from 'src/app/models/models.service';
 import { CookiesService } from '../cookies/cookies.service';
 import { environment } from './../../../environments/environment';
+import { ThemePalette } from '@angular/material/core';
 
 type AvailableLanguages = 'en' | 'hr';
 
@@ -1327,17 +1328,19 @@ export class GlobalVariablesService {
     displayedName: 'OPIS_DAN',
     name: 'OPIS_DAN'
   };
-
+  public D1Column: ColumnRef = {
+    displayedName: 'D1',
+    name: 'D1'
+  };
 
   public EvidencijaMjesecnaDisplayedColumns: ColumnRef[] = [
-    this.DATUMColumn,
+    this.D1Column,
     this.DANColumn,
     this.SIF_MT_NColumn,
-    this.SIF_VP_NColumn,
+    this.SIF_VPColumn,
     this.SATIColumn,
     this.ODHHColumn,
     this.DOHHColumn,
-    this.IDK_NColumn
   ];
 
   public EvidencijaMjesecnaColumnsList: ColumnRef[] = [
