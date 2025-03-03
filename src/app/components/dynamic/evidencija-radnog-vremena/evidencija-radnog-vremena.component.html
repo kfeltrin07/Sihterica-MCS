@@ -17,12 +17,16 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-    </mat-form-field>
+    <div class="search-input">
+        <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+            matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+            (keyup.enter)="refresh();">
+            <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+        </mat-form-field>
+    </div>
 
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();" [disabled]="filter.SIF_OJ==''">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();"
+        [disabled]="filter.SIF_OJ==''">
         <mat-icon>search</mat-icon>
     </button>
     <!--
@@ -46,8 +50,8 @@
                 <label for="MBR">{{ 'mjesto-troska' | translate }}:</label>
             </td>
             <td>
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickEvidencijaRadVreOj();"
-                    (contextmenu)="removeEvidencijaRadVreOj($event)"
+                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                    (click)="pickEvidencijaRadVreOj();" (contextmenu)="removeEvidencijaRadVreOj($event)"
                     matTooltip="{{ (!filter.SIF_OJ ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                     [class.color-valid]="filter!.NAZMJTR">
                     {{ filter!.NAZMJTR ? 'done' : 'import_contacts'}}
@@ -55,9 +59,10 @@
             </td>
             <td class="filter-result">
                 <span>
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
-                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                        id="offeredEvidencijaRadVreOj-help-span" class="minimum-margin-horizontal light-gray-background"
+                        style="width: 50px;" placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"

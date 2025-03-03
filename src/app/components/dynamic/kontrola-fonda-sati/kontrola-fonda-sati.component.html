@@ -17,12 +17,16 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-    </mat-form-field>
+    <div class="search-input">
+        <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+            matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+            (keyup.enter)="refresh();">
+            <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+        </mat-form-field>
+    </div>
 
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();" [disabled]="filter.SIF_OJ==''">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();"
+        [disabled]="filter.SIF_OJ==''">
         <mat-icon>search</mat-icon>
     </button>
     <!--
@@ -57,7 +61,8 @@
                 <span>
                     <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredFondSatiHelpOJ-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter.SIF_OJ==''?'':OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter.SIF_OJ==''?'':OfferedFondSatiHelpOJ();resetFondSatiHelpOJIndex();"
                         (ngModelChange)="filterFondSatiHelpOJ(filter!.SIF_OJ);"
                         (focus)="refreshFondSatiHelpOJ(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectFondSatiHelpOJ(offeredFondSatiHelpOJ[FondSatiHelpOJDropdownIndex]);"

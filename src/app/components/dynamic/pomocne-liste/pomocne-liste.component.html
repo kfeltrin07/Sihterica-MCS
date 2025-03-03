@@ -17,12 +17,16 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-    </mat-form-field>
+    <div class="search-input">
+        <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+            matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+            (keyup.enter)="refresh();">
+            <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+        </mat-form-field>
+    </div>
 
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();" [disabled]="filter.SIF_OJ==''">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();"
+        [disabled]="filter.SIF_OJ==''">
         <mat-icon>search</mat-icon>
     </button>
     <!--
@@ -57,9 +61,9 @@
                 <span>
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
-                        (ngModelChange)="filterZaposleni(filter!.MBR);"
-                        (focus)="refreshZaposleni(filter!.MBR, false);"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
+                        (ngModelChange)="filterZaposleni(filter!.MBR);" (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);"
                         (keyup.escape)="resetZaposleniIndex();"
                         (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"
@@ -113,8 +117,8 @@
                 <label for="MBR">{{ 'mjesto-troska' | translate }}:</label>
             </td>
             <td>
-                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex" (click)="pickEvidencijaRadVreOj();"
-                    (contextmenu)="removeEvidencijaRadVreOj($event)"
+                <mat-icon matSuffix class="minimum-margin-left cursor-pointer display-flex"
+                    (click)="pickEvidencijaRadVreOj();" (contextmenu)="removeEvidencijaRadVreOj($event)"
                     matTooltip="{{ (!filter.SIF_OJ ? 'ClickToSelectFromDialogToFill' : '') | translate }}"
                     [class.color-valid]="filter!.NAZMJTR">
                     {{ filter!.NAZMJTR ? 'done' : 'import_contacts'}}
@@ -122,9 +126,10 @@
             </td>
             <td class="filter-result2">
                 <span>
-                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22" id="offeredEvidencijaRadVreOj-help-span"
-                        class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
+                    <input type="text" [(ngModel)]="filter!.SIF_OJ" maxlength="22"
+                        id="offeredEvidencijaRadVreOj-help-span" class="minimum-margin-horizontal light-gray-background"
+                        style="width: 50px;" placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter!.SIF_OJ==''?'':OfferedEvidencijaRadVreOj();resetEvidencijaRadVreOjIndex();"
                         (ngModelChange)="filterEvidencijaRadVreOj(filter!.SIF_OJ);"
                         (focus)="refreshEvidencijaRadVreOj(filter!.SIF_OJ, false);"
                         (keyup.enter)="selectEvidencijaRadVreOj(offeredEvidencijaRadVreOj[EvidencijaRadVreOjDropdownIndex]);"
@@ -161,7 +166,8 @@
                 <span>
                     <input type="text" [(ngModel)]="filter!.SIF_VP" maxlength="22" id="offeredVrstePosla-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter!.SIF_VP==''?'':OfferedVrstePosla();resetVrstePoslaIndex();"
                         (ngModelChange)="filterVrstePosla(filter!.SIF_VP);"
                         (focus)="refreshVrstePosla(filter!.SIF_VP, false);"
                         (keyup.enter)="selectVrstePosla(offeredVrstePosla[VrstePoslaDropdownIndex]);"
@@ -194,7 +200,7 @@
                     <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
                         matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
                 </button>
-  
+
             </td>
         </tr>
     </table>

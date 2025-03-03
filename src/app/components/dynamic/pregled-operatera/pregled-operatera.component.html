@@ -16,10 +16,13 @@
 
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-  matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-  <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-</mat-form-field>
+  <div class="search-input">
+    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+      matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+      (keyup.enter)="refresh();">
+      <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+    </mat-form-field>
+  </div>
 
   <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
     <mat-icon>search</mat-icon>

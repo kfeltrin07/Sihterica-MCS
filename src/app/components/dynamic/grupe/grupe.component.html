@@ -16,10 +16,13 @@
 
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-  matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-  <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-</mat-form-field>
+  <div class="search-input">
+    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+      matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+      (keyup.enter)="refresh();">
+      <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+    </mat-form-field>
+  </div>
 
   <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();">
     <mat-icon>search</mat-icon>
@@ -40,26 +43,26 @@
 
 <div class="dokumenti-filteri-container" style="margin-top: 20px;border-radius: 10px;overflow-x: auto;">
   <table class="filteri-table">
-      <tr>
-          <td>
-              <label for="" style="font-size: 14px;">{{'Ispis'|translate}}</label>
-          </td>
-          <td>
-              <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
-                  (mousedown)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});">
-                  <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
-                      matTooltip="{{ 'EXCEL' | translate }}">
-                      <img src="assets/icons/png/excel.png" alt="" height="20">
-                  </mat-icon>
-              </button>
-              <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
-                  (mousedown)="openPDFDialog(searchParam);">
-                  <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
-                      matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
-              </button>
+    <tr>
+      <td>
+        <label for="" style="font-size: 14px;">{{'Ispis'|translate}}</label>
+      </td>
+      <td>
+        <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
+          (mousedown)="openEXCELDialog({headers: displayedColumns, searchParam: searchParam});">
+          <mat-icon id="EXCELButton" class="cursor-pointer minimum-margin-left-and-right"
+            matTooltip="{{ 'EXCEL' | translate }}">
+            <img src="assets/icons/png/excel.png" alt="" height="20">
+          </mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="minimum-margin-left-and-right"
+          (mousedown)="openPDFDialog(searchParam);">
+          <mat-icon id="PDFButton" class="cursor-pointer minimum-margin-left-and-right"
+            matTooltip="{{ 'PDF' | translate }}">picture_as_pdf</mat-icon>
+        </button>
 
-          </td>
-      </tr>
+      </td>
+    </tr>
   </table>
 </div>
 

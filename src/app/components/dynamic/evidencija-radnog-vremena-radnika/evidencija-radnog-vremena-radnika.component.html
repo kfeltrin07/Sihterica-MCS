@@ -17,12 +17,16 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
-        matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above" (keyup.enter)="refresh();">
-        <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
-    </mat-form-field>
+    <div class="search-input">
+        <mat-form-field appearance="fill" class="input-lower-margin-corrector small-margin-left"
+            matTooltip="{{ 'UpisiteTekstZaPretrazivanje' | translate }}" matTooltipPosition="above"
+            (keyup.enter)="refresh();">
+            <input type="text" matInput [(ngModel)]="searchParam" placeholder="{{ 'Search' | translate }}">
+        </mat-form-field>
+    </div>
 
-    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();" [disabled]="filter.MBR==''">
+    <button mat-icon-button matTooltip="{{ 'Search' | translate }}" (mousedown)="refresh();"
+        [disabled]="filter.MBR==''">
         <mat-icon>search</mat-icon>
     </button>
     <!--
@@ -57,9 +61,9 @@
                 <span>
                     <input type="text" [(ngModel)]="filter!.MBR" maxlength="22" id="offeredZaposleni-help-span"
                         class="minimum-margin-horizontal light-gray-background" style="width: 50px;"
-                        placeholder="{{ 'Code' | translate }}" (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
-                        (ngModelChange)="filterZaposleni(filter!.MBR);"
-                        (focus)="refreshZaposleni(filter!.MBR, false);"
+                        placeholder="{{ 'Code' | translate }}"
+                        (blur)="filter!.MBR==''?'':OfferedZaposleni();resetZaposleniIndex();"
+                        (ngModelChange)="filterZaposleni(filter!.MBR);" (focus)="refreshZaposleni(filter!.MBR, false);"
                         (keyup.enter)="selectZaposleni(offeredZaposleni[ZaposleniDropdownIndex]);refresh();"
                         (keyup.escape)="resetZaposleniIndex();"
                         (keyup.arrowdown)="ZaposleniDropdownIndex = (ZaposleniDropdownIndex + 1) % offeredZaposleni.length;globalFn.scroll('offeredZaposleni-dropdown-' + ZaposleniDropdownIndex);"

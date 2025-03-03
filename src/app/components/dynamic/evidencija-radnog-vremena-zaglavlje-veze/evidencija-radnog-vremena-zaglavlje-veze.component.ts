@@ -26,6 +26,7 @@ import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 import { PdfEvidencijaRadnogVremenaZaglavljeVezeComponent } from './pdf-evidencija-radnog-vremena-zaglavlje-veze/pdf-evidencija-radnog-vremena-zaglavlje-veze.component';
 import { ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent } from './excel-evidencija-radnog-vremena-zaglavlje-veze/excel-evidencija-radnog-vremena-zaglavlje-veze.component';
+import { DetailsVrstePoslaComponent } from "../vrste-posla/details-vrste-posla/details-vrste-posla.component";
 
 @Component({
   selector: 'app-evidencija-radnog-vremena-zaglavlje-veze',
@@ -42,12 +43,12 @@ import { ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent } from './excel-evid
     MatLabel,
     MatToolbarModule,
     MatInputModule,
-
     FormsModule,
     CommonModule,
     TranslationPipe,
-    PaginationComponent
-  ],
+    PaginationComponent,
+    DetailsVrstePoslaComponent
+],
   templateUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.html',
   styleUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
