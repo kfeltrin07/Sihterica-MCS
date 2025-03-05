@@ -22,30 +22,28 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 
 @Component({
-  selector: 'app-pick-evidencija-help-radnici',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-evidencija-help-radnici.component.html',
-  styleUrl: './pick-evidencija-help-radnici.component.scss'
+    selector: 'app-pick-evidencija-help-radnici',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-evidencija-help-radnici.component.html',
+    styleUrl: './pick-evidencija-help-radnici.component.scss'
 })
 export class PickEvidencijaHelpRadniciComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'PREZIME_IME','SIF_OJ', 'NAZ_OJ'];

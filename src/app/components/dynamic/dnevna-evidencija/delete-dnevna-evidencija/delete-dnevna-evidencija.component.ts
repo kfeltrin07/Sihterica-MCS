@@ -14,21 +14,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-delete-dnevna-evidencija',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './delete-dnevna-evidencija.component.html',
-  styleUrl: './delete-dnevna-evidencija.component.scss'
+    selector: 'app-delete-dnevna-evidencija',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        CdkDrag,
+        CdkDragHandle,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './delete-dnevna-evidencija.component.html',
+    styleUrl: './delete-dnevna-evidencija.component.scss'
 })
 export class DeleteDnevnaEvidencijaComponent {
 constructor(

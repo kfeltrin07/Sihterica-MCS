@@ -22,30 +22,28 @@ import { MatInputModule } from '@angular/material/input';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-pick-org-jedinice',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-org-jedinice.component.html',
-  styleUrl: './pick-org-jedinice.component.scss'
+    selector: 'app-pick-org-jedinice',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-org-jedinice.component.html',
+    styleUrl: './pick-org-jedinice.component.scss'
 })
 export class PickOrgJediniceComponent implements OnInit {
   public displayedColumns: string[] = ['RN', 'SIF_OJ', 'NAZ_OJ'];

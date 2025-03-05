@@ -17,22 +17,20 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-edit-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatTooltip,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './edit-evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './edit-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-edit-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatTooltip,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './edit-evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './edit-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class EditEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
   public EvidencijaRadVreZagVeze: EvidencijaRadVreZagVeze = {

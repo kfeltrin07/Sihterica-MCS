@@ -18,22 +18,20 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-create-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatTooltip,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './create-ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './create-ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-create-ovlastene-osobe-mj-tr',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatTooltip,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './create-ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './create-ovlastene-osobe-mj-tr.component.scss'
 })
 export class CreateOvlasteneOsobeMjTrComponent {
 

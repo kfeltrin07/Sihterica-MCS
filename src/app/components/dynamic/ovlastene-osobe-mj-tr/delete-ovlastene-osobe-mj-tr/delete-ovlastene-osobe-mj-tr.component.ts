@@ -14,21 +14,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-delete-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './delete-ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './delete-ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-delete-ovlastene-osobe-mj-tr',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        CdkDrag,
+        CdkDragHandle,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './delete-ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './delete-ovlastene-osobe-mj-tr.component.scss'
 })
 export class DeleteOvlasteneOsobeMjTrComponent {
   constructor(

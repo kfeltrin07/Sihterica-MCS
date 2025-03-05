@@ -22,30 +22,28 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 
 @Component({
-  selector: 'app-pick-evidencija-help-oj',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-evidencija-help-oj.component.html',
-  styleUrl: './pick-evidencija-help-oj.component.scss'
+    selector: 'app-pick-evidencija-help-oj',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-evidencija-help-oj.component.html',
+    styleUrl: './pick-evidencija-help-oj.component.scss'
 })
 export class PickEvidencijaHelpOjComponent implements OnInit {
   public displayedColumns: string[] = ['SIF_OJ', 'NAZMJTR','VRSTA'];

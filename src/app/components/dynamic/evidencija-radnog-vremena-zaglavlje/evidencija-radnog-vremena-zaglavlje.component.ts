@@ -28,28 +28,26 @@ import { PdfEvidencijaRadnogVremenaZaglavljeComponent } from './pdf-evidencija-r
 import { ExcelEvidencijaRadnogVremenaZaglavljeComponent } from './excel-evidencija-radnog-vremena-zaglavlje/excel-evidencija-radnog-vremena-zaglavlje.component';
 
 @Component({
-  selector: 'app-evidencija-radnog-vremena-zaglavlje',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './evidencija-radnog-vremena-zaglavlje.component.html',
-  styleUrl: './evidencija-radnog-vremena-zaglavlje.component.scss'
+    selector: 'app-evidencija-radnog-vremena-zaglavlje',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './evidencija-radnog-vremena-zaglavlje.component.html',
+    styleUrl: './evidencija-radnog-vremena-zaglavlje.component.scss'
 })
 export class EvidencijaRadnogVremenaZaglavljeComponent implements OnInit {
   public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA', 'RBROJ', 'options'];

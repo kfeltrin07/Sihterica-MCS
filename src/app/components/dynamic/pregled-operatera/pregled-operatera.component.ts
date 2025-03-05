@@ -25,28 +25,26 @@ import { PdfPregledOperateraComponent } from './pdf-pregled-operatera/pdf-pregle
 import { ExcelPregledOperateraComponent } from './excel-pregled-operatera/excel-pregled-operatera.component';
 
 @Component({
-  selector: 'app-pregled-operatera',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './pregled-operatera.component.html',
-  styleUrl: './pregled-operatera.component.scss'
+    selector: 'app-pregled-operatera',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './pregled-operatera.component.html',
+    styleUrl: './pregled-operatera.component.scss'
 })
 export class PregledOperateraComponent implements OnInit {
   public displayedColumns: string[] = ['ID', 'NAZIV', 'USERNAME', 'NAPOMENA', 'IDULOGE', 'ULOGA', 'options'];

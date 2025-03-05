@@ -6,14 +6,13 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
-  selector: 'app-loading',
-  standalone:true,
-  imports:[
-    TranslationPipe,
-    CommonModule
-  ],
-  templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss']
+    selector: 'app-loading',
+    imports: [
+        TranslationPipe,
+        CommonModule
+    ],
+    templateUrl: './loading.component.html',
+    styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent {
   loading: boolean = false;

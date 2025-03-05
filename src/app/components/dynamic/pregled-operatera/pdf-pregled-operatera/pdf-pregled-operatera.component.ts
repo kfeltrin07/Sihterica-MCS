@@ -19,20 +19,18 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-pdf-pregled-operatera',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-pregled-operatera.component.html',
-  styleUrl: './pdf-pregled-operatera.component.scss'
+    selector: 'app-pdf-pregled-operatera',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-pregled-operatera.component.html',
+    styleUrl: './pdf-pregled-operatera.component.scss'
 })
 export class PdfPregledOperateraComponent {
   public operateri!: Operateri[];

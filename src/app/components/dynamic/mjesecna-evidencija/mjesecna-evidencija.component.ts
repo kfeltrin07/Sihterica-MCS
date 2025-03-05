@@ -33,30 +33,28 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
-  selector: 'app-mjesecna-evidencija',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './mjesecna-evidencija.component.html',
-  styleUrl: './mjesecna-evidencija.component.scss'
+    selector: 'app-mjesecna-evidencija',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatBadgeModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './mjesecna-evidencija.component.html',
+    styleUrl: './mjesecna-evidencija.component.scss'
 })
 export class MjesecnaEvidencijaComponent implements OnInit {
   public displayedColumns: string[] = ['D1', 'DAN', 'SIF_MT_N', 'SIF_VP', 'SATI', 'ODHH', 'DOHH', 'options'];

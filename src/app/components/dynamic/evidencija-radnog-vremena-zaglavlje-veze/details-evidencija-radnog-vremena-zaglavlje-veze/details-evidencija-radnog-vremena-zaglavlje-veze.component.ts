@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './details-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-details-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './details-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class DetailsEvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
 

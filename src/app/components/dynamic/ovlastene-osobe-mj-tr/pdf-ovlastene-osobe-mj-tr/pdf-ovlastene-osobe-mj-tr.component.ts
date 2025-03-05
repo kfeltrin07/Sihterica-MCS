@@ -19,20 +19,18 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-pdf-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './pdf-ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-pdf-ovlastene-osobe-mj-tr',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './pdf-ovlastene-osobe-mj-tr.component.scss'
 })
 export class PdfOvlasteneOsobeMjTrComponent {
 

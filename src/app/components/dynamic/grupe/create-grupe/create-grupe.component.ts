@@ -18,22 +18,20 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-create-grupe',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './create-grupe.component.html',
-  styleUrl: './create-grupe.component.scss'
+    selector: 'app-create-grupe',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './create-grupe.component.html',
+    styleUrl: './create-grupe.component.scss'
 })
 export class CreateGrupeComponent {
   public Grupe: Grupe = {

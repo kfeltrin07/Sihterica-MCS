@@ -13,21 +13,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-zaposleni-pdf',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-
-  ],
-  templateUrl: './zaposleni-pdf.component.html',
-  styleUrl: './zaposleni-pdf.component.scss'
+    selector: 'app-zaposleni-pdf',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './zaposleni-pdf.component.html',
+    styleUrl: './zaposleni-pdf.component.scss'
 })
 export class ZaposleniPdfComponent {
 

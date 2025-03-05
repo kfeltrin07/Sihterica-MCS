@@ -12,20 +12,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-dnevna-evidencija',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-dnevna-evidencija.component.html',
-  styleUrl: './pdf-dnevna-evidencija.component.scss'
+    selector: 'app-pdf-dnevna-evidencija',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-dnevna-evidencija.component.html',
+    styleUrl: './pdf-dnevna-evidencija.component.scss'
 })
 export class PdfDnevnaEvidencijaComponent {
 

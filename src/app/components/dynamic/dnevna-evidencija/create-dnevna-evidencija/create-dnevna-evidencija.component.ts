@@ -19,23 +19,21 @@ import { CreateGrupeComponent } from '../../grupe/create-grupe/create-grupe.comp
 import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
-  selector: 'app-create-dnevna-evidencija',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatBadgeModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './create-dnevna-evidencija.component.html',
-  styleUrl: './create-dnevna-evidencija.component.scss'
+    selector: 'app-create-dnevna-evidencija',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatBadgeModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './create-dnevna-evidencija.component.html',
+    styleUrl: './create-dnevna-evidencija.component.scss'
 })
 export class CreateDnevnaEvidencijaComponent {
   public varNames: any = {

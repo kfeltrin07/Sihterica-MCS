@@ -22,30 +22,28 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pick-ovlastene-osobe',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-ovlastene-osobe.component.html',
-  styleUrl: './pick-ovlastene-osobe.component.scss'
+    selector: 'app-pick-ovlastene-osobe',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-ovlastene-osobe.component.html',
+    styleUrl: './pick-ovlastene-osobe.component.scss'
 })
 export class PickOvlasteneOsobeComponent implements OnInit {
   public displayedColumns: string[] = ['ID', 'NAZIV', 'ULOGA'];

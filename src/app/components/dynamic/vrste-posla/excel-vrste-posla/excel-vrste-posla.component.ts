@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-vrste-posla',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-vrste-posla.component.html',
-  styleUrl: './excel-vrste-posla.component.scss'
+    selector: 'app-excel-vrste-posla',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-vrste-posla.component.html',
+    styleUrl: './excel-vrste-posla.component.scss'
 })
 export class ExcelVrstePoslaComponent {
   public vrstePosla!: VrstePosla[];

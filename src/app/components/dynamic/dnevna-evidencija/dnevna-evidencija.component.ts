@@ -36,30 +36,28 @@ import { DetailsDnevnaEvidencijaComponent } from './details-dnevna-evidencija/de
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  selector: 'app-dnevna-evidencija',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatCheckboxModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './dnevna-evidencija.component.html',
-  styleUrl: './dnevna-evidencija.component.scss'
+    selector: 'app-dnevna-evidencija',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatCheckboxModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './dnevna-evidencija.component.html',
+    styleUrl: './dnevna-evidencija.component.scss'
 })
 export class DnevnaEvidencijaComponent implements OnInit {
   public displayedColumns: string[] = ['OSOBA', 'SIF_MT_N', 'SIF_VP_N', 'SATI', 'ODHH', 'DOHH', 'options'];

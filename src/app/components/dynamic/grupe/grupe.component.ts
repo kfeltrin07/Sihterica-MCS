@@ -29,28 +29,26 @@ import { RadniciGrupeComponent } from './radnici-grupe/radnici-grupe.component';
 import { EditGrupeComponent } from './edit-grupe/edit-grupe.component';
 
 @Component({
-  selector: 'app-grupe',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './grupe.component.html',
-  styleUrl: './grupe.component.scss'
+    selector: 'app-grupe',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './grupe.component.html',
+    styleUrl: './grupe.component.scss'
 })
 export class GrupeComponent implements OnInit {
   public displayedColumns: string[] = ['ID_GRUPE', 'NAZ_GRUPE', 'SIF_SHEME','NAZ_SHEME', 'SIF_OJ', 'NAZ_OJ', 'options'];

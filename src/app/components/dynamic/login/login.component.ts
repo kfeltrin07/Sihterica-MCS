@@ -18,24 +18,21 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatInputModule,
-
-
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [
+        MatCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatInputModule,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
   @HostListener('window:keydown.Control.Shift.F11', ['$event']) scrollUp(event: KeyboardEvent) {

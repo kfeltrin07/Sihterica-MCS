@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-evidencija-radnog-vremena',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-evidencija-radnog-vremena.component.html',
-  styleUrl: './pdf-evidencija-radnog-vremena.component.scss'
+    selector: 'app-pdf-evidencija-radnog-vremena',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-evidencija-radnog-vremena.component.html',
+    styleUrl: './pdf-evidencija-radnog-vremena.component.scss'
 })
 export class PdfEvidencijaRadnogVremenaComponent {
   public zaposleni!: EvidencijaRadVre[];

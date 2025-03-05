@@ -13,22 +13,20 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './details-ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-details-ovlastene-osobe-mj-tr',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './details-ovlastene-osobe-mj-tr.component.scss'
 })
 export class DetailsOvlasteneOsobeMjTrComponent implements OnInit {
 

@@ -16,21 +16,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-toolbar',
-  standalone:true,
-  imports:[
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    CommonModule,
-
-    TranslationPipe
-  ],
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+    selector: 'app-toolbar',
+    imports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltipModule,
+        MatButtonModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
   @HostListener('window:keydown.Control.Shift.F11',['$event']) scrollUp(event: KeyboardEvent) {

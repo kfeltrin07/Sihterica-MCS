@@ -11,20 +11,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './pdf-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-pdf-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './pdf-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class PdfEvidencijaRadnogVremenaZaglavljeVezeComponent {
   constructor(

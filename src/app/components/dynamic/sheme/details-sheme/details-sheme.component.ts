@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-sheme',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-sheme.component.html',
-  styleUrl: './details-sheme.component.scss'
+    selector: 'app-details-sheme',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-sheme.component.html',
+    styleUrl: './details-sheme.component.scss'
 })
 export class DetailsShemeComponent implements OnInit{
 

@@ -14,21 +14,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-delete-sheme',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './delete-sheme.component.html',
-  styleUrl: './delete-sheme.component.scss'
+    selector: 'app-delete-sheme',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        CdkDrag,
+        CdkDragHandle,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './delete-sheme.component.html',
+    styleUrl: './delete-sheme.component.scss'
 })
 export class DeleteShemeComponent {
 constructor(

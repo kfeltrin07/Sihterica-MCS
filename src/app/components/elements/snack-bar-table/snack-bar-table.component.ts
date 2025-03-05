@@ -14,20 +14,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-snack-bar-table',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatTooltipModule,
-    MatListModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './snack-bar-table.component.html',
-  styleUrl: './snack-bar-table.component.scss'
+    selector: 'app-snack-bar-table',
+    imports: [
+        MatTableModule,
+        MatTooltipModule,
+        MatListModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './snack-bar-table.component.html',
+    styleUrl: './snack-bar-table.component.scss'
 })
 export class SnackBarTableComponent implements OnInit{
   public displayedColumns: string[] = ['MBR', 'SIFRA_RAD', 'DATUM','PORUKA'];

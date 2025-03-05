@@ -18,22 +18,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-sidenav',
-  standalone: true,
-  imports: [
-    MatTooltipModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatRippleModule,
-
-    FormsModule,
-    TranslationPipe,
-    CommonModule,
-    MainContentComponent
-  ],
-  templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss'],
+    selector: 'app-sidenav',
+    imports: [
+        MatTooltipModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatRippleModule,
+        FormsModule,
+        TranslationPipe,
+        CommonModule,
+        MainContentComponent
+    ],
+    templateUrl: './sidenav.component.html',
+    styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav') public sidenav!: MatSidenav;

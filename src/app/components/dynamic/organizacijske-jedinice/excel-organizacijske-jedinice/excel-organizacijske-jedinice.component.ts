@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-organizacijske-jedinice',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-organizacijske-jedinice.component.html',
-  styleUrl: './excel-organizacijske-jedinice.component.scss'
+    selector: 'app-excel-organizacijske-jedinice',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-organizacijske-jedinice.component.html',
+    styleUrl: './excel-organizacijske-jedinice.component.scss'
 })
 export class ExcelOrganizacijskeJediniceComponent {
 

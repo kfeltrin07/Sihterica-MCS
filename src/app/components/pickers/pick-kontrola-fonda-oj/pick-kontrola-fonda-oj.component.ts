@@ -22,30 +22,28 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 
 @Component({
-  selector: 'app-pick-kontrola-fonda-oj',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-kontrola-fonda-oj.component.html',
-  styleUrl: './pick-kontrola-fonda-oj.component.scss'
+    selector: 'app-pick-kontrola-fonda-oj',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-kontrola-fonda-oj.component.html',
+    styleUrl: './pick-kontrola-fonda-oj.component.scss'
 })
 export class PickKontrolaFondaOjComponent implements OnInit {
   public displayedColumns: string[] = ['SIF_OJ', 'NAZ_OJ','VRSTA'];

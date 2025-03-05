@@ -15,21 +15,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-create-sheme',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './create-sheme.component.html',
-  styleUrl: './create-sheme.component.scss'
+    selector: 'app-create-sheme',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './create-sheme.component.html',
+    styleUrl: './create-sheme.component.scss'
 })
 export class CreateShemeComponent {
 

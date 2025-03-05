@@ -16,22 +16,20 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-create-evidencija-radnog-vremena-zaglavlje',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatTooltip,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './create-evidencija-radnog-vremena-zaglavlje.component.html',
-  styleUrl: './create-evidencija-radnog-vremena-zaglavlje.component.scss'
+    selector: 'app-create-evidencija-radnog-vremena-zaglavlje',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatTooltip,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './create-evidencija-radnog-vremena-zaglavlje.component.html',
+    styleUrl: './create-evidencija-radnog-vremena-zaglavlje.component.scss'
 })
 export class CreateEvidencijaRadnogVremenaZaglavljeComponent {
   public EvidencijaRadVreZag: EvidencijaRadVreZag = {

@@ -11,20 +11,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-pomocne-liste',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-pomocne-liste.component.html',
-  styleUrl: './pdf-pomocne-liste.component.scss'
+    selector: 'app-pdf-pomocne-liste',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-pomocne-liste.component.html',
+    styleUrl: './pdf-pomocne-liste.component.scss'
 })
 export class PdfPomocneListeComponent {
   constructor(

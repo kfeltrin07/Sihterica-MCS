@@ -13,20 +13,18 @@ import { MatButtonModule } from '@angular/material/button';
 import {CdkDrag, CdkDragHandle} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-details-zaposleni',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-zaposleni.component.html',
-  styleUrl: './details-zaposleni.component.scss'
+    selector: 'app-details-zaposleni',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-zaposleni.component.html',
+    styleUrl: './details-zaposleni.component.scss'
 })
 export class DetailsZaposleniComponent implements OnInit{
 

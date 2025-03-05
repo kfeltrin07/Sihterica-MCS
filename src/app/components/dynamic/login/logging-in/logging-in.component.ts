@@ -7,18 +7,17 @@ import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 
 @Component({
-  selector: 'app-logging-in',
-  standalone: true,
-  imports: [
-    MatDialogContent,
-    MatDialogActions,
-    MatIconModule,
-    MatProgressBarModule,
-    TranslationPipe,
-    CommonModule
-  ],
-  templateUrl: './logging-in.component.html',
-  styleUrl: './logging-in.component.scss'
+    selector: 'app-logging-in',
+    imports: [
+        MatDialogContent,
+        MatDialogActions,
+        MatIconModule,
+        MatProgressBarModule,
+        TranslationPipe,
+        CommonModule
+    ],
+    templateUrl: './logging-in.component.html',
+    styleUrl: './logging-in.component.scss'
 })
 export class LoggingInComponent {
   constructor(

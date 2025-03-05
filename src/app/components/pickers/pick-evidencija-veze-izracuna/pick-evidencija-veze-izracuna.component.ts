@@ -22,30 +22,28 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 
 @Component({
-  selector: 'app-pick-evidencija-veze-izracuna',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-evidencija-veze-izracuna.component.html',
-  styleUrl: './pick-evidencija-veze-izracuna.component.scss'
+    selector: 'app-pick-evidencija-veze-izracuna',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-evidencija-veze-izracuna.component.html',
+    styleUrl: './pick-evidencija-veze-izracuna.component.scss'
 })
 export class PickEvidencijaVezeIzracunaComponent implements OnInit {
   public displayedColumns: string[] = ['RN', 'SIFRA', 'OPIS'];

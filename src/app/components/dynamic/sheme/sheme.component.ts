@@ -28,28 +28,26 @@ import { EditShemeComponent } from './edit-sheme/edit-sheme.component';
 import { DeleteShemeComponent } from './delete-sheme/delete-sheme.component';
 
 @Component({
-  selector: 'app-sheme',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './sheme.component.html',
-  styleUrl: './sheme.component.scss'
+    selector: 'app-sheme',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './sheme.component.html',
+    styleUrl: './sheme.component.scss'
 })
 export class ShemeComponent implements OnInit {
   public displayedColumns: string[] = ['SIF_SHEME', 'OPIS', 'OD', 'DO', 'PAUZA_OD', 'PAUZA_DO', 'options'];

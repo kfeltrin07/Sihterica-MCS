@@ -26,28 +26,26 @@ import { PickEvidencijaHelpRadniciComponent } from '../../pickers/pick-evidencij
 import { PdfEvidencijaRadnogVremenaRadnikaComponent } from './pdf-evidencija-radnog-vremena-radnika/pdf-evidencija-radnog-vremena-radnika.component';
 
 @Component({
-  selector: 'app-evidencija-radnog-vremena-radnika',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './evidencija-radnog-vremena-radnika.component.html',
-  styleUrl: './evidencija-radnog-vremena-radnika.component.scss'
+    selector: 'app-evidencija-radnog-vremena-radnika',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './evidencija-radnog-vremena-radnika.component.html',
+    styleUrl: './evidencija-radnog-vremena-radnika.component.scss'
 })
 export class EvidencijaRadnogVremenaRadnikaComponent implements OnInit {
   public displayedColumns: string[] = ['REDAK', 'SIFRANAZIV', 'SIF_MT', 'NAZIV_MT', 'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];

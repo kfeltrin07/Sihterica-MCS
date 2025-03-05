@@ -22,30 +22,28 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { PaginationComponent } from '../../elements/pagination/pagination.component';
 
 @Component({
-  selector: 'app-pick-evidencija-veze-sifra',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-evidencija-veze-sifra.component.html',
-  styleUrl: './pick-evidencija-veze-sifra.component.scss'
+    selector: 'app-pick-evidencija-veze-sifra',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-evidencija-veze-sifra.component.html',
+    styleUrl: './pick-evidencija-veze-sifra.component.scss'
 })
 export class PickEvidencijaVezeSifraComponent implements OnInit {
   public displayedColumns: string[] = ['RN', 'SIF_STUPCA', 'KNAZIV'];

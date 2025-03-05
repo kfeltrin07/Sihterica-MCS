@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-pregled-operatera',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-pregled-operatera.component.html',
-  styleUrl: './excel-pregled-operatera.component.scss'
+    selector: 'app-excel-pregled-operatera',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-pregled-operatera.component.html',
+    styleUrl: './excel-pregled-operatera.component.scss'
 })
 export class ExcelPregledOperateraComponent {
   public operateri!: Operateri[];

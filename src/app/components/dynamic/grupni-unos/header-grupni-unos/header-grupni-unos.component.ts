@@ -7,22 +7,19 @@ import { CalendarCommonModule, CalendarView, CalendarWeekModule } from 'angular-
 import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 
 @Component({
-  selector: 'app-header-grupni-unos',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-
-    CalendarCommonModule,
-    CalendarWeekModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe,
-    TitleCasePipe
-  ],
-  templateUrl: './header-grupni-unos.component.html',
-  styleUrl: './header-grupni-unos.component.scss'
+    selector: 'app-header-grupni-unos',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        CalendarCommonModule,
+        CalendarWeekModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe,
+        TitleCasePipe
+    ],
+    templateUrl: './header-grupni-unos.component.html',
+    styleUrl: './header-grupni-unos.component.scss'
 })
 export class HeaderGrupniUnosComponent {
   @Input() view!: CalendarView;

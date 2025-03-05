@@ -13,21 +13,19 @@ import { GlobalFunctionsService } from 'src/app/services/global-functions/global
 import { GlobalVariablesService } from 'src/app/services/global-variables/global-variables.service';
 
 @Component({
-  selector: 'app-pagination',
-  standalone: true,
-  imports: [
-    MatPaginatorModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatButtonModule,
-
-    CommonModule,
-    TranslationPipe,
-    FormsModule
-  ],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss'
+    selector: 'app-pagination',
+    imports: [
+        MatPaginatorModule,
+        MatSelectModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatButtonModule,
+        CommonModule,
+        TranslationPipe,
+        FormsModule
+    ],
+    templateUrl: './pagination.component.html',
+    styleUrl: './pagination.component.scss'
 })
 export class PaginationComponent implements AfterViewInit{
 

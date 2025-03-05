@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-kontrola-fonda-sati',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-kontrola-fonda-sati.component.html',
-  styleUrl: './excel-kontrola-fonda-sati.component.scss'
+    selector: 'app-excel-kontrola-fonda-sati',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-kontrola-fonda-sati.component.html',
+    styleUrl: './excel-kontrola-fonda-sati.component.scss'
 })
 export class ExcelKontrolaFondaSatiComponent {
   public fondSati!: FondSati[];

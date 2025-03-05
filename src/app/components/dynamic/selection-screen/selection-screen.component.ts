@@ -8,16 +8,14 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-selection-screen',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    MatIconModule,
-    
-    TranslationPipe
-  ],
-  templateUrl: './selection-screen.component.html',
-  styleUrl: './selection-screen.component.scss'
+    selector: 'app-selection-screen',
+    imports: [
+        MatCardModule,
+        MatIconModule,
+        TranslationPipe
+    ],
+    templateUrl: './selection-screen.component.html',
+    styleUrl: './selection-screen.component.scss'
 })
 export class SelectionScreenComponent implements OnInit {
 

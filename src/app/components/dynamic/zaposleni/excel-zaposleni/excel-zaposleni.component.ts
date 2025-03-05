@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-zaposleni',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-zaposleni.component.html',
-  styleUrl: './excel-zaposleni.component.scss'
+    selector: 'app-excel-zaposleni',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-zaposleni.component.html',
+    styleUrl: './excel-zaposleni.component.scss'
 })
 export class ExcelZaposleniComponent {
   public zaposleni!: Zaposleni[];

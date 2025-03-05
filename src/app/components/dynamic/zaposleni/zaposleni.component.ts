@@ -27,28 +27,26 @@ import { ZaposleniPdfComponent } from './zaposleni-pdf/zaposleni-pdf.component';
 import { ExcelZaposleniComponent } from './excel-zaposleni/excel-zaposleni.component';
 
 @Component({
-  selector: 'app-zaposleni',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './zaposleni.component.html',
-  styleUrl: './zaposleni.component.scss'
+    selector: 'app-zaposleni',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './zaposleni.component.html',
+    styleUrl: './zaposleni.component.scss'
 })
 export class ZaposleniComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'PREZIME_IME', 'NAZ_ZAN', 'SIF_OJ', 'NAZ_OJ', 'options'];

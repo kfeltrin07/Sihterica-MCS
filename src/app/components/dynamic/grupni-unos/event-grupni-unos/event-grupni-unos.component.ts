@@ -25,31 +25,29 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { RadniciGrupeComponent } from '../../grupe/radnici-grupe/radnici-grupe.component';
 
 @Component({
-  selector: 'app-event-grupni-unos',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-    MatTabsModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './event-grupni-unos.component.html',
-  styleUrl: './event-grupni-unos.component.scss'
+    selector: 'app-event-grupni-unos',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        MatTabsModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './event-grupni-unos.component.html',
+    styleUrl: './event-grupni-unos.component.scss'
 })
 export class EventGrupniUnosComponent implements OnInit {
   public displayedColumns: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA','SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];

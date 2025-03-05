@@ -42,31 +42,29 @@ import { EditEventGrupniUnosComponent } from './edit-event-grupni-unos/edit-even
 
 
 @Component({
-  selector: 'app-grupni-unos',
-  standalone: true,
-  imports: [
-    HeaderGrupniUnosComponent,
-    CalendarDayModule,
-    CalendarWeekModule,
-    CalendarMonthModule,
-    CalendarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatAutocompleteModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './grupni-unos.component.html',
-  styleUrl: './grupni-unos.component.scss',
-  providers: [
-    {
-      provide: CalendarDateFormatter,
-      useClass: CustomDateFormatter,
-    },
-  ],
+    selector: 'app-grupni-unos',
+    imports: [
+        HeaderGrupniUnosComponent,
+        CalendarDayModule,
+        CalendarWeekModule,
+        CalendarMonthModule,
+        CalendarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatAutocompleteModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './grupni-unos.component.html',
+    styleUrl: './grupni-unos.component.scss',
+    providers: [
+        {
+            provide: CalendarDateFormatter,
+            useClass: CustomDateFormatter,
+        },
+    ]
 })
 export class GrupniUnosComponent implements OnInit {
 

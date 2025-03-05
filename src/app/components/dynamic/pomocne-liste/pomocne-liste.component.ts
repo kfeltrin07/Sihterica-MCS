@@ -28,28 +28,26 @@ import { PickVrstaPoslaComponent } from '../../pickers/pick-vrsta-posla/pick-vrs
 import { PdfPomocneListeComponent } from './pdf-pomocne-liste/pdf-pomocne-liste.component';
 
 @Component({
-  selector: 'app-pomocne-liste',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './pomocne-liste.component.html',
-  styleUrl: './pomocne-liste.component.scss'
+    selector: 'app-pomocne-liste',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './pomocne-liste.component.html',
+    styleUrl: './pomocne-liste.component.scss'
 })
 export class PomocneListeComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'NAZIV', 'SI', 'SIF_VP', 'NAZ_VP', 'SIF_MT', 'MJESEC', 'S1', 'S2', 'UKUPNO', 'VRSTA', 'UKUP', 'options'];

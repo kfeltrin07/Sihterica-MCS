@@ -19,20 +19,18 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-pdf-evidencija-radnog-vremena-zaglavlje',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-evidencija-radnog-vremena-zaglavlje.component.html',
-  styleUrl: './pdf-evidencija-radnog-vremena-zaglavlje.component.scss'
+    selector: 'app-pdf-evidencija-radnog-vremena-zaglavlje',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-evidencija-radnog-vremena-zaglavlje.component.html',
+    styleUrl: './pdf-evidencija-radnog-vremena-zaglavlje.component.scss'
 })
 export class PdfEvidencijaRadnogVremenaZaglavljeComponent {
 constructor(

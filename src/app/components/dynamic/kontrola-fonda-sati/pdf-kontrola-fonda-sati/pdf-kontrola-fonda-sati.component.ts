@@ -12,20 +12,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-kontrola-fonda-sati',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-kontrola-fonda-sati.component.html',
-  styleUrl: './pdf-kontrola-fonda-sati.component.scss'
+    selector: 'app-pdf-kontrola-fonda-sati',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-kontrola-fonda-sati.component.html',
+    styleUrl: './pdf-kontrola-fonda-sati.component.scss'
 })
 export class PdfKontrolaFondaSatiComponent {
   constructor(

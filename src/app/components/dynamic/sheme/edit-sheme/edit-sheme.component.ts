@@ -14,21 +14,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-edit-sheme',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    FormsModule,
-    CommonModule,
-    TranslationPipe
-  ],
-  templateUrl: './edit-sheme.component.html',
-  styleUrl: './edit-sheme.component.scss'
+    selector: 'app-edit-sheme',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        CdkDrag,
+        CdkDragHandle,
+        FormsModule,
+        CommonModule,
+        TranslationPipe
+    ],
+    templateUrl: './edit-sheme.component.html',
+    styleUrl: './edit-sheme.component.scss'
 })
 export class EditShemeComponent implements OnInit {
   public Sheme: Sheme = {

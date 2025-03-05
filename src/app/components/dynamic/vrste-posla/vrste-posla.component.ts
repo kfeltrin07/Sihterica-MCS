@@ -25,28 +25,26 @@ import { VrstePoslaPdfComponent } from './vrste-posla-pdf/vrste-posla-pdf.compon
 import { ExcelVrstePoslaComponent } from './excel-vrste-posla/excel-vrste-posla.component';
 
 @Component({
-  selector: 'app-vrste-posla',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './vrste-posla.component.html',
-  styleUrl: './vrste-posla.component.scss'
+    selector: 'app-vrste-posla',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './vrste-posla.component.html',
+    styleUrl: './vrste-posla.component.scss'
 })
 export class VrstePoslaComponent implements OnInit {
   public displayedColumns: string[] = ['SIF_VP', 'NAZ_VP', 'SI', 'options'];

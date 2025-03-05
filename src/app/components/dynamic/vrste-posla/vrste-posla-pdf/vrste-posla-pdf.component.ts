@@ -13,20 +13,18 @@ import { SessionService } from 'src/app/services/session/session.service';
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-vrste-posla-pdf',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './vrste-posla-pdf.component.html',
-  styleUrl: './vrste-posla-pdf.component.scss'
+    selector: 'app-vrste-posla-pdf',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './vrste-posla-pdf.component.html',
+    styleUrl: './vrste-posla-pdf.component.scss'
 })
 export class VrstePoslaPdfComponent {
   public zaposleni!: VrstePosla[];

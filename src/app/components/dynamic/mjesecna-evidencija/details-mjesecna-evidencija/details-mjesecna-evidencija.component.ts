@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-mjesecna-evidencija',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-mjesecna-evidencija.component.html',
-  styleUrl: './details-mjesecna-evidencija.component.scss'
+    selector: 'app-details-mjesecna-evidencija',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-mjesecna-evidencija.component.html',
+    styleUrl: './details-mjesecna-evidencija.component.scss'
 })
 export class DetailsMjesecnaEvidencijaComponent implements OnInit{
 

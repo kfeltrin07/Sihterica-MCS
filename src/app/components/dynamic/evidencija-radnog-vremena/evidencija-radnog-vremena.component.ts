@@ -25,28 +25,26 @@ import { PaginationComponent } from '../../elements/pagination/pagination.compon
 import { PdfEvidencijaRadnogVremenaComponent } from './pdf-evidencija-radnog-vremena/pdf-evidencija-radnog-vremena.component';
 
 @Component({
-  selector: 'app-evidencija-radnog-vremena',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './evidencija-radnog-vremena.component.html',
-  styleUrl: './evidencija-radnog-vremena.component.scss'
+    selector: 'app-evidencija-radnog-vremena',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './evidencija-radnog-vremena.component.html',
+    styleUrl: './evidencija-radnog-vremena.component.scss'
 })
 export class EvidencijaRadnogVremenaComponent implements OnInit {
   public displayedColumns: string[] = ['REDAK','NAZIVRAD', 'SIFRANAZIV', 'NAZIV_OJ', 'SIF_MT', 'NAZIV_MT',  'POCETAK', 'ZAVRSETAK', 'SATI_1', 'SATI_2', 'options'];

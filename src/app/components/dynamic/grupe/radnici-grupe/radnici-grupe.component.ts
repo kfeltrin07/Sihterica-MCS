@@ -28,31 +28,29 @@ import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-s
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
-  selector: 'app-radnici-grupe',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './radnici-grupe.component.html',
-  styleUrl: './radnici-grupe.component.scss'
+    selector: 'app-radnici-grupe',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatAutocompleteModule,
+        CdkDrag,
+        CdkDragHandle,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './radnici-grupe.component.html',
+    styleUrl: './radnici-grupe.component.scss'
 })
 export class RadniciGrupeComponent {
   public displayedColumns: string[] = ['yes-no', 'MBR', 'PREZIME_IME', 'SIF_OJ', 'NAZ_OJ', 'NAZ_RM'];

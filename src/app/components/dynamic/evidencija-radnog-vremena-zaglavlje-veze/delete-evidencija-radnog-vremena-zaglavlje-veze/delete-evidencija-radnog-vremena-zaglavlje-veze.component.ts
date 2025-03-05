@@ -14,21 +14,19 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
-  selector: 'app-delete-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './delete-evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './delete-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-delete-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        CdkDrag,
+        CdkDragHandle,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './delete-evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './delete-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class DeleteEvidencijaRadnogVremenaZaglavljeVezeComponent {
   constructor(

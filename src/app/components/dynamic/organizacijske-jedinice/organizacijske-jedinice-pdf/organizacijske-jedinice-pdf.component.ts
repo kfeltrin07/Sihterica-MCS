@@ -13,20 +13,18 @@ import { SessionService } from 'src/app/services/session/session.service';
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-organizacijske-jedinice-pdf',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './organizacijske-jedinice-pdf.component.html',
-  styleUrl: './organizacijske-jedinice-pdf.component.scss'
+    selector: 'app-organizacijske-jedinice-pdf',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './organizacijske-jedinice-pdf.component.html',
+    styleUrl: './organizacijske-jedinice-pdf.component.scss'
 })
 export class OrganizacijskeJedinicePdfComponent {
   public zaposleni!: OrganizacijskeJedinice[];

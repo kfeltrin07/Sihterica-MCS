@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './excel-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-excel-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './excel-evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent {
   public evidencijaRadVreZagVeze!: EvidencijaRadVreZagVeze[];

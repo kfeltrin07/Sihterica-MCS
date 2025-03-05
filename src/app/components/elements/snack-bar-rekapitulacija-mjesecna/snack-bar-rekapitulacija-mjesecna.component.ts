@@ -14,20 +14,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-snack-bar-rekapitulacija-mjesecna',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatTooltipModule,
-    MatListModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './snack-bar-rekapitulacija-mjesecna.component.html',
-  styleUrl: './snack-bar-rekapitulacija-mjesecna.component.scss'
+    selector: 'app-snack-bar-rekapitulacija-mjesecna',
+    imports: [
+        MatTableModule,
+        MatTooltipModule,
+        MatListModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './snack-bar-rekapitulacija-mjesecna.component.html',
+    styleUrl: './snack-bar-rekapitulacija-mjesecna.component.scss'
 })
 export class SnackBarRekapitulacijaMjesecnaComponent  implements OnInit{
   public displayedColumns: string[] = ['NAZ_MT','SIF_VP_N','SATI'];

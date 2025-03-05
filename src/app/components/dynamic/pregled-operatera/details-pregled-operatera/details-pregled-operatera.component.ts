@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-pregled-operatera',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-pregled-operatera.component.html',
-  styleUrl: './details-pregled-operatera.component.scss'
+    selector: 'app-details-pregled-operatera',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-pregled-operatera.component.html',
+    styleUrl: './details-pregled-operatera.component.scss'
 })
 export class DetailsPregledOperateraComponent implements OnInit {
 

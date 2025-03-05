@@ -22,30 +22,28 @@ import { MatInputModule } from '@angular/material/input';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-pick-opis-vrste',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-opis-vrste.component.html',
-  styleUrl: './pick-opis-vrste.component.scss'
+    selector: 'app-pick-opis-vrste',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-opis-vrste.component.html',
+    styleUrl: './pick-opis-vrste.component.scss'
 })
 export class PickOpisVrsteComponent implements OnInit {
   public displayedColumns: string[] = ['RN', 'SIFRA', 'OPIS'];

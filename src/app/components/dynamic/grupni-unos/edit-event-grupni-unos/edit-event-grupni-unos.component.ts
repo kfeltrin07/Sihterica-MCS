@@ -29,30 +29,29 @@ import { PickEvidencijaHelpOjComponent } from 'src/app/components/pickers/pick-e
 import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-sheme.component';
 
 @Component({
-  selector: 'app-edit-event-grupni-unos',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-    MatTabsModule,
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe,
-  ],
-  templateUrl: './edit-event-grupni-unos.component.html',
-  styleUrl: './edit-event-grupni-unos.component.scss'
+    selector: 'app-edit-event-grupni-unos',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        MatTabsModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe,
+    ],
+    templateUrl: './edit-event-grupni-unos.component.html',
+    styleUrl: './edit-event-grupni-unos.component.scss'
 })
 export class EditEventGrupniUnosComponent implements OnInit {
   public displayedColumns: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA', 'SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];

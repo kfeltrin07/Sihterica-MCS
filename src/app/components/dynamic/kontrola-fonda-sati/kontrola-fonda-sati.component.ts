@@ -27,29 +27,27 @@ import { PdfKontrolaFondaSatiComponent } from './pdf-kontrola-fonda-sati/pdf-kon
 import { ExcelKontrolaFondaSatiComponent } from './excel-kontrola-fonda-sati/excel-kontrola-fonda-sati.component';
 
 @Component({
-  selector: 'app-kontrola-fonda-sati',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-    MatRadioModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './kontrola-fonda-sati.component.html',
-  styleUrl: './kontrola-fonda-sati.component.scss'
+    selector: 'app-kontrola-fonda-sati',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        MatRadioModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './kontrola-fonda-sati.component.html',
+    styleUrl: './kontrola-fonda-sati.component.scss'
 })
 export class KontrolaFondaSatiComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'OSOBA', 'NAZ_OJ', 'SATI', 'DATUM'];

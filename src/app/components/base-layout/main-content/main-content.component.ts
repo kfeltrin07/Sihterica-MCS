@@ -6,16 +6,15 @@ import { RouterOutlet } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-main-content',
-  standalone:true,
-  imports:[
-    MatCardModule,
-    RouterOutlet,
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './main-content.component.html',
-  styleUrls: ['./main-content.component.scss']
+    selector: 'app-main-content',
+    imports: [
+        MatCardModule,
+        RouterOutlet,
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './main-content.component.html',
+    styleUrls: ['./main-content.component.scss']
 })
 export class MainContentComponent {
 

@@ -28,28 +28,26 @@ import { PdfOvlasteneOsobeMjTrComponent } from './pdf-ovlastene-osobe-mj-tr/pdf-
 import { ExcelOvlasteneOsobeMjTrComponent } from './excel-ovlastene-osobe-mj-tr/excel-ovlastene-osobe-mj-tr.component';
 
 @Component({
-  selector: 'app-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-ovlastene-osobe-mj-tr',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './ovlastene-osobe-mj-tr.component.scss'
 })
 export class OvlasteneOsobeMjTrComponent implements OnInit {
   public displayedColumns: string[] = ['ID', 'NAZIV', 'USERNAME', 'SIFMJTR', 'NAZMJTR', 'options'];

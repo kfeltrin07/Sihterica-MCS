@@ -12,20 +12,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-pdf-mjesecna-evidencija',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-mjesecna-evidencija.component.html',
-  styleUrl: './pdf-mjesecna-evidencija.component.scss'
+    selector: 'app-pdf-mjesecna-evidencija',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-mjesecna-evidencija.component.html',
+    styleUrl: './pdf-mjesecna-evidencija.component.scss'
 })
 export class PdfMjesecnaEvidencijaComponent {
 constructor(

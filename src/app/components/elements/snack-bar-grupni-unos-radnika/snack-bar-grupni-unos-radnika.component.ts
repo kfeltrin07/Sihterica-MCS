@@ -14,20 +14,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-snack-bar-grupni-unos-radnika',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatTooltipModule,
-    MatListModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './snack-bar-grupni-unos-radnika.component.html',
-  styleUrl: './snack-bar-grupni-unos-radnika.component.scss'
+    selector: 'app-snack-bar-grupni-unos-radnika',
+    imports: [
+        MatTableModule,
+        MatTooltipModule,
+        MatListModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './snack-bar-grupni-unos-radnika.component.html',
+    styleUrl: './snack-bar-grupni-unos-radnika.component.scss'
 })
 export class SnackBarGrupniUnosRadnikaComponent implements OnInit{
   public displayedColumns: string[] = ['MBR', 'SIF_SHEME', 'SIF_GRUPE','PORUKA'];

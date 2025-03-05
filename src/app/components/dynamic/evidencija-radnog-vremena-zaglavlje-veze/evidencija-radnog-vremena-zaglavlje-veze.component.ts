@@ -29,28 +29,26 @@ import { ExcelEvidencijaRadnogVremenaZaglavljeVezeComponent } from './excel-evid
 import { DetailsVrstePoslaComponent } from "../vrste-posla/details-vrste-posla/details-vrste-posla.component";
 
 @Component({
-  selector: 'app-evidencija-radnog-vremena-zaglavlje-veze',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent,
-    DetailsVrstePoslaComponent
-],
-  templateUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.html',
-  styleUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.scss'
+    selector: 'app-evidencija-radnog-vremena-zaglavlje-veze',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.html',
+    styleUrl: './evidencija-radnog-vremena-zaglavlje-veze.component.scss'
 })
 export class EvidencijaRadnogVremenaZaglavljeVezeComponent implements OnInit {
   public displayedColumns: string[] = ['KNAZIV', 'OPIS', 'SIF_STUPCA', 'XFAKTOR', 'NAZ_VP', 'options'];

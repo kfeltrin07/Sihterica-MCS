@@ -25,28 +25,26 @@ import { OrganizacijskeJedinicePdfComponent } from './organizacijske-jedinice-pd
 import { ExcelOrganizacijskeJediniceComponent } from './excel-organizacijske-jedinice/excel-organizacijske-jedinice.component';
 
 @Component({
-  selector: 'app-organizacijske-jedinice',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSortModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatLabel,
-    MatToolbarModule,
-    MatInputModule,
-
-    FormsModule,
-    CommonModule,
-    TranslationPipe,
-    PaginationComponent
-  ],
-  templateUrl: './organizacijske-jedinice.component.html',
-  styleUrl: './organizacijske-jedinice.component.scss'
+    selector: 'app-organizacijske-jedinice',
+    imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatLabel,
+        MatToolbarModule,
+        MatInputModule,
+        FormsModule,
+        CommonModule,
+        TranslationPipe,
+        PaginationComponent
+    ],
+    templateUrl: './organizacijske-jedinice.component.html',
+    styleUrl: './organizacijske-jedinice.component.scss'
 })
 export class OrganizacijskeJediniceComponent {
   public displayedColumns: string[] = ['SIF_OJ', 'NAZ_OJ', 'options'];

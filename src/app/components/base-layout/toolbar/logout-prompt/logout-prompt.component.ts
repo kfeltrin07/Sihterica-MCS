@@ -5,16 +5,14 @@ import { TranslationPipe } from 'src/app/pipes/translation/translation.pipe';
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-logout-prompt',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-
-    TranslationPipe
-  ],
-  templateUrl: './logout-prompt.component.html',
-  styleUrl: './logout-prompt.component.scss'
+    selector: 'app-logout-prompt',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        TranslationPipe
+    ],
+    templateUrl: './logout-prompt.component.html',
+    styleUrl: './logout-prompt.component.scss'
 })
 export class LogoutPromptComponent {
   constructor(

@@ -19,20 +19,18 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 import RobotoFont from 'src/assets/fonts/roboto.json';
 
 @Component({
-  selector: 'app-pdf-sheme',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pdf-sheme.component.html',
-  styleUrl: './pdf-sheme.component.scss'
+    selector: 'app-pdf-sheme',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pdf-sheme.component.html',
+    styleUrl: './pdf-sheme.component.scss'
 })
 export class PdfShemeComponent {
   constructor(

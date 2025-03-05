@@ -16,20 +16,18 @@ import RobotoFont from 'src/assets/fonts/roboto.json';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-excel-ovlastene-osobe-mj-tr',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './excel-ovlastene-osobe-mj-tr.component.html',
-  styleUrl: './excel-ovlastene-osobe-mj-tr.component.scss'
+    selector: 'app-excel-ovlastene-osobe-mj-tr',
+    imports: [
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './excel-ovlastene-osobe-mj-tr.component.html',
+    styleUrl: './excel-ovlastene-osobe-mj-tr.component.scss'
 })
 export class ExcelOvlasteneOsobeMjTrComponent {
   public ovlastenaOsobaMjTr!: OvlastenaOsobaMjTr[];

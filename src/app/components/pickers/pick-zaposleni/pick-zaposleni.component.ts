@@ -22,30 +22,28 @@ import { MatInputModule } from '@angular/material/input';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-pick-zaposleni',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatInputModule,
-
-    CdkDrag,
-    CdkDragHandle,
-    PaginationComponent,
-    CommonModule,
-    FormsModule,
-    TranslationPipe
-  ],
-  templateUrl: './pick-zaposleni.component.html',
-  styleUrl: './pick-zaposleni.component.scss'
+    selector: 'app-pick-zaposleni',
+    imports: [
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatInputModule,
+        CdkDrag,
+        CdkDragHandle,
+        PaginationComponent,
+        CommonModule,
+        FormsModule,
+        TranslationPipe
+    ],
+    templateUrl: './pick-zaposleni.component.html',
+    styleUrl: './pick-zaposleni.component.scss'
 })
 export class PickZaposleniComponent implements OnInit {
   public displayedColumns: string[] = ['MBR', 'PREZIME_IME', 'SIF_OJ'];

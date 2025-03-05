@@ -13,20 +13,18 @@ import { GlobalVariablesService } from 'src/app/services/global-variables/global
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
-  selector: 'app-details-organizacijske-jedinice',
-  standalone: true,
-  imports: [
-    MatListModule,
-    MatTooltipModule,
-    MatButtonModule,
-
-    TranslationPipe,
-    CommonModule,
-    CdkDrag,
-    CdkDragHandle,
-  ],
-  templateUrl: './details-organizacijske-jedinice.component.html',
-  styleUrl: './details-organizacijske-jedinice.component.scss'
+    selector: 'app-details-organizacijske-jedinice',
+    imports: [
+        MatListModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslationPipe,
+        CommonModule,
+        CdkDrag,
+        CdkDragHandle,
+    ],
+    templateUrl: './details-organizacijske-jedinice.component.html',
+    styleUrl: './details-organizacijske-jedinice.component.scss'
 })
 export class DetailsOrganizacijskeJediniceComponent implements OnInit {
 
