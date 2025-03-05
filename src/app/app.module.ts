@@ -7,7 +7,7 @@ import { MainContentComponent } from './components/base-layout/main-content/main
 import { SidenavComponent } from './components/base-layout/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/base-layout/toolbar/toolbar.component';
 import { LoadingComponent } from './components/elements/loading/loading.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoggingInterceptor } from './services/intercept/logging.interceptor';
 import { ErrorInterceptor } from './services/intercept/error.interceptor';
 import { LoadingInterceptor } from './services/intercept/loading.interceptor';
@@ -20,41 +20,33 @@ import { CalendarCommonModule, CalendarModule, DateAdapter } from 'angular-calen
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserModule,
-    CommonModule,
-    LoadingComponent,
-    AppRoutingModule,
-    MainContentComponent,
-    SidenavComponent,
-    MatSidenavModule,
-    ToolbarComponent,
-    TranslationPipe,
-    CalendarCommonModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }
-    ),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-  ],
-  providers: [
-    SidenavService,
-    { provide: LOCALE_ID, useValue: 'hr-HR' },
-    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserAnimationsModule,
+        FormsModule,
+        BrowserModule,
+        CommonModule,
+        LoadingComponent,
+        AppRoutingModule,
+        MainContentComponent,
+        SidenavComponent,
+        MatSidenavModule,
+        ToolbarComponent,
+        TranslationPipe,
+        CalendarCommonModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        })], providers: [
+        SidenavService,
+        { provide: LOCALE_ID, useValue: 'hr-HR' },
+        { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule { }
