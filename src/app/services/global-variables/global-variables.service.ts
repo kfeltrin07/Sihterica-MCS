@@ -29,6 +29,8 @@ export class GlobalVariablesService {
 
   public selectWasClicked: boolean = false;
 
+  public isEventEdited:boolean=false;
+
   public RequestVarijable: any;
   public TrenutniIzvjestaj: any;
 

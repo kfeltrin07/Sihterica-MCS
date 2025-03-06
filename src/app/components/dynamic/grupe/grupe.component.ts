@@ -63,8 +63,10 @@ export class GrupeComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
 
@@ -199,6 +201,10 @@ export class GrupeComponent implements OnInit {
       width: '1100px'
     });
     dialogRef.afterClosed().subscribe((result) => {
+      if(this.globalVar.isEventEdited){
+        this.globalVar.isEventEdited=false;
+        this.refresh();
+      }
     });
   }
 

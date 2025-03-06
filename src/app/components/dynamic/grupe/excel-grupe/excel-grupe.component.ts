@@ -40,8 +40,10 @@ export class ExcelGrupeComponent {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   }
 
   public allColumns: boolean = true;

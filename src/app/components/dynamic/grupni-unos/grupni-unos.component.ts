@@ -42,29 +42,29 @@ import { EditEventGrupniUnosComponent } from './edit-event-grupni-unos/edit-even
 
 
 @Component({
-    selector: 'app-grupni-unos',
-    imports: [
-        HeaderGrupniUnosComponent,
-        CalendarDayModule,
-        CalendarWeekModule,
-        CalendarMonthModule,
-        CalendarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTooltipModule,
-        MatAutocompleteModule,
-        FormsModule,
-        CommonModule,
-        TranslationPipe
-    ],
-    templateUrl: './grupni-unos.component.html',
-    styleUrl: './grupni-unos.component.scss',
-    providers: [
-        {
-            provide: CalendarDateFormatter,
-            useClass: CustomDateFormatter,
-        },
-    ]
+  selector: 'app-grupni-unos',
+  imports: [
+    HeaderGrupniUnosComponent,
+    CalendarDayModule,
+    CalendarWeekModule,
+    CalendarMonthModule,
+    CalendarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatAutocompleteModule,
+    FormsModule,
+    CommonModule,
+    TranslationPipe
+  ],
+  templateUrl: './grupni-unos.component.html',
+  styleUrl: './grupni-unos.component.scss',
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter,
+    },
+  ]
 })
 export class GrupniUnosComponent implements OnInit {
 
@@ -92,9 +92,10 @@ export class GrupniUnosComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
-
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
   public grupe: Grupe[] = [];
@@ -107,9 +108,10 @@ export class GrupniUnosComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
-
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -341,81 +343,56 @@ export class GrupniUnosComponent implements OnInit {
 
       let index = 0;
       let colorindex = 0;
-      this.http.post(
-        this.globalVar.APIHost + this.globalVar.APIFile,
-        {
-          action: 'Sihterica',
-          method: 'getSheme',
-          sid: this.session.loggedInUser.sessionID,
-          data: {
-            pDioNaziva: '%%',
-            pSifSheme: '',
-            limit: 10,
-            page: 1,
-            sort: [
-              {
-                property: 'SIF_SHEME',
-                direction: 'ASC'
-              }
-            ]
-          }
-        }
-      ).subscribe((response: any) => {
-
-        for (let grupe of this.grupe) {
 
 
-          console.log(response);
-
-          let shema = response.debugData.data.find((shema: any) => shema.SIF_SHEME === grupe.SIF_SHEME);
-
-          //let shema = response.debugData.data[0];
-
-          let date: Date = new Date();
-
-          let dateOd: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.OD.substring(0, 2), +shema.OD.substring(3, 4));
-          let dateDo: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +shema.DO.substring(0, 2), +shema.DO.substring(3, 4));
-
-          if (index == colors.length) {
-            colorindex = 0
-          };
-
-          if (!this.globalVar.externalGrupeEvents.find((iEvent) => iEvent.meta.ID_GRUPE === grupe.ID_GRUPE)) {
-            this.globalVar.externalGrupeEvents = [...this.globalVar.externalGrupeEvents, {
-              id: index,
-              title: grupe.NAZ_GRUPE,
-              start: dateOd,
-              end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
-              color: colors[colorindex],
-              draggable: true,
-              meta: {
-                OD: shema?.OD,
-                DO: shema?.DO,
-                NAZ_GRUPE: grupe?.NAZ_GRUPE,
-                ID_GRUPE: grupe?.ID_GRUPE,
-                SIF_OJ: grupe?.SIF_OJ,
-                NAZ_OJ: grupe?.NAZ_OJ,
-                NAZ_SHEME: shema?.OPIS,
-                SIF_SHEME: shema?.SIF_SHEME,
-                OPIS: shema?.OPIS,
-                PAUZA_DO: shema?.PAUZA_DO,
-                PAUZA_OD: shema?.PAUZA_OD,
-                UKUPANBROJSLOGOVA: shema?.UKUPANBROJSLOGOVA,
-                RN: shema?.RN,
-                NOVASHEMA: true,
-                type: 'grupa',
-                incrementsBadgeTotal: true,
-
-              },
-            }];
-          };
+      for (let grupe of this.grupe) {
 
 
-          index++;
-          colorindex++;
+        console.log(response);
+        //let shema = response.debugData.data[0];
 
+        let date: Date = new Date();
+
+        let dateOd: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +grupe.OD.substring(0, 2), +grupe.OD.substring(3, 4));
+        let dateDo: Date = new Date(date.getFullYear(), date.getMonth(), date.getDay(), +grupe.DO.substring(0, 2), +grupe.DO.substring(3, 4));
+
+        if (index == colors.length) {
+          colorindex = 0
         };
-      });
+
+        if (!this.globalVar.externalGrupeEvents.find((iEvent) => iEvent.meta.ID_GRUPE === grupe.ID_GRUPE)) {
+          this.globalVar.externalGrupeEvents = [...this.globalVar.externalGrupeEvents, {
+            id: index,
+            title: grupe.NAZ_GRUPE,
+            start: dateOd,
+            end: (dateDo < dateOd) ? addDays(dateDo, 1) : dateDo,
+            color: colors[colorindex],
+            draggable: true,
+            meta: {
+              OD: grupe?.OD,
+              DO: grupe?.DO,
+              NAZ_GRUPE: grupe?.NAZ_GRUPE,
+              ID_GRUPE: grupe?.ID_GRUPE,
+              SIF_OJ: grupe?.SIF_OJ,
+              NAZ_OJ: grupe?.NAZ_OJ,
+              NAZ_SHEME: grupe?.NAZ_SHEME,
+              SIF_SHEME: grupe?.SIF_SHEME,
+              OPIS: grupe?.NAZ_SHEME,
+              PAUZA_DO: grupe?.PAUZA_DO,
+              PAUZA_OD: grupe?.PAUZA_OD,
+              NOVASHEMA: true,
+              type: 'grupa',
+              incrementsBadgeTotal: true,
+
+            },
+          }];
+        };
+
+
+        index++;
+        colorindex++;
+
+      };
     });
   }
 
@@ -1045,8 +1022,8 @@ export class GrupniUnosComponent implements OnInit {
             pSifVP: this.varNames.SIF_VP,
             pDatum: this.globalFn.formatDateForRequest(event.start),
             pSati: totalHours,
-            pOd: ('0'+event.start.getHours()).slice(-2) + ':' + ('0'+event.start.getMinutes()).slice(-2),
-            pDo: ('0'+event.end.getHours()).slice(-2) + ':' + ('0'+event.end.getMinutes()).slice(-2),
+            pOd: ('0' + event.start.getHours()).slice(-2) + ':' + ('0' + event.start.getMinutes()).slice(-2),
+            pDo: ('0' + event.end.getHours()).slice(-2) + ':' + ('0' + event.end.getMinutes()).slice(-2),
             pIdOperatera: this.session.loggedInUser.ID,
             pRid: ''
           }];
@@ -1186,7 +1163,7 @@ export class GrupniUnosComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateGrupeComponent, {
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if(result==true){
+      if (result == true) {
         setTimeout(() => this.getGrupeEvents(), 1000);
       }
     });
@@ -1198,7 +1175,10 @@ export class GrupniUnosComponent implements OnInit {
       data: item
     });
     dialogRef.afterClosed().subscribe((result) => {
-      setTimeout(() => this.getGrupeEvents(), 1000);
+      if (this.globalVar.isEventEdited) {
+        this.globalVar.isEventEdited = false;
+        setTimeout(() => this.getGrupeEvents(), 1000);
+      }
     });
   }
 }

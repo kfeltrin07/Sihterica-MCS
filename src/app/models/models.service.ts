@@ -632,6 +632,8 @@ export interface Grupe {
   NAZ_SHEME: string;
   OD:string;
   DO:string;
+  PAUZA_DO:string;
+  PAUZA_OD:string;
 }
 
 

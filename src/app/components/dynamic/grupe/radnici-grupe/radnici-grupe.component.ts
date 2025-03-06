@@ -291,6 +291,7 @@ export class RadniciGrupeComponent {
   }
 
   public save(): void {
+    this.globalVar.isEventEdited=true;
     for (let zaposlenik of this.zaposleniGrupe) {
       if (this.selection.isSelected(zaposlenik) && !(this.oldSelection.isSelected(zaposlenik))) {
         this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {

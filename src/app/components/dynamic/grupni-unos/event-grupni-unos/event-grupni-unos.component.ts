@@ -62,8 +62,10 @@ export class EventGrupniUnosComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
   public zaposleniPoGrupiIShemi: ZaposleniPoGrupiIShemi[] = [];
@@ -195,11 +197,15 @@ export class EventGrupniUnosComponent implements OnInit {
       data: this.receivedSheme.meta
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.refresh();
+      console.log(this.globalVar.isEventEdited);
+      if(this.globalVar.isEventEdited==true){
+        this.refresh();
+      }
     });
   }
 
   public save(): void {
+    this.globalVar.isEventEdited=true;
     this.receivedSheme.start = new Date(this.varNames.OD);
     this.receivedSheme.end = new Date(this.varNames.DO);
     console.log(this.receivedSheme);

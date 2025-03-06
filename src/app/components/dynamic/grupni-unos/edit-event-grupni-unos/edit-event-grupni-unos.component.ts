@@ -29,29 +29,29 @@ import { PickEvidencijaHelpOjComponent } from 'src/app/components/pickers/pick-e
 import { PickShemeComponent } from 'src/app/components/pickers/pick-sheme/pick-sheme.component';
 
 @Component({
-    selector: 'app-edit-event-grupni-unos',
-    imports: [
-        MatDialogModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTooltipModule,
-        MatProgressSpinnerModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatToolbarModule,
-        MatTableModule,
-        MatSortModule,
-        MatInputModule,
-        MatTabsModule,
-        CdkDrag,
-        CdkDragHandle,
-        PaginationComponent,
-        CommonModule,
-        FormsModule,
-        TranslationPipe,
-    ],
-    templateUrl: './edit-event-grupni-unos.component.html',
-    styleUrl: './edit-event-grupni-unos.component.scss'
+  selector: 'app-edit-event-grupni-unos',
+  imports: [
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatSortModule,
+    MatInputModule,
+    MatTabsModule,
+    CdkDrag,
+    CdkDragHandle,
+    PaginationComponent,
+    CommonModule,
+    FormsModule,
+    TranslationPipe,
+  ],
+  templateUrl: './edit-event-grupni-unos.component.html',
+  styleUrl: './edit-event-grupni-unos.component.scss'
 })
 export class EditEventGrupniUnosComponent implements OnInit {
   public displayedColumns: string[] = ['ID_RADNIKA', 'NAZIV_RADNIKA', 'SIF_OJ', 'NAZ_OJ', 'OD', 'DO', 'SATI'];
@@ -66,8 +66,10 @@ export class EditEventGrupniUnosComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
   public GrupaToSend: Grupe = {
     UKUPANBROJSLOGOVA: 0,
@@ -78,8 +80,10 @@ export class EditEventGrupniUnosComponent implements OnInit {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
   public zaposleniPoGrupiIShemi: ZaposleniPoGrupiIShemi[] = [];
@@ -178,7 +182,10 @@ export class EditEventGrupniUnosComponent implements OnInit {
       NAZ_OJ: this.receivedSheme.NAZ_OJ,
       NAZ_SHEME: this.receivedSheme.NAZ_SHEME,
       OD: this.receivedSheme.OD,
-      DO: this.receivedSheme.DO
+      DO: this.receivedSheme.DO,
+      PAUZA_DO: this.receivedSheme.PAUZA_DO,
+      PAUZA_OD: this.receivedSheme.PAUZA_OD
+
     }
   }
 
@@ -244,7 +251,9 @@ export class EditEventGrupniUnosComponent implements OnInit {
       data: this.receivedSheme
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.refresh();
+      if (this.globalVar.isEventEdited) {
+        this.refresh();
+      }
     });
   }
 
@@ -257,6 +266,7 @@ export class EditEventGrupniUnosComponent implements OnInit {
   }
 
   public save(): void {
+    this.globalVar.isEventEdited = true;
     this.http.post(
       this.globalVar.APIHost + this.globalVar.APIFile,
       {

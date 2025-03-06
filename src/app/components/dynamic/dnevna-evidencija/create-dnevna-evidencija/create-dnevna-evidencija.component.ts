@@ -102,8 +102,10 @@ export class CreateDnevnaEvidencijaComponent {
     SIF_OJ: "",
     NAZ_OJ: "",
     NAZ_SHEME: "",
-    OD:"",
-    DO:"",
+    OD: "",
+    DO: "",
+    PAUZA_DO: '',
+    PAUZA_OD: ''
   };
 
   public VrstePoslaDropdownIndex: number = -1;
@@ -187,31 +189,9 @@ export class CreateDnevnaEvidencijaComponent {
       this.zaposleniPoGrupiIShemi = response.debugData.data;
 
       if (this.varNames.OD == '' || this.varNames.DO == ''||this.varNames.OD == '--:--' || this.varNames.DO == '--:--') {
-        this.http.post(
-          this.globalVar.APIHost + this.globalVar.APIFile,
-          {
-            action: 'Sihterica',
-            method: 'getSheme',
-            sid: this.session.loggedInUser.sessionID,
-            data: {
-              pDioNaziva: '%%',
-              pSifSheme: this.varNames.SIF_SHEME,
-              limit: 100000,
-              page: 1,
-              sort: [
-                {
-                  property: 'SIF_SHEME',
-                  direction: 'ASC'
-                }
-              ]
-            }
-          }
-        ).subscribe((response: any) => {
-          this.Sheme = response.debugData.data[0];
 
 
-
-          let SATI = Math.abs((parseInt(this.Sheme.DO)) - (parseInt(this.Sheme.OD)));
+          let SATI = Math.abs((parseInt(this.varNames.DO)) - (parseInt(this.varNames.OD)));
 
           for (let zaposleni of this.zaposleniPoGrupiIShemi) {
             this.ArrayPodatakaZaUnos = [...this.ArrayPodatakaZaUnos, {
@@ -222,14 +202,12 @@ export class CreateDnevnaEvidencijaComponent {
               pSifVP: this.varNames.SIF_VP,
               pDatum: this.globalFn.formatDate(this.receivedData.DATUM),
               pSati: SATI,
-              pOd: this.Sheme.OD,
-              pDo: this.Sheme.DO,
+              pOd: this.varNames.OD,
+              pDo: this.varNames.DO,
               pIdOperatera: this.session.loggedInUser.ID
             }];
           }
-
           this.Unos();
-        });
       } else {
         let SATI = Math.abs((parseInt(this.varNames.DO)) - (parseInt(this.varNames.OD)));
 
